@@ -4,10 +4,11 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "expo": "expor start",
-    "start": "expo start --web",
+    "start": "expo start --android",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "format": "npx prettier . --write"
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
@@ -21,10 +22,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "prettier": "^3.1.1",
     "tailwindcss": "^3.2.2"
   },
   "private": true,
   "engines": {
-    "node": "20.10.0"
+    "node": "21.0.0"
   }
 }
