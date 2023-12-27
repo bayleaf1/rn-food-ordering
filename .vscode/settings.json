@@ -1,0 +1,6 @@
+{
+    "tailwindCSS.classAttributes": ["tw"],
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+}
