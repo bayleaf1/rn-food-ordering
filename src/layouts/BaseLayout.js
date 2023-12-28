@@ -33,9 +33,19 @@ function VisibleArea({ children }) {
 function SafeArea({ children }) {
   const insets = useSafeAreaInsets()
 
-  const tw = `mt-[${insets.top}px] mr-[${insets.right}px] mb-[${insets.bottom}px] ml-[${insets.left}px] flex-1`
-  
-  return <View tw={tw}>{children}</View>
+  return (
+    <View
+      style={{
+        flex: 1,
+        marginTop: insets.top,
+        marginRight: insets.right,
+        marginBottom: insets.bottom,
+        marginLeft: insets.left,
+      }}
+    >
+      {children}
+    </View>
+  )
 }
 
 function VerticalPart({ children }) {
