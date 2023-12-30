@@ -5,6 +5,7 @@ const width = () => Dimensions.get('window').width
 function Writing({
   h2,
   h1,
+  label,
   p = true,
   bold,
   semibold,
@@ -19,6 +20,7 @@ function Writing({
   const size = [
     [h1, 26],
     [h2, 21],
+    [label, 11],
     [p, 15],
   ].find((v) => v[0])
 
