@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useNavigationBuilder, createNavigatorFactory, StackRouter } from '@react-navigation/native'
 import { StackView } from '@react-navigation/stack'
 import { Animated } from 'react-native'
+import { NativeStackView } from '@react-navigation/native-stack'
 
 //Changing the file with custom navigator causes freeze of the app and it needs to be reloaded
 
@@ -34,7 +35,7 @@ function StackNavigator({ initialRouteName, children, screenOptions, ...rest }) 
 
   return (
     <NavigationContent>
-      <StackView {...rest} state={state} navigation={navigation} descriptors={descriptors} />
+      <NativeStackView {...rest} state={state} navigation={navigation} descriptors={descriptors} />
     </NavigationContent>
   )
 }
@@ -48,6 +49,7 @@ function addDefaultOptionsToScreens(children, defaultOptions) {
     if (possibleScreen.type.name === 'Screen') {
       result = React.cloneElement(possibleScreen, {
         ...possibleScreen.props,
+        name:  possibleScreen.props.name ? possibleScreen.props.name.toString() : undefined,
         options: { ...defaultOptions, ...(possibleScreen.props.options || {}) },
       })
     }
