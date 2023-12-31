@@ -5,21 +5,19 @@ import BaseLayout from './src/layouts/BaseLayout'
 import FontsProvider from './src/providers/FontsProvider'
 // import * as ScreenOrientation from 'expo-screen-orientation'
 import Routes from './src/libs/Navigation/Routes'
-import {
-  NavigationContainer,
-  StackRouter,
-  createNavigatorFactory,
-  useNavigationBuilder,
-} from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import React, { useState } from 'react'
-// import {} form '@react-navigation/'
 import Animated, { SharedTransition, withSpring } from 'react-native-reanimated'
-import { StackView, createStackNavigator } from '@react-navigation/stack'
 import { NativeWindStyleSheet } from 'nativewind'
-// import { createStackNavigatorWithDefaultScreenOptions } from './src/libs/Navigation/Navigators'
-import { SharedElement, SharedElementTransition, RNAnimatedSharedElementTransitionView, nodeFromRef } from 'react-native-shared-element'
+import { createStackNavigatorWithDefaultScreenOptions } from './src/libs/Navigation/Navigators'
+// import {
+//   SharedElement,
+//   SharedElementTransition,
+//   RNAnimatedSharedElementTransitionView,
+//   nodeFromRef,
+// } from 'react-native-shared-element'
 // import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
+// import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 NativeWindStyleSheet.setOutput({
   default: 'native',
 })
@@ -37,18 +35,18 @@ NativeWindStyleSheet.setOutput({
 //TODO text, text name component?, textinput, navigation, drawer 1 or 2, translating
 
 // const Stack = createNativeStackNavigator()
-// const Stack = createStackNavigatorWithDefaultScreenOptions()
-const Stack = createSharedElementStackNavigator()
+const Stack = createStackNavigatorWithDefaultScreenOptions()
+// const Stack = createSharedElementStackNavigator()
 
-const customTransition = SharedTransition.custom((values) => {
-  'worklet'
-  return {
-    height: withSpring(values.targetHeight),
-    width: withSpring(values.targetWidth),
-    // originX: withSpring(values.targetOriginX),
-    // originY: withSpring(values.targetOriginY),
-  }
-})
+// const customTransition = SharedTransition.custom((values) => {
+//   'worklet'
+//   return {
+//     height: withSpring(values.targetHeight),
+//     width: withSpring(values.targetWidth),
+//     // originX: withSpring(values.targetOriginX),
+//     // originY: withSpring(values.targetOriginY),
+//   }
+// })
 
 let startAncestor
 let startNode
@@ -83,9 +81,9 @@ function Home({ navigation }) {
           <View style={{ width: 200, height: 200, backgroundColor: 'red' }} />
         </SharedElement>
       </View> */}
-      <SharedElement id={`item.photo`}>
+      {/* <SharedElement id={`item.photo`}> */}
         <View style={{ width: 150, height: 150, backgroundColor: 'purple' }} />
-      </SharedElement>
+      {/* </SharedElement> */}
       {/* <Animated.View
         style={{ width: 300, height: 300, backgroundColor: 'cyan' }}
         sharedTransitionTag="tag"
@@ -116,9 +114,9 @@ function Log({ navigation }) {
           sharedTransitionTag="tag"
           sharedTransitionStyle={customTransition}
         /> */}
-        <SharedElement id={`item.photo`}>
+        {/* <SharedElement id={`item.photo`}> */}
           <View style={{ width: 150 * 2, height: 150 * 2, backgroundColor: 'purple' }} />
-        </SharedElement>
+        {/* </SharedElement> */}
       </Pressable>
     </View>
   )
@@ -136,10 +134,9 @@ export default function App() {
         <NavigationContainer>
           <BaseLayout>
             <Stack.Navigator
-              // screenOptions={{
-              //   headerMode: 'float',
-              // }}
-             
+            // screenOptions={{
+            //   headerMode: 'float',
+            // }}
             >
               <Stack.Screen
                 name={Routes.login.toString()}
@@ -176,10 +173,6 @@ export default function App() {
                 //   gestureEnabled: true,
                 //   gestureDirection: 'vertical',
                 // }}
-                sharedElements={(route, otherRoute, showing) => {
-                  const { item } = route.params
-                  return [`item.photo`]
-                }}
               />
             </Stack.Navigator>
           </BaseLayout>

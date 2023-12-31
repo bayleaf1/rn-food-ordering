@@ -35,7 +35,7 @@ function StackNavigator({ initialRouteName, children, screenOptions, ...rest }) 
 
   return (
     <NavigationContent>
-      <NativeStackView {...rest} state={state} navigation={navigation} descriptors={descriptors} />
+      <StackView {...rest} state={state} navigation={navigation} descriptors={descriptors} />
     </NavigationContent>
   )
 }
