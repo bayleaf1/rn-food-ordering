@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { useNavigationBuilder, createNavigatorFactory, StackRouter } from '@react-navigation/native'
-import { StackView } from '@react-navigation/stack'
+import { StackView, create, createStackNavigator } from '@react-navigation/stack'
 import { Animated } from 'react-native'
 import { withLayoutContext } from 'expo-router'
 
@@ -26,42 +25,44 @@ const defaultOptions = {
   },
 }
 
-function StackNavigatorWithDefaultScreenOptions({
-  initialRouteName,
-  children,
-  screenOptions,
-  ...rest
-}) {
-  const { state, descriptors, navigation, NavigationContent } = useNavigationBuilder(StackRouter, {
-    children,
-    // children: addDefaultOptionsToScreens(children, defaultOptions),
-    initialRouteName,
-    screenOptions: { ...defaultOptions, ...screenOptions },
-  })
+// let
 
-  return (
-    <NavigationContent>
-      <StackView {...rest} state={state} navigation={navigation} descriptors={descriptors} />
-    </NavigationContent>
-  )
-}
+// function StackNavigatorWithDefaultScreenOptions({
+//   initialRouteName,
+//   children,
+//   screenOptions,
+//   ...rest
+// }) {
+//   const { state, descriptors, navigation, NavigationContent } = useNavigationBuilder(StackRouter, {
+//     children,
+//     // children: addDefaultOptionsToScreens(children, defaultOptions),
+//     initialRouteName,
+//     screenOptions: { ...defaultOptions, ...screenOptions },
+//   })
 
-function addDefaultOptionsToScreens(children, defaultOptions) {
-  let array = React.Children.toArray(children)
+//   return (
+//     <NavigationContent>
+//       <StackView {...rest} state={state} navigation={navigation} descriptors={descriptors} />
+//     </NavigationContent>
+//   )
+// }
 
-  return array.map((possibleScreen) => {
-    let result = possibleScreen
+// function addDefaultOptionsToScreens(children, defaultOptions) {
+//   let array = React.Children.toArray(children)
 
-    if (possibleScreen.type.name === 'Screen') {
-      result = React.cloneElement(possibleScreen, {
-        ...possibleScreen.props,
-        name: possibleScreen.props.name ? possibleScreen.props.name.toString() : undefined,
-        options: { ...defaultOptions, ...(possibleScreen.props.options || {}) },
-      })
-    }
-    return result
-  })
-}
+//   return array.map((possibleScreen) => {
+//     let result = possibleScreen
+
+//     if (possibleScreen.type.name === 'Screen') {
+//       result = React.cloneElement(possibleScreen, {
+//         ...possibleScreen.props,
+//         name: possibleScreen.props.name ? possibleScreen.props.name.toString() : undefined,
+//         options: { ...defaultOptions, ...(possibleScreen.props.options || {}) },
+//       })
+//     }
+//     return result
+//   })
+// }
 
 function forSlide({ current, next, inverted, layouts: { screen } }) {
   const progress = Animated.add(
@@ -101,6 +102,17 @@ function forSlide({ current, next, inverted, layouts: { screen } }) {
   }
 }
 
-const { Navigator } = createNavigatorFactory(StackNavigatorWithDefaultScreenOptions)()
+// const { Navigator } = createNavigatorFactory(StackNavigatorWithDefaultScreenOptions)()
+let { Navigator } = createStackNavigator()
 
-export default BaseStack = withLayoutContext(Navigator)
+let StackForExpoRouter = withLayoutContext(Navigator)
+
+let StackWithDefaultOptions = ({ children, screenOptions, ...props }) => (
+  <StackForExpoRouter screenOptions={{ ...defaultOptions, ...screenOptions }} {...props}>
+    {children}
+  </StackForExpoRouter>
+)
+StackWithDefaultOptions.Screen = StackForExpoRouter.Screen;
+
+export default PrimaryStack = StackWithDefaultOptions;
+// console.log(`BaseStack:`, BaseStack);

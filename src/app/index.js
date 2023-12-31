@@ -1,7 +1,6 @@
 import { Link, Stack } from 'expo-router'
 import { Text, View } from 'react-native'
-import BaseLayout, { FullScreenLayout, LayoutWithTopContent } from '../layouts/BaseLayout'
-import BaseStack from '../libs/Navigation/PrimaryStack'
+import { FullScreenLayout } from '../layouts/BaseLayout'
 
 export default function Page() {
   return (
