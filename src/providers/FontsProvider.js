@@ -5,6 +5,7 @@ import { Text, View } from 'react-native'
 // let start = null
 // let end = null
 
+//TODO add splash screen
 // Loading time ~ 150ms on emulator
 function FontsProvider({ children }) {
   // if(start === null) start = Date.now();

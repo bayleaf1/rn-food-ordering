@@ -1,7 +1,7 @@
 {
   "name": "rn-pr-1",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "expo-router/entry",
   "scripts": {
     "expo": "expor start",
     "start": "expo start --android",
@@ -32,7 +32,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-svg": "13.9.0",
     "react-native-web": "~0.19.6",
-    "expo-splash-screen": "~0.20.5"
+    "expo-splash-screen": "~0.20.5",
+    "expo-router": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

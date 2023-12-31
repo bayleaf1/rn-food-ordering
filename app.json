@@ -3,6 +3,7 @@
     "name": "rn-pr-1",
     "slug": "rn-pr-1",
     "version": "1.0.0",
+    "scheme": "expo-top-app",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -33,7 +34,8 @@
         {
           "initialOrientation": "DEFAULT"
         }
-      ]
+      ],
+      "expo-router"
     ]
   }
 }

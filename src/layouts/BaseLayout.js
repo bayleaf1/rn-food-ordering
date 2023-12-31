@@ -2,45 +2,59 @@ import React from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-function BaseLayout({ children }) {
+function Layout({ children }) {
+  return children
+}
+Layout.VisibleArea = VisibleArea
+Layout.SafeArea = SafeArea
+Layout.VerticalPart = VerticalPart
+Layout.HorizontalPart = HorizontalPart
+
+export function FullScreenLayout({ children }) {
   return (
-    <BaseLayout.VisibleAreaWithSafeArea>
-      <BaseLayout.VerticalPart>
-        <BaseLayout.HorizontalPart>{children}</BaseLayout.HorizontalPart>
-      </BaseLayout.VerticalPart>
-    </BaseLayout.VisibleAreaWithSafeArea>
+    <Layout.VisibleArea>
+      <Layout.SafeArea top right bottom left>
+        <Layout.VerticalPart>
+          <Layout.HorizontalPart>{children}</Layout.HorizontalPart>
+        </Layout.VerticalPart>
+      </Layout.SafeArea>
+    </Layout.VisibleArea>
   )
 }
 
-BaseLayout.VisibleAreaWithSafeArea = VisibleAreaWithSafeArea
-BaseLayout.VerticalPart = VerticalPart
-BaseLayout.HorizontalPart = HorizontalPart
+export default FullScreenLayout
 
-export default BaseLayout
-
-function VisibleAreaWithSafeArea({ children }) {
+export const LayoutWithTopContent = ({ children, bgColor }) => {
   return (
-    <VisibleArea>
-      <SafeArea>{children}</SafeArea>
-    </VisibleArea>
+    <Layout.VisibleArea bgColor={bgColor}>
+      <Layout.SafeArea right bottom left>
+        <Layout.VerticalPart top={10}>
+          <Layout.HorizontalPart>{children}</Layout.HorizontalPart>
+        </Layout.VerticalPart>
+      </Layout.SafeArea>
+    </Layout.VisibleArea>
   )
 }
 
-function VisibleArea({ children }) {
-  return <View tw="flex-1 bg-gray-700">{children}</View>
+function VisibleArea({ children, bgColor }) {
+  return (
+    <View tw="bg-gray-7x00 flex-1" style={{ backgroundColor: bgColor }}>
+      {children}
+    </View>
+  )
 }
 
-function SafeArea({ children }) {
+function SafeArea({ children, top, right, bottom, left }) {
   const insets = useSafeAreaInsets()
 
   return (
     <View
       style={{
         flex: 1,
-        marginTop: insets.top,
-        marginRight: insets.right,
-        marginBottom: insets.bottom,
-        marginLeft: insets.left,
+        marginTop: top ? insets.top : 0,
+        marginRight: right ? insets.right : 0,
+        marginBottom: bottom ? insets.bottom : 0,
+        marginLeft: left ? insets.left : 0,
       }}
     >
       {children}
@@ -48,10 +62,14 @@ function SafeArea({ children }) {
   )
 }
 
-function VerticalPart({ children }) {
-  return <View tw="mt-0 mb-0 flex-1 bg-gray-500">{children}</View>
+function VerticalPart({ children, top = 0, bottom = 0 }) {
+  return (
+    <View tw="bg-gray-5x00 flex-1" style={{ marginTop: top, marginBottom: bottom }}>
+      {children}
+    </View>
+  )
 }
 
 function HorizontalPart({ children }) {
-  return <View tw="ml-4 mr-4 flex-1 bg-gray-400">{children}</View>
+  return <View tw="bg-gray-4x00 ml-4 mr-4 flex-1">{children}</View>
 }
