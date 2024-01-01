@@ -1,26 +1,23 @@
 import React from 'react'
-import PrimaryStack from '../libs/Navigation/PrimaryStack' // PRIMARY
+import PrimaryStack from '../libs/Navigation/PrimaryStack'
 
 import FontsProvider from '../providers/FontsProvider'
+import SessionProvider from '../providers/SessionProvider'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { Link, Slot } from 'expo-router'
+import { Text, View } from 'react-native'
+//TODO check if canGo back and return to login or home screen
+export { ErrorBoundary } from 'expo-router';
 
-
-export default function _layout() {
+//TODO cand se schimba ecranele clipeste alb, de pus layout la fiecare ecran
+// wrap link and other components
+export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <FontsProvider>
-        <PrimaryStack>
-          <PrimaryStack.Screen name="index" />
-          <PrimaryStack.Screen
-            name="modal"
-            options={{
-              gestureEnabled: true,
-              presentation: 'modal',
-              cardStyle: { backgroundColor: 'transparent' },
-              headerShown: false,
-            }}
-          />
-        </PrimaryStack>
+        <SessionProvider>
+          <Slot />
+        </SessionProvider>
       </FontsProvider>
     </SafeAreaProvider>
   )

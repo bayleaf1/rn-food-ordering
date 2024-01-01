@@ -10,9 +10,9 @@ Layout.SafeArea = SafeArea
 Layout.VerticalPart = VerticalPart
 Layout.HorizontalPart = HorizontalPart
 
-export function FullScreenLayout({ children }) {
+export function FullScreenLayout({ children, bgColor }) {
   return (
-    <Layout.VisibleArea>
+    <Layout.VisibleArea bgColor={bgColor}>
       <Layout.SafeArea top right bottom left>
         <Layout.VerticalPart>
           <Layout.HorizontalPart>{children}</Layout.HorizontalPart>
@@ -22,7 +22,6 @@ export function FullScreenLayout({ children }) {
   )
 }
 
-export default FullScreenLayout
 
 export const LayoutWithTopContent = ({ children, bgColor }) => {
   return (
@@ -38,7 +37,7 @@ export const LayoutWithTopContent = ({ children, bgColor }) => {
 
 function VisibleArea({ children, bgColor }) {
   return (
-    <View tw="bg-gray-7x00 flex-1" style={{ backgroundColor: bgColor }}>
+    <View tw="flex-1" style={{ backgroundColor: bgColor }}>
       {children}
     </View>
   )
