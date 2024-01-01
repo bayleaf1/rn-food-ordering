@@ -42,9 +42,9 @@ export default function AppLayout() {
   // This layout can be deferred because it's not the root layout.
   return (
     <FullScreenLayout bgColor={'gray'}>
-      <PrimaryStack initialRouteName="log-in" screenOptions={{ headerShown: false }}>
+      <PrimaryStack initialRouteName="sign-in" screenOptions={{ headerShown: false }}>
         <PrimaryStack.Screen
-          name="log-in"
+          name="sign-in"
           options={{
             gestureEnabled: true,
             presentation: 'modal',
@@ -53,7 +53,7 @@ export default function AppLayout() {
           }}
         />
         <PrimaryStack.Screen
-          name="register"
+          name="sign-up"
           options={{
             gestureEnabled: true,
             presentation: 'modal',
