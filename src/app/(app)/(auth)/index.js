@@ -2,6 +2,7 @@ import { Link } from 'expo-router'
 import { Pressable, Text, View } from 'react-native'
 import { LayoutWithTopContent } from '../../../layouts/BaseLayout'
 import { useSession } from '../../../providers/SessionProvider'
+import WheelMan from '../../../libs/Navigation/WheelMan'
 
 // export function ErrorBoundary(props) {
 //   return (
@@ -11,9 +12,8 @@ import { useSession } from '../../../providers/SessionProvider'
 //     </View>
 //   );
 // }
-function er(){
-  throw new Error("Cusotm error")
-
+function er() {
+  // throw new Error("Cusotm error")
 }
 export default function Page() {
   let { signOut } = useSession()
@@ -22,9 +22,12 @@ export default function Page() {
     <View tw="flex-1 bg-gray-500">
       {er()}
       <Text>HomePage</Text>
-      <Link href="/log-in" asChild>
-        <Text>Sign in</Text>
-      </Link>
+      {/* <Link href="/log-in" asChild> */}
+      <WheelMan to={'singIn'} children={<Text>Sign in</Text>} />
+      {/* <WheelMan to={'singIn'} children={<Text>Sign in</Text>} /> */}
+      {/* <Text>Sign in</Text> */}
+      {/* </WheelMan> */}
+      {/* </Link> */}
       <Link href="/sign-let" asChild>
         <Text>Sign let</Text>
       </Link>
