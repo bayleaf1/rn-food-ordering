@@ -18,6 +18,7 @@ const config = {
 }
 
 const defaultOptions = {
+  headerShown: false,
   cardStyleInterpolator: forSlide,
   transitionSpec: {
     open: config,

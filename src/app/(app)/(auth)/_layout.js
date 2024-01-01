@@ -2,12 +2,12 @@ import React, { useMemo } from 'react'
 import PrimaryStack from '../../../libs/Navigation/PrimaryStack'
 import { FullScreenLayout } from '../../../layouts/BaseLayout'
 import { Redirect, Slot } from 'expo-router'
-import { useSession } from '../../../providers/SessionProvider'
+import { useSessionProvider } from '../../../providers/SessionProvider'
 import { Text } from 'react-native'
 
 let value = true
 export default function AuthorizedLayout() {
-  const { session, isLoading } = useSession()
+  const { isSignedOut, isLoading } = useSessionProvider()
 
   // You can keep the splash screen open, or render a loading screen like we do here.
   if (false) {
@@ -22,7 +22,8 @@ export default function AuthorizedLayout() {
   //   return <Redirect href="sign-in" />
   // }
 
-  if (!session) return <Redirect href="/sign-in" />
+  console.log(`isSignedOut:`, isSignedOut);
+  if (isSignedOut) return <Redirect href="/sign-in" />
 
   // This layout can be deferred because it's not the root layout.
   return (

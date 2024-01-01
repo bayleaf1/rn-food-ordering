@@ -1,8 +1,7 @@
 import { Link } from 'expo-router'
 import { Pressable, Text, View } from 'react-native'
-import { LayoutWithTopContent } from '../../../layouts/BaseLayout'
-import { useSession } from '../../../providers/SessionProvider'
-import WheelMan from '../../../libs/Navigation/WheelMan'
+import { useSessionProvider } from '../../../providers/SessionProvider'
+import Compass from '../../../libs/Navigation/Compass'
 
 // export function ErrorBoundary(props) {
 //   return (
@@ -16,21 +15,23 @@ function er() {
   // throw new Error("Cusotm error")
 }
 export default function Page() {
-  let { signOut } = useSession()
+  let { signOut } = useSessionProvider()
   return (
     // <LayoutWithTopContent bgColor="gray">
     <View tw="flex-1 bg-gray-500">
       {er()}
       <Text>HomePage</Text>
       {/* <Link href="/log-in" asChild> */}
-      <WheelMan to={'singIn'} children={<Text>Sign in</Text>} />
-      {/* <WheelMan to={'singIn'} children={<Text>Sign in</Text>} /> */}
+      <Compass goToRoute={'singIn'} children={<Text>Sign in</Text>} />
+      {/* <Compass to={'singIn'} children={<Text>Sign in</Text>} /> */}
       {/* <Text>Sign in</Text> */}
-      {/* </WheelMan> */}
+      {/* </Compass> */}
       {/* </Link> */}
-      <Link href="/sign-let" asChild>
-        <Text>Sign let</Text>
-      </Link>
+      <Compass goToRoute={'singUp'} children={<Text>Sign up</Text>} />
+
+      {/* <Link href="/sign-let" asChild>
+        <Text>Sign up</Text>
+      </Link> */}
       <Link href="/second" asChild>
         <Text>SecondPage</Text>
       </Link>

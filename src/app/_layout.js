@@ -10,7 +10,7 @@ import { Text, View } from 'react-native'
 export { ErrorBoundary } from 'expo-router';
 
 //TODO cand se schimba ecranele clipeste alb, de pus layout la fiecare ecran
-// wrap link and other components
+//TODO drawer
 export default function RootLayout() {
   return (
     <SafeAreaProvider>

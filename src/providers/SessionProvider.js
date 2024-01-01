@@ -1,42 +1,45 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
+import { useStorageState } from '../libs/Storage'
 // import { useStorageState } from './useStorageState'
 
 const AuthContext = React.createContext({
   signIn: () => null,
   signOut: () => null,
-  session: null,
+  // session: null,
+  isSignedIn: false,
+  isSignedOut: true,
   isLoading: false,
 })
 
 // This hook can be used to access the user info.
-export function useSession() {
+export function useSessionProvider() {
   const value = React.useContext(AuthContext)
   //   if (process.env.NODE_ENV !== 'production') {
   //     if (!value) {
-  //       throw new Error('useSession must be wrapped in a <SessionProvider />');
+  //       throw new Error('useSessionProvider must be wrapped in a <SessionProvider />');
   //     }
   //   }
 
   return value
 }
-const init = [[false, 'xxx'], () => null]
+
 function SessionProvider(props) {
-  let [session, setSession] = useState(null);
-  // const [[isLoading, session], setSession] = init
-  //TODO complete useStorageState
-  //   const [[isLoading, session], setSession] = useStorageState('session');
-  let isLoading = false;
+  const [[isLoading, jwtToken], setJwtToken] = useStorageState('jwtToken')
+  // console.log(`session:`, isLoading, jwtToken)
+  const isSignedIn = useMemo(() => !!jwtToken, [jwtToken])
+  const isSignedOut = useMemo(() => !isSignedIn, [isSignedIn])
   return (
     <AuthContext.Provider
       value={{
         signIn: () => {
-          // Perform sign-in logic here
-          setSession('xxx')
+          setJwtToken('someJwt')
         },
         signOut: () => {
-          setSession(null)
+          setJwtToken(null)
         },
-        session,
+        isSignedIn,
+        isSignedOut,
+        // session,
         isLoading,
       }}
     >
