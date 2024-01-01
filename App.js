@@ -18,6 +18,7 @@ import { createStackNavigatorWithDefaultScreenOptions } from './src/libs/Navigat
 // } from 'react-native-shared-element'
 // import { createNativeStackNavigator } from '@react-navigation/native-stack'
 // import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
+//TODO move to app folder
 NativeWindStyleSheet.setOutput({
   default: 'native',
 })

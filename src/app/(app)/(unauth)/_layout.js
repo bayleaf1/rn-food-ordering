@@ -4,7 +4,8 @@ import { FullScreenLayout } from '../../../layouts/BaseLayout'
 import { Redirect, Slot } from 'expo-router'
 import { useSessionProvider } from '../../../providers/SessionProvider'
 import { Text, View } from 'react-native'
-
+import { TransitionPresets } from '@react-navigation/stack'
+import Routes from '../../../libs/Navigation/Routes'
 
 export default function AppLayout() {
   const { isSignedIn } = useSessionProvider()
@@ -13,9 +14,35 @@ export default function AppLayout() {
   if (false) {
     return <Text tw="mt-20">Loading...</Text>
   }
-  if (isSignedIn) return <Redirect href="/" />
+  
+  if (isSignedIn) return <Redirect href={Routes.home} />
 
-  return <Slot/>
+  return (
+    <PrimaryStack initialRouteName="index">
+      <PrimaryStack.Screen
+        name="index"
+        options={{
+          gestureEnabled: true,
+          cardStyle: { backgroundColor: 'transparent' },
+        }}
+      />
+      <PrimaryStack.Screen
+        name="sign-up"
+        options={{
+          gestureEnabled: true,
+          cardStyle: { backgroundColor: 'transparent' },
+        }}
+      />
+      <PrimaryStack.Screen
+          name="password-reset"
+          options={{
+            gestureEnabled: true,
+            cardStyle: { backgroundColor: 'transparent' },
+          }}
+        />
+    </PrimaryStack>
+  )
+  // return <Slot/>
   // return (
   //   <FullScreenLayout bgColor={'gray'}>
   //     <PrimaryStack initialRouteName="sign-in">

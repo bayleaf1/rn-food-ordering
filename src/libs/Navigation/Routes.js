@@ -1,22 +1,12 @@
-const Paths = {
-  home: '/',
-  singIn: '/sign-in',
+const Routes = {
+  singIn: '/',
   singUp: '/sign-up',
+  passwordReset: '/password-reset',
+  TOS: '/terms-of-use',
+  privacyPolicy: '/privacy-policy',
   //
-  // overview: 'overview',
-  // login: {
-  //   toString: () => 'home',
-  //   register: 'register',
-  //   resetPassword: 'Log',
-  // },
-  // home: {
-  //   toString: () => 'home',
-  //   settings: 'settings',
-  //   store: {
-  //       toString: () => 'store',
-  //     singleItem: 'singleItem',
-  //   },
-  // },
+  home: '/home',
+  settings: '/settings'
 }
 
 {/* <WayFinder to={Ways.singIn}></WayFinder> */}
@@ -25,7 +15,7 @@ const Paths = {
 {/* <Indicator to={Paths.singIn}></Indicator>
 <Pointer to={Paths.singIn}></Pointer> */}
 
-export default Paths
+export default Routes
 
 
 // export default Routes;

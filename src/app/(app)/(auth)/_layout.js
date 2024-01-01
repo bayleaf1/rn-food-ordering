@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react'
 import PrimaryStack from '../../../libs/Navigation/PrimaryStack'
-import { FullScreenLayout } from '../../../layouts/BaseLayout'
 import { Redirect, Slot } from 'expo-router'
 import { useSessionProvider } from '../../../providers/SessionProvider'
 import { Text } from 'react-native'
+import Routes from '../../../libs/Navigation/Routes'
 
 let value = true
 export default function AuthorizedLayout() {
@@ -22,18 +22,15 @@ export default function AuthorizedLayout() {
   //   return <Redirect href="sign-in" />
   // }
 
-  console.log(`isSignedOut:`, isSignedOut);
-  if (isSignedOut) return <Redirect href="/sign-in" />
+  // console.log(`isSignedOut:`, isSignedOut);
+  if (isSignedOut) return <Redirect href={Routes.singIn} />
 
   // This layout can be deferred because it's not the root layout.
   return (
-    // <Slot />
-    <FullScreenLayout bgColor={'gray'}>
-      {/* <Slot /> */}
-      <PrimaryStack screenOptions={{ headerShown: false }}>
-        <PrimaryStack.Screen name="index" />
-        <PrimaryStack.Screen name="second" />
-        <PrimaryStack.Screen
+    <PrimaryStack initialRouteName="home" screenOptions={{ headerShown: false }}>
+      <PrimaryStack.Screen name="home" />
+      <PrimaryStack.Screen name="settings" />
+      {/*   <PrimaryStack.Screen
           name="modal"
           options={{
             gestureEnabled: true,
@@ -41,27 +38,7 @@ export default function AuthorizedLayout() {
             cardStyle: { backgroundColor: 'transparent' },
             headerShown: false,
           }}
-        />
-      </PrimaryStack>
-    </FullScreenLayout>
+        /> */}
+    </PrimaryStack>
   )
 }
-// export default function _layout() {
-//   return (
-//     <FullScreenLayout bgColor={'gray'}>
-//       <PrimaryStack screenOptions={{headerShown: false}}>
-//         <PrimaryStack.Screen name="index" />
-//         <PrimaryStack.Screen name="second" />
-//         {/* <PrimaryStack.Screen
-//         name="modal"
-//         options={{
-//           gestureEnabled: true,
-//           presentation: 'modal',
-//           cardStyle: { backgroundColor: 'transparent' },
-//           headerShown: false,
-//         }}
-//       /> */}
-//       </PrimaryStack>
-//     </FullScreenLayout>
-//   )
-// }

@@ -1,6 +1,6 @@
-import { Link, Redirect } from 'expo-router'
 import { Pressable, Text, View } from 'react-native'
 import { useSessionProvider } from '../../../providers/SessionProvider'
+import Compass from '../../../libs/Navigation/Go'
 import { SafeFullScreenLayout } from '../../../layouts/BaseLayout'
 
 export default function Page() {
@@ -8,11 +8,16 @@ export default function Page() {
 
   return (
     <SafeFullScreenLayout>
-      <Text>Sign up</Text>
+      <Text>Sign In</Text>
 
-      <Pressable onPress={signIn}>
+      {/* <Link asChild href={'/'} onPress={signIn}> */}
+      {/* <Go goToRoute="home" onPress={signIn}> */}
+       <Pressable onPress={signIn}>
+
         <Text>Home</Text>
-      </Pressable>
+       </Pressable>
+      {/* </Compass> */}
+      {/* </Link> */}
     </SafeFullScreenLayout>
   )
 }

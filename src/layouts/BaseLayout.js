@@ -10,7 +10,7 @@ Layout.SafeArea = SafeArea
 Layout.VerticalPart = VerticalPart
 Layout.HorizontalPart = HorizontalPart
 
-export function FullScreenLayout({ children, bgColor }) {
+export function SafeFullScreenLayout({ children, bgColor }) {
   return (
     <Layout.VisibleArea bgColor={bgColor}>
       <Layout.SafeArea top right bottom left>

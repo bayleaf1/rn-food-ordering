@@ -10,6 +10,7 @@ const IMAGES = {
   home: require('../../../assets/images/colibri.jpg'),
 }
 
+//TODO add styles for image, prop without wrapper
 function LocalPicture({ image = '', icon = '', ctw = '' }) {
   let selectedImage = IMAGES[image]
 

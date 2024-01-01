@@ -109,6 +109,7 @@ let { Navigator } = createStackNavigator()
 let StackForExpoRouter = withLayoutContext(Navigator)
 
 let StackWithDefaultOptions = ({ children, screenOptions, ...props }) => (
+  //TODO handle when screenOptions is a function
   <StackForExpoRouter screenOptions={{ ...defaultOptions, ...screenOptions }} {...props}>
     {children}
   </StackForExpoRouter>

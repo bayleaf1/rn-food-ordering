@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import PrimaryStack from '../../libs/Navigation/PrimaryStack'
-import { FullScreenLayout } from '../../layouts/BaseLayout'
 import { Redirect, Slot } from 'expo-router'
 import { useSessionProvider } from '../../providers/SessionProvider'
 import { Text, View } from 'react-native'
@@ -20,36 +19,17 @@ import { Text, View } from 'react-native'
 
 // let value = true
 export default function AppLayout() {
+  //TODO add slash screen provider and component here
   // You can keep the splash screen open, or render a loading screen like we do here.
   if (false) {
     return <Text tw="mt-20">Loading...</Text>
   }
-
-  return (
-    <FullScreenLayout bgColor={'gray'}>
-      <PrimaryStack initialRouteName="sign-in">
-        <PrimaryStack.Screen
-          name="sign-in"
-          options={{
-            gestureEnabled: true,
-            cardStyle: { backgroundColor: 'transparent' },
-          }}
-        />
-        <PrimaryStack.Screen
-          name="sign-up"
-          options={{
-            gestureEnabled: true,
-            cardStyle: { backgroundColor: 'transparent' },
-          }}
-        />
-        <PrimaryStack.Screen
-          name="rec"
-          options={{
-            gestureEnabled: true,
-            cardStyle: { backgroundColor: 'transparent' },
-          }}
-        />
-      </PrimaryStack>
-    </FullScreenLayout>
-  )
+  // return <Slot/>
+  return <PrimaryStack />
+  // return (
+  //   <PrimaryStack>
+  //     <PrimaryStack.Screen name="terms-of-use" options={{headerShown: true}} />
+  //     <PrimaryStack.Screen name="privacy-policy" options={{headerShown: true}} />
+  //   </PrimaryStack>
+  // )
 }

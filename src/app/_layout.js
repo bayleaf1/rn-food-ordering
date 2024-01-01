@@ -11,7 +11,7 @@ export { ErrorBoundary } from 'expo-router';
 
 //TODO cand se schimba ecranele clipeste alb, de pus layout la fiecare ecran
 //TODO drawer
-export default function RootLayout() {
+export default function AppLayout() {
   return (
     <SafeAreaProvider>
       <FontsProvider>
