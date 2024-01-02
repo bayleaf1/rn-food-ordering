@@ -5,16 +5,11 @@ import Go from '../../../libs/Navigation/Go'
 
 export default function Page() {
   return (
-    <SafeFullScreenLayout>
-      <View tw="flex-1 bg-gray-500">
-        <Text>SecondPage</Text>
-        <Go toRoute="home">
+    <SafeFullScreenLayout contentTw='bg-green-400'>
+        <Text>Settings</Text>
+        <Go toScreen="home">
           <Text>HomePage</Text>
         </Go>
-        {/* <Link href="/" asChild>
-          <Text>HomePage</Text>
-        </Link> */}
-      </View>
     </SafeFullScreenLayout>
   )
 }

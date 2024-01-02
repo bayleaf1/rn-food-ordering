@@ -19,15 +19,12 @@ import { createStackNavigatorWithDefaultScreenOptions } from './src/libs/Navigat
 // import { createNativeStackNavigator } from '@react-navigation/native-stack'
 // import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 //TODO move to app folder
-NativeWindStyleSheet.setOutput({
-  default: 'native',
-})
+// NativeWindStyleSheet.setOutput({
+//   default: 'native',
+// })
 // LogBox.ignoreLogs(['`new NativeEventEmitter()` was called with a non-null']) //Hide warnings
 
-//TODO if navigation doesn't work on android
-// react-native-screens package requires one additional configuration step to properly work on Android devices. Edit MainActivity.kt or MainActivity.java file which is located under android/app/src/main/java/<your package name>/.
 
-// Add the highlighted code to the body of MainActivity class:
 
 //tw - tailwind
 //ctw - component tailwind;

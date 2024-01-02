@@ -17,7 +17,7 @@ function FontsProvider({ children }) {
     PrimaryThin: require('../../assets/fonts/Montserrat/MontserratAlternates-Thin.ttf'),
     Primary: require('../../assets/fonts/Montserrat/MontserratAlternates-Regular.ttf'),
   })
-
+  //TODO handle this
   if (!loaded) return null
 
   //   if (end === null) end = Date.now()

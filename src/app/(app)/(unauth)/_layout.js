@@ -1,11 +1,9 @@
-import React, { useMemo } from 'react'
+import { Redirect } from 'expo-router'
+import React from 'react'
+import { Text } from 'react-native'
 import PrimaryStack from '../../../libs/Navigation/PrimaryStack'
-import { FullScreenLayout } from '../../../layouts/BaseLayout'
-import { Redirect, Slot } from 'expo-router'
+import Screens from '../../../libs/Navigation/ScreenList'
 import { useSessionProvider } from '../../../providers/SessionProvider'
-import { Text, View } from 'react-native'
-import { TransitionPresets } from '@react-navigation/stack'
-import Routes from '../../../libs/Navigation/Routes'
 
 export default function AppLayout() {
   const { isSignedIn } = useSessionProvider()
@@ -15,7 +13,7 @@ export default function AppLayout() {
     return <Text tw="mt-20">Loading...</Text>
   }
   
-  if (isSignedIn) return <Redirect href={Routes.home} />
+  if (isSignedIn) return <Redirect href={Screens.home} />
 
   return (
     <PrimaryStack initialRouteName="index">
@@ -34,7 +32,7 @@ export default function AppLayout() {
         }}
       />
       <PrimaryStack.Screen
-          name="password-reset"
+          name="reset-password"
           options={{
             gestureEnabled: true,
             cardStyle: { backgroundColor: 'transparent' },

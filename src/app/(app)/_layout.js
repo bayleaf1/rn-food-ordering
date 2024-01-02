@@ -24,12 +24,5 @@ export default function AppLayout() {
   if (false) {
     return <Text tw="mt-20">Loading...</Text>
   }
-  // return <Slot/>
   return <PrimaryStack />
-  // return (
-  //   <PrimaryStack>
-  //     <PrimaryStack.Screen name="terms-of-use" options={{headerShown: true}} />
-  //     <PrimaryStack.Screen name="privacy-policy" options={{headerShown: true}} />
-  //   </PrimaryStack>
-  // )
 }

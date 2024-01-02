@@ -1,4 +1,5 @@
-import { Dimensions, Text } from "react-native"
+import { forwardRef } from 'react'
+import { Dimensions, Text } from 'react-native'
 
 const width = () => Dimensions.get('window').width
 
@@ -37,7 +38,7 @@ function Writing({
       style={{
         fontSize: size[1] * (width() * (1 / 300)),
         fontFamily: weight[1],
-        ...style
+        ...style,
       }}
       tw={ctw}
       numberOfLines={numberOfLines}
@@ -47,5 +48,4 @@ function Writing({
   )
 }
 
-
-export default Writing;
+export default Writing

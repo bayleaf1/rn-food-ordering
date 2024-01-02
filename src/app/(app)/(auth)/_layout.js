@@ -3,7 +3,7 @@ import PrimaryStack from '../../../libs/Navigation/PrimaryStack'
 import { Redirect, Slot } from 'expo-router'
 import { useSessionProvider } from '../../../providers/SessionProvider'
 import { Text } from 'react-native'
-import Routes from '../../../libs/Navigation/Routes'
+import Screens from '../../../libs/Navigation/ScreenList'
 
 let value = true
 export default function AuthorizedLayout() {
@@ -23,7 +23,7 @@ export default function AuthorizedLayout() {
   // }
 
   // console.log(`isSignedOut:`, isSignedOut);
-  if (isSignedOut) return <Redirect href={Routes.singIn} />
+  if (isSignedOut) return <Redirect href={Screens.singIn} />
 
   // This layout can be deferred because it's not the root layout.
   return (

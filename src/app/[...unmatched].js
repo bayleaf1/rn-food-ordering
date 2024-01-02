@@ -1,8 +1,23 @@
-import { Unmatched } from 'expo-router'
-import { Text } from 'react-native'
-// export default Unmatched
+import { View } from 'react-native'
+import Writing from '../components/Writing'
+import { SafeFullScreenLayout } from '../layouts/BaseLayout'
+import Go from '../libs/Navigation/Go'
 
-export default function CustomUnmatched(){
-    return <Unmatched/>
-    // return <Text tw="mt-20">Unmatched</Text>
+//! For some reason tailwind is not working on this file
+export default function CustomUnmatched() {
+  return (
+    <SafeFullScreenLayout>
+      <View style={{ flex: 1 }}>
+        <Writing h1 style={{ marginTop: 200, textAlign: 'center' }}>
+          Screen not found
+        </Writing>
+
+        <Go toScreen="home">
+          <Writing h2 style={{ marginTop: 20, textAlign: 'center' }}>
+            Return to home
+          </Writing>
+        </Go>
+      </View>
+    </SafeFullScreenLayout>
+  )
 }

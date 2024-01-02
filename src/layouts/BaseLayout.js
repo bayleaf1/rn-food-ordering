@@ -9,26 +9,30 @@ Layout.VisibleArea = VisibleArea
 Layout.SafeArea = SafeArea
 Layout.VerticalPart = VerticalPart
 Layout.HorizontalPart = HorizontalPart
+Layout.Content = View
 
-export function SafeFullScreenLayout({ children, bgColor }) {
+export function SafeFullScreenLayout({ children, bgColor, contentTw = '' }) {
   return (
     <Layout.VisibleArea bgColor={bgColor}>
       <Layout.SafeArea top right bottom left>
         <Layout.VerticalPart>
-          <Layout.HorizontalPart>{children}</Layout.HorizontalPart>
+          <Layout.HorizontalPart>
+            <Layout.Content tw={'flex-1' + ' ' + contentTw}>{children}</Layout.Content>
+          </Layout.HorizontalPart>
         </Layout.VerticalPart>
       </Layout.SafeArea>
     </Layout.VisibleArea>
   )
 }
 
-
-export const LayoutWithTopContent = ({ children, bgColor }) => {
+export const LayoutWithTopContent = ({ children, bgColor, contentTw = 'flex-1' }) => {
   return (
     <Layout.VisibleArea bgColor={bgColor}>
       <Layout.SafeArea right bottom left>
         <Layout.VerticalPart top={10}>
-          <Layout.HorizontalPart>{children}</Layout.HorizontalPart>
+          <Layout.HorizontalPart>
+            <Layout.Content tw={'flex-1' + ' ' + contentTw}>{children}</Layout.Content>
+          </Layout.HorizontalPart>
         </Layout.VerticalPart>
       </Layout.SafeArea>
     </Layout.VisibleArea>

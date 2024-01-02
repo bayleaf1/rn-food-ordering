@@ -1,24 +1,28 @@
 import { Link } from 'expo-router'
-import Routes from './Routes'
 import { useMemo } from 'react'
+import Screens from './ScreenList'
+import { Pressable } from 'react-native'
 
-const defaultRoute = Routes.home
+const defaultScreen = Screens.home
 
-function Go({ toRoute = defaultRoute, children, ...rest }) {
+function Go({ toScreen = defaultScreen, children, ...rest }) {
   let href = useMemo(() => {
-    if (!Array.isArray(toRoute)) toRoute = [toRoute]
+    if (!Array.isArray(toScreen)) toScreen = [toScreen]
 
-    let [routeName, ...params] = toRoute
+    let [screenName, ...params] = toScreen
 
-    let route = Routes[routeName]
+    let route = Screens[screenName]
 
-    let result = defaultRoute
+    let result = defaultScreen
 
     if (route) result = typeof route === 'string' ? route : route(...params)
     return result
-  }, [toRoute])
+  }, [toScreen])
 
-  return <Link asChild {...rest} href={href} children={children} />
+  return (
+    <Link asChild {...rest} href={href}>
+      <Pressable>{children}</Pressable>
+    </Link>
+  )
 }
-
 export default Go

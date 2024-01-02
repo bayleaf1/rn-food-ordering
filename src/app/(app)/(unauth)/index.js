@@ -11,7 +11,7 @@ export default function Page() {
       <Text>Sign In</Text>
 
       {/* <Link asChild href={'/'} onPress={signIn}> */}
-      {/* <Go goToRoute="home" onPress={signIn}> */}
+      {/* <Go gotoScreen="home" onPress={signIn}> */}
        <Pressable onPress={signIn}>
 
         <Text>Home</Text>
