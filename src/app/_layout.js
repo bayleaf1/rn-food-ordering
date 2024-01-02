@@ -13,14 +13,7 @@ export { ErrorBoundary } from 'expo-router'
 //TODO de incercat https://github.com/kristerkari/react-native-svg-example?tab=readme-ov-file
 //TODO translating
 
-//XTODO if navigation doesn't work on android
-// react-native-screens package requires one additional configuration step to properly work on Android devices. Edit MainActivity.kt or MainActivity.java file which is located under android/app/src/main/java/<your package name>/.
-
-// Add the highlighted code to the body of MainActivity class:
-
 NativeWindStyleSheet.setOutput({ default: 'native' })
-//tw - tailwind
-//ctw - component tailwind;
 
 export default function AppLayout() {
   return (

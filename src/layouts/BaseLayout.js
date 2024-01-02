@@ -25,7 +25,7 @@ export function SafeFullScreenLayout({ children, bgColor, contentTw = '' }) {
   )
 }
 
-export const LayoutWithTopContent = ({ children, bgColor, contentTw = 'flex-1' }) => {
+export const LayoutWithTopContent = ({ children, bgColor, contentTw = '' }) => {
   return (
     <Layout.VisibleArea bgColor={bgColor}>
       <Layout.SafeArea right bottom left>
@@ -40,11 +40,7 @@ export const LayoutWithTopContent = ({ children, bgColor, contentTw = 'flex-1' }
 }
 
 function VisibleArea({ children, bgColor }) {
-  return (
-    <View tw="flex-1" style={{ backgroundColor: bgColor }}>
-      {children}
-    </View>
-  )
+  return <View tw="flex-1" style={{ backgroundColor: bgColor }} children={children} />
 }
 
 function SafeArea({ children, top, right, bottom, left }) {
@@ -59,18 +55,13 @@ function SafeArea({ children, top, right, bottom, left }) {
         marginBottom: bottom ? insets.bottom : 0,
         marginLeft: left ? insets.left : 0,
       }}
-    >
-      {children}
-    </View>
+      children={children}
+    />
   )
 }
 
 function VerticalPart({ children, top = 0, bottom = 0 }) {
-  return (
-    <View tw="bg-gray-5x00 flex-1" style={{ marginTop: top, marginBottom: bottom }}>
-      {children}
-    </View>
-  )
+  return <View tw="flex-1" style={{ marginTop: top, marginBottom: bottom }} children={children} />
 }
 
 function HorizontalPart({ children }) {
