@@ -1,11 +1,11 @@
 import { Link } from 'expo-router'
-import { useMemo } from 'react'
+import { Fragment, useMemo } from 'react'
 import Screens from './ScreenList'
 import { Pressable } from 'react-native'
 
 const defaultScreen = Screens.home
 
-function Go({ toScreen = defaultScreen, children, ...rest }) {
+function Go({ toScreen = defaultScreen, children, ctw = '', ...rest }) {
   let href = useMemo(() => {
     if (!Array.isArray(toScreen)) toScreen = [toScreen]
 
@@ -17,12 +17,13 @@ function Go({ toScreen = defaultScreen, children, ...rest }) {
 
     if (route) result = typeof route === 'string' ? route : route(...params)
     return result
-  }, [toScreen])
+  }, [toScreen]) 
 
   return (
-    <Link asChild {...rest} href={href}>
+    <Link asChild {...rest} href={href} tw={ctw}>
       <Pressable>{children}</Pressable>
     </Link>
   )
 }
+
 export default Go

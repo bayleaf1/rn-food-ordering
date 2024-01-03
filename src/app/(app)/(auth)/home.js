@@ -42,6 +42,9 @@ export default function Page() {
       <Go toScreen={'TOS'} children={<Text>TOS</Text>} />
       <Go toScreen={'privacyPolicy'} children={<Text>P.P</Text>} />
 
+      <Go toScreen={'drawerone'} children={<Text>Drawer</Text>} />
+
+
       <Pressable onPress={signOut}>
         <Text>Sign out</Text>
       </Pressable>

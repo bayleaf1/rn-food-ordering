@@ -12,5 +12,3 @@ Changing the file with custom navigator causes freeze of the app and it need to 
 Pnpm doesn't work with expo/react-native, expo-router.
 
 If something is not working, ex: navigate to route, then run npx expo start -c to clean cache, sometimes it helps.
-
-When using auto clean import alt + shift + o the import of gesture handler is removed. Do not forget to restore it.

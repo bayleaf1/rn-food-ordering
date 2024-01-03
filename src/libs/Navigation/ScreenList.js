@@ -6,7 +6,9 @@ const Screens = {
   privacyPolicy: '/privacy-policy',
   //
   home: '/home',
-  settings: '/settings'
+  settings: '/settings',
+  drawerone: '/drawer/one',
+  drawertwo: '/drawer/two',
 }
 
 export default Screens;

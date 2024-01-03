@@ -1,9 +1,7 @@
 import * as React from 'react'
-import { StackView, create, createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator } from '@react-navigation/stack'
 import { Animated } from 'react-native'
 import { withLayoutContext } from 'expo-router'
-
-//Changing the file with custom navigator causes freeze of the app and it needs to be reloaded
 
 const config = {
   animation: 'spring',
@@ -25,45 +23,6 @@ const defaultOptions = {
     close: config,
   },
 }
-
-// let
-
-// function StackNavigatorWithDefaultScreenOptions({
-//   initialRouteName,
-//   children,
-//   screenOptions,
-//   ...rest
-// }) {
-//   const { state, descriptors, navigation, NavigationContent } = useNavigationBuilder(StackRouter, {
-//     children,
-//     // children: addDefaultOptionsToScreens(children, defaultOptions),
-//     initialRouteName,
-//     screenOptions: { ...defaultOptions, ...screenOptions },
-//   })
-
-//   return (
-//     <NavigationContent>
-//       <StackView {...rest} state={state} navigation={navigation} descriptors={descriptors} />
-//     </NavigationContent>
-//   )
-// }
-
-// function addDefaultOptionsToScreens(children, defaultOptions) {
-//   let array = React.Children.toArray(children)
-
-//   return array.map((possibleScreen) => {
-//     let result = possibleScreen
-
-//     if (possibleScreen.type.name === 'Screen') {
-//       result = React.cloneElement(possibleScreen, {
-//         ...possibleScreen.props,
-//         name: possibleScreen.props.name ? possibleScreen.props.name.toString() : undefined,
-//         options: { ...defaultOptions, ...(possibleScreen.props.options || {}) },
-//       })
-//     }
-//     return result
-//   })
-// }
 
 function forSlide({ current, next, inverted, layouts: { screen } }) {
   const progress = Animated.add(
@@ -103,18 +62,28 @@ function forSlide({ current, next, inverted, layouts: { screen } }) {
   }
 }
 
-// const { Navigator } = createNavigatorFactory(StackNavigatorWithDefaultScreenOptions)()
 let { Navigator } = createStackNavigator()
 
 let StackForExpoRouter = withLayoutContext(Navigator)
 
 let StackWithDefaultOptions = ({ children, screenOptions, ...props }) => (
-  //TODO handle when screenOptions is a function
-  <StackForExpoRouter screenOptions={{ ...defaultOptions, ...screenOptions }} {...props}>
+  <StackForExpoRouter
+    screenOptions={(...args) => {
+      let passed =
+        typeof props.screenOptions === 'function'
+          ? screenOptions(...args)
+          : screenOptions
+      return {
+        ...defaultOptions,
+        ...passed,
+      }
+    }}
+    {...props}
+  >
     {children}
   </StackForExpoRouter>
 )
-StackWithDefaultOptions.Screen = StackForExpoRouter.Screen;
 
-export default PrimaryStack = StackWithDefaultOptions;
-// console.log(`BaseStack:`, BaseStack);
+StackWithDefaultOptions.Screen = StackForExpoRouter.Screen
+
+export default PrimaryStack = StackWithDefaultOptions

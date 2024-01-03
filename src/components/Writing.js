@@ -1,5 +1,4 @@
-import { forwardRef } from 'react'
-import { Dimensions, Text } from 'react-native'
+import { Dimensions, Pressable, Text } from 'react-native'
 
 const width = () => Dimensions.get('window').width
 
@@ -17,6 +16,7 @@ function Writing({
   ctw = '',
   style = {},
   children,
+  onPress, //leave for autocompletion
 }) {
   const size = [
     [h1, 26],
@@ -42,10 +42,21 @@ function Writing({
       }}
       tw={ctw}
       numberOfLines={numberOfLines}
-    >
-      {children}
-    </Text>
+      children={children}
+    />
   )
 }
 
-export default Writing
+function withPressableIfExistsOnPressHandler(Component) {
+  return (p) => {
+    if (!p.onPress) return <Component {...p} />
+
+    return (
+      <Pressable onPress={p.onPress}>
+        <Component {...p} />
+      </Pressable>
+    )
+  }
+}
+// adding <Pressable/> in component will cause <Go/> not work
+export default withPressableIfExistsOnPressHandler(Writing)
