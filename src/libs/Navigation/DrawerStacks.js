@@ -8,7 +8,13 @@ import { useDrawerProgress } from '@react-navigation/drawer'
 import { useWindowDimensions } from 'react-native'
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated'
 
-function SliderDrawerStack(props) {
+let withDefaultScreenOptions = (passed = {}) => ({
+  overlayColor: 'transparent',
+  ...passed,
+  drawerType: 'slide',
+})
+
+export function SliderDrawerStack(props) {
   return (
     <Drawer
       {...props}
@@ -18,18 +24,14 @@ function SliderDrawerStack(props) {
           typeof props.screenOptions === 'function'
             ? props.screenOptions(...args)
             : props.screenOptions
-        return {
-          overlayColor: 'transparent',
-          ...passed,
-          drawerType: 'slide',
-        }
+        return withDefaultScreenOptions(passed)
       }}
     />
   )
 }
 
 SliderDrawerStack.Screen = Drawer.Screen
-SliderDrawerStack.SceneScreenZoomOut = SceneScreenZoomOut
+SliderDrawerStack.SceneZoomOut = SceneScreenZoomOut
 
 function CustomSlideDrawerContent({ state, navigation }) {
   return (
@@ -86,4 +88,3 @@ function SceneScreenZoomOut({ children }) {
     </Animated.View>
   )
 }
-export default SliderDrawerStack

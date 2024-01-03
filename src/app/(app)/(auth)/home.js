@@ -23,17 +23,11 @@ export default function Page() {
       {/* <View tw="flex-1 bg-gray-500"> */}
       {er()}
       <Text>HomePage</Text>
-      {/* <Link href="/log-in" asChild> */}
-      <Go toScreen={'singIn'} children={<Text>Sign in</Text>} />
-      {/* <Go to={'singIn'} children={<Text>Sign in</Text>} /> */}
-      {/* <Text>Sign in</Text> */}
-      {/* </Compass> */}
-      {/* </Link> */}
-      <Go toScreen={'singUp'} children={<Text>Sign up</Text>} />
 
-      {/* <Link href="/sign-let" asChild>
-        <Text>Sign up</Text>
-      </Link> */}
+      <Go toScreen={'singIn'} children={<Text>Sign in</Text>} />
+ 
+      <Go toScreen={'singUp'} children={<Text>Sign up</Text>} />
+     
       <Go toScreen={'settings'} children={<Text>Settings</Text>} />
 
       <Link href="/secondx" asChild>
@@ -43,6 +37,8 @@ export default function Page() {
       <Go toScreen={'privacyPolicy'} children={<Text>P.P</Text>} />
 
       <Go toScreen={'drawerone'} children={<Text>Drawer</Text>} />
+    
+      <Go toScreen={'tabsone'} children={<Text>Tabs</Text>} />
 
 
       <Pressable onPress={signOut}>

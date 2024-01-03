@@ -6,6 +6,7 @@ function Writing({
   h2,
   h1,
   label,
+  xs,
   p = true,
   bold,
   semibold,
@@ -22,6 +23,7 @@ function Writing({
     [h1, 26],
     [h2, 21],
     [label, 11],
+    [xs, 9],
     [p, 15],
   ].find((v) => v[0])
 

@@ -1,5 +1,4 @@
-import { Drawer } from 'expo-router/drawer'
-import SliderDrawerStack from '../../../../libs/Navigation/DrawerStack'
+import { SliderDrawerStack } from '../../../../libs/Navigation/DrawerStacks'
 
 export default function DrawerLayout() {
   return (

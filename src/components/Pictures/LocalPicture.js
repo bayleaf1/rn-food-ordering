@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image, Text, View } from 'react-native'
 import HomeIcon from '../../../assets/icons/home'
+import Writing from '../Writing'
 
 const ICONS = {
   home: HomeIcon,
@@ -11,25 +12,26 @@ const IMAGES = {
 }
 
 //TODO add styles for image, prop without wrapper
-function LocalPicture({ image = '', icon = '', ctw = '' }) {
+function LocalPicture({ image = '', icon = '', ctw = '', pictureStyle = {} }) {
   let selectedImage = IMAGES[image]
 
   let SelectedIcon = ICONS[icon]
 
-  if (selectedImage) return <Image source={selectedImage} tw={`h-full w-full ${ctw}`} />
+  let wraperTw = `h-full w-full ${ctw}`
+  if (selectedImage) return <Image source={selectedImage} tw={wraperTw} />
 
   if (SelectedIcon)
     return (
-      <View tw={`h-full w-full ${ctw}`}>
-        <SelectedIcon width={'100%'} height="100%" />
+      <View tw={wraperTw}>
+        <SelectedIcon {...{ width: '100%', height: '100%', ...pictureStyle }} />
       </View>
     )
 
   return (
-    <View>
-      <Text>
+    <View tw={wraperTw}>
+      <Writing xs>
         {image && `Image (${image}) is missing`} {icon && `Icon (${icon}) is missing`}
-      </Text>
+      </Writing>
     </View>
   )
 }

@@ -9,6 +9,8 @@ const Screens = {
   settings: '/settings',
   drawerone: '/drawer/one',
   drawertwo: '/drawer/two',
+  tabsone: '/tabs/one',
+  tabstwo: '/tabs/two',
 }
 
 export default Screens;
