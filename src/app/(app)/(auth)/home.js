@@ -1,23 +1,23 @@
 import { Link } from 'expo-router'
-import { Pressable, Text, View } from 'react-native'
-import { useSessionProvider } from '../../../providers/SessionProvider'
+import { Pressable, Text } from 'react-native'
+import LocalPicture from '../../../components/Pictures/LocalPicture'
+import Writing from '../../../components/Writing'
 import { SafeFullScreenLayout } from '../../../layouts/BaseLayout'
 import Go from '../../../libs/Navigation/Go'
-import LocalPicture from '../../../components/Pictures/LocalPicture'
+import { useSessionProvider } from '../../../providers/SessionProvider'
+import { useTranslationProvider } from '../../../providers/TranslationProvider'
 
-// export function ErrorBoundary(props) {
-//   return (
-//     <View style={{ flex: 1, backgroundColor: "red" }}>
-//       <Text>{props.error.message}</Text>
-//       <Text onPress={props.retry}>Try Again?</Text>
-//     </View>
-//   );
-// }
 function er() {
   // throw new Error("Cusotm error")
 }
 export default function Page() {
   let { signOut } = useSessionProvider()
+  let { t, setLanguageAndSaveToStorage, availableLanguages } = useTranslationProvider()
+  // useEffect(() => {
+  //   loadLocaleAsync(detectedLocale).then(() => setWasLoaded(true))
+  // }, [])
+
+  // if (!wasLoaded) return null
   return (
     <SafeFullScreenLayout contentTw="bg-red-200">
       {/* // <LayoutWithTopContent bgColor="gray"> */}
@@ -47,9 +47,23 @@ export default function Page() {
         <Text>Sign out</Text>
       </Pressable>
 
-      <LocalPicture image="home" ctw="h-40 bg-slate-500" />
+      {availableLanguages.map((v) => (
+        <Pressable onPress={() => setLanguageAndSaveToStorage(v.value)}>
+          <Text>change {v.label}</Text>
+        </Pressable>
+      ))}
 
-      {/* </View> */}
+      {/* <Pressable onPress={() => setLanguageAndSaveToStorage('DEFAULT')}>
+        <Text>change en</Text>
+      </Pressable>
+
+      <Pressable onPress={() => setLanguageAndSaveToStorage('RO')}>
+        <Text>change ro</Text>
+      </Pressable> */}
+
+      <Writing>{t('greeting', { name: 'Lalal' })}</Writing>
+
+      <LocalPicture image="home" ctw="h-40 bg-slate-500" />
     </SafeFullScreenLayout>
   )
 }

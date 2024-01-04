@@ -24,8 +24,7 @@ export function useSessionProvider() {
 }
 
 function SessionProvider(props) {
-  const [[isLoading, jwtToken], setJwtToken] = useStorageState('jwtToken')
-  // console.log(`session:`, isLoading, jwtToken)
+  const [[isLoading, jwtToken], setJwtToken] = useStorageState('jwt-token')
   const isSignedIn = useMemo(() => !!jwtToken, [jwtToken])
   const isSignedOut = useMemo(() => !isSignedIn, [isSignedIn])
   return (
