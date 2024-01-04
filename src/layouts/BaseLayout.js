@@ -12,54 +12,68 @@ Layout.VerticalPart = VerticalPart
 Layout.HorizontalPart = HorizontalPart
 Layout.Content = View
 
-export function SafeFullScreenLayout({ children, bgColor, contentTw = '' }) {
+export function SafeFullScreenLayout({ headerIsShown, children, contentTw = '' }) {
+  let resolver = propsResolverByHeaderShowness()
   return (
-    <Layout.VisibleArea bgColor={bgColor}>
-      <Layout.SafeArea top right bottom left>
-        <Layout.VerticalPart>
-          <Layout.HorizontalPart>
-            <Layout.Content tw={'flex-1' + ' ' + contentTw}>{children}</Layout.Content>
-          </Layout.HorizontalPart>
-        </Layout.VerticalPart>
-      </Layout.SafeArea>
-    </Layout.VisibleArea>
-  )
-}
-
-export const LayoutWithTopContent = ({ children, bgColor, contentTw = '' }) => {
-  return (
-    <Layout.VisibleArea bgColor={bgColor}>
-      <Layout.SafeArea right bottom left>
-        <Layout.VerticalPart top={10}>
-          <Layout.HorizontalPart>
+    <Layout.VisibleArea>
+      <Layout.SafeArea {...resolver.safeAreaMargins()}>
+        <Layout.VerticalPart topMarginTw={resolver.topMarginTw()} bottomMarginTw="">
+          <Layout.HorizontalPart leftMarginTw={'ml-4'} rightMarginTw={'mr-4'}>
             <Layout.Content tw={clsx('flex-1', contentTw)}>{children}</Layout.Content>
           </Layout.HorizontalPart>
         </Layout.VerticalPart>
       </Layout.SafeArea>
     </Layout.VisibleArea>
   )
+
+  function propsResolverByHeaderShowness() {
+    return {
+      safeAreaMargins() {
+        let margins = { right: true, left: true, bottom: true }
+        if (!headerIsShown) margins.top = true
+        return margins
+      },
+      topMarginTw() {
+        return headerIsShown ? 'mt-4' : 'mt-2'
+      },
+    }
+  }
 }
 
-export const LayoutForBottomTabs = ({ headerIsShown, children, contentTw = '', bgColor }) => {
-  let safeAreaMargins = { right: true, left: true }
-  if (!headerIsShown) safeAreaMargins.top = true
-  let topMargin = 0
-  if (headerIsShown) topMargin = 16
+export const LayoutForBottomTabs = ({ headerIsShown, children, contentTw = '' }) => {
+  let resolver = propsResolverByHeaderShowness()
   return (
-    <Layout.VisibleArea bgColor={bgColor}>
-      <Layout.SafeArea {...safeAreaMargins}>
-        <Layout.HorizontalPart>
-          <Layout.VerticalPart top={topMargin} bottom={16} moreTw="overflow-hidden bg-red-400">
+    <Layout.VisibleArea>
+      <Layout.SafeArea {...resolver.safeAreaMargins()}>
+        <Layout.VerticalPart
+          topMarginTw={resolver.topMarginTw()}
+          bottomMarginTw=""
+          moreTw="overflow-hidden bg-red-400"
+        >
+          <Layout.HorizontalPart leftMarginTw={'ml-4'} rightMarginTw={'mr-4'}>
             <Layout.Content tw={clsx('flex-1', contentTw)}>{children}</Layout.Content>
-          </Layout.VerticalPart>
-        </Layout.HorizontalPart>
+          </Layout.HorizontalPart>
+        </Layout.VerticalPart>
       </Layout.SafeArea>
     </Layout.VisibleArea>
   )
+
+  function propsResolverByHeaderShowness() {
+    return {
+      safeAreaMargins() {
+        let margins = { right: true, left: true }
+        if (!headerIsShown) margins.top = true
+        return margins
+      },
+      topMarginTw() {
+        return headerIsShown ? 'mt-4' : ''
+      },
+    }
+  }
 }
 
-function VisibleArea({ baseTw = 'flex-1', children, bgColor }) {
-  return <View tw={baseTw} style={{ backgroundColor: bgColor }} children={children} />
+function VisibleArea({ moreTw = '', children }) {
+  return <View tw={clsx('flex-1', moreTw)} children={children} />
 }
 
 function SafeArea({ children, top, right, bottom, left }) {
@@ -79,16 +93,10 @@ function SafeArea({ children, top, right, bottom, left }) {
   )
 }
 
-function VerticalPart({ top, bottom, moreTw = '', children }) {
-  let style = {}
-  if (top) style.marginTop = top
-  if (bottom) style.marginBottom = bottom
-  return <View tw={clsx('flex-1', moreTw)} style={style} children={children} />
+function VerticalPart({ topMarginTw, bottomMarginTw, moreTw = '', children }) {
+  return <View tw={clsx('flex-1', topMarginTw, bottomMarginTw, moreTw)} children={children} />
 }
 
-function HorizontalPart({ left = 16, right = 16, moreTw = '', children }) {
-  let style = {}
-  if (left) style.marginLeft = left
-  if (right) style.marginRight = right
-  return <View tw={clsx('flex-1', moreTw)} style={style} children={children} />
+function HorizontalPart({ leftMarginTw, rightMarginTw, moreTw = '', children }) {
+  return <View tw={clsx('flex-1', leftMarginTw, rightMarginTw, moreTw)} children={children} />
 }

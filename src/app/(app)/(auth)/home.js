@@ -33,7 +33,9 @@ export default function Page() {
       <Link href="/secondx" asChild>
         <Text>Inexistent</Text>
       </Link>
+      
       <Go toScreen={'TOS'} children={<Text>TOS</Text>} />
+      
       <Go toScreen={'privacyPolicy'} children={<Text>P.P</Text>} />
 
       <Go toScreen={'drawerone'} children={<Text>Drawer</Text>} />
