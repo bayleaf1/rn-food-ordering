@@ -12,7 +12,6 @@ export { ErrorBoundary } from 'expo-router'
 //TODO screen orientation
 //TODO de incercat https://github.com/kristerkari/react-native-svg-example?tab=readme-ov-file
 //TODO translating
-//TODO add tabs drawer
 
 NativeWindStyleSheet.setOutput({ default: 'native' })
 

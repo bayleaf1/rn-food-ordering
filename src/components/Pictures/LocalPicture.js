@@ -11,24 +11,33 @@ const IMAGES = {
   home: require('../../../assets/images/colibri.jpg'),
 }
 
-//TODO add styles for image, prop without wrapper
-function LocalPicture({ image = '', icon = '', ctw = '', pictureStyle = {} }) {
+function LocalPicture({
+  image = '',
+  icon = '',
+  ctw = '',
+  imageResizeMode = 'cover',
+  iconProps = {},
+}) {
   let selectedImage = IMAGES[image]
 
   let SelectedIcon = ICONS[icon]
 
-  let wraperTw = `h-full w-full ${ctw}`
-  if (selectedImage) return <Image source={selectedImage} tw={wraperTw} />
+  if (selectedImage)
+    return (
+      <View tw={ctw}>
+        <Image source={selectedImage} tw={'h-full w-full'} resizeMode={imageResizeMode} />
+      </View>
+    )
 
   if (SelectedIcon)
     return (
-      <View tw={wraperTw}>
-        <SelectedIcon {...{ width: '100%', height: '100%', ...pictureStyle }} />
+      <View tw={ctw}>
+        <SelectedIcon {...{ width: '100%', height: '100%', ...iconProps }} />
       </View>
     )
 
   return (
-    <View tw={wraperTw}>
+    <View tw={ctw}>
       <Writing xs>
         {image && `Image (${image}) is missing`} {icon && `Icon (${icon}) is missing`}
       </Writing>

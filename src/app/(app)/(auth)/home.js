@@ -3,6 +3,7 @@ import { Pressable, Text, View } from 'react-native'
 import { useSessionProvider } from '../../../providers/SessionProvider'
 import { SafeFullScreenLayout } from '../../../layouts/BaseLayout'
 import Go from '../../../libs/Navigation/Go'
+import LocalPicture from '../../../components/Pictures/LocalPicture'
 
 // export function ErrorBoundary(props) {
 //   return (
@@ -25,27 +26,29 @@ export default function Page() {
       <Text>HomePage</Text>
 
       <Go toScreen={'singIn'} children={<Text>Sign in</Text>} />
- 
+
       <Go toScreen={'singUp'} children={<Text>Sign up</Text>} />
-     
+
       <Go toScreen={'settings'} children={<Text>Settings</Text>} />
 
       <Link href="/secondx" asChild>
         <Text>Inexistent</Text>
       </Link>
-      
+
       <Go toScreen={'TOS'} children={<Text>TOS</Text>} />
-      
+
       <Go toScreen={'privacyPolicy'} children={<Text>P.P</Text>} />
 
       <Go toScreen={'drawerone'} children={<Text>Drawer</Text>} />
-    
-      <Go toScreen={'tabsone'} children={<Text>Tabs</Text>} />
 
+      <Go toScreen={'tabsone'} children={<Text>Tabs</Text>} />
 
       <Pressable onPress={signOut}>
         <Text>Sign out</Text>
       </Pressable>
+
+      <LocalPicture image="home" ctw="h-40 bg-slate-500" />
+
       {/* </View> */}
     </SafeFullScreenLayout>
   )

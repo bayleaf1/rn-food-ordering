@@ -44,7 +44,7 @@ function CustomTabBar({ navigationItems = {}, state }) {
                   <LocalPicture
                     icon={item.iconName}
                     ctw="h-6"
-                    pictureStyle={{ fill: isActive && 'red' }}
+                    iconProps={{ fill: isActive && 'red' }}
                   />
                   <Writing xs>{item.label}</Writing>
                 </Go>
