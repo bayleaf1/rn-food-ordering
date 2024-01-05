@@ -1,5 +1,5 @@
-import Writing from '../../../../components/Writing'
-import { LayoutWithTopContent } from '../../../../layouts/BaseLayout';
+import Writing from '@components/Writing/Writing';
+import { LayoutWithTopContent } from '@layouts/BaseLayout';
 
 export default function Page() {
   return (

@@ -1,12 +1,12 @@
 import clsx from 'clsx'
 import { Drawer } from 'expo-router/drawer'
-import Writing from '../../components/Writing'
-import { SafeFullScreenLayout } from '../../layouts/BaseLayout'
+import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import Go from './Go'
 
 import { useDrawerProgress } from '@react-navigation/drawer'
 import { useWindowDimensions } from 'react-native'
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated'
+import Writing from '@components/Writing/Writing'
 
 let withDefaultScreenOptions = (passed = {}) => ({
   overlayColor: 'transparent',

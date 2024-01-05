@@ -10,7 +10,7 @@ export const AppLanguages = Object.freeze({
 })
 export const DEFAULT_LANGUAGE = AppLanguages.EN
 
-verifyAndThrowTranslationsIfNotProductionEnv(en, [ro])
+verifyAndThrowTranslationsWhenNotProductionEnv(en, [ro])
 
 const resources = {
   en: {
@@ -33,7 +33,7 @@ i18n.use(initReactI18next).init({
 
 export default i18n
 
-function verifyAndThrowTranslationsIfNotProductionEnv(baseTranslation, otherTranslations) {
+function verifyAndThrowTranslationsWhenNotProductionEnv(baseTranslation, otherTranslations) {
   //TODO extract somewhere nodeENV
   if (process.env.NODE_ENV === 'production') return
   otherTranslations.forEach((tr) =>

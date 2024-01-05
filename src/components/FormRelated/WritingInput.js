@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import Writing from '../Writing'
+import Writing from '@components/Writing/Writing'
 import { TextInput, View } from 'react-native'
 import { useState } from 'react'
 

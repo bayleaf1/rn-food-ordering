@@ -1,11 +1,11 @@
 import { Link } from 'expo-router'
 import { Pressable, Text } from 'react-native'
-import LocalPicture from '../../../components/Pictures/LocalPicture'
-import Writing from '../../../components/Writing/Writing'
-import { SafeFullScreenLayout } from '../../../layouts/BaseLayout'
-import Go from '../../../libs/Navigation/Go'
-import { useSessionProvider } from '../../../providers/SessionProvider'
-import { useTranslationProvider } from '../../../providers/TranslationProvider'
+import LocalPicture from '@components/Pictures/LocalPicture'
+import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import Go from '@libs/Navigation/Go'
+import { useSessionProvider } from '@providers/SessionProvider'
+import { useTranslationProvider } from '@providers/TranslationProvider'
+import Writing from '@components/Writing/Writing'
 
 function er() {
   // throw new Error("Cusotm error")

@@ -1,10 +1,11 @@
 import { Tabs } from 'expo-router/tabs'
 import { Text, View } from 'react-native'
-import Writing from '../../components/Writing'
 import Go from '../../libs/Navigation/Go'
 import { Layout } from '../../layouts/BaseLayout'
 import LocalPicture from '../../components/Pictures/LocalPicture'
+import Writing from '@components/Writing/Writing'
 
+// Example
 // let tabBarNavigationItems = {
 //   one: { label: 'One', iconName: 'home' },
 //   two: { label: 'Two', iconName: 'home' },

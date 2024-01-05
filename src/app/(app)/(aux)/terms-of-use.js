@@ -1,7 +1,8 @@
 import { Text } from 'react-native'
-import { SafeFullScreenLayout } from '../../../layouts/BaseLayout'
-import Writing from '../../../components/Writing'
-import Go from '../../../libs/Navigation/Go'
+import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import Writing from '@components/Writing/Writing'
+
+import Go from '@libs/Navigation/Go'
 export default function Page() {
   return (
     <SafeFullScreenLayout headerIsShown>

@@ -1,5 +1,5 @@
 import React from 'react'
-import PrimaryStack from '../../../libs/Navigation/PrimaryStack'
+import PrimaryStack from '@libs/Navigation/PrimaryStack'
 
 export default function Layout() {
   return (

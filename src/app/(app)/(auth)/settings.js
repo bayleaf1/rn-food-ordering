@@ -1,7 +1,6 @@
-import { Link } from 'expo-router'
-import { Text, View } from 'react-native'
-import { LayoutWithTopContent, SafeFullScreenLayout } from '../../../layouts/BaseLayout'
-import Go from '../../../libs/Navigation/Go'
+import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import { Text } from 'react-native'
+import Go from '@libs/Navigation/Go'
 
 export default function Page() {
   return (

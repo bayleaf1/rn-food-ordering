@@ -1,11 +1,9 @@
-import React, { useMemo } from 'react'
-import PrimaryStack from '../../../libs/Navigation/PrimaryStack'
-import { Redirect, Slot } from 'expo-router'
-import { useSessionProvider } from '../../../providers/SessionProvider'
+import { Redirect } from 'expo-router'
 import { Text } from 'react-native'
-import Screens from '../../../libs/Navigation/ScreenList'
+import PrimaryStack from '@libs/Navigation/PrimaryStack'
+import Screens from '@libs/Navigation/ScreenList'
+import { useSessionProvider } from '@providers/SessionProvider'
 
-let value = true
 export default function AuthorizedLayout() {
   const { isSignedOut, isLoading } = useSessionProvider()
 

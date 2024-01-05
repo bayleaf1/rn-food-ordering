@@ -1,6 +1,4 @@
-import React from 'react'
 import { useFonts } from 'expo-font'
-import { Text, View } from 'react-native'
 
 // let start = null
 // let end = null

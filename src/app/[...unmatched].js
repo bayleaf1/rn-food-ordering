@@ -1,7 +1,7 @@
 import { View } from 'react-native'
-import Writing from '../components/Writing'
-import { SafeFullScreenLayout } from '../layouts/BaseLayout'
-import Go from '../libs/Navigation/Go'
+import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import Go from '@libs/Navigation/Go'
+import Writing from '@components/Writing/Writing'
 
 //! For some reason tailwind is not working on this file
 export default function CustomUnmatched() {

@@ -1,6 +1,5 @@
-import Writing from '../../../../components/Writing'
-import { LayoutWithTopContent } from '../../../../layouts/BaseLayout'
-import { SliderDrawerStack } from '../../../../libs/Navigation/DrawerStacks'
+import Writing from '@components/Writing/Writing'
+import { SliderDrawerStack } from '@libs/Navigation/DrawerStacks'
 
 export default function Page() {
   return (

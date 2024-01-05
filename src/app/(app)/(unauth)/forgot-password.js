@@ -1,12 +1,12 @@
-import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import { Text } from 'react-native'
+import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 
 export default function Page() {
 
   return (
     <SafeFullScreenLayout>
 
-      <Text>Sign let</Text>
+      <Text>Forgot password</Text>
 
       {/* <Link asChild href={'/'}> */}
         <Text>Home</Text>

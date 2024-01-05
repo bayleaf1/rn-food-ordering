@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@components/*": ["./src/components/*"],
+        "@libs/*": ["./src/libs/*"],
+        "@layouts/*": ["./src/layouts/*"],
+        "@providers/*": ["./src/providers /*"],
+        "@assets/*": ["./assets/*"],
+      }
+    },
+    "exclude": ["node_modules", ".expo", ".vscode"]
+  }

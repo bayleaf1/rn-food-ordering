@@ -1,9 +1,9 @@
 import { Redirect } from 'expo-router'
 import React from 'react'
 import { Text } from 'react-native'
-import PrimaryStack from '../../../libs/Navigation/PrimaryStack'
-import Screens from '../../../libs/Navigation/ScreenList'
-import { useSessionProvider } from '../../../providers/SessionProvider'
+import PrimaryStack from '@libs/Navigation/PrimaryStack'
+import Screens from '@libs/Navigation/ScreenList'
+import { useSessionProvider } from '@providers/SessionProvider'
 
 export default function AppLayout() {
   const { isSignedIn } = useSessionProvider()
@@ -40,29 +40,4 @@ export default function AppLayout() {
         />
     </PrimaryStack>
   )
-  // return <Slot/>
-  // return (
-  //   <FullScreenLayout bgColor={'gray'}>
-  //     <PrimaryStack initialRouteName="sign-in">
-  //       <PrimaryStack.Screen
-  //         name="sign-in"
-  //         options={{
-  //           cardStyle: { backgroundColor: 'transparent' },
-  //         }}
-  //       />
-  //       <PrimaryStack.Screen
-  //         name="sign-up"
-  //         options={{
-  //           cardStyle: { backgroundColor: 'transparent' },
-  //         }}
-  //       />
-  //       <PrimaryStack.Screen
-  //         name="password-recover"
-  //         options={{
-  //           cardStyle: { backgroundColor: 'transparent' },
-  //         }}
-  //       />
-  //     </PrimaryStack>
-  //   </FullScreenLayout>
-  // )
 }

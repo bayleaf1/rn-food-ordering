@@ -1,6 +1,7 @@
 import { Pressable, Text } from 'react-native'
 import { useTranslationProvider } from '../../providers/TranslationProvider'
 import { Fragment } from 'react'
+import normalizeFontSize from './normalizeFontSize'
 
 function Writing({
   xl3,

@@ -1,4 +1,4 @@
-import { SliderDrawerStack } from '../../../../libs/Navigation/DrawerStacks'
+import { SliderDrawerStack } from '@libs/Navigation/DrawerStacks'
 
 export default function DrawerLayout() {
   return (
