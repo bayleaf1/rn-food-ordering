@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native'
-import Writing from '../../../../components/Writing'
+import Writing from '../../../../components/Writing/Writing'
 import { Layout, LayoutForBottomTabs, LayoutWithTopContent } from '../../../../layouts/BaseLayout'
 
 export default function Page() {

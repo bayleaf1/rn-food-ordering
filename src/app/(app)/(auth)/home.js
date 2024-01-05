@@ -1,7 +1,7 @@
 import { Link } from 'expo-router'
 import { Pressable, Text } from 'react-native'
 import LocalPicture from '../../../components/Pictures/LocalPicture'
-import Writing from '../../../components/Writing'
+import Writing from '../../../components/Writing/Writing'
 import { SafeFullScreenLayout } from '../../../layouts/BaseLayout'
 import Go from '../../../libs/Navigation/Go'
 import { useSessionProvider } from '../../../providers/SessionProvider'
@@ -12,7 +12,7 @@ function er() {
 }
 export default function Page() {
   let { signOut } = useSessionProvider()
-  let { t, setLanguageAndSaveToStorage, availableLanguages } = useTranslationProvider()
+  let { t, setLanguageAndSaveToStorage, AvailableLanguages } = useTranslationProvider()
   // useEffect(() => {
   //   loadLocaleAsync(detectedLocale).then(() => setWasLoaded(true))
   // }, [])
@@ -47,21 +47,21 @@ export default function Page() {
         <Text>Sign out</Text>
       </Pressable>
 
-      {availableLanguages.map((v) => (
+      {/* {availableLanguagesList.map((v) => (
         <Pressable onPress={() => setLanguageAndSaveToStorage(v.value)}>
           <Text>change {v.label}</Text>
         </Pressable>
-      ))}
+      ))} */}
 
-      {/* <Pressable onPress={() => setLanguageAndSaveToStorage('DEFAULT')}>
-        <Text>change en</Text>
+      <Pressable onPress={() => setLanguageAndSaveToStorage(AvailableLanguages.EN)}>
+        <Text>change {AvailableLanguages.EN}</Text>
       </Pressable>
 
-      <Pressable onPress={() => setLanguageAndSaveToStorage('RO')}>
-        <Text>change ro</Text>
-      </Pressable> */}
+      <Pressable onPress={() => setLanguageAndSaveToStorage(AvailableLanguages.RO)}>
+        <Text>change {AvailableLanguages.RO}</Text>
+      </Pressable>
 
-      <Writing>{t('greeting', { name: 'Lalal' })}</Writing>
+      <Writing xl2 t={['greeting', { name: 'Lalal' }]} />
 
       <LocalPicture image="home" ctw="h-40 bg-slate-500" />
     </SafeFullScreenLayout>

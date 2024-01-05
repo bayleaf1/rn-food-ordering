@@ -9,7 +9,7 @@ let Context = createContext({
   t: () => '',
   setLocaleAndSaveToStorage: () => null,
   providerHasLoaded: false,
-  availableLanguages: [],
+  AvailableLanguages: AppLanguages,
 })
 export const useTranslationProvider = () => useContext(Context)
 
@@ -23,10 +23,6 @@ function TranslationProvider({ children }) {
   const setLanguageAndSaveToStorage = useCallback(
     (lang) => setLanguage(lang || DEFAULT_LANGUAGE),
     [setLanguage]
-  )
-  const availableLanguages = useMemo(
-    () => Object.entries(AppLanguages).map(([label, value]) => ({ label, value })),
-    []
   )
 
   useEffect(() => {
@@ -51,7 +47,7 @@ function TranslationProvider({ children }) {
           providerHasLoaded: isLoading,
           t,
           setLanguageAndSaveToStorage,
-          availableLanguages,
+          AvailableLanguages: AppLanguages,
         }}
       >
         {children}

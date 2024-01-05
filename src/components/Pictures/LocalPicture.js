@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, Text, View } from 'react-native'
 import HomeIcon from '../../../assets/icons/home'
-import Writing from '../Writing'
+import Writing from '../Writing/Writing'
 
 const ICONS = {
   home: HomeIcon,
