@@ -6,6 +6,7 @@ import i18nConfigs, { AppLanguages, DEFAULT_LANGUAGE } from '@libs/Translation/_
 import _ from 'lodash'
 
 let Context = createContext({
+  providerIsLoaded: false,
   t: () => '',
   setLocaleAndSaveToStorage: () => null,
   providerHasLoaded: false,
@@ -44,7 +45,7 @@ function TranslationProvider({ children }) {
     <I18nextProvider i18n={i18nConfigs}>
       <Context.Provider
         value={{
-          providerHasLoaded: isLoading,
+          providerIsLoaded: !isLoading,
           t,
           setLanguageAndSaveToStorage,
           AvailableLanguages: AppLanguages,

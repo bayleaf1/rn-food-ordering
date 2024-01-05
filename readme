@@ -12,3 +12,5 @@ Changing the file with custom navigator causes freeze of the app and it need to 
 Pnpm doesn't work with expo/react-native, expo-router.
 
 If something is not working, ex: navigate to route, then run npx expo start -c to clean cache, sometimes it helps.
+
+Splash screen image should remain with the same name because it is used in SplashScreenComponent. If it is updated make sure to update it in component too 

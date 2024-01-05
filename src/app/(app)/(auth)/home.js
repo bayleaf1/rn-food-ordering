@@ -24,6 +24,7 @@ export default function Page() {
       {/* <View tw="flex-1 bg-gray-500"> */}
       {er()}
       <Text>HomePage</Text>
+      <Text>HomePage</Text>
 
       <Go toScreen={'singIn'} children={<Text>Sign in</Text>} />
 

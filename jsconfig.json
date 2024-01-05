@@ -5,7 +5,7 @@
         "@components/*": ["./src/components/*"],
         "@libs/*": ["./src/libs/*"],
         "@layouts/*": ["./src/layouts/*"],
-        "@providers/*": ["./src/providers /*"],
+        "@providers/*": ["./src/providers/*"],
         "@assets/*": ["./assets/*"],
       }
     },
