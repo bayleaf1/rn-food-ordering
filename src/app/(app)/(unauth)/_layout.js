@@ -12,7 +12,7 @@ export default function AppLayout() {
   if (false) {
     return <Text tw="mt-20">Loading...</Text>
   }
-  
+
   if (isSignedIn) return <Redirect href={Screens.home} />
 
   return (
@@ -32,12 +32,19 @@ export default function AppLayout() {
         }}
       />
       <PrimaryStack.Screen
-          name="reset-password"
-          options={{
-            gestureEnabled: true,
-            cardStyle: { backgroundColor: 'transparent' },
-          }}
-        />
+        name="reset-password"
+        options={{
+          gestureEnabled: true,
+          cardStyle: { backgroundColor: 'transparent' },
+        }}
+      />
+      <PrimaryStack.Screen
+        name="forgot-password"
+        options={{
+          gestureEnabled: true,
+          cardStyle: { backgroundColor: 'transparent' },
+        }}
+      />
     </PrimaryStack>
   )
 }

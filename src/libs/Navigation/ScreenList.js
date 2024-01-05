@@ -2,6 +2,7 @@ const Screens = {
   singIn: '/',
   singUp: '/sign-up',
   resetPassword: '/reset-password',
+  forgotPassword: '/forgot-password',
   TOS: '/terms-of-use',
   privacyPolicy: '/privacy-policy',
   //
