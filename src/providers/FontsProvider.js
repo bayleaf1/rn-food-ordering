@@ -22,7 +22,7 @@ function FontsProvider({ children }) {
     Primary: require('../../assets/fonts/Montserrat/MontserratAlternates-Regular.ttf'),
   })
   //TODO handle this
-  // if (!loaded) return null
+  if (!loaded) return null///
 
   //   if (end === null) end = Date.now()
   // let f = end - start

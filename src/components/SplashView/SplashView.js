@@ -1,4 +1,5 @@
 import { useFontsProvider } from '@providers/FontsProvider'
+import ProvidersLoadingWatcher from '@providers/ProvidersLoadingWatcher'
 import { useSessionProvider } from '@providers/SessionProvider'
 import { useTranslationProvider } from '@providers/TranslationProvider'
 import Constants from 'expo-constants'
@@ -8,26 +9,25 @@ import { Animated, StyleSheet, View } from 'react-native'
 export { ErrorBoundary } from 'expo-router'
 
 const loadedSplashImage = require('@assets/splash.jpg')
+const devSplashImage = require('@assets/dev-splash.png') //
+const IS_DEV_ENV = false ////
 
 try {
-//   SplashScreen.preventAutoHideAsync()
+  SplashScreen.preventAutoHideAsync()
 } catch (e) {
   console.error(`Splash screen :`, e)
 }
-const IS_DEV_ENV = true
-function SplashView({ children }) {
+function SplashView({ children, showAnimationInDevEnv }) {
+  // TODO continue with showAnimationInDevEnv flag////
   const animation = useMemo(() => new Animated.Value(1), [])
   const [isAppReady, setAppReady] = useState(false)
-  const [isSplashAnimationComplete, setAnimationComplete] = useState(false)
+  const [isSplashAnimationComplete, setAnimationComplete] = useState(IS_DEV_ENV)
   const [isImageLoaded, setImageLoaded] = useState(false)
-
-  const { providerIsLoaded: fonts } = useFontsProvider()
-  const { providerIsLoaded: session } = useSessionProvider()
-  const { providerIsLoaded: translation } = useTranslationProvider()
+  const [isAppProvidersLoaded, setAppProvidersLoaded] = useState(false)
 
   const loaders = useMemo(
-    () => [fonts, session, translation, isImageLoaded],
-    [fonts, session, translation, isImageLoaded]
+    () => [isAppProvidersLoaded, isImageLoaded],
+    [isAppProvidersLoaded, isImageLoaded]
   )
 
   useEffect(() => {
@@ -40,36 +40,34 @@ function SplashView({ children }) {
         }).start(() => setAnimationComplete(true))
       }
     }
-
-    // if (isAppReady) {
-    //   SplashScreen.hideAsync()
-    //   setAnimationComplete(true)
-    // }
-    startAnimationIfAppIsReady()
+    if (!IS_DEV_ENV) startAnimationIfAppIsReady()
   }, [isAppReady])
 
-  const onImageLoaded = useCallback(async () => {
+  const hideImediatlySplashScreenAndSetAppIsReady = useCallback(() => {
     try {
-        SplashScreen.hideAsync()
+      SplashScreen.hideAsync() //fl
     } finally {
       setAppReady(true)
     }
   }, [])
 
   useEffect(() => {
+    if (IS_DEV_ENV) hideImediatlySplashScreenAndSetAppIsReady()
+  }, [])
+
+  useEffect(() => {
     function verifyIfAppHasLoadedAndSetInState() {
-      if (loaders.every(Boolean)) onImageLoaded()
-      console.log(`loaders:`, loaders)
+      if (loaders.every(Boolean)) hideImediatlySplashScreenAndSetAppIsReady()
     }
     verifyIfAppHasLoadedAndSetInState()
   }, [loaders])
 
-  if (IS_DEV_ENV) return children
-
   return (
     <View style={{ flex: 1 }}>
-      {isAppReady && children} 
-      {/* {children} */}
+      <ProvidersLoadingWatcher onAllProvidersLoaded={() => setAppProvidersLoaded(true)}>
+        {children}
+      </ProvidersLoadingWatcher>
+
       {!isSplashAnimationComplete && (
         <Animated.View
           pointerEvents="none"
@@ -92,7 +90,7 @@ function SplashView({ children }) {
                 // },
               ],
             }}
-            source={loadedSplashImage}
+            source={IS_DEV_ENV ? devSplashImage : loadedSplashImage}
             onLoadEnd={() => setImageLoaded(true)}
             // onLoadEnd={onImageLoaded}
             fadeDuration={0}
