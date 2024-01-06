@@ -16,3 +16,7 @@ If something is not working, ex: navigate to route, then run npx expo start -c t
 Splash screen image should remain with the same name because it is used in SplashScreenComponent. If it is updated make sure to update it in component too 
 
 By default splash animation is not shown in dev env, it can be forced to play by passing a flag option
+
+Use a dev splash image and a production because the production blinks on resfresh and it is iritated
+
+Do not use conditioinal logic in _layout file with slot: predicate ? <Slot/> : <Text>Loading...</Text>

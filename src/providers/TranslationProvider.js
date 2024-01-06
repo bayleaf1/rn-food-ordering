@@ -4,9 +4,9 @@ import { I18nextProvider, useTranslation } from 'react-i18next'
 import { useStorageState } from '@libs/Storage'
 import i18nConfigs, { AppLanguages, DEFAULT_LANGUAGE } from '@libs/Translation/_i18n'
 import _ from 'lodash'
+import { useAppLoadingProvider } from './AppLoadingProvider'
 
 let Context = createContext({
-  providerIsLoaded: false,
   t: () => '',
   setLocaleAndSaveToStorage: () => null,
   providerHasLoaded: false,
@@ -16,6 +16,12 @@ export const useTranslationProvider = () => useContext(Context)
 
 function TranslationProvider({ children }) {
   const [[isLoading, language], setLanguage] = useStorageState('app-language')
+
+  let { setProviderAsLoaded } = useAppLoadingProvider()
+
+  useEffect(() => {
+    if (!isLoading) setProviderAsLoaded('translation')
+  }, [isLoading])
 
   const { t, i18n } = useTranslation()
   const locales = useLocales()
@@ -45,7 +51,6 @@ function TranslationProvider({ children }) {
     <I18nextProvider i18n={i18nConfigs}>
       <Context.Provider
         value={{
-          providerIsLoaded: !isLoading,
           t,
           setLanguageAndSaveToStorage,
           AvailableLanguages: AppLanguages,

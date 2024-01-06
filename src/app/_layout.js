@@ -7,6 +7,8 @@ import { Slot } from 'expo-router'
 import { NativeWindStyleSheet } from 'nativewind'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import SplashView from '@components/SplashView/SplashView'
+import AppLoadingProvider, { useAppLoadingProvider } from '@providers/AppLoadingProvider'
+import { Text } from 'react-native'
 // import * as SplashScreen from 'expo-splash-screen';
 export { ErrorBoundary } from 'expo-router'
 
@@ -16,6 +18,7 @@ export { ErrorBoundary } from 'expo-router'
 //TODO check skia (shadow)
 //TODO check huszstand state
 //TODO add Localizations or Cronos objectx
+//TODO add env config
 
 NativeWindStyleSheet.setOutput({ default: 'native' })
 
@@ -28,26 +31,25 @@ NativeWindStyleSheet.setOutput({ default: 'native' })
 // })
 
 export default function AppLayout() {
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     SplashScreen.hideAsync()
-  //   }, 2000)
-  // }, [])
-
-  
-
   return (
-    <SafeAreaProvider>
-      <FontsProvider>
-        <TranslationProvider>
-          <SessionProvider>
-            <SplashView>
-              <Slot />
-            </SplashView>
-          </SessionProvider>
-        </TranslationProvider>
-      </FontsProvider>
-    </SafeAreaProvider>
+    <AppLoadingProvider>
+      <SafeAreaProvider>
+        <FontsProvider>
+          <TranslationProvider>
+            <SessionProvider>
+              <SplashView>
+                <StopRenderIfAppNotLoaded>{<Slot />}</StopRenderIfAppNotLoaded>
+              </SplashView>
+            </SessionProvider>
+          </TranslationProvider>
+        </FontsProvider>
+      </SafeAreaProvider>
+    </AppLoadingProvider>
   )
 }
 
+function StopRenderIfAppNotLoaded({ children }) {
+  let { isAppLoaded } = useAppLoadingProvider()
+
+  return isAppLoaded ? children : null
+}
