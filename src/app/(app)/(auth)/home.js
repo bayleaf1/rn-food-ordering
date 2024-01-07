@@ -7,6 +7,7 @@ import { useSessionProvider } from '@providers/SessionProvider'
 import { useTranslationProvider } from '@providers/TranslationProvider'
 import Writing from '@components/Writing/Writing'
 import { ENV_VARS } from '@config/config'
+import { useScreenOrientationProvider } from '@providers/ScreenOrientationProvider'
 
 function er() {
   // throw new Error("Cusotm error")
@@ -14,6 +15,7 @@ function er() {
 export default function Page() {
   let { signOut } = useSessionProvider()
   let { setLanguageAndSaveToStorage, AvailableLanguages } = useTranslationProvider()
+  let {portraitOrLandscape} = useScreenOrientationProvider()
 
   return (
     <SafeFullScreenLayout contentTw="bg-red-200">
@@ -22,6 +24,7 @@ export default function Page() {
       {er()}
       <Text>HomePage</Text>
       <Text>{ENV_VARS.ENV}</Text>
+      <Text>{portraitOrLandscape('port', 'land')}</Text>
 
       <Go toScreen={'singIn'} children={<Text>Sign in</Text>} />
 
