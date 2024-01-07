@@ -28,7 +28,6 @@ export function BottomTabsStack({ tabBarNavigationItems = {}, ...props }) {
   )
 }
 BottomTabsStack.Screen = Tabs.Screen
-//TODO add layout for bottom tabs screen
 
 function CustomTabBar({ navigationItems = {}, state }) {
   return (

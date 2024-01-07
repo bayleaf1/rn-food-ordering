@@ -6,6 +6,8 @@ export const ENV_VARS = Object.freeze({
 
 export const isDevEnv = () => ENV_VARS === 'development'
 
+export const isProdEnv = () => ENV_VARS === 'production'
+
 function reportMissing(envName, defValueToReturn) {
   console.warn(
     `Env variable "${envName}" is missing. ${

@@ -10,11 +10,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import SplashView from '@components/SplashView/SplashView'
 import AppLoadingProvider, { useAppLoadingProvider } from '@providers/AppLoadingProvider'
 import ScreenOrientationProvider from '@providers/ScreenOrientationProvider'
-import NativeStackResponsableForScreenOrientation from '@providers/NativeStackResponsableForScreenOrientation'
+import NativeStackResponsableForScreenOrientation from '@libs/Navigation/NativeStackResponsableForScreenOrientation'
 export { ErrorBoundary } from 'expo-router'
 
 //TODO cand se schimba ecranele clipeste alb
-//TODO screen orientation
 //TODO de incercat https://github.com/kristerkari/react-native-svg-example?tab=readme-ov-file
 //TODO check skia (shadow)
 //TODO check huszstand state
