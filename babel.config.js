@@ -19,6 +19,7 @@ module.exports = function (api) {
         '@layouts': './src/layouts',
         '@providers': './src/providers',
         '@assets': './assets',
+        '@config': './src/config',
       },
     },
   ]

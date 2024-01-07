@@ -6,25 +6,22 @@ import Go from '@libs/Navigation/Go'
 import { useSessionProvider } from '@providers/SessionProvider'
 import { useTranslationProvider } from '@providers/TranslationProvider'
 import Writing from '@components/Writing/Writing'
+import { ENV_VARS } from '@config/config'
 
 function er() {
   // throw new Error("Cusotm error")
 }
 export default function Page() {
   let { signOut } = useSessionProvider()
-  let { t, setLanguageAndSaveToStorage, AvailableLanguages } = useTranslationProvider()
-  // useEffect(() => {
-  //   loadLocaleAsync(detectedLocale).then(() => setWasLoaded(true))
-  // }, [])
+  let { setLanguageAndSaveToStorage, AvailableLanguages } = useTranslationProvider()
 
-  // if (!wasLoaded) return null
   return (
     <SafeFullScreenLayout contentTw="bg-red-200">
       {/* // <LayoutWithTopContent bgColor="gray"> */}
       {/* <View tw="flex-1 bg-gray-500"> */}
       {er()}
       <Text>HomePage</Text>
-      <Text>HomePage</Text>
+      <Text>{ENV_VARS.ENV}</Text>
 
       <Go toScreen={'singIn'} children={<Text>Sign in</Text>} />
 

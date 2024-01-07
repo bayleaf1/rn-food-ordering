@@ -20,3 +20,5 @@ By default splash animation is not shown in dev env, it can be forced to play by
 Use a dev splash image and a production because the production blinks on resfresh and it is iritated
 
 Do not use conditioinal logic in _layout file with slot: predicate ? <Slot/> : <Text>Loading...</Text>
+
+Enva variable set from command line loads the required env file but process.env.NODE_ENV remains with development value. Set a custom ENV vars in every .env file.

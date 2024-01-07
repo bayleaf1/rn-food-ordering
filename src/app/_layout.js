@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler'
 
+import '@config/config'
 import FontsProvider from '@providers/FontsProvider'
 import SessionProvider from '@providers/SessionProvider'
 import TranslationProvider from '@providers/TranslationProvider'
@@ -8,9 +9,8 @@ import { NativeWindStyleSheet } from 'nativewind'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import SplashView from '@components/SplashView/SplashView'
 import AppLoadingProvider, { useAppLoadingProvider } from '@providers/AppLoadingProvider'
-import { Text } from 'react-native'
-// import * as SplashScreen from 'expo-splash-screen';
 export { ErrorBoundary } from 'expo-router'
+
 
 //TODO cand se schimba ecranele clipeste alb
 //TODO screen orientation
@@ -18,7 +18,7 @@ export { ErrorBoundary } from 'expo-router'
 //TODO check skia (shadow)
 //TODO check huszstand state
 //TODO add Localizations or Cronos objectx
-//TODO add env config
+
 
 NativeWindStyleSheet.setOutput({ default: 'native' })
 

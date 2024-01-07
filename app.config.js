@@ -1,7 +1,4 @@
 export default ({ config }) => {
-  // (console.log(config);
-  let IS_DEV = false
-  let splashImage = IS_DEV ? './assets/dev-splash.png' : './assets/splash.jpg'
   return {
     ...config,
     expo: {
@@ -13,7 +10,7 @@ export default ({ config }) => {
       icon: './assets/icon.png',
       userInterfaceStyle: 'light',
       splash: {
-        image: splashImage,
+        image: './assets/splash.jpg',
         resizeMode: 'cover',
         backgroundColor: '#ffffff',
       },
