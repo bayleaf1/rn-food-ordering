@@ -1,16 +1,17 @@
 import React from 'react'
 import { Image, View } from 'react-native'
-import HomeIcon from '@assets/icons/home'
+import HomeIcon from '@icons/home.svg'
 import Writing from '@components/Writing/Writing'
 
 const ICONS = {
-  home: HomeIcon,
+  home: HomeIcon//require('@icons/home.svg'),
 }
 
 const IMAGES = {
-  home: require('../../../assets/images/colibri.jpg'),
+  home: require('@images/colibri.jpg'),
 }
 
+// TODO split icon component
 function LocalPicture({
   image = '',
   icon = '',

@@ -1,31 +1,22 @@
 import 'react-native-gesture-handler'
 
+import SplashView from '@components/SplashView/SplashView'
 import '@config/config'
+import NativeStackResponsableForScreenOrientation from '@libs/Navigation/NativeStackResponsableForScreenOrientation'
+import AppLoadingProvider, { useAppLoadingProvider } from '@providers/AppLoadingProvider'
 import FontsProvider from '@providers/FontsProvider'
+import ScreenOrientationProvider from '@providers/ScreenOrientationProvider'
 import SessionProvider from '@providers/SessionProvider'
 import TranslationProvider from '@providers/TranslationProvider'
-import { Slot, Stack } from 'expo-router'
 import { NativeWindStyleSheet } from 'nativewind'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import SplashView from '@components/SplashView/SplashView'
-import AppLoadingProvider, { useAppLoadingProvider } from '@providers/AppLoadingProvider'
-import ScreenOrientationProvider from '@providers/ScreenOrientationProvider'
-import NativeStackResponsableForScreenOrientation from '@libs/Navigation/NativeStackResponsableForScreenOrientation'
+import { LogBox } from 'react-native'
 export { ErrorBoundary } from 'expo-router'
 
-//TODO de incercat https://github.com/kristerkari/react-native-svg-example?tab=readme-ov-file
-//TODO check huszstand state
+LogBox.ignoreLogs(['new NativeEventEmitter'])
 //TODO add Localizations or Cronos objectx
 
 NativeWindStyleSheet.setOutput({ default: 'native' })
-
-// SplashScreen.preventAutoHideAsync()
-
-// Instruct SplashScreen not to hide yet, we want to do this manually
-// SplashScreen.preventAutoHideAsync()
-// .catch(() => {
-/* reloading the app might trigger some race conditions, ignore them */
-// })
 
 export default function AppLayout() {
   return (
@@ -37,6 +28,7 @@ export default function AppLayout() {
               <SessionProvider>
                 <SplashView>
                   <StopRenderIfAppNotLoaded>
+                    {/* Might change name */}
                     <NativeStackResponsableForScreenOrientation />
                   </StopRenderIfAppNotLoaded>
                 </SplashView>

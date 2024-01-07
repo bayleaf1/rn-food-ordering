@@ -23,7 +23,6 @@ export default function Page() {
       <Text tw="self-stretch">HomePage</Text>
       <Text>{ENV_VARS.ENV}</Text>
       <Text>{portraitOrLandscape('port', 'land')}</Text>
-
       <Go toScreen={'singIn'} children={<Text>Sign in</Text>} />
 
       <Go toScreen={'singUp'} children={<Text>Sign up</Text>} />
