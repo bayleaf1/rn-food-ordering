@@ -83,4 +83,5 @@ function StackWithDefaultOptions({ children, screenOptions, ...props }) {
 
 StackWithDefaultOptions.Screen = StackForExpoRouter.Screen
 
+
 export default PrimaryStack = StackWithDefaultOptions

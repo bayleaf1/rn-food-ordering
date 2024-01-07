@@ -4,13 +4,14 @@ import '@config/config'
 import FontsProvider from '@providers/FontsProvider'
 import SessionProvider from '@providers/SessionProvider'
 import TranslationProvider from '@providers/TranslationProvider'
-import { Slot } from 'expo-router'
+import { Slot, Stack } from 'expo-router'
 import { NativeWindStyleSheet } from 'nativewind'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import SplashView from '@components/SplashView/SplashView'
 import AppLoadingProvider, { useAppLoadingProvider } from '@providers/AppLoadingProvider'
+import ScreenOrientationProvider from '@providers/ScreenOrientationProvider'
+import NativeStackResponsableForScreenOrientation from '@providers/NativeStackResponsableForScreenOrientation'
 export { ErrorBoundary } from 'expo-router'
-
 
 //TODO cand se schimba ecranele clipeste alb
 //TODO screen orientation
@@ -18,7 +19,6 @@ export { ErrorBoundary } from 'expo-router'
 //TODO check skia (shadow)
 //TODO check huszstand state
 //TODO add Localizations or Cronos objectx
-
 
 NativeWindStyleSheet.setOutput({ default: 'native' })
 
@@ -35,13 +35,17 @@ export default function AppLayout() {
     <AppLoadingProvider>
       <SafeAreaProvider>
         <FontsProvider>
-          <TranslationProvider>
-            <SessionProvider>
-              <SplashView>
-                <StopRenderIfAppNotLoaded>{<Slot />}</StopRenderIfAppNotLoaded>
-              </SplashView>
-            </SessionProvider>
-          </TranslationProvider>
+          <ScreenOrientationProvider>
+            <TranslationProvider>
+              <SessionProvider>
+                <SplashView>
+                  <StopRenderIfAppNotLoaded>
+                    <NativeStackResponsableForScreenOrientation />
+                  </StopRenderIfAppNotLoaded>
+                </SplashView>
+              </SessionProvider>
+            </TranslationProvider>
+          </ScreenOrientationProvider>
         </FontsProvider>
       </SafeAreaProvider>
     </AppLoadingProvider>

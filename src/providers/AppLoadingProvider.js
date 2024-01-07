@@ -11,6 +11,7 @@ function AppLoadingProvider({ children }) {
   const [modules, setModules] = useState({
     fontsProvider: false,
     sessionProvider: false,
+    // screenOrientationProvider: false,
     translationProvider: false,
   })
 

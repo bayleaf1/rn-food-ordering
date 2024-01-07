@@ -4,11 +4,12 @@
   "main": "expo-router/entry",
   "scripts": {
     "expo": "expor start",
-    "start": "set NODE_ENV=production& expo start --android",
+    "start": "expo start --android",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "format": "npx prettier . --write"
+    "format": "npx prettier . --write",
+    "build": "set NODE_ENV=production& echo todo"
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",

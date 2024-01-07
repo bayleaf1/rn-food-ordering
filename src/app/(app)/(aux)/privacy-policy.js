@@ -1,10 +1,10 @@
 import { Text } from 'react-native'
-import { LayoutWithTopContent } from '@layouts/BaseLayout'
+import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 
 export default function Page() {
   return (
-    <LayoutWithTopContent>
+    <SafeFullScreenLayout headerIsShown>
       <Text>Privacy policy</Text>
-    </LayoutWithTopContent>
+    </SafeFullScreenLayout>
   )
 }

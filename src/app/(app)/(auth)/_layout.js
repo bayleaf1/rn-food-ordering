@@ -1,4 +1,4 @@
-import { Redirect } from 'expo-router'
+import { Redirect, Stack } from 'expo-router'
 import { Text } from 'react-native'
 import PrimaryStack from '@libs/Navigation/PrimaryStack'
 import Screens from '@libs/Navigation/ScreenList'
@@ -7,25 +7,13 @@ import { useSessionProvider } from '@providers/SessionProvider'
 export default function AuthorizedLayout() {
   const { isSignedOut, isLoading } = useSessionProvider()
 
-  // You can keep the splash screen open, or render a loading screen like we do here.
-  if (false) {
-    return <Text tw="mt-20">Loading...</Text>
-  }
-
-  // Only require authentication within the (app) group's layout as users
-  // need to be able to access the (auth) group and sign in again.
-  // if (true) {
-  //   // On web, static rendering will stop here as the user is not authenticated
-  //   // in the headless Node process that the pages are rendered in.
-  //   return <Redirect href="sign-in" />
-  // }
-
-  // console.log(`isSignedOut:`, isSignedOut);
   if (isSignedOut) return <Redirect href={Screens.singIn} />
-
-  // This layout can be deferred because it's not the root layout.
+  // return <Stack>
+  //   <Stack.Screen name="home" options={{orientation: 'all'}} />
+  //   <Stack.Screen name="settings" />
+  // </Stack>
   return (
-    <PrimaryStack initialRouteName="home" screenOptions={{ headerShown: false }}>
+    <PrimaryStack initialRouteName="home" screenOptions={{orientation: 'all', headerShown: false }}>
       <PrimaryStack.Screen name="home" />
       <PrimaryStack.Screen name="settings" />
       {/*   <PrimaryStack.Screen
