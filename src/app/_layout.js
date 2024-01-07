@@ -13,9 +13,7 @@ import ScreenOrientationProvider from '@providers/ScreenOrientationProvider'
 import NativeStackResponsableForScreenOrientation from '@libs/Navigation/NativeStackResponsableForScreenOrientation'
 export { ErrorBoundary } from 'expo-router'
 
-//TODO cand se schimba ecranele clipeste alb
 //TODO de incercat https://github.com/kristerkari/react-native-svg-example?tab=readme-ov-file
-//TODO check skia (shadow)
 //TODO check huszstand state
 //TODO add Localizations or Cronos objectx
 

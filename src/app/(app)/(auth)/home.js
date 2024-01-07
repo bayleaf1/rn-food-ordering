@@ -1,28 +1,26 @@
-import { Link } from 'expo-router'
-import { Pressable, Text } from 'react-native'
 import LocalPicture from '@components/Pictures/LocalPicture'
-import { SafeFullScreenLayout } from '@layouts/BaseLayout'
-import Go from '@libs/Navigation/Go'
-import { useSessionProvider } from '@providers/SessionProvider'
-import { useTranslationProvider } from '@providers/TranslationProvider'
 import Writing from '@components/Writing/Writing'
 import { ENV_VARS } from '@config/config'
+import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import Go from '@libs/Navigation/Go'
 import { useScreenOrientationProvider } from '@providers/ScreenOrientationProvider'
-
+import { useSessionProvider } from '@providers/SessionProvider'
+import { useTranslationProvider } from '@providers/TranslationProvider'
+import { Link } from 'expo-router'
+import { Pressable, Text } from 'react-native'
 function er() {
   // throw new Error("Cusotm error")
 }
+
 export default function Page() {
   let { signOut } = useSessionProvider()
   let { setLanguageAndSaveToStorage, AvailableLanguages } = useTranslationProvider()
-  let {portraitOrLandscape} = useScreenOrientationProvider()
+  let { portraitOrLandscape } = useScreenOrientationProvider()
 
   return (
     <SafeFullScreenLayout contentTw="bg-red-200">
-      {/* // <LayoutWithTopContent bgColor="gray"> */}
-      {/* <View tw="flex-1 bg-gray-500"> */}
       {er()}
-      <Text>HomePage</Text>
+      <Text tw="self-stretch">HomePage</Text>
       <Text>{ENV_VARS.ENV}</Text>
       <Text>{portraitOrLandscape('port', 'land')}</Text>
 

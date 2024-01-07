@@ -1,5 +1,5 @@
 import { useLocales } from 'expo-localization'
-import { createContext, useCallback, useContext, useEffect, useMemo } from 'react'
+import { createContext, useCallback, useContext, useEffect } from 'react'
 import { I18nextProvider, useTranslation } from 'react-i18next'
 import { useStorageState } from '@libs/Storage'
 import i18nConfigs, { AppLanguages, DEFAULT_LANGUAGE } from '@libs/Translation/_i18n'
