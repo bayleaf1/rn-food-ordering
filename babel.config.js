@@ -20,16 +20,18 @@ module.exports = function (api) {
         '@providers': './src/providers',
         '@config': './src/config',
         '@assets': './assets',
-        "@icons": "./assets/icons",
-        "@images": "./assets/images",
+        '@icons': './assets/icons',
+        '@images': './assets/images',
       },
     },
   ]
+  const remoweWarnsFromConsolePlugin = ['transform-remove-console', { exclude: ['error', 'log'] }]
   api.cache(true)
   return {
     presets: ['babel-preset-expo'],
     plugins: [
       moduleResolverPlugin,
+      remoweWarnsFromConsolePlugin,
       'nativewind/babel',
       'expo-router/babel',
       'react-native-reanimated/plugin',

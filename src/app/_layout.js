@@ -1,5 +1,4 @@
 import 'react-native-gesture-handler'
-
 import SplashView from '@components/SplashView/SplashView'
 import '@config/config'
 import NativeStackResponsableForScreenOrientation from '@libs/Navigation/NativeStackResponsableForScreenOrientation'
@@ -13,7 +12,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { LogBox } from 'react-native'
 export { ErrorBoundary } from 'expo-router'
 
-LogBox.ignoreLogs(['new NativeEventEmitter'])
+// LogBox.ignoreLogs(['new NativeEventEmitter'])
 //TODO add Localizations or Cronos objectx
 
 NativeWindStyleSheet.setOutput({ default: 'native' })

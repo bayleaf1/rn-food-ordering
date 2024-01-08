@@ -13,6 +13,7 @@
     "clean": "npx expo start -c"
   },
   "dependencies": {
+    "@babel/helper-module-imports": "^7.22.15",
     "@expo/webpack-config": "^19.0.0",
     "@react-native-masked-view/masked-view": "0.2.9",
     "@react-navigation/bottom-tabs": "^6.5.11",
@@ -20,6 +21,7 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "6.9.17",
     "@react-navigation/stack": "^6.3.20",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "clsx": "^2.0.0",
     "expo": "~49.0.15",
     "expo-font": "~11.4.0",
@@ -27,6 +29,7 @@
     "expo-router": "^2.0.0",
     "expo-screen-orientation": "~6.0.6",
     "expo-secure-store": "~12.3.1",
+    "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "i18next": "^23.7.16",
     "lodash": "^4.17.21",

@@ -22,3 +22,5 @@ Use a dev splash image and a production because the production blinks on resfres
 Do not use conditioinal logic in _layout file with slot: predicate ? <Slot/> : <Text>Loading...</Text>
 
 Enva variable set from command line loads the required env file but process.env.NODE_ENV remains with development value. Set a custom ENV vars in every .env file.
+
+Screen orientation plugin has some annoying warns. TO surpress all warnings is used a babel plugin. Sometime it should be suspended to inspect the warnings. 
