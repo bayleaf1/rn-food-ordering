@@ -9,12 +9,15 @@ import SessionProvider from '@providers/SessionProvider'
 import TranslationProvider from '@providers/TranslationProvider'
 import { NativeWindStyleSheet } from 'nativewind'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { LogBox } from 'react-native'
-export { ErrorBoundary } from 'expo-router'
+import React from 'react'
+import { View } from 'react-native'
+import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import Writing from '@components/Writing/Writing'
+import Go from '@libs/Navigation/Go'
 
-// LogBox.ignoreLogs(['new NativeEventEmitter'])
+
 //TODO add Localizations or Cronos objectx
-
+//TODO add buttons
 NativeWindStyleSheet.setOutput({ default: 'native' })
 
 export default function AppLayout() {

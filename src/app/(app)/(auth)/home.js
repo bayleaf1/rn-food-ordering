@@ -8,8 +8,9 @@ import { useSessionProvider } from '@providers/SessionProvider'
 import { useTranslationProvider } from '@providers/TranslationProvider'
 import { Link } from 'expo-router'
 import { Pressable, Text } from 'react-native'
+
 function er() {
-  // throw new Error("Cusotm error")
+    throw new Error("Cusotm error")
 }
 
 export default function Page() {
@@ -19,10 +20,11 @@ export default function Page() {
 
   return (
     <SafeFullScreenLayout contentTw="bg-red-200">
-      {er()}
+      {/* {er()} */}
       <Text tw="self-stretch">HomePage</Text>
       <Text>{ENV_VARS.ENV}</Text>
       <Text>{portraitOrLandscape('port', 'land')}</Text>
+      {/* <Writing onPress={()=>{throw new Error('SMTH FOMR HOME')}} >Error</Writing> */}
       <Go toScreen={'singIn'} children={<Text>Sign in</Text>} />
 
       <Go toScreen={'singUp'} children={<Text>Sign up</Text>} />

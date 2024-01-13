@@ -1,7 +1,12 @@
+import Writing from '@components/Writing/Writing';
+import Go from '@libs/Navigation/Go';
 import PrimaryStack from '@libs/Navigation/PrimaryStack'
 import Screens from '@libs/Navigation/ScreenList'
 import { useSessionProvider } from '@providers/SessionProvider'
 import { Redirect } from 'expo-router'
+import CustomErrorBoundary from '@components/ErrorBoundary'
+
+export const ErrorBoundary = CustomErrorBoundary
 
 export default function AuthorizedLayout() {
   const { isSignedOut } = useSessionProvider()
