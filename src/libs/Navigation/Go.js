@@ -5,7 +5,7 @@ import { Pressable } from 'react-native'
 
 const defaultScreen = Screens.home
 
-function Go({ toScreen = defaultScreen, children, ctw = '', ...rest }) {
+function Go({ toScreen = defaultScreen, andPassProps = {}, children, ctw = '', ...rest }) {
   let href = useMemo(() => {
     if (!Array.isArray(toScreen)) toScreen = [toScreen]
 

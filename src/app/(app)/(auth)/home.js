@@ -39,9 +39,7 @@ export default function Page() {
 
       <Go toScreen={'tabsone'} children={<Text>Tabs</Text>} />
 
-      <Go toScreen={'sharedone'} children={<Text>Shared animation</Text>} />
-      <Go toScreen={'sharedone'} children={<Text>Shared animation</Text>} />
-      <Go toScreen={'sharedone'} children={<Text>Shared animation</Text>} />
+      <Go toScreen={'shared-one'} children={<Text>Shared animation</Text>} />
 
       <Pressable onPress={signOut}>
         <Text>Sign out</Text>

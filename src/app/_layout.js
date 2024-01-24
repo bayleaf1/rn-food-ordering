@@ -19,7 +19,6 @@ LogBox.ignoreLogs(['NativeEvent'])
 //TODO add buttons
 //TODO change splash view visibility prop name in dev mode hideInDev=true
 //TODO add lottie
-//TODO add shared animate transition example with reanimated
 NativeWindStyleSheet.setOutput({ default: 'native' })
 
 export default function AppLayout() {
