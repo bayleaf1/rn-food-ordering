@@ -10,11 +10,16 @@ import ToastsProvider from '@providers/ToastsProvider'
 import TranslationProvider from '@providers/TranslationProvider'
 import { NativeWindStyleSheet } from 'nativewind'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { Slot } from 'expo-router'
+import { LogBox } from 'react-native'
+
+LogBox.ignoreLogs(['NativeEvent'])
 
 //TODO add Localizations or Cronos objectx
 //TODO add buttons
 //TODO change splash view visibility prop name in dev mode hideInDev=true
 //TODO add lottie
+//TODO add shared animate transition example with reanimated
 NativeWindStyleSheet.setOutput({ default: 'native' })
 
 export default function AppLayout() {

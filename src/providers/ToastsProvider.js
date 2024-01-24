@@ -32,7 +32,7 @@ function ToastsProvider({ children }) {
 
   return (
     <Context.Provider value={{}}>
-      <View tw="relative flex-1">
+      {/* <View tw="relative flex-1"> */}
         {/* <Pressable onPress={click}>
         <View tw=" ml-11 mt-9 h-10 w-10 bg-slate-500" />
       </Pressable>
@@ -41,7 +41,7 @@ function ToastsProvider({ children }) {
       </Pressable> */}
         {children}
         {/* <Animated.View tw="absolute left-24 h-24 w-[250px] bg-slate-800" style={{ top }} /> */}
-      </View>
+      {/* </View> */}
     </Context.Provider>
   )
 }

@@ -11,7 +11,7 @@ export default function CustomUnmatched() {
         <Writing h1 style={{ marginTop: 200, textAlign: 'center' }}>
           Screen not found
         </Writing>
-
+        {/* ! Go componenet not working */}
         <Go toScreen="home">
           <Writing h2 style={{ marginTop: 20, textAlign: 'center' }}>
             Return to home

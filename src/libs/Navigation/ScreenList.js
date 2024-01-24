@@ -12,6 +12,8 @@ const Screens = {
   drawertwo: '/drawer/two',
   tabsone: '/tabs/one',
   tabstwo: '/tabs/two',
+  'sharedone': '/shared/one',
+  'shared-anim-two': '/shared/two',
 }
 
 export default Screens;

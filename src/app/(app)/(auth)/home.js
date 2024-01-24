@@ -9,10 +9,6 @@ import { useTranslationProvider } from '@providers/TranslationProvider'
 import { Link } from 'expo-router'
 import { Pressable, Text } from 'react-native'
 
-function er() {
-    throw new Error("Cusotm error")
-}
-
 export default function Page() {
   let { signOut } = useSessionProvider()
   let { setLanguageAndSaveToStorage, AvailableLanguages } = useTranslationProvider()
@@ -42,6 +38,10 @@ export default function Page() {
       <Go toScreen={'drawerone'} children={<Text>Drawer</Text>} />
 
       <Go toScreen={'tabsone'} children={<Text>Tabs</Text>} />
+
+      <Go toScreen={'sharedone'} children={<Text>Shared animation</Text>} />
+      <Go toScreen={'sharedone'} children={<Text>Shared animation</Text>} />
+      <Go toScreen={'sharedone'} children={<Text>Shared animation</Text>} />
 
       <Pressable onPress={signOut}>
         <Text>Sign out</Text>
