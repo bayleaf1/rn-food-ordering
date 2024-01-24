@@ -1,7 +1,8 @@
 import LocalPicture from '@components/Pictures/LocalPicture'
 import Writing from '@components/Writing/Writing'
-import { ENV_VARS } from '@config/config'
+import { GLOBAL_CONFIG } from '@config/globalConfig'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import useApi, { Endpoints } from '@libs/Api'
 import Go from '@libs/Navigation/Go'
 import { useScreenOrientationProvider } from '@providers/ScreenOrientationProvider'
 import { useSessionProvider } from '@providers/SessionProvider'
@@ -14,11 +15,15 @@ export default function Page() {
   let { setLanguageAndSaveToStorage, AvailableLanguages } = useTranslationProvider()
   let { portraitOrLandscape } = useScreenOrientationProvider()
 
+  
+  let { data, statusCode, } = useApi("/todos/1", { defaultData: {} })
+  // let { data } = useApi(Endpoints.me.value(), { defaultData: {} })
+
   return (
     <SafeFullScreenLayout contentTw="bg-red-200">
       {/* {er()} */}
       <Text tw="self-stretch">HomePage</Text>
-      <Text>{ENV_VARS.ENV}</Text>
+      <Text>{GLOBAL_CONFIG.ENV}</Text>
       <Text>{portraitOrLandscape('port', 'land')}</Text>
       {/* <Writing onPress={()=>{throw new Error('SMTH FOMR HOME')}} >Error</Writing> */}
       <Go toScreen={'singIn'} children={<Text>Sign in</Text>} />
@@ -62,6 +67,8 @@ export default function Page() {
       <Writing xl2 t={['greeting', { name: 'Lalal' }]} />
 
       <LocalPicture image="home" ctw="h-40 bg-slate-500" />
+
+      <Writing>{statusCode} {JSON.stringify(data, null, 2)} </Writing>
     </SafeFullScreenLayout>
   )
 }

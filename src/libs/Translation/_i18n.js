@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { initReactI18next } from 'react-i18next'
 import en from './en'
 import ro from './ro'
-import { isProdEnv } from '@config/config'
+import { isProdEnv } from '@config/globalConfig'
 
 export const AppLanguages = Object.freeze({
   EN: 'en',

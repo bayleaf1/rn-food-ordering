@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler'
-import '@config/config'
+import '@config/globalConfig'
 import SplashView from '@components/SplashView/SplashView'
 import NativeStackResponsableForScreenOrientation from '@libs/Navigation/NativeStackResponsableForScreenOrientation'
 import AppLoadingProvider, { useAppLoadingProvider } from '@providers/AppLoadingProvider'
@@ -19,6 +19,7 @@ LogBox.ignoreLogs(['NativeEvent'])
 //TODO add buttons
 //TODO change splash view visibility prop name in dev mode hideInDev=true
 //TODO add lottie
+//TODO add auth token to useApi and get, post, patch
 NativeWindStyleSheet.setOutput({ default: 'native' })
 
 export default function AppLayout() {

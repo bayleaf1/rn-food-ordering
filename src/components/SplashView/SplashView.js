@@ -4,7 +4,7 @@ import Constants from 'expo-constants'
 import { SplashScreen } from 'expo-router'
 import { useEffect, useMemo, useState } from 'react'
 import { Animated, StyleSheet, View } from 'react-native'
-import { isDevEnv } from '@config/config'
+import { isDevEnv } from '@config/globalConfig'
 export { ErrorBoundary } from 'expo-router'
 
 const loadedSplashImage = require('@assets/splash.jpg')
