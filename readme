@@ -1,0 +1,28 @@
+Details
+tw stands for tailwind; use this because it is shorter than className
+ctw stands for component tailwind; use this because tw is "compiled" and can not be passed
+
+Tips
+If navigation doesn't work on android
+react-native-screens package requires one additional configuration step to properly work on Android devices. Edit MainActivity.kt or MainActivity.java file which is located under android/app/src/main/java/<your package name>/.
+Add the highlighted code to the body of MainActivity class:
+
+Changing the file with custom navigator causes freeze of the app and it need to be reloaded
+
+Pnpm doesn't work with expo/react-native, expo-router.
+
+If something is not working, ex: navigate to route, then run npx expo start -c to clean cache, sometimes it helps.
+
+Splash screen image should remain with the same name because it is used in SplashScreenComponent. If it is updated make sure to update it in component too 
+
+By default splash animation is not shown in dev env, it can be forced to play by passing a flag option
+
+Use a dev splash image and a production because the production blinks on resfresh and it is iritated
+
+Do not use conditioinal logic in _layout file with slot: predicate ? <Slot/> : <Text>Loading...</Text>
+
+Enva variable set from command line loads the required env file but process.env.NODE_ENV remains with development value. Set a custom ENV vars in every .env file.
+
+new NativeEventEmitter() warns comes from screen orientation library.
+
+Screen orientation plugin has some annoying warns. TO surpress all warnings is used a babel plugin. Sometime it should be suspended to inspect the warnings. 

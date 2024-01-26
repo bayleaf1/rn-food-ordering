@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "typeRoots": ["./node_modules/@types"],
+      "baseUrl": ".",
+      "paths": {
+        "@components/*": ["./src/components/*"],
+        "@libs/*": ["./src/libs/*"],
+        "@layouts/*": ["./src/layouts/*"],
+        "@providers/*": ["./src/providers/*"],
+        "@config/*": ["./src/config/*"],
+        "@assets/*": ["./assets/*"],
+        "@icons/*": ["./assets/icons/*"],
+        "@images/*": ["./assets/images/*"],
+      }
+    },
+    "exclude": ["node_modules", ".expo", ".vscode"]
+  }
