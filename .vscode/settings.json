@@ -1,5 +1,5 @@
 {
-    "tailwindCSS.classAttributes": ["tw", "ctw", "contentTw", "moreTw"],
+    "tailwindCSS.classAttributes": ["tw", "ctw", "contentTw", "moreTw", "containerTw", "inputViewTw"],
     "editor.quickSuggestions": {
         "strings": true
     },

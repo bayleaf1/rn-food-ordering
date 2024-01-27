@@ -12,7 +12,10 @@ import { NativeWindStyleSheet } from 'nativewind'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Slot } from 'expo-router'
 import { LogBox } from 'react-native'
+import clsx from 'clsx';
 
+globalThis.clsx = clsx
+globalThis.cl = clsx
 LogBox.ignoreLogs(['NativeEvent'])
 
 //TODO add Localizations or Cronos objectx

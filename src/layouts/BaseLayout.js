@@ -12,10 +12,10 @@ Layout.VerticalPart = VerticalPart
 Layout.HorizontalPart = HorizontalPart
 Layout.Content = View
 
-export function SafeFullScreenLayout({ headerIsShown, children, contentTw = '' }) {
+export function SafeFullScreenLayout({ visibleAreaTw, headerIsShown, children, contentTw = '' }) {
   let resolver = propsResolverByHeaderShowness()
   return (
-    <Layout.VisibleArea>
+    <Layout.VisibleArea moreTw={visibleAreaTw} >
       <Layout.SafeArea {...resolver.safeAreaMargins()}>
         <Layout.VerticalPart topMarginTw={resolver.topMarginTw()} bottomMarginTw="">
           <Layout.HorizontalPart leftMarginTw={'ml-4'} rightMarginTw={'mr-4'}>

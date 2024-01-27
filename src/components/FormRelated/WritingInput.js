@@ -1,36 +1,61 @@
-import clsx from 'clsx'
 import Writing from '@components/Writing/Writing'
-import { TextInput, View } from 'react-native'
-import { useState } from 'react'
+import { Pressable, TextInput, View } from 'react-native'
+import { useEffect, useRef, useState } from 'react'
+import normalizeFontSize from '@components/Writing/normalizeFontSize'
+import { getViews } from '@components/components'
 
-let [Container, InputView, InputInnerBorder] = [View, View, View]
+let [Container, InputView, InputInnerBorder] = getViews()
 
-function WritingInput({ label, containerTw, leftAddornment = null, rightAddornment = null }) {
+function WritingInput({
+  label,
+  value = '',
+  onChangeText = () => '',
+  inputViewTw,
+  placeholder,
+  containerTw,
+  leftAddornment = null,
+  rightAddornment = null,
+}) {
   let [focus, setFocus] = useState(false)
+  let ref = useRef(null)
+
+  useEffect(() => {
+    if (focus && ref.current) ref.current.focus()
+  }, [focus, ref])
 
   return (
-    <Container tw={clsx('flex-0 w-ful', containerTw)}>
-      {label && <Writing label ctw="mb-1" children={label} />}
+    <Pressable onPress={() => setFocus(true)}>
+      <Container tw={cl('flex-0 w-ful', containerTw)}>
+        {label && <Writing label ctw="mb-1" children={label} />}
 
-      <InputView tw={'flex-0 relative w-full flex-row overflow-hidden rounded-md bg-white outline'}>
-        {leftAddornment}
-        <TextInput
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-          value="123"
-          tw="flex-1 self-start justify-self-start px-2 py-2"
-          style={{ fontSize: 20, fontFamily: 'Primary' }}
-        />
-        {rightAddornment}
-        <InputInnerBorder
-          pointerEvents="none"
-          tw={clsx(
-            'absolute top-0 right-0 bottom-0 left-0 rounded-md border border-gray-300',
-            focus && 'border-2 border-blue-500'
+        <InputView
+          tw={cl(
+            'flex-0 relative w-full flex-row items-center overflow-hidden rounded-md',
+            inputViewTw
           )}
-        />
-      </InputView>
-    </Container>
+        >
+          {leftAddornment}
+          <TextInput
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
+            value={value}
+            onChangeText={onChangeText}
+            placeholder={placeholder}
+            tw="flex-1 px-2 py-2"
+            style={{ fontSize: normalizeFontSize(11), fontFamily: 'Primary' }}
+            ref={ref}
+          />
+          {rightAddornment}
+          <InputInnerBorder
+            pointerEvents="none"
+            tw={cl(
+              'absolute top-0 right-0 bottom-0 left-0 rounded-md border-2 border-white'
+              // focus && ' border-primary'
+            )}
+          />
+        </InputView>
+      </Container>
+    </Pressable>
   )
 }
 
