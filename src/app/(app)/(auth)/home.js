@@ -11,14 +11,17 @@ import Go from '@libs/Navigation/Go'
 import { useScreenOrientationProvider } from '@providers/ScreenOrientationProvider'
 import { useSessionProvider } from '@providers/SessionProvider'
 import { useTranslationProvider } from '@providers/TranslationProvider'
-// import clsx from 'clsx'
 import { Link } from 'expo-router'
 import { useEffect, useState } from 'react'
-import { Pressable, Text, TouchableNativeFeedback, View } from 'react-native'
-import { TouchableRipple } from 'react-native-paper'
+import { Pressable, ScrollView, Text, View } from 'react-native'
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated'
 
-let [SearchPanel] = getViews()
+let [] = getViews()
+const categories = [
+  ['burger', 'Fast food'],
+  ['coffe', 'Drink'],
+  ['snacks', 'Snacks'],
+]
 
 export default function Page() {
   let { signOut } = useSessionProvider()
@@ -29,28 +32,13 @@ export default function Page() {
   // let { data } = useApi(Endpoints.me.value(), { defaultData: {} })
 
   return (
-    <SafeFullScreenLayout visibleAreaTw={"bg-gray-25"}  contentTw="bg-gray-25x">
-      <SearchPanel tw="flex flex-row " style={{ columnGap: 10 }}>
-        <WritingInput
-          placeholder={'Search food...'}
-          inputViewTw={'bg-gray-50 h-12'}
-          containerTw={'grow'}
-          leftAddornment={
-            <Icon
-              name="search"
-              containerTw="ml-2 w-[25px] h-[25px]"
-              ctw="fill-gray-300 stroke-gray-300"
-            />
-          }
-        />
+    <SafeFullScreenLayout visibleAreaTw={'bg-gray-25'} contentTw="bg-gray-25x">
+      <Title />
 
-        <Anim>
-          <Btn ctw="h-12">
-            <Icon name="filters" ctw="fill-white" containerTw="w-6 h-6 pointer-events-none" />
-          </Btn>
-        </Anim>
-      </SearchPanel>
-      {/* {er()} */}
+      <SearchPanel />
+
+      <FoodCategories categories={categories} />
+
       <Text tw="self-stretch">HomePage</Text>
       <Text>{GLOBAL_CONFIG.ENV}</Text>
       <Text>{portraitOrLandscape('port', 'land')}</Text>
@@ -104,6 +92,69 @@ export default function Page() {
   )
 }
 
+function FoodCategories(props) {
+  return (
+    <View tw="mt-3 flex flex-row">
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{
+          rowGap: 16,
+          columnGap: 16,
+          alignSelf: 'flex-start',
+        }}
+      >
+        {props.categories.map(([icon, label], k) => (
+          <View key={k} tw="flex flex-row items-center self-start rounded-lg bg-primary py-2.5 px-4">
+            <Icon name={icon} containerTw="w-5 h-5" />
+            <Writing xs ctw="ml-1 text-white">
+              {label}
+            </Writing>
+          </View>
+        ))}
+      </ScrollView>
+    </View>
+  )
+}
+
+function SearchPanel() {
+  return (
+    <View
+      tw="mt-4 flex flex-row"
+      style={{
+        columnGap: 10,
+      }}
+    >
+      <WritingInput
+        placeholder={'Search food...'}
+        inputViewTw={'bg-gray-50 h-12'}
+        containerTw={'grow '}
+        leftAddornment={
+          <Icon
+            name="search"
+            containerTw="ml-2 w-[25px] h-[25px]"
+            ctw="fill-gray-300 stroke-gray-300"
+          />
+        }
+      />
+
+      <Rhomb ctw="h-12">
+        <Icon name="filters" ctw="fill-white" containerTw="w-6 h-6 pointer-events-none" />
+      </Rhomb>
+    </View>
+  )
+}
+
+function Title() {
+  return (
+    <View tw="mt-4">
+      <Writing xl>Find Your</Writing>
+      <Writing semibold xl>
+        Best food <Writing xl>here</Writing>
+      </Writing>
+    </View>
+  )
+}
 function Anim({ containerTw = 'flex-start', children }) {
   let size = useSharedValue(1)
   let [targetSize, setTargetSize] = useState(1)
@@ -131,14 +182,19 @@ function Anim({ containerTw = 'flex-start', children }) {
   )
 }
 
-function Btn({ ctw, squareTw = 'bg-primary', children }) {
+function Rhomb({ ctw, squareTw = 'bg-primary', children }) {
   return (
-    <View tw={clsx('relative aspect-square py-1 px-1', ctw)}>
-      <BlockWithShadow
-        elevation={3}
-        ctw={clsx('inset-0 aspect-square h-full w-full rotate-45 rounded-xl', squareTw)}
-      />
-      <View tw="absolute inset-0 flex items-center justify-center">{children}</View>
-    </View>
+    <Anim>
+      <View tw={clsx('relative aspect-square py-1 px-1', ctw)}>
+        <BlockWithShadow
+          elevation={3}
+          ctw={clsx('inset-0 aspect-square h-full w-full rotate-45 rounded-xl', squareTw)}
+        />
+        <View tw="absolute inset-0 flex items-center justify-center">{children}</View>
+      </View>
+    </Anim>
   )
 }
+
+
+

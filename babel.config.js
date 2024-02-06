@@ -22,6 +22,7 @@ module.exports = function (api) {
         '@assets': './assets',
         '@icons': './assets/icons',
         '@images': './assets/images',
+        '@utils': './src/utils',
       },
     },
   ]

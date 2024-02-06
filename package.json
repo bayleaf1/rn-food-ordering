@@ -47,7 +47,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-svg": "13.9.0",
     "react-native-web": "~0.19.6",
-    "swr": "^2.2.4"
+    "swr": "^2.2.4",
+    "tw-merge": "^0.0.1-alpha.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

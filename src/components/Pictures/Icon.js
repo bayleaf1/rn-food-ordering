@@ -3,11 +3,17 @@ import { View } from 'react-native'
 import Home from '@icons/home.svg'
 import Search from '@icons/search.svg'
 import Filters from '@icons/filters.svg'
+import Burger from '@icons/burger.svg'
+import Coffe from '@icons/coffe.svg'
+import Snacks from '@icons/snacks.svg'
 
 const ICONS = {
   home: Home, //require('@icons/home.svg'),
   search: Search,
-  filters: Filters
+  filters: Filters,
+  burger: Burger,
+  coffe: Coffe,
+  snacks: Snacks
 }
 
 function Icon({ name = '', ctw = '', containerTw = 'w-7 h-7', iconProps = {} }) {

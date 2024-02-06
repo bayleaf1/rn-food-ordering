@@ -11,6 +11,7 @@
         "@assets/*": ["./assets/*"],
         "@icons/*": ["./assets/icons/*"],
         "@images/*": ["./assets/images/*"],
+        "@utils/*": ["./src/utils/*"],
       }
     },
     "exclude": ["node_modules", ".expo", ".vscode"]

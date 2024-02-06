@@ -30,7 +30,7 @@ function Writing({
     [xl, 20],
     [lg, 18],
     [sm, 14],
-    [xs, 12],
+    [xs, 11],
     [s8, 8],
     [base, 16],
   ].find((v) => v[0])

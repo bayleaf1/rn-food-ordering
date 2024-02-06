@@ -15,11 +15,11 @@ function FontsProvider({ children }) {
   let { setProviderAsLoaded } = useAppLoadingProvider()
 
   let [loaded] = useFonts({
-    PrimaryBold: require('../../assets/fonts/Montserrat/MontserratAlternates-Bold.ttf'),
-    PrimarySemiBold: require('../../assets/fonts/Montserrat/MontserratAlternates-SemiBold.ttf'),
-    PrimaryMedium: require('../../assets/fonts/Montserrat/MontserratAlternates-Medium.ttf'),
-    PrimaryThin: require('../../assets/fonts/Montserrat/MontserratAlternates-Thin.ttf'),
-    Primary: require('../../assets/fonts/Montserrat/MontserratAlternates-Regular.ttf'),
+    PrimaryBold: require('../../assets/fonts/IBMPlexSans/IBMPlexSans-Bold.ttf'),
+    PrimarySemiBold: require('../../assets/fonts/IBMPlexSans/IBMPlexSans-SemiBold.ttf'),
+    PrimaryMedium: require('../../assets/fonts/IBMPlexSans/IBMPlexSans-Medium.ttf'),
+    PrimaryThin: require('../../assets/fonts/IBMPlexSans/IBMPlexSans-Thin.ttf'),
+    Primary: require('../../assets/fonts/IBMPlexSans/IBMPlexSans-Regular.ttf'),
   })
 
   useEffect(() => {
