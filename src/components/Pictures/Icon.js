@@ -6,6 +6,7 @@ import Filters from '@icons/filters.svg'
 import Burger from '@icons/burger.svg'
 import Coffe from '@icons/coffe.svg'
 import Snacks from '@icons/snacks.svg'
+import RatingStar from '@icons/rating-star.svg'
 
 const ICONS = {
   home: Home, //require('@icons/home.svg'),
@@ -13,15 +14,16 @@ const ICONS = {
   filters: Filters,
   burger: Burger,
   coffe: Coffe,
-  snacks: Snacks
+  snacks: Snacks,
+  'rating-star': RatingStar,
 }
 
-function Icon({ name = '', ctw = '', containerTw = 'w-7 h-7', iconProps = {} }) {
+function Icon({ name = 'home', ctw = 'w-6 h-6', iconElementTw = '', iconProps = {} }) {
   let SelectedIcon = ICONS[name] || ICONS.home
 
   return (
-    <View tw={containerTw}>
-      <SelectedIcon tw={ctw} {...{ width: '100%', height: '100%', ...iconProps }} />
+    <View tw={cn(ctw)}>
+      <SelectedIcon tw={cn(iconElementTw)} {...{ width: '100%', height: '100%', ...iconProps }} />
     </View>
   )
 }

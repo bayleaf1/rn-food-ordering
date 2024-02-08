@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import React from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -19,7 +18,7 @@ export function SafeFullScreenLayout({ visibleAreaTw, headerIsShown, children, c
       <Layout.SafeArea {...resolver.safeAreaMargins()}>
         <Layout.VerticalPart topMarginTw={resolver.topMarginTw()} bottomMarginTw="">
           <Layout.HorizontalPart leftMarginTw={'ml-4'} rightMarginTw={'mr-4'}>
-            <Layout.Content tw={clsx('flex-1', contentTw)}>{children}</Layout.Content>
+            <Layout.Content tw={cn('flex-1', contentTw)}>{children}</Layout.Content>
           </Layout.HorizontalPart>
         </Layout.VerticalPart>
       </Layout.SafeArea>
@@ -51,7 +50,7 @@ export const LayoutForBottomTabs = ({ headerIsShown, children, contentTw = '' })
           moreTw="overflow-hidden bg-red-400"
         >
           <Layout.HorizontalPart leftMarginTw={'ml-4'} rightMarginTw={'mr-4'}>
-            <Layout.Content tw={clsx('flex-1', contentTw)}>{children}</Layout.Content>
+            <Layout.Content tw={cn('flex-1', contentTw)}>{children}</Layout.Content>
           </Layout.HorizontalPart>
         </Layout.VerticalPart>
       </Layout.SafeArea>
@@ -73,7 +72,7 @@ export const LayoutForBottomTabs = ({ headerIsShown, children, contentTw = '' })
 }
 
 function VisibleArea({ moreTw = '', children }) {
-  return <View tw={clsx('flex-1', moreTw)} children={children} />
+  return <View tw={cn('flex-1', moreTw)} children={children} />
 }
 
 function SafeArea({ children, top, right, bottom, left }) {
@@ -94,9 +93,9 @@ function SafeArea({ children, top, right, bottom, left }) {
 }
 
 function VerticalPart({ topMarginTw, bottomMarginTw, moreTw = '', children }) {
-  return <View tw={clsx('flex-1', topMarginTw, bottomMarginTw, moreTw)} children={children} />
+  return <View tw={cn('flex-1', topMarginTw, bottomMarginTw, moreTw)} children={children} />
 }
 
 function HorizontalPart({ leftMarginTw, rightMarginTw, moreTw = '', children }) {
-  return <View tw={clsx('flex-1', leftMarginTw, rightMarginTw, moreTw)} children={children} />
+  return <View tw={cn('flex-1', leftMarginTw, rightMarginTw, moreTw)} children={children} />
 }

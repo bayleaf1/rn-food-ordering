@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler'
 import '@config/globalConfig'
+import '@config/globalDeclarations'
 import SplashView from '@components/SplashView/SplashView'
 import NativeStackResponsableForScreenOrientation from '@libs/Navigation/NativeStackResponsableForScreenOrientation'
 import AppLoadingProvider, { useAppLoadingProvider } from '@providers/AppLoadingProvider'
@@ -12,12 +13,8 @@ import { NativeWindStyleSheet } from 'nativewind'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Slot } from 'expo-router'
 import { LogBox } from 'react-native'
-import clsx from 'clsx';
 
-globalThis.clsx = clsx
-globalThis.cl = clsx
 LogBox.ignoreLogs(['NativeEvent'])
-
 //TODO add Localizations or Cronos objectx
 //TODO add buttons
 //TODO change splash view visibility prop name in dev mode hideInDev=true
@@ -25,9 +22,10 @@ LogBox.ignoreLogs(['NativeEvent'])
 //TODO add auth token to useApi and get, post, patch
 NativeWindStyleSheet.setOutput({ default: 'native' })
 
+
 export default function AppLayout() {
   return (
-    <AppLoadingProvider>
+    <AppLoadingProvider>      
       <ToastsProvider>
         <SafeAreaProvider>
           <TranslationProvider>

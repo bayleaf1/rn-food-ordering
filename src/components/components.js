@@ -9,4 +9,5 @@ function createGetter(Component) {
     },
   })
 }
+
 export const getViews = createGetter(View)

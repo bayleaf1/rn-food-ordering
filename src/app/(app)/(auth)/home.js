@@ -1,9 +1,8 @@
-import BlockWithShadow from '@components/BlockWithShadow'
+import ViewWithShadow from '@components/ViewWithShadow'
 import WritingInput from '@components/FormRelated/WritingInput'
 import Icon from '@components/Pictures/Icon'
 import LocalPicture from '@components/Pictures/LocalPicture'
 import Writing from '@components/Writing/Writing'
-import { getViews } from '@components/components'
 import { GLOBAL_CONFIG } from '@config/globalConfig'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import useApi from '@libs/Api'
@@ -12,17 +11,46 @@ import { useScreenOrientationProvider } from '@providers/ScreenOrientationProvid
 import { useSessionProvider } from '@providers/SessionProvider'
 import { useTranslationProvider } from '@providers/TranslationProvider'
 import { Link } from 'expo-router'
-import { useEffect, useState } from 'react'
-import { Pressable, ScrollView, Text, View } from 'react-native'
+import { FlatList, Pressable, ScrollView, Text, View } from 'react-native'
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated'
-
-let [] = getViews()
+// import Carousel from 'react-native-reanimated-carousel'
 const categories = [
   ['burger', 'Fast food'],
   ['coffe', 'Drink'],
   ['snacks', 'Snacks'],
 ]
 
+function Food() {
+  return (
+    <ViewWithShadow
+      elevation={3}
+      ctw="w-fullx max-w-[70%]x w-[250px] items-center self-start  rounded-3xl p-4  pt-0"
+    >
+      <LocalPicture name="egg-pasta" ctw="h-[200px] w-full" imageResizeMode="contain" />
+      <Writing xl ctw={cn('mt-4')}>
+        Egg pasta
+      </Writing>
+      <Writing sm ctw={cn('mt-2 text-gray-400')}>
+        Spicy Chicken Pasta
+      </Writing>
+
+      <View tw={cn('mt-2 flex flex-row items-center justify-center')}>
+        <Icon name="rating-star" ctw="h-[18px] w-[18px]" />
+        <Writing sm ctw={cn('ml-1 text-gray-400')}>
+          5.0
+        </Writing>
+      </View>
+
+      <Writing ctw={cn('mt-2 text-primary')}>
+        $ <Writing xl2>15.00</Writing>
+      </Writing>
+    </ViewWithShadow>
+  )
+}
+function onChange(params) {
+  let { viewableItems } = params
+  console.log(`params:`, params, viewableItems)
+}
 export default function Page() {
   let { signOut } = useSessionProvider()
   let { setLanguageAndSaveToStorage, AvailableLanguages } = useTranslationProvider()
@@ -39,7 +67,45 @@ export default function Page() {
 
       <FoodCategories categories={categories} />
 
-      <Text tw="self-stretch">HomePage</Text>
+      {/* <Carousel
+        width={width}
+        data={[{ color: 'red' }, { color: 'purple' }, { color: 'yellow' }]}
+        renderItem={({ color }) => {
+          return <View style={{ backgroundColor: color, flex: 1 }} />
+        }}
+      /> */}
+      <View tw={cn('')}>
+        <FlatList
+          horizontal
+          contentContainerStyle={{
+            backgroundColor: 'red',
+            columnGap: 16,
+          }}
+          // decelerationRate={0}
+          // snapToInterval={250 - 60}
+          // snapToAlignment={'center'}
+          snapToAlignment="center"
+          // snapToOffsets={200}
+          showsHorizontalScrollIndicator={false}
+          onViewableItemsChanged={onChange}
+          viewabilityConfig={{
+            itemVisiblePercentThreshold: 70,
+          }}
+          data={[{}, {}, {}, {}]}
+          renderItem={({ item, index, ...rest }) => (
+            console.log(rest), (<Food key={index}></Food>)
+          )}
+          pagingEnabled
+          // pagingEnabled
+        >
+          {/* <Food></Food>
+          <Food></Food>
+          <Food></Food>
+          <Food></Food> */}
+        </FlatList>
+      </View>
+
+      <Text tw="self-stretch">HomePage {GLOBAL_VALUE}</Text>
       <Text>{GLOBAL_CONFIG.ENV}</Text>
       <Text>{portraitOrLandscape('port', 'land')}</Text>
       {/* <Writing onPress={()=>{throw new Error('SMTH FOMR HOME')}} >Error</Writing> */}
@@ -94,7 +160,7 @@ export default function Page() {
 
 function FoodCategories(props) {
   return (
-    <View tw="mt-3 flex flex-row">
+    <View tw={'mt-3 flex flex-row'}>
       <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}
@@ -105,7 +171,10 @@ function FoodCategories(props) {
         }}
       >
         {props.categories.map(([icon, label], k) => (
-          <View key={k} tw="flex flex-row items-center self-start rounded-lg bg-primary py-2.5 px-4">
+          <View
+            key={k}
+            tw="flex flex-row items-center self-start rounded-lg bg-primary py-2.5 px-4"
+          >
             <Icon name={icon} containerTw="w-5 h-5" />
             <Writing xs ctw="ml-1 text-white">
               {label}
@@ -185,16 +254,13 @@ function Anim({ containerTw = 'flex-start', children }) {
 function Rhomb({ ctw, squareTw = 'bg-primary', children }) {
   return (
     <Anim>
-      <View tw={clsx('relative aspect-square py-1 px-1', ctw)}>
-        <BlockWithShadow
+      <View tw={cn('relative aspect-square py-1 px-1', ctw)}>
+        <ViewWithShadow
           elevation={3}
-          ctw={clsx('inset-0 aspect-square h-full w-full rotate-45 rounded-xl', squareTw)}
+          ctw={cn('inset-0 aspect-square h-full w-full rotate-45 rounded-xl', squareTw)}
         />
         <View tw="absolute inset-0 flex items-center justify-center">{children}</View>
       </View>
     </Anim>
   )
 }
-
-
-

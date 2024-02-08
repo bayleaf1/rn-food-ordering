@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { Drawer } from 'expo-router/drawer'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import Go from './Go'
@@ -44,7 +43,7 @@ function CustomSlideDrawerContent({ state, navigation }) {
         let isActive = idx === state.index
         return (
           <Go
-            ctw={clsx('mt-2 rounded-md p-2', isActive ? 'bg-slate-500' : '')}
+            ctw={cn('mt-2 rounded-md p-2', isActive ? 'bg-slate-500' : '')}
             toScreen={'drawer' + route.name}
             key={idx}
           >
