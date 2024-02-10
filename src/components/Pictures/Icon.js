@@ -18,11 +18,11 @@ const ICONS = {
   'rating-star': RatingStar,
 }
 
-function Icon({ name = 'home', ctw = 'w-6 h-6', iconElementTw = '', iconProps = {} }) {
+function Icon({ name = 'home', ctw, iconElementTw = '', iconProps = {} }) {
   let SelectedIcon = ICONS[name] || ICONS.home
 
   return (
-    <View tw={cn(ctw)}>
+    <View tw={cn('w-6 h-6', ctw)}>
       <SelectedIcon tw={cn(iconElementTw)} {...{ width: '100%', height: '100%', ...iconProps }} />
     </View>
   )

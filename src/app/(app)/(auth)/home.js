@@ -1,137 +1,121 @@
-import ViewWithShadow from '@components/ViewWithShadow'
 import WritingInput from '@components/FormRelated/WritingInput'
 import Icon from '@components/Pictures/Icon'
 import LocalPicture from '@components/Pictures/LocalPicture'
+import ViewWithShadow from '@components/ViewWithShadow'
 import Writing from '@components/Writing/Writing'
-import { GLOBAL_CONFIG } from '@config/globalConfig'
-import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import { Layout } from '@layouts/BaseLayout'
 import useApi from '@libs/Api'
-import Go from '@libs/Navigation/Go'
 import { useScreenOrientationProvider } from '@providers/ScreenOrientationProvider'
 import { useSessionProvider } from '@providers/SessionProvider'
 import { useTranslationProvider } from '@providers/TranslationProvider'
-import { Link } from 'expo-router'
-import { FlatList, Pressable, ScrollView, Text, View } from 'react-native'
-import Animated, { useSharedValue, withSpring } from 'react-native-reanimated'
-// import Carousel from 'react-native-reanimated-carousel'
+import {
+  Pressable,
+  ScrollView,
+  View
+} from 'react-native'
+import Animated, {
+  useSharedValue,
+  withSpring
+} from 'react-native-reanimated'
+import HorizontalCarousel from '@components/Carousels/HorizontalCarousel'
+import LayoutWithGaps from '@layouts/LayoutWithGaps'
+{
+  /* <Writing onPress={()=>{throw new Error('SMTH FOMR HOME')}} >Error</Writing> */
+}
+
 const categories = [
   ['burger', 'Fast food'],
   ['coffe', 'Drink'],
   ['snacks', 'Snacks'],
 ]
 
-function Food() {
-  return (
-    <ViewWithShadow
-      elevation={3}
-      ctw="w-fullx max-w-[70%]x w-[250px] items-center self-start  rounded-3xl p-4  pt-0"
-    >
-      <LocalPicture name="egg-pasta" ctw="h-[200px] w-full" imageResizeMode="contain" />
-      <Writing xl ctw={cn('mt-4')}>
-        Egg pasta
-      </Writing>
-      <Writing sm ctw={cn('mt-2 text-gray-400')}>
-        Spicy Chicken Pasta
-      </Writing>
+let foods = [
+  {
+    name: 'Egg pasta',
+    imageName: 'egg-pasta',
+    secondName: 'Spicy Chicken Pasta',
+    grade: 5,
+    price: 15,
+  },
+  {
+    name: 'Egg pasta',
+    imageName: 'egg-pasta',
+    secondName: 'Spicy Chicken Pasta',
+    grade: 4,
+    price: 10,
+  },
+  {
+    name: 'Egg pasta',
+    imageName: 'egg-pasta',
+    secondName: 'Spicy Chicken Pasta',
+    grade: 5,
+    price: 17,
+  },
+]
 
-      <View tw={cn('mt-2 flex flex-row items-center justify-center')}>
-        <Icon name="rating-star" ctw="h-[18px] w-[18px]" />
-        <Writing sm ctw={cn('ml-1 text-gray-400')}>
-          5.0
-        </Writing>
-      </View>
 
-      <Writing ctw={cn('mt-2 text-primary')}>
-        $ <Writing xl2>15.00</Writing>
-      </Writing>
-    </ViewWithShadow>
-  )
-}
-function onChange(params) {
-  let { viewableItems } = params
-  console.log(`params:`, params, viewableItems)
-}
 export default function Page() {
   let { signOut } = useSessionProvider()
   let { setLanguageAndSaveToStorage, AvailableLanguages } = useTranslationProvider()
   let { portraitOrLandscape } = useScreenOrientationProvider()
 
   let { data, statusCode } = useApi('/todos/1', { defaultData: {} })
-  // let { data } = useApi(Endpoints.me.value(), { defaultData: {} })
 
   return (
-    <SafeFullScreenLayout visibleAreaTw={'bg-gray-25'} contentTw="bg-gray-25x">
-      <Title />
+    <LayoutWithGaps>
+      <LayoutWithGaps.TopSection>
+        <Title />
+        <SearchPanel />
+        <FoodCategories categories={categories} />
+      </LayoutWithGaps.TopSection>
 
-      <SearchPanel />
+      <LayoutWithGaps.Gap>
+        <FoodListAsCarousel foods={foods} />
+      </LayoutWithGaps.Gap>
 
-      <FoodCategories categories={categories} />
+      <LayoutWithGaps.BottomSection>
+        <Writing ctw={cn('')}>Bttom </Writing>
+      </LayoutWithGaps.BottomSection>
 
-      {/* <Carousel
-        width={width}
-        data={[{ color: 'red' }, { color: 'purple' }, { color: 'yellow' }]}
-        renderItem={({ color }) => {
-          return <View style={{ backgroundColor: color, flex: 1 }} />
-        }}
-      /> */}
-      <View tw={cn('')}>
-        <FlatList
-          horizontal
-          contentContainerStyle={{
-            backgroundColor: 'red',
-            columnGap: 16,
-          }}
-          // decelerationRate={0}
-          // snapToInterval={250 - 60}
-          // snapToAlignment={'center'}
-          snapToAlignment="center"
-          // snapToOffsets={200}
-          showsHorizontalScrollIndicator={false}
-          onViewableItemsChanged={onChange}
-          viewabilityConfig={{
-            itemVisiblePercentThreshold: 70,
-          }}
-          data={[{}, {}, {}, {}]}
-          renderItem={({ item, index, ...rest }) => (
-            console.log(rest), (<Food key={index}></Food>)
+      {/* </View> */}
+      {/* <View tw={cn('h-10 w-10 bg-gray-600')}></View> */}
+      {/* <HorizontalCarousel
+          items={[1, 2, 3]}
+          NORMALIZED_ITEM_WIDTH={0.6}
+          HORIZONTAL_SPACE={Layout.HORIZONTAL_SPACE}
+          renderItem={({ item, index }) => (
+            <View tw={cn('h-[400px] bg-gray-300')} style={{}}>
+              <Writing ctw={cn('')}> {index + 1} </Writing>
+            </View>
           )}
-          pagingEnabled
-          // pagingEnabled
-        >
-          {/* <Food></Food>
-          <Food></Food>
-          <Food></Food>
-          <Food></Food> */}
-        </FlatList>
-      </View>
+        /> */}
 
-      <Text tw="self-stretch">HomePage {GLOBAL_VALUE}</Text>
-      <Text>{GLOBAL_CONFIG.ENV}</Text>
-      <Text>{portraitOrLandscape('port', 'land')}</Text>
-      {/* <Writing onPress={()=>{throw new Error('SMTH FOMR HOME')}} >Error</Writing> */}
-      <Go toScreen={'singIn'} children={<Text>Sign in</Text>} />
+      {/* <Text tw="self-stretch">HomePage {GLOBAL_VALUE}</Text>
+        <Text>{GLOBAL_CONFIG.ENV}</Text>
+        <Text>{portraitOrLandscape('port', 'land')}</Text>
+        <Go toScreen={'singIn'} children={<Text>Sign in</Text>} />
 
-      <Go toScreen={'singUp'} children={<Text>Sign up</Text>} />
+        <Go toScreen={'singUp'} children={<Text>Sign up</Text>} />
 
-      <Go toScreen={'settings'} children={<Text>Settings</Text>} />
+        <Go toScreen={'settings'} children={<Text>Settings</Text>} />
 
-      <Link href="/secondx" asChild>
-        <Text>Inexistent</Text>
-      </Link>
+        <Link href="/secondx" asChild>
+          <Text>Inexistent</Text>
+        </Link>
 
-      <Go toScreen={'TOS'} children={<Text>TOS</Text>} />
+        <Go toScreen={'TOS'} children={<Text>TOS</Text>} />
 
-      <Go toScreen={'privacyPolicy'} children={<Text>P.P</Text>} />
+        <Go toScreen={'privacyPolicy'} children={<Text>P.P</Text>} />
 
-      <Go toScreen={'drawerone'} children={<Text>Drawer</Text>} />
+        <Go toScreen={'drawerone'} children={<Text>Drawer</Text>} />
 
-      <Go toScreen={'tabsone'} children={<Text>Tabs</Text>} />
+        <Go toScreen={'tabsone'} children={<Text>Tabs</Text>} />
 
-      <Go toScreen={'shared-one'} children={<Text>Shared animation</Text>} />
+        <Go toScreen={'shared-one'} children={<Text>Shared animation</Text>} />
 
-      <Pressable onPress={signOut}>
-        <Text>Sign out</Text>
-      </Pressable>
+        <Pressable onPress={signOut}>
+          <Text>Sign out</Text>
+        </Pressable> */}
 
       {/* {availableLanguagesList.map((v) => (
         <Pressable onPress={() => setLanguageAndSaveToStorage(v.value)}>
@@ -139,22 +123,75 @@ export default function Page() {
         </Pressable>
       ))} */}
 
-      <Pressable onPress={() => setLanguageAndSaveToStorage(AvailableLanguages.EN)}>
-        <Text>change {AvailableLanguages.EN}</Text>
-      </Pressable>
+      {/* <Pressable onPress={() => setLanguageAndSaveToStorage(AvailableLanguages.EN)}>
+          <Text>change {AvailableLanguages.EN}</Text>
+        </Pressable>
 
-      <Pressable onPress={() => setLanguageAndSaveToStorage(AvailableLanguages.RO)}>
-        <Text>change {AvailableLanguages.RO}</Text>
-      </Pressable>
+        <Pressable onPress={() => setLanguageAndSaveToStorage(AvailableLanguages.RO)}>
+          <Text>change {AvailableLanguages.RO}</Text>
+        </Pressable>
 
-      <Writing xl2 t={['greeting', { name: 'Lalal' }]} />
+        <Writing xl2 t={['greeting', { name: 'Lalal' }]} />
 
-      <LocalPicture image="home" ctw="bg-slate-500 h-40" />
+        <LocalPicture image="home" ctw="bg-slate-500 h-40" /> */}
 
       {/* </TouchableRipple> */}
 
       {/* <Writing>{statusCode} {JSON.stringify(data, null, 2)} </Writing> */}
-    </SafeFullScreenLayout>
+    </LayoutWithGaps>
+  )
+}
+
+function FoodListAsCarousel() {
+  return (
+    <View tw={cn('mt-8')}>
+      {/* //TODO add link */}
+      <Writing
+        medium
+        ctw={cn('text-right text-primary')}
+        style={{
+          marginRight: Layout.HORIZONTAL_SPACE,
+        }}
+      >
+        See all
+      </Writing>
+      <HorizontalCarousel
+        items={foods}
+        NORMALIZED_ITEM_WIDTH={0.63}
+        HORIZONTAL_SPACE={Layout.HORIZONTAL_SPACE}
+        contentContainerStyle={{
+          paddingBottom: 15,
+          paddingTop: 5,
+          marginTop: 16,
+        }}
+        renderItem={({ item }) => <Food {...item} />}
+      />
+    </View>
+  )
+}
+
+function Food({ name, imageName, secondName, grade, price }) {
+  return (
+    <ViewWithShadow elevation={2} ctw="w-full items-center self-start  rounded-3xl p-4  pt-0">
+      <LocalPicture name={imageName} ctw="h-[200px] self-stretch" imageResizeMode="contain" />
+      <Writing xl ctw={cn('mt-4')}>
+        {name}
+      </Writing>
+      <Writing sm ctw={cn('mt-3 text-gray-400')}>
+        {secondName}
+      </Writing>
+
+      <View tw={cn('mt-3 flex flex-row items-center justify-center')}>
+        <Icon name="rating-star" ctw="h-[18px] w-[18px]" />
+        <Writing sm ctw={cn('ml-1 text-gray-400')}>
+          {grade}.0
+        </Writing>
+      </View>
+
+      <Writing ctw={cn('mt-3 text-primary')}>
+        $ <Writing xl2>{price}</Writing>
+      </Writing>
+    </ViewWithShadow>
   )
 }
 
@@ -171,10 +208,7 @@ function FoodCategories(props) {
         }}
       >
         {props.categories.map(([icon, label], k) => (
-          <View
-            key={k}
-            tw="flex flex-row items-center self-start rounded-lg bg-primary py-2.5 px-4"
-          >
+          <View key={k} tw="flex flex-row items-center self-start rounded-lg bg-primary py-2 px-4">
             <Icon name={icon} containerTw="w-5 h-5" />
             <Writing xs ctw="ml-1 text-white">
               {label}
@@ -197,18 +231,18 @@ function SearchPanel() {
       <WritingInput
         placeholder={'Search food...'}
         inputViewTw={'bg-gray-50 h-12'}
-        containerTw={'grow '}
+        containerTw={'grow'}
         leftAddornment={
           <Icon
             name="search"
-            containerTw="ml-2 w-[25px] h-[25px]"
-            ctw="fill-gray-300 stroke-gray-300"
+            ctw="ml-2 w-[25px] h-[25px]"
+            iconElementTw="fill-gray-300 stroke-gray-300"
           />
         }
       />
 
       <Rhomb ctw="h-12">
-        <Icon name="filters" ctw="fill-white" containerTw="w-6 h-6 pointer-events-none" />
+        <Icon name="filters" iconElementTw="pointer-events-none fill-white" />
       </Rhomb>
     </View>
   )
