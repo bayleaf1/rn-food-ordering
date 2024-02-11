@@ -2,6 +2,7 @@ import { Surface } from 'react-native-paper'
 
 
 const classToMakeShadowWork = 'bg-white'
+//TODO add do main repo
 
 function ViewWithShadow({ elevation, ctw = '', children }) {
   return (

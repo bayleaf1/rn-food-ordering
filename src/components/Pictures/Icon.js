@@ -7,6 +7,8 @@ import Burger from '@icons/burger.svg'
 import Coffe from '@icons/coffe.svg'
 import Snacks from '@icons/snacks.svg'
 import RatingStar from '@icons/rating-star.svg'
+import Cart from '@icons/cart.svg'
+import Orders from '@icons/orders.svg'
 
 const ICONS = {
   home: Home, //require('@icons/home.svg'),
@@ -16,6 +18,8 @@ const ICONS = {
   coffe: Coffe,
   snacks: Snacks,
   'rating-star': RatingStar,
+  cart: Cart,
+  orders: Orders,
 }
 
 function Icon({ name = 'home', ctw, iconElementTw = '', iconProps = {} }) {

@@ -8,17 +8,11 @@ import useApi from '@libs/Api'
 import { useScreenOrientationProvider } from '@providers/ScreenOrientationProvider'
 import { useSessionProvider } from '@providers/SessionProvider'
 import { useTranslationProvider } from '@providers/TranslationProvider'
-import {
-  Pressable,
-  ScrollView,
-  View
-} from 'react-native'
-import Animated, {
-  useSharedValue,
-  withSpring
-} from 'react-native-reanimated'
+import { Pressable, ScrollView, View } from 'react-native'
+import Animated, { useSharedValue, withSpring } from 'react-native-reanimated'
 import HorizontalCarousel from '@components/Carousels/HorizontalCarousel'
 import LayoutWithGaps from '@layouts/LayoutWithGaps'
+import { TouchableRipple } from 'react-native-paper'
 {
   /* <Writing onPress={()=>{throw new Error('SMTH FOMR HOME')}} >Error</Writing> */
 }
@@ -53,7 +47,6 @@ let foods = [
   },
 ]
 
-
 export default function Page() {
   let { signOut } = useSessionProvider()
   let { setLanguageAndSaveToStorage, AvailableLanguages } = useTranslationProvider()
@@ -73,9 +66,43 @@ export default function Page() {
         <FoodListAsCarousel foods={foods} />
       </LayoutWithGaps.Gap>
 
-      <LayoutWithGaps.BottomSection>
-        <Writing ctw={cn('')}>Bttom </Writing>
-      </LayoutWithGaps.BottomSection>
+      <LayoutWithGaps.Gap moreContentTw={'flex-1 justify-end'}>
+        <ViewWithShadow elevation={5} ctw="flex-0 h-[72px] justify-center rounded-t-[60px]">
+          <View tw={cn('flex-0 mx-10 h-full flex-row justify-around')}>
+            <Ripple ctw="h-full flex-1 grow items-center justify-center rounded-full">
+              <Icon
+                name="home"
+                ctw={'h-8 w-10'}
+                iconElementTw={cn(true ? 'fill-primary stroke-primary' : 'fill-black stroke-black')}
+              />
+            </Ripple>
+            <Ripple ctw="h-full flex-1 grow items-center justify-center rounded-full">
+              <Icon
+                name="search"
+                ctw={'h-8 w-10'}
+                iconElementTw={cn(true ? 'fill-primary stroke-primary' : 'fill-black stroke-black')}
+              />
+            </Ripple>
+            <Ripple ctw="h-full flex-1 grow items-center justify-center rounded-full">
+              <Icon
+                name="cart"
+                ctw={'h-8 w-10'}
+                iconElementTw={cn(true ? 'fill-primary stroke-primary' : 'fill-black stroke-black')}
+              />
+            </Ripple>
+
+            <Ripple ctw="h-full flex-1 grow items-center justify-center rounded-full">
+              <Icon
+                name="orders"
+                ctw={'h-8 w-10'}
+                iconElementTw={cn(true ? 'fill-primary stroke-primary' : 'fill-black stroke-black')}
+              />
+            </Ripple>
+          </View>
+        </ViewWithShadow>
+      </LayoutWithGaps.Gap>
+
+      {/* <Writing ctw={cn('')}>Bttom </Writing> */}
 
       {/* </View> */}
       {/* <View tw={cn('h-10 w-10 bg-gray-600')}></View> */}
@@ -196,8 +223,9 @@ function Food({ name, imageName, secondName, grade, price }) {
 }
 
 function FoodCategories(props) {
+  let activeIndex = 0
   return (
-    <View tw={'mt-3 flex flex-row'}>
+    <View tw={'mt-6 flex flex-row'}>
       <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}
@@ -207,14 +235,30 @@ function FoodCategories(props) {
           alignSelf: 'flex-start',
         }}
       >
-        {props.categories.map(([icon, label], k) => (
-          <View key={k} tw="flex flex-row items-center self-start rounded-lg bg-primary py-2 px-4">
-            <Icon name={icon} containerTw="w-5 h-5" />
-            <Writing xs ctw="ml-1 text-white">
-              {label}
-            </Writing>
-          </View>
-        ))}
+        {props.categories.map(([icon, label], k) => {
+          let isActive = k === activeIndex
+          return (
+            <View
+              key={k}
+              tw={cn(
+                'flex flex-row items-center self-start rounded-lg bg-purple-200 py-2.5 px-4',
+                isActive && 'bg-primary'
+              )}
+            >
+              <Icon
+                name={icon}
+                containerTw="w-5 h-5"
+                iconElementTw={cn(
+                  'fill-gray-500 stroke-gray-500',
+                  isActive && 'fill-white stroke-white'
+                )}
+              />
+              <Writing xs ctw={cn('ml-2 text-gray-500', isActive && 'text-white')}>
+                {label}
+              </Writing>
+            </View>
+          )
+        })}
       </ScrollView>
     </View>
   )
@@ -225,23 +269,23 @@ function SearchPanel() {
     <View
       tw="mt-4 flex flex-row"
       style={{
-        columnGap: 10,
+        columnGap: 20,
       }}
     >
       <WritingInput
         placeholder={'Search food...'}
-        inputViewTw={'bg-gray-50 h-12'}
+        inputViewTw={'bg-gray-50 h-14'}
         containerTw={'grow'}
         leftAddornment={
           <Icon
             name="search"
-            ctw="ml-2 w-[25px] h-[25px]"
+            ctw="ml-2 h-[25px] w-[25px]"
             iconElementTw="fill-gray-300 stroke-gray-300"
           />
         }
       />
 
-      <Rhomb ctw="h-12">
+      <Rhomb ctw="h-[54px]">
         <Icon name="filters" iconElementTw="pointer-events-none fill-white" />
       </Rhomb>
     </View>

@@ -22,7 +22,6 @@ LogBox.ignoreLogs(['NativeEvent'])
 //TODO add auth token to useApi and get, post, patch
 NativeWindStyleSheet.setOutput({ default: 'native' })
 
-
 export default function AppLayout() {
   return (
     <AppLoadingProvider>      

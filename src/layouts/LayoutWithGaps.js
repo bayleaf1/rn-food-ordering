@@ -18,7 +18,7 @@ LayoutWithGaps.TopSection = ({ children }) => (
   </Layout.SafeArea>
 )
 
-LayoutWithGaps.Gap = ({ children }) => <Layout.Content>{children}</Layout.Content>
+LayoutWithGaps.Gap = ({ moreContentTw,  children }) => <Layout.Content moreTw={moreContentTw}>{children}</Layout.Content>
 
 LayoutWithGaps.BottomSection = ({ children }) => (
   <Layout.SafeArea bottom left right>
@@ -27,7 +27,7 @@ LayoutWithGaps.BottomSection = ({ children }) => (
         leftSpace={Layout.HORIZONTAL_SPACE}
         rightSpace={Layout.HORIZONTAL_SPACE}
       >
-        <Layout.Content>{children}</Layout.Content>
+        <Layout.Content >{children}</Layout.Content>
       </Layout.HorizontalPart>
     </Layout.VerticalPart>
   </Layout.SafeArea>
