@@ -28,6 +28,8 @@ export function BottomTabsStack({ tabBarNavigationItems = {}, ...props }) {
   )
 }
 BottomTabsStack.Screen = Tabs.Screen
+//TODO add to main repo
+BottomTabsStack.CustomTabBar = CustomTabBar
 
 function CustomTabBar({ navigationItems = {}, state }) {
   return (

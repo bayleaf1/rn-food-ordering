@@ -8,7 +8,6 @@ export default function Ripple({ ctw, children }) {
       onPress={setThisFunctionToMakeRippleWork}
       rippleColor="rgba(150, 150, 150, 0.2)"
       borderless
-      
       tw={cn(ctw)}
     >
       {children}

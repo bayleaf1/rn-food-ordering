@@ -66,7 +66,7 @@ export default function Page() {
         <FoodListAsCarousel foods={foods} />
       </LayoutWithGaps.Gap>
 
-      <LayoutWithGaps.Gap moreContentTw={'flex-1 justify-end'}>
+      {/* <LayoutWithGaps.Gap moreContentTw={'flex-1 justify-end'}>
         <ViewWithShadow elevation={5} ctw="flex-0 h-[72px] justify-center rounded-t-[60px]">
           <View tw={cn('flex-0 mx-10 h-full flex-row justify-around')}>
             <Ripple ctw="h-full flex-1 grow items-center justify-center rounded-full">
@@ -100,7 +100,7 @@ export default function Page() {
             </Ripple>
           </View>
         </ViewWithShadow>
-      </LayoutWithGaps.Gap>
+      </LayoutWithGaps.Gap> */}
 
       {/* <Writing ctw={cn('')}>Bttom </Writing> */}
 

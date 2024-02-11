@@ -13,6 +13,7 @@ import { NativeWindStyleSheet } from 'nativewind'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Slot } from 'expo-router'
 import { LogBox } from 'react-native'
+import { BottomTabsStack } from '@libs/Navigation/TabsStacks'
 
 LogBox.ignoreLogs(['NativeEvent'])
 //TODO add Localizations or Cronos objectx
