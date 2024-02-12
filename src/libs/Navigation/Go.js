@@ -1,4 +1,4 @@
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import React, { useMemo } from 'react'
 import Screens from './ScreenList'
 import { Pressable } from 'react-native'
@@ -40,4 +40,5 @@ function Go({
   )
 }
 
+Go.toScreen = (name) => router.push(name)
 export default Go

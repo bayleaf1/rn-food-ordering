@@ -9,10 +9,17 @@ import { useScreenOrientationProvider } from '@providers/ScreenOrientationProvid
 import { useSessionProvider } from '@providers/SessionProvider'
 import { useTranslationProvider } from '@providers/TranslationProvider'
 import { Pressable, ScrollView, View } from 'react-native'
-import Animated, { useSharedValue, withSpring } from 'react-native-reanimated'
+import Animated, {
+  SharedTransition,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated'
 import HorizontalCarousel from '@components/Carousels/HorizontalCarousel'
 import LayoutWithGaps from '@layouts/LayoutWithGaps'
 import { TouchableRipple } from 'react-native-paper'
+import Go from '@libs/Navigation/Go'
+import Rhomb from '@components/Rhomb'
 {
   /* <Writing onPress={()=>{throw new Error('SMTH FOMR HOME')}} >Error</Writing> */
 }
@@ -65,6 +72,8 @@ export default function Page() {
       <LayoutWithGaps.Gap>
         <FoodListAsCarousel foods={foods} />
       </LayoutWithGaps.Gap>
+      {/* <Go toScreen={'shared-one'} children={<Writing>Shared animation</Writing>} /> */}
+
 
       {/* <LayoutWithGaps.Gap moreContentTw={'flex-1 justify-end'}>
         <ViewWithShadow elevation={5} ctw="flex-0 h-[72px] justify-center rounded-t-[60px]">
@@ -199,26 +208,32 @@ function FoodListAsCarousel() {
 
 function Food({ name, imageName, secondName, grade, price }) {
   return (
-    <ViewWithShadow elevation={2} ctw="w-full items-center self-start  rounded-3xl p-4  pt-0">
-      <LocalPicture name={imageName} ctw="h-[200px] self-stretch" imageResizeMode="contain" />
-      <Writing xl ctw={cn('mt-4')}>
-        {name}
-      </Writing>
-      <Writing sm ctw={cn('mt-3 text-gray-400')}>
-        {secondName}
-      </Writing>
-
-      <View tw={cn('mt-3 flex flex-row items-center justify-center')}>
-        <Icon name="rating-star" ctw="h-[18px] w-[18px]" />
-        <Writing sm ctw={cn('ml-1 text-gray-400')}>
-          {grade}.0
+    <Go toScreen="food-review">
+      <ViewWithShadow elevation={2} ctw="w-full items-center self-start  rounded-3xl p-4  pt-0">
+        <LocalPicture
+          name={imageName}
+          ctw="h-[200px] self-stretch"
+          imageResizeMode="contain"
+        />
+        <Writing xl ctw={cn('mt-4')}>
+          {name}
         </Writing>
-      </View>
+        <Writing sm ctw={cn('mt-3 text-gray-400')}>
+          {secondName}
+        </Writing>
 
-      <Writing ctw={cn('mt-3 text-primary')}>
-        $ <Writing xl2>{price}</Writing>
-      </Writing>
-    </ViewWithShadow>
+        <View tw={cn('mt-3 flex flex-row items-center justify-center')}>
+          <Icon name="rating-star" ctw="h-[18px] w-[18px]" />
+          <Writing sm ctw={cn('ml-1 text-gray-400')}>
+            {grade}.0
+          </Writing>
+        </View>
+
+        <Writing ctw={cn('mt-3 text-primary')}>
+          $ <Writing xl2>{price}</Writing>
+        </Writing>
+      </ViewWithShadow>
+    </Go>
   )
 }
 
@@ -300,45 +315,5 @@ function Title() {
         Best food <Writing xl>here</Writing>
       </Writing>
     </View>
-  )
-}
-function Anim({ containerTw = 'flex-start', children }) {
-  let size = useSharedValue(1)
-  let [targetSize, setTargetSize] = useState(1)
-
-  useEffect(() => {
-    size.value = withSpring(targetSize, {
-      stiffness: 100,
-    })
-  }, [targetSize])
-
-  return (
-    <Pressable
-      onPressIn={() => {
-        setTargetSize(0.98)
-      }}
-      onPressOut={() => {
-        setTargetSize(1)
-      }}
-      tw={containerTw}
-    >
-      <Animated.View style={{ transform: [{ scale: size }], backgroundColor: 'redx' }}>
-        {children}
-      </Animated.View>
-    </Pressable>
-  )
-}
-
-function Rhomb({ ctw, squareTw = 'bg-primary', children }) {
-  return (
-    <Anim>
-      <View tw={cn('relative aspect-square py-1 px-1', ctw)}>
-        <ViewWithShadow
-          elevation={3}
-          ctw={cn('inset-0 aspect-square h-full w-full rotate-45 rounded-xl', squareTw)}
-        />
-        <View tw="absolute inset-0 flex items-center justify-center">{children}</View>
-      </View>
-    </Anim>
   )
 }

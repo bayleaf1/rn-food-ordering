@@ -10,7 +10,7 @@ import Writing from '@components/Writing/Writing'
 //   one: { label: 'One', iconName: 'home' },
 //   two: { label: 'Two', iconName: 'home' },
 // }
-let withDefaultScreenOptions = (passed = {}) => ({ ...passed })
+let withDefaultScreenOptions = (passed = {}) => ({animation: 'slade_from_right', ...passed })
 
 export function BottomTabsStack({ tabBarNavigationItems = {}, ...props }) {
   return (

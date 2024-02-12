@@ -13,9 +13,9 @@ import LocalPicture from '@components/Pictures/LocalPicture'
 //TODO RESTORE
 // export const ErrorBoundary = CustomErrorBoundary
 let tabBarNavigationItems = {
-  home: { label: 'One', iconName: 'home', goToScreen: 'home' },
-  settings: { label: 'Two', iconName: 'search', goToScreen: 'settings' },
-  // cart: { label: 'Two', iconName: 'cart', goToScreen: 'cart' },
+  home: { label: 'Home', iconName: 'home', goToScreen: 'home' },
+  settings: { label: 'Search', iconName: 'search', goToScreen: 'settings' },
+  'food-review': { label: 'Food', iconName: 'cart', goToScreen: 'food-review' },
 }
 export default function AuthorizedLayout() {
   const { isSignedOut } = useSessionProvider()
@@ -27,7 +27,7 @@ export default function AuthorizedLayout() {
       screenOptions={{ headerShown: false }}
       tabBar={({ state }) => {
         if (state.routes.length !== Object.keys(tabBarNavigationItems).length) {
-          throw new Error('Some routes are missing or superfluos')
+          // throw new Error('Some routes are missing or superfluos')
         }
         return (
           <ViewWithShadow elevation={5} ctw="flex-0 h-[72px] justify-center rounded-t-[60px]">
@@ -35,22 +35,25 @@ export default function AuthorizedLayout() {
               {state.routes.map((stateRoute, idx) => {
                 let isActive = state.index === idx
 
-                let route = tabBarNavigationItems[stateRoute.name]
-                if (!route) throw new Error('Missing route: ' + route.name)
+                let route = tabBarNavigationItems[stateRoute.name] || tabBarNavigationItems.home
+                // if (!route) throw new Error('Missing route: ' + route.name)
 
                 return (
-                  <Go toScreen={route.goToScreen} doNotUsePressable>
-                    <View tw={cn('h-full flex-1 grow items-center justify-center rounded-full')}>
-                      <Icon
-                        name={route.iconName}
-                        ctw={'h-8 w-10'}
-                        iconElementTw={cn(
-                          isActive ? 'fill-primary stroke-primary' : 'fill-black stroke-black'
-                        )}
-                      />
-                      {/* //TODO Add label */}
-                    </View>
-                  </Go>
+                  <AnimationList.ZoomOutOnClick
+                    containerTw={cn('h-full flex-1 grow items-center justify-center rounded-full')}
+                    onPress={() => Go.toScreen(route.goToScreen)}
+                  >
+                    <Icon
+                      name={route.iconName}
+                      ctw={'h-8 w-10'}
+                      iconElementTw={cn(
+                        isActive ? 'fill-primary stroke-primary' : 'fill-black stroke-black'
+                      )}
+                    />
+                    <Writing s9 ctw={cn('text-center', isActive && 'text-primary')}>
+                      {route.label}
+                    </Writing>
+                  </AnimationList.ZoomOutOnClick>
                 )
               })}
             </View>
@@ -60,6 +63,7 @@ export default function AuthorizedLayout() {
     >
       <BottomTabsStack.Screen name="home" />
       <BottomTabsStack.Screen name="settings" />
+      <BottomTabsStack.Screen name="food-review" options={{ animation: 'slide' }} />
     </BottomTabsStack>
   )
 

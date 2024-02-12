@@ -1,3 +1,4 @@
+import AnimationList from '@components/AnimationList/AnimationList'
 import Ripple from '@components/Ripple'
 import Writing from '@components/Writing/Writing'
 import { cn } from '@libs/Styling'
@@ -16,3 +17,4 @@ global.cn = cn
 global.View = View
 global.Writing = Writing
 global.Ripple = Ripple
+global.AnimationList = AnimationList

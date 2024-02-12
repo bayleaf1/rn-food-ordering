@@ -7,6 +7,7 @@ const Screens = {
   privacyPolicy: '/privacy-policy',
   //
   home: '/home',
+  'food-review': '/food-review',
   settings: '/settings',
   drawerone: '/drawer/one',
   drawertwo: '/drawer/two',

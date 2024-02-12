@@ -11,6 +11,7 @@ function Writing({
   lg,
   sm,
   xs,
+  s9,
   s8,
   base = true,
   bold,
@@ -32,6 +33,7 @@ function Writing({
     [lg, 18],
     [sm, 14],
     [xs, 11],
+    [s9, 9],
     [s8, 8],
     [base, 16],
   ].find((v) => v[0])
