@@ -15,7 +15,7 @@ import LocalPicture from '@components/Pictures/LocalPicture'
 let tabBarNavigationItems = {
   home: { label: 'Home', iconName: 'home', goToScreen: 'home' },
   settings: { label: 'Search', iconName: 'search', goToScreen: 'settings' },
-  'food-review': { label: 'Food', iconName: 'cart', goToScreen: 'food-review' },
+  // 'food-review': { label: 'Food', iconName: 'cart', goToScreen: 'food-review' },
 }
 export default function AuthorizedLayout() {
   const { isSignedOut } = useSessionProvider()
@@ -27,7 +27,7 @@ export default function AuthorizedLayout() {
       screenOptions={{ headerShown: false }}
       tabBar={({ state }) => {
         if (state.routes.length !== Object.keys(tabBarNavigationItems).length) {
-          // throw new Error('Some routes are missing or superfluos')
+          throw new Error('Some routes are missing or superfluos')
         }
         return (
           <ViewWithShadow elevation={5} ctw="flex-0 h-[72px] justify-center rounded-t-[60px]">
@@ -36,7 +36,7 @@ export default function AuthorizedLayout() {
                 let isActive = state.index === idx
 
                 let route = tabBarNavigationItems[stateRoute.name] || tabBarNavigationItems.home
-                // if (!route) throw new Error('Missing route: ' + route.name)
+                if (!route) throw new Error('Missing route: ' + route.name)
 
                 return (
                   <AnimationList.ZoomOutOnClick

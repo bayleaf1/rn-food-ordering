@@ -17,6 +17,7 @@ function Writing({
   bold,
   semibold,
   medium,
+  light,
   thin,
   regular = true,
   numberOfLines,
@@ -42,6 +43,7 @@ function Writing({
     [bold, 'PrimaryBold'],
     [semibold, 'PrimarySemiBold'],
     [medium, 'PrimaryMedium'],
+    [light, 'PrimaryLight'],
     [thin, 'PrimaryThin'],
     [regular, 'Primary'],
   ].find((v) => v[0])
@@ -53,6 +55,7 @@ function Writing({
         style={{
           // fontSize: size[1] * (width() * (1 / 300)),
           fontSize: normalizeFontSize(size[1]),
+          lineHeight: normalizeFontSize(size[1] + 4),
           fontFamily: weight[1],
           ...style,
         }}

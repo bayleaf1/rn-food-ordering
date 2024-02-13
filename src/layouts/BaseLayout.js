@@ -12,14 +12,14 @@ Layout.HorizontalPart = HorizontalPart
 Layout.Content = Content
 Layout.HORIZONTAL_SPACE = 16
 Layout.VERTICAL_TOP_SPACE = 16
-Layout.VERTICAL_BOTTOM_SPACE = 0
+Layout.VERTICAL_BOTTOM_SPACE = 16
 
 export function SafeFullScreenLayout({ visibleAreaTw, headerIsShown, children, contentTw = '' }) {
   let resolver = propsResolverByHeaderShowness()
   return (
     <Layout.VisibleArea moreTw={visibleAreaTw}>
       <Layout.SafeArea {...resolver.safeAreaMargins()}>
-        <Layout.VerticalPart topSpace={resolver.topSpace()} bottomSpace={0}>
+        <Layout.VerticalPart topSpace={resolver.topSpace()} bottomSpace={Layout.VERTICAL_BOTTOM_SPACE}>
           <Layout.HorizontalPart>
             <Layout.Content moreTw={contentTw}>{children}</Layout.Content>
           </Layout.HorizontalPart>

@@ -1,5 +1,6 @@
 import AnimationList from '@components/AnimationList/AnimationList'
 import Ripple from '@components/Ripple'
+import SpacerView from '@components/SpacerView'
 import Writing from '@components/Writing/Writing'
 import { cn } from '@libs/Styling'
 import { useState, useEffect, useCallback, useContext, createContext, useRef } from 'react'
@@ -18,3 +19,4 @@ global.View = View
 global.Writing = Writing
 global.Ripple = Ripple
 global.AnimationList = AnimationList
+global.SpacerView = SpacerView

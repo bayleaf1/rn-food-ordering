@@ -18,6 +18,7 @@ function FontsProvider({ children }) {
     PrimaryBold: require('../../assets/fonts/IBMPlexSans/IBMPlexSans-Bold.ttf'),
     PrimarySemiBold: require('../../assets/fonts/IBMPlexSans/IBMPlexSans-SemiBold.ttf'),
     PrimaryMedium: require('../../assets/fonts/IBMPlexSans/IBMPlexSans-Medium.ttf'),
+    PrimaryLight: require('../../assets/fonts/IBMPlexSans/IBMPlexSans-Light.ttf'),
     PrimaryThin: require('../../assets/fonts/IBMPlexSans/IBMPlexSans-Thin.ttf'),
     Primary: require('../../assets/fonts/IBMPlexSans/IBMPlexSans-Regular.ttf'),
   })
