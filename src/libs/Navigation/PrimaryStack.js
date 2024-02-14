@@ -60,6 +60,7 @@ let withDefaultScreenOptions = (passed = {}) => ({
     open: config,
     close: config,
   },
+  contentStyle: { backgroundColor: 'white' },
   ...passed,
 })
 let { Navigator } = createStackNavigator()

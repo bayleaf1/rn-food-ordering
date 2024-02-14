@@ -20,6 +20,7 @@ import LayoutWithGaps from '@layouts/LayoutWithGaps'
 import { TouchableRipple } from 'react-native-paper'
 import Go from '@libs/Navigation/Go'
 import Rhomb from '@components/Rhomb'
+import Food from '@components/Food/Food'
 {
   /* <Writing onPress={()=>{throw new Error('SMTH FOMR HOME')}} >Error</Writing> */
 }
@@ -73,7 +74,6 @@ export default function Page() {
         <FoodListAsCarousel foods={foods} />
       </LayoutWithGaps.Gap>
       {/* <Go toScreen={'shared-one'} children={<Writing>Shared animation</Writing>} /> */}
-
 
       {/* <LayoutWithGaps.Gap moreContentTw={'flex-1 justify-end'}>
         <ViewWithShadow elevation={5} ctw="flex-0 h-[72px] justify-center rounded-t-[60px]">
@@ -200,21 +200,17 @@ function FoodListAsCarousel() {
           paddingTop: 5,
           marginTop: 16,
         }}
-        renderItem={({ item }) => <Food {...item} />}
+        renderItem={({ item }) => <Foodx {...item} />}
       />
     </View>
   )
 }
 
-function Food({ name, imageName, secondName, grade, price }) {
+function Foodx({ name, imageName, secondName, grade, price }) {
   return (
     <Go toScreen="food-review">
       <ViewWithShadow elevation={2} ctw="w-full items-center self-start  rounded-3xl p-4  pt-0">
-        <LocalPicture
-          name={imageName}
-          ctw="h-[200px] self-stretch"
-          imageResizeMode="contain"
-        />
+        <LocalPicture name={imageName} ctw="h-[200px] self-stretch" imageResizeMode="contain" />
         <Writing xl ctw={cn('mt-4')}>
           {name}
         </Writing>
@@ -222,16 +218,8 @@ function Food({ name, imageName, secondName, grade, price }) {
           {secondName}
         </Writing>
 
-        <View tw={cn('mt-3 flex flex-row items-center justify-center')}>
-          <Icon name="rating-star" ctw="h-[18px] w-[18px]" />
-          <Writing sm ctw={cn('ml-1 text-gray-400')}>
-            {grade}.0
-          </Writing>
-        </View>
-
-        <Writing ctw={cn('mt-3 text-primary')}>
-          $ <Writing xl2>{price}</Writing>
-        </Writing>
+        <Food.Rating value={2} iconTw={'h-[18px] w-[18px]'} />
+        <Food.Price value={15} priceTw={'text-primary'} />
       </ViewWithShadow>
     </Go>
   )

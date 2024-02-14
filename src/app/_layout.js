@@ -14,6 +14,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Slot } from 'expo-router'
 import { LogBox } from 'react-native'
 import { BottomTabsStack } from '@libs/Navigation/TabsStacks'
+import AppThemeProvider from '@providers/AppTheme'
 
 LogBox.ignoreLogs(['NativeEvent'])
 //TODO add Localizations or Cronos objectx
@@ -25,25 +26,27 @@ NativeWindStyleSheet.setOutput({ default: 'native' })
 
 export default function AppLayout() {
   return (
-    <AppLoadingProvider>      
-      <ToastsProvider>
-        <SafeAreaProvider>
-          <TranslationProvider>
-            <FontsProvider>
-              <ScreenOrientationProvider>
-                <SessionProvider>
-                  <SplashView>
-                    <StopRenderIfAppNotLoaded>
-                      {/* Might change name */}
-                      <NativeStackResponsableForScreenOrientation />
-                    </StopRenderIfAppNotLoaded>
-                  </SplashView>
-                </SessionProvider>
-              </ScreenOrientationProvider>
-            </FontsProvider>
-          </TranslationProvider>
-        </SafeAreaProvider>
-      </ToastsProvider>
+    <AppLoadingProvider>
+      <AppThemeProvider>
+        <ToastsProvider>
+          <SafeAreaProvider>
+            <TranslationProvider>
+              <FontsProvider>
+                <ScreenOrientationProvider>
+                  <SessionProvider>
+                    <SplashView>
+                      <StopRenderIfAppNotLoaded>
+                        {/* Might change name */}
+                        <NativeStackResponsableForScreenOrientation />
+                      </StopRenderIfAppNotLoaded>
+                    </SplashView>
+                  </SessionProvider>
+                </ScreenOrientationProvider>
+              </FontsProvider>
+            </TranslationProvider>
+          </SafeAreaProvider>
+        </ToastsProvider>
+      </AppThemeProvider>
     </AppLoadingProvider>
   )
 }

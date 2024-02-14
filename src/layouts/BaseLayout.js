@@ -1,6 +1,9 @@
+import Icon from '@components/Pictures/Icon'
+import Rhomb from '@components/Rhomb'
 import React from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import LayoutWithGaps from './LayoutWithGaps'
 
 export function Layout({ children }) {
   return children
@@ -13,13 +16,55 @@ Layout.Content = Content
 Layout.HORIZONTAL_SPACE = 16
 Layout.VERTICAL_TOP_SPACE = 16
 Layout.VERTICAL_BOTTOM_SPACE = 16
+Layout.Header = Header
+
+function Header({ title, renderRightElement = () => <View tw={cn('w-[56px]')} />, navigation }) {
+  return (
+    <LayoutWithGaps.TopSection>
+      <View tw={cn('flex flex-row items-center')}>
+        <View tw={cn('shrink grow')}>
+          <Rhomb
+            ctw={cn('h-[56px]')}
+            squareTw="bg-white"
+            elevation={2}
+            onPress={() => {
+              if (navigation.canGoBack()) navigation.goBack()
+            }}
+          >
+            <Icon name="chevron-left" ctw={cn('h-8 w-8 -translate-x-0.5')} />
+          </Rhomb>
+        </View>
+        <View tw={cn('shrink grow')}>
+          <Writing ctw={cn('text-center')}>{title}</Writing>
+        </View>
+        <View tw={cn('shrink grow flex flex-row justify-end')}>{renderRightElement()}</View>
+      </View>
+    </LayoutWithGaps.TopSection>
+  )
+}
+
+Header.AddToFavorites = () => (
+  <Rhomb
+    ctw={cn('h-[56px]')}
+    squareTw="bg-white"
+    elevation={2}
+    onPress={() => {
+      // if (navigation.canGoBack()) navigation.goBack()
+    }}
+  >
+    <Icon name="heart-grey" ctw={cn('h-6 w-6 translate-y-0.5')} />
+  </Rhomb>
+)
 
 export function SafeFullScreenLayout({ visibleAreaTw, headerIsShown, children, contentTw = '' }) {
   let resolver = propsResolverByHeaderShowness()
   return (
     <Layout.VisibleArea moreTw={visibleAreaTw}>
       <Layout.SafeArea {...resolver.safeAreaMargins()}>
-        <Layout.VerticalPart topSpace={resolver.topSpace()} bottomSpace={Layout.VERTICAL_BOTTOM_SPACE}>
+        <Layout.VerticalPart
+          topSpace={resolver.topSpace()}
+          bottomSpace={Layout.VERTICAL_BOTTOM_SPACE}
+        >
           <Layout.HorizontalPart>
             <Layout.Content moreTw={contentTw}>{children}</Layout.Content>
           </Layout.HorizontalPart>

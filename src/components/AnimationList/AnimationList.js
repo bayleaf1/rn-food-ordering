@@ -16,19 +16,19 @@ AnimationList.ZoomOutOnClick = ({ containerTw = 'flex-start', onPress = () => ''
   }, [targetSize])
 
   return (
-      <Pressable
-        onPress={onPress}
-        onPressIn={() => {
-          setTargetSize(0.98)
-        }}
-        onPressOut={() => {
-          setTargetSize(1)
-        }}
-        tw={containerTw}
-      >
-        <Animated.View style={{ transform: [{ scale: size }], backgroundColor: 'redx' }}>
-          {children}
-        </Animated.View>
-      </Pressable>
+    <Pressable
+      onPressIn={() => {
+        setTargetSize(0.98)
+        onPress()
+      }}
+      onPressOut={() => {
+        setTargetSize(1)
+      }}
+      tw={cn(containerTw)}
+    >
+      <Animated.View style={{ transform: [{ scale: size }], backgroundColor: 'redx' }}>
+        {children}
+      </Animated.View>
+    </Pressable>
   )
 }
