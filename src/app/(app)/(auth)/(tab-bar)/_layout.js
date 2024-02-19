@@ -9,12 +9,13 @@ import { BottomTabsStack } from '@libs/Navigation/TabsStacks'
 import ViewWithShadow from '@components/ViewWithShadow'
 import Icon from '@components/Pictures/Icon'
 import LocalPicture from '@components/Pictures/LocalPicture'
+import { Layout } from '@layouts/BaseLayout'
 
 //TODO RESTORE
 // export const ErrorBoundary = CustomErrorBoundary
 let tabBarNavigationItems = {
   home: { label: 'Home', iconName: 'home', goToScreen: 'home' },
-  settings: { label: 'Search', iconName: 'search', goToScreen: 'settings' },
+  search: { label: 'Search', iconName: 'search', goToScreen: 'search' },
   // 'food-review': { label: 'Food', iconName: 'cart', goToScreen: 'food-review' },
 }
 export default function AuthorizedLayout() {
@@ -30,7 +31,7 @@ export default function AuthorizedLayout() {
           throw new Error('Some routes are missing or superfluos')
         }
         return (
-          <ViewWithShadow elevation={5} ctw="flex-0 h-[72px] justify-center rounded-t-[60px]">
+          <ViewWithShadow elevation={5} ctw="flex-0 h-[62px] justify-center rounded-t-[30px]">
             <View tw={cn('flex-0 mx-10 h-full flex-row justify-around')}>
               {state.routes.map((stateRoute, idx) => {
                 let isActive = state.index === idx
@@ -62,15 +63,25 @@ export default function AuthorizedLayout() {
       }}
     >
       <BottomTabsStack.Screen name="home" />
-      <BottomTabsStack.Screen name="settings" />
-      <BottomTabsStack.Screen name="food-review" options={{ animation: 'slide' }} />
+      <BottomTabsStack.Screen
+        name="search"
+        options={{
+          headerShown: true,
+          header: ({ navigation }) => (
+            <Layout.Header
+              renderLeftElement={() => null}
+              navigation={navigation}
+              title={'Search food'}
+            />
+          ),
+        }}
+      />
+      {/* <BottomTabsStack.Screen
+        name="food-review"
+        options={{
+          animation: 'slide',
+        }}
+      /> */}
     </BottomTabsStack>
-  )
-
-  return (
-    <PrimaryStack initialRouteName="home" screenOptions={{ headerShown: false }}>
-      <PrimaryStack.Screen name="home" />
-      <PrimaryStack.Screen name="settings" />
-    </PrimaryStack>
   )
 }

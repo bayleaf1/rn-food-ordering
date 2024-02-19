@@ -1,29 +1,18 @@
-import WritingInput from '@components/FormRelated/WritingInput'
+import HorizontalCarousel from '@components/Carousels/HorizontalCarousel'
+import Food from '@components/Food/Food'
 import Icon from '@components/Pictures/Icon'
 import LocalPicture from '@components/Pictures/LocalPicture'
+import SearchPanel from '@components/SearchPanel'
 import ViewWithShadow from '@components/ViewWithShadow'
 import Writing from '@components/Writing/Writing'
 import { Layout } from '@layouts/BaseLayout'
+import LayoutWithGaps from '@layouts/LayoutWithGaps'
 import useApi from '@libs/Api'
+import Go from '@libs/Navigation/Go'
 import { useScreenOrientationProvider } from '@providers/ScreenOrientationProvider'
 import { useSessionProvider } from '@providers/SessionProvider'
 import { useTranslationProvider } from '@providers/TranslationProvider'
-import { Pressable, ScrollView, View } from 'react-native'
-import Animated, {
-  SharedTransition,
-  useSharedValue,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated'
-import HorizontalCarousel from '@components/Carousels/HorizontalCarousel'
-import LayoutWithGaps from '@layouts/LayoutWithGaps'
-import { TouchableRipple } from 'react-native-paper'
-import Go from '@libs/Navigation/Go'
-import Rhomb from '@components/Rhomb'
-import Food from '@components/Food/Food'
-{
-  /* <Writing onPress={()=>{throw new Error('SMTH FOMR HOME')}} >Error</Writing> */
-}
+import { ScrollView, View } from 'react-native'
 
 const categories = [
   ['burger', 'Fast food'],
@@ -200,7 +189,7 @@ function FoodListAsCarousel() {
           paddingTop: 5,
           marginTop: 16,
         }}
-        renderItem={({ item }) => <Foodx {...item} />}
+        renderItem={({ item }) => <Food.Showcase {...item} />}
       />
     </View>
   )
@@ -267,33 +256,6 @@ function FoodCategories(props) {
   )
 }
 
-function SearchPanel() {
-  return (
-    <View
-      tw="mt-4 flex flex-row"
-      style={{
-        columnGap: 20,
-      }}
-    >
-      <WritingInput
-        placeholder={'Search food...'}
-        inputViewTw={'bg-gray-50 h-14'}
-        containerTw={'grow'}
-        leftAddornment={
-          <Icon
-            name="search"
-            ctw="ml-2 h-[25px] w-[25px]"
-            iconElementTw="fill-gray-300 stroke-gray-300"
-          />
-        }
-      />
-
-      <Rhomb ctw="h-[54px]">
-        <Icon name="filters" iconElementTw="pointer-events-none fill-white" />
-      </Rhomb>
-    </View>
-  )
-}
 
 function Title() {
   return (

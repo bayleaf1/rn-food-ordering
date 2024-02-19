@@ -3,7 +3,6 @@ import { useTranslationProvider } from '../../providers/TranslationProvider'
 import { Fragment } from 'react'
 import normalizeFontSize from './normalizeFontSize'
 
-
 function Writing({
   xl3,
   xl2,
@@ -21,6 +20,7 @@ function Writing({
   thin,
   regular = true,
   numberOfLines,
+  lineHeight = null,
   ctw = '',
   style = {},
   children,
@@ -55,7 +55,7 @@ function Writing({
         style={{
           // fontSize: size[1] * (width() * (1 / 300)),
           fontSize: normalizeFontSize(size[1]),
-          lineHeight: normalizeFontSize(size[1] + 4),
+          lineHeight: normalizeFontSize(lineHeight === null ? size[1] + 4 : lineHeight),
           fontFamily: weight[1],
           ...style,
         }}

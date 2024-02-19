@@ -16,33 +16,41 @@ Layout.Content = Content
 Layout.HORIZONTAL_SPACE = 16
 Layout.VERTICAL_TOP_SPACE = 16
 Layout.VERTICAL_BOTTOM_SPACE = 16
+Layout.TOTAL_HORIZONTAL_SPACE = Layout.HORIZONTAL_SPACE * 2
 Layout.Header = Header
 
-function Header({ title, renderRightElement = () => <View tw={cn('w-[56px]')} />, navigation }) {
+function Header({
+  title,
+  renderLeftElement = renderGoBackButton,
+  renderRightElement = () => <View tw={cn('w-[56px]')} />,
+  navigation,
+}) {
   return (
     <LayoutWithGaps.TopSection>
       <View tw={cn('flex flex-row items-center')}>
-        <View tw={cn('shrink grow')}>
-          <Rhomb
-            ctw={cn('h-[56px]')}
-            squareTw="bg-white"
-            elevation={2}
-            onPress={() => {
-              if (navigation.canGoBack()) navigation.goBack()
-            }}
-          >
-            <Icon name="chevron-left" ctw={cn('h-8 w-8 -translate-x-0.5')} />
-          </Rhomb>
-        </View>
+        <View tw={cn('shrink grow')}>{renderLeftElement(navigation)}</View>
         <View tw={cn('shrink grow')}>
           <Writing ctw={cn('text-center')}>{title}</Writing>
         </View>
-        <View tw={cn('shrink grow flex flex-row justify-end')}>{renderRightElement()}</View>
+        <View tw={cn('flex shrink grow flex-row justify-end')}>{renderRightElement()}</View>
       </View>
     </LayoutWithGaps.TopSection>
   )
 }
-
+function renderGoBackButton(navigation) {
+  return (
+    <Rhomb
+      ctw={cn('h-[56px]')}
+      squareTw="bg-white"
+      elevation={2}
+      onPress={() => {
+        if (navigation.canGoBack()) navigation.goBack()
+      }}
+    >
+      <Icon name="chevron-left" ctw={cn('h-8 w-8 -translate-x-0.5')} />
+    </Rhomb>
+  )
+}
 Header.AddToFavorites = () => (
   <Rhomb
     ctw={cn('h-[56px]')}
@@ -89,12 +97,14 @@ export function SafeFullScreenLayout({ visibleAreaTw, headerIsShown, children, c
 
 export const LayoutForBottomTabs = ({ headerIsShown, children, contentTw = '' }) => {
   let resolver = propsResolverByHeaderShowness()
+  {
+  }
   return (
-    <Layout.VisibleArea>
+    <Layout.VisibleArea moreTw="flex-1">
       <Layout.SafeArea {...resolver.safeAreaMargins()}>
-        <Layout.VerticalPart topSpace={resolver.topSpace()} moreTw="overflow-hidden bg-red-400">
-          <Layout.HorizontalPart>
-            <Layout.Content tw={cn('flex-1', contentTw)}>{children}</Layout.Content>
+        <Layout.VerticalPart topSpace={resolver.topSpace()}>
+          <Layout.HorizontalPart moreTw="">
+            <Layout.Content tw={cn('', contentTw)}>{children}</Layout.Content>
           </Layout.HorizontalPart>
         </Layout.VerticalPart>
       </Layout.SafeArea>
