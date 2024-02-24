@@ -1,19 +1,20 @@
 import Food from '@components/Food/Food'
 import SearchPanel from '@components/SearchPanel'
-import { LayoutForBottomTabs, SafeFullScreenLayout } from '@layouts/BaseLayout'
+import { LayoutForBottomTabs } from '@layouts/BaseLayout'
+import { useAppTheme } from '@providers/AppTheme'
+import { LinearGradient } from 'expo-linear-gradient'
 import { ScrollView } from 'react-native'
 
 export default function Page() {
-  let columnOneItems = Food.Showcase.propsModels(10)
-  let columnTwoItems = Food.Showcase.propsModels(3)
-  // <SafeFullScreenLayout headerIsShown contentTw="mt-[35px]x flex-1 bg-gray-500x">
+  let columnOneItems = Food.Showcase.propsModels(6)
+  const { theme } = useAppTheme()
   return (
     <LayoutForBottomTabs contentTw="flex-1">
       <SearchPanel />
-      <View tw={cn('mt-6')}>
-        <ScrollView style={{ flex: 0 }}>
-          <View tw={cn('flex-row gap-[20px] p-1')}>
-            {/* //TODO expo-linear-gradient */}
+      <View tw={cn('relative mt-6')}>
+        <FaddingBaner background={theme.colors.background}></FaddingBaner>
+        <ScrollView style={{ flex: 0 }} showsVerticalScrollIndicator={false} bounces={false}>
+          <View tw={cn('relative flex-row gap-[20px] p-1')}>
             <View tw={cn('flex grow')}>
               <Writing xl3 medium lineHeight={37} ctw={cn('mb-2 self-start')}>
                 Found {'\n'}90 result
@@ -60,6 +61,19 @@ export default function Page() {
       </View>
     </LayoutForBottomTabs>
   )
-  // </SafeFullScreenLayout>
 }
-// <View tw={cn('mb-3 h-24 bg-gray-500')} key={key}></View>
+
+function FaddingBaner(props) {
+  return (
+    <LinearGradient
+      colors={[props.background, 'transparent']}
+      style={{
+        position: 'absolute',
+        top: 0,
+        height: 30,
+        width: '100%',
+        zIndex: 1,
+      }}
+    />
+  )
+}

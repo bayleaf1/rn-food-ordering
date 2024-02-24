@@ -97,12 +97,11 @@ export function SafeFullScreenLayout({ visibleAreaTw, headerIsShown, children, c
 
 export const LayoutForBottomTabs = ({ headerIsShown, children, contentTw = '' }) => {
   let resolver = propsResolverByHeaderShowness()
-  {
-  }
+  
   return (
     <Layout.VisibleArea moreTw="flex-1">
       <Layout.SafeArea {...resolver.safeAreaMargins()}>
-        <Layout.VerticalPart topSpace={resolver.topSpace()}>
+        <Layout.VerticalPart topSpace={resolver.topSpace()} bottomSpace={143}>
           <Layout.HorizontalPart moreTw="">
             <Layout.Content tw={cn('', contentTw)}>{children}</Layout.Content>
           </Layout.HorizontalPart>
