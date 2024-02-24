@@ -189,28 +189,13 @@ function FoodListAsCarousel() {
           paddingTop: 5,
           marginTop: 16,
         }}
-        renderItem={({ item }) => <Food.Showcase {...item} />}
+        renderItem={({ item }) => (
+          // <Go toScreen="food-review">
+            <Food.Showcase {...item} />
+          // </Go>
+        )}
       />
     </View>
-  )
-}
-
-function Foodx({ name, imageName, secondName, grade, price }) {
-  return (
-    <Go toScreen="food-review">
-      <ViewWithShadow elevation={2} ctw="w-full items-center self-start  rounded-3xl p-4  pt-0">
-        <LocalPicture name={imageName} ctw="h-[200px] self-stretch" imageResizeMode="contain" />
-        <Writing xl ctw={cn('mt-4')}>
-          {name}
-        </Writing>
-        <Writing sm ctw={cn('mt-3 text-gray-400')}>
-          {secondName}
-        </Writing>
-
-        <Food.Rating value={2} iconTw={'h-[18px] w-[18px]'} />
-        <Food.Price value={15} priceTw={'text-primary'} />
-      </ViewWithShadow>
-    </Go>
   )
 }
 
@@ -255,7 +240,6 @@ function FoodCategories(props) {
     </View>
   )
 }
-
 
 function Title() {
   return (

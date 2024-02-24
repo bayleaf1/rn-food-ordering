@@ -1,15 +1,9 @@
-import Writing from '@components/Writing/Writing'
-import Go from '@libs/Navigation/Go'
-import PrimaryStack from '@libs/Navigation/PrimaryStack'
+import { Layout } from '@layouts/BaseLayout'
+import LayoutForBottomTabs from '@layouts/LayoutForBottomTabs'
 import Screens from '@libs/Navigation/ScreenList'
+import { BottomTabsStack } from '@libs/Navigation/TabsStacks'
 import { useSessionProvider } from '@providers/SessionProvider'
 import { Redirect } from 'expo-router'
-import CustomErrorBoundary from '@components/ErrorBoundary'
-import { BottomTabsStack } from '@libs/Navigation/TabsStacks'
-import ViewWithShadow from '@components/ViewWithShadow'
-import Icon from '@components/Pictures/Icon'
-import LocalPicture from '@components/Pictures/LocalPicture'
-import { Layout } from '@layouts/BaseLayout'
 
 //TODO RESTORE
 // export const ErrorBoundary = CustomErrorBoundary
@@ -27,39 +21,16 @@ export default function AuthorizedLayout() {
     <BottomTabsStack
       screenOptions={{ headerShown: false }}
       tabBar={({ state }) => {
-        if (state.routes.length !== Object.keys(tabBarNavigationItems).length) {
+        if (state.routes.length !== Object.keys(tabBarNavigationItems).length)
           throw new Error('Some routes are missing or superfluos')
-        }
-        return (
-          <ViewWithShadow elevation={5} ctw="flex-0 h-[62px] justify-center rounded-t-[30px]">
-            <View tw={cn('flex-0 mx-10 h-full flex-row justify-around')}>
-              {state.routes.map((stateRoute, idx) => {
-                let isActive = state.index === idx
 
-                let route = tabBarNavigationItems[stateRoute.name] || tabBarNavigationItems.home
-                if (!route) throw new Error('Missing route: ' + route.name)
-
-                return (
-                  <AnimationList.ZoomOutOnClick
-                    containerTw={cn('h-full flex-1 grow items-center justify-center rounded-full')}
-                    onPress={() => Go.toScreen(route.goToScreen)}
-                  >
-                    <Icon
-                      name={route.iconName}
-                      ctw={'h-8 w-10'}
-                      iconElementTw={cn(
-                        isActive ? 'fill-primary stroke-primary' : 'fill-black stroke-black'
-                      )}
-                    />
-                    <Writing s9 ctw={cn('text-center', isActive && 'text-primary')}>
-                      {route.label}
-                    </Writing>
-                  </AnimationList.ZoomOutOnClick>
-                )
-              })}
-            </View>
-          </ViewWithShadow>
-        )
+        let routes = state.routes.map((stateRoute, idx) => {
+          let route = tabBarNavigationItems[stateRoute.name]
+          if (!route) throw new Error('Missing route: ' + route.name)
+          return { ...route, isActive: state.index === idx }
+        })
+        
+        return <LayoutForBottomTabs.BottomTabs routes={routes} />
       }}
     >
       <BottomTabsStack.Screen name="home" />

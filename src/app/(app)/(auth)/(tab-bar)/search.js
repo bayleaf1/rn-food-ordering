@@ -1,6 +1,6 @@
 import Food from '@components/Food/Food'
 import SearchPanel from '@components/SearchPanel'
-import { LayoutForBottomTabs } from '@layouts/BaseLayout'
+import LayoutForBottomTabs from '@layouts/LayoutForBottomTabs'
 import { useAppTheme } from '@providers/AppTheme'
 import { LinearGradient } from 'expo-linear-gradient'
 import { ScrollView } from 'react-native'
@@ -12,7 +12,7 @@ export default function Page() {
     <LayoutForBottomTabs contentTw="flex-1">
       <SearchPanel />
       <View tw={cn('relative mt-6')}>
-        <FaddingBaner background={theme.colors.background}></FaddingBaner>
+        <FaddingBaner background={theme.colors.background} />
         <ScrollView style={{ flex: 0 }} showsVerticalScrollIndicator={false} bounces={false}>
           <View tw={cn('relative flex-row gap-[20px] p-1')}>
             <View tw={cn('flex grow')}>

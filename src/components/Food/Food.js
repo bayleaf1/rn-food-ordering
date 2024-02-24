@@ -41,32 +41,42 @@ Food.Showcase = ({
   ratingIconTw,
   valueTextSize,
   containerTw,
-  elevation = 2
+  elevation = 2,
 }) => {
   return (
-    <Go toScreen="food-review ">
-      <ViewWithShadow
-        elevation={elevation}
-        ctw={cn('w-full items-center self-start rounded-3xl p-4', containerTw, 'pt-0')}
-      >
-        <LocalPicture name={imageName} ctw="h-[200px] w-[100px]x self-stretch" imageResizeMode="contain" />
-        <Writing {...titleSize} ctw={cn(titleMtTw)}>
-          {name}
-        </Writing>
-        <Writing {...subtitleSize} ctw={cn('mt-3 whitespace-pre-wrap text-gray-400', subtitleTw)}>
-          {secondName}
-        </Writing>
+    // <Go toScreen="food-review">
+    <ViewWithShadow
+      elevation={elevation}
+      ctw={cn('w-full items-center self-start rounded-3xl p-4', containerTw, 'pt-0')}
+    >
+      {/* <Go toScreen="food-review"> */}
+      <LocalPicture
+        name={imageName}
+        ctw="w-[100px]x h-[200px] self-stretch"
+        imageResizeMode="contain"
+      />
+      <Writing {...titleSize} ctw={cn(titleMtTw)}>
+        {name}
+      </Writing>
+      <Writing {...subtitleSize} ctw={cn('mt-3 whitespace-pre-wrap text-gray-400', subtitleTw)}>
+        {secondName}
+      </Writing>
 
-        <Food.Rating value={2} iconTw={cn('h-[18px] w-[18px]', ratingIconTw)} valueTextSize={valueTextSize}/>
-        <Food.Price
-          value={15}
-          priceTw={'text-primary'}
-          currencySize={currencySize}
-          priceSize={priceSize}
-          containerTw={priceContainerTw}
-        />
-      </ViewWithShadow>
-    </Go>
+      <Food.Rating
+        value={2}
+        iconTw={cn('h-[18px] w-[18px]', ratingIconTw)}
+        valueTextSize={valueTextSize}
+      />
+      <Food.Price
+        value={15}
+        priceTw={'text-primary'}
+        currencySize={currencySize}
+        priceSize={priceSize}
+        containerTw={priceContainerTw}
+      />
+      {/* </Go> */}
+    </ViewWithShadow>
+    // </Go>
   )
 }
 
