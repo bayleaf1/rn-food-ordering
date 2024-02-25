@@ -60,9 +60,9 @@ LayoutForBottomTabs.BottomTabs = ({ routes = [LayoutForBottomTabs.BottomTabs.def
                     route.isActive ? 'fill-primary stroke-primary' : 'fill-black stroke-black'
                   )}
                 />
-                <Writing s9 ctw={cn('text-center', route.isActive && 'text-primary')}>
+                {/* <Writing s9 ctw={cn('text-center', route.isActive && 'text-primary')}>
                   {route.label}
-                </Writing>
+                </Writing> */}
               </View>
             </Ripple>
           )

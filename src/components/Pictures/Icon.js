@@ -11,7 +11,9 @@ import Cart from '@icons/cart.svg'
 import Orders from '@icons/orders.svg'
 import ChevronLeft from '@icons/chevron-left.svg'
 import HeartGrey from '@icons/heart-grey.svg'
+import HeartOutlined from '@icons/heart-outlined.svg'
 import ClockRed from '@icons/clock-red.svg'
+import Close from '@icons/close.svg'
 
 const ICONS = {
   home: Home, //require('@icons/home.svg'),
@@ -26,6 +28,8 @@ const ICONS = {
   'chevron-left': ChevronLeft,
   'clock-red': ClockRed,
   'heart-grey': HeartGrey,
+  'heart-outlined': HeartOutlined,
+  close: Close
 }
 
 function Icon({ name = 'home', ctw, iconElementTw = '', iconProps = {} }) {

@@ -9,6 +9,7 @@ import { Redirect } from 'expo-router'
 // export const ErrorBoundary = CustomErrorBoundary
 let tabBarNavigationItems = {
   home: { label: 'Home', iconName: 'home', goToScreen: 'home' },
+  favourites: { label: 'Fav', iconName: 'heart-outlined', goToScreen: 'favourites' },
   search: { label: 'Search', iconName: 'search', goToScreen: 'search' },
   // 'food-review': { label: 'Food', iconName: 'cart', goToScreen: 'food-review' },
 }
@@ -29,7 +30,7 @@ export default function AuthorizedLayout() {
           if (!route) throw new Error('Missing route: ' + route.name)
           return { ...route, isActive: state.index === idx }
         })
-        
+
         return <LayoutForBottomTabs.BottomTabs routes={routes} />
       }}
     >
@@ -39,10 +40,19 @@ export default function AuthorizedLayout() {
         options={{
           headerShown: true,
           header: ({ navigation }) => (
+            <Layout.Header renderLeftElement={null} navigation={navigation} title={'Search food'} />
+          ),
+        }}
+      />
+      <BottomTabsStack.Screen
+        name="favourites"
+        options={{
+          headerShown: true,
+          header: ({ navigation }) => (
             <Layout.Header
               renderLeftElement={null}
               navigation={navigation}
-              title={'Search food'}
+              title={'My favourites'}
             />
           ),
         }}
