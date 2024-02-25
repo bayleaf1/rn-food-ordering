@@ -8,7 +8,7 @@ import { FlatList } from 'react-native'
 const COLUMNS_COUNT = 2
 
 export default function Page() {
-  let items = Food.Showcase.propsModels(20)
+  let items = Food.Showcase.propsModels(10)
   return (
     <LayoutForBottomTabs contentTw="flex-1" verticalPartBottomSpace={0}>
       <SearchPanel />
@@ -78,7 +78,7 @@ function FoodList({ items = [], itemsCount = 0 }) {
   )
   return (
     <View tw={cn('relative mt-4')}>
-      <FaddingBaner />
+      <FadingOverlay />
       <FlatList
         style={{
           paddingTop: 30,
@@ -104,7 +104,7 @@ function FoodList({ items = [], itemsCount = 0 }) {
   )
 }
 
-function FaddingBaner({ color }) {
+function FadingOverlay({ color }) {
   const { theme } = useAppTheme()
   if (!color) color = theme.colors.background
 

@@ -40,7 +40,7 @@ export default function AuthorizedLayout() {
           headerShown: true,
           header: ({ navigation }) => (
             <Layout.Header
-              renderLeftElement={() => null}
+              renderLeftElement={null}
               navigation={navigation}
               title={'Search food'}
             />

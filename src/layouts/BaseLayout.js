@@ -22,21 +22,29 @@ Layout.Header = Header
 function Header({
   title,
   renderLeftElement = renderGoBackButton,
-  renderRightElement = () => <View tw={cn('w-[56px]')} />,
+  renderRightElement = null, 
   navigation,
 }) {
   return (
     <LayoutWithGaps.TopSection>
-      <View tw={cn('flex flex-row items-center')}>
-        <View tw={cn('shrink grow')}>{renderLeftElement(navigation)}</View>
-        <View tw={cn('shrink grow')}>
+      <View tw={cn('relative flex flex-row items-center')}>
+        <View tw={cn('z-10 shrink grow')}>
+          {renderLeftElement ? renderLeftElement(navigation) : <Header.Placeholder />}
+        </View>
+
+        <View tw={cn('absolute left-0 right-0 shrink grow')}>
           <Writing ctw={cn('text-center')}>{title}</Writing>
         </View>
-        <View tw={cn('flex shrink grow flex-row justify-end')}>{renderRightElement()}</View>
+
+        <View tw={cn('z-10 flex shrink grow flex-row justify-end')}>
+          {renderRightElement ? renderRightElement() : <Header.Placeholder />}
+        </View>
       </View>
     </LayoutWithGaps.TopSection>
   )
 }
+Header.Placeholder = () => <View tw={cn('w-[56px]')} />
+
 function renderGoBackButton(navigation) {
   return (
     <Rhomb
@@ -97,7 +105,7 @@ export function SafeFullScreenLayout({ visibleAreaTw, headerIsShown, children, c
 
 export const LayoutForBottomTabs = ({ headerIsShown, children, contentTw = '' }) => {
   let resolver = propsResolverByHeaderShowness()
-  
+
   return (
     <Layout.VisibleArea moreTw="flex-1">
       <Layout.SafeArea {...resolver.safeAreaMargins()}>
