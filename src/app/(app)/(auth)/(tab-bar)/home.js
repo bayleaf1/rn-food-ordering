@@ -169,7 +169,7 @@ export default function Page() {
 
 function FoodListAsCarousel() {
   return (
-    <View tw={cn('mt-8')}>
+    <View tw={cn('mt-10')}>
       {/* //TODO add link */}
       <Writing
         medium
@@ -187,13 +187,9 @@ function FoodListAsCarousel() {
         contentContainerStyle={{
           paddingBottom: 15,
           paddingTop: 5,
-          marginTop: 16,
+          marginTop: 30,
         }}
-        renderItem={({ item }) => (
-          // <Go toScreen="food-review">
-            <Food.Showcase {...item} />
-          // </Go>
-        )}
+        renderItem={({ item }) => <Food.Showcase {...item} ratingContainerTw={"mt-4"} />}
       />
     </View>
   )

@@ -8,7 +8,7 @@ export default function Food({}) {
 }
 
 Food.Rating = ({ value = 0, iconTw, containerTw, valueTextSize = { md: true } }) => (
-  <View tw={cn('flex flex-row items-center justify-center self-center',containerTw)}>
+  <View tw={cn('flex flex-row items-center justify-center self-center', containerTw)}>
     <Icon name="rating-star" ctw={cn('h-[22px] w-[22px]', iconTw)} />
     <Writing {...valueTextSize} ctw={cn('ml-1 text-gray-400')}>
       {value}.0
@@ -30,55 +30,48 @@ Food.Price = ({ containerTw, priceTw, value, currencySize = {}, priceSize = { xl
 Food.Showcase = ({
   name,
   imageName,
-  secondName,
   titleSize = { xl: true },
-  subtitleSize = { sm: true },
   currencySize,
   priceSize,
   titleMtTw = 'mt-4',
-  subtitleTw,
   priceContainerTw,
   ratingIconTw,
   valueTextSize,
   containerTw,
   elevation = 2,
-  ratingContainerTw
+  ratingContainerTw,
 }) => {
   return (
-    // <Go toScreen="food-review">
-    <ViewWithShadow
-      elevation={elevation}
-      ctw={cn('w-full items-center self-start rounded-3xl p-4', containerTw, 'pt-0')}
-    >
-      {/* <Go toScreen="food-review"> */}
-      <LocalPicture
-        name={imageName}
-        ctw="w-[100px]x h-[200px] self-stretch"
-        imageResizeMode="contain"
-      />
-      <Writing {...titleSize} ctw={cn(titleMtTw)}>
-        {name}
-      </Writing>
-      {/* <Writing {...subtitleSize} ctw={cn('mt-3 whitespace-pre-wrap text-gray-400', subtitleTw)}>
-        {secondName}
-      </Writing> */}
+    <Go toScreen="food-review">
+      <ViewWithShadow
+        elevation={elevation}
+        ctw={cn('w-full items-center self-start rounded-3xl p-4', containerTw, 'pt-0')}
+      >
+        <LocalPicture
+          name={imageName}
+          ctw="h-[200px] self-stretch"
+          imageResizeMode="contain"
+        />
 
-      <Food.Rating
-        value={2}
-        iconTw={cn('h-[18px] w-[18px]', ratingIconTw)}
-        valueTextSize={valueTextSize}
-        containerTw={ratingContainerTw}
-      />
-      <Food.Price
-        value={15}
-        priceTw={'text-primary'}
-        currencySize={currencySize}
-        priceSize={priceSize}
-        containerTw={priceContainerTw}
-      />
-      {/* </Go> */}
-    </ViewWithShadow>
-    // </Go>
+        <Writing {...titleSize} ctw={cn(titleMtTw)}>
+          {name}
+        </Writing>
+
+        <Food.Rating
+          value={2}
+          iconTw={cn('h-[18px] w-[18px]', ratingIconTw)}
+          valueTextSize={valueTextSize}
+          containerTw={ratingContainerTw}
+        />
+        <Food.Price
+          value={15}
+          priceTw={'text-primary'}
+          currencySize={currencySize}
+          priceSize={priceSize}
+          containerTw={priceContainerTw}
+        />
+      </ViewWithShadow>
+    </Go>
   )
 }
 
