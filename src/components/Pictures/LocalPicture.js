@@ -4,7 +4,7 @@ import Writing from '@components/Writing/Writing'
 
 const IMAGES = {
   home: require('@images/colibri.jpg'),
-  'egg-pasta': require('@images/egg-pasta.png')
+  'egg-pasta': require('@images/egg-pasta-250.png')
 }
 
 function LocalPicture({

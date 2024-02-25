@@ -7,8 +7,8 @@ export default function Food({}) {
   return <View tw={cn('')}></View>
 }
 
-Food.Rating = ({ value = 0, iconTw, valueTextSize = { md: true } }) => (
-  <View tw={cn('flex flex-row items-center justify-center self-center')}>
+Food.Rating = ({ value = 0, iconTw, containerTw, valueTextSize = { md: true } }) => (
+  <View tw={cn('flex flex-row items-center justify-center self-center',containerTw)}>
     <Icon name="rating-star" ctw={cn('h-[22px] w-[22px]', iconTw)} />
     <Writing {...valueTextSize} ctw={cn('ml-1 text-gray-400')}>
       {value}.0
@@ -42,6 +42,7 @@ Food.Showcase = ({
   valueTextSize,
   containerTw,
   elevation = 2,
+  ratingContainerTw
 }) => {
   return (
     // <Go toScreen="food-review">
@@ -58,14 +59,15 @@ Food.Showcase = ({
       <Writing {...titleSize} ctw={cn(titleMtTw)}>
         {name}
       </Writing>
-      <Writing {...subtitleSize} ctw={cn('mt-3 whitespace-pre-wrap text-gray-400', subtitleTw)}>
+      {/* <Writing {...subtitleSize} ctw={cn('mt-3 whitespace-pre-wrap text-gray-400', subtitleTw)}>
         {secondName}
-      </Writing>
+      </Writing> */}
 
       <Food.Rating
         value={2}
         iconTw={cn('h-[18px] w-[18px]', ratingIconTw)}
         valueTextSize={valueTextSize}
+        containerTw={ratingContainerTw}
       />
       <Food.Price
         value={15}

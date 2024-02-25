@@ -6,13 +6,18 @@ import { View } from 'react-native'
 import { Layout } from './BaseLayout'
 import Ripple from '@components/Ripple'
 
-export default function LayoutForBottomTabs({ headerIsShown, children, contentTw = '' }) {
+export default function LayoutForBottomTabs({
+  headerIsShown,
+  children,
+  contentTw = '',
+  verticalPartBottomSpace = LayoutForBottomTabs.defaultVerticalPartBottomSpace,
+}) {
   let resolver = propsResolverByHeaderShowness()
 
   return (
     <Layout.VisibleArea moreTw="flex-1">
       <Layout.SafeArea {...resolver.safeAreaMargins()}>
-        <Layout.VerticalPart topSpace={resolver.topSpace()} bottomSpace={143}>
+        <Layout.VerticalPart topSpace={resolver.topSpace()} bottomSpace={verticalPartBottomSpace}>
           <Layout.HorizontalPart moreTw="">
             <Layout.Content tw={cn('', contentTw)}>{children}</Layout.Content>
           </Layout.HorizontalPart>
@@ -35,6 +40,8 @@ export default function LayoutForBottomTabs({ headerIsShown, children, contentTw
   }
 }
 
+LayoutForBottomTabs.defaultVerticalPartBottomSpace = 143
+
 LayoutForBottomTabs.BottomTabs = ({ routes = [LayoutForBottomTabs.BottomTabs.defaultRoute] }) => {
   return (
     <ViewWithShadow elevation={5} ctw="flex-0 h-[62px] justify-center rounded-t-[30px]">
@@ -43,7 +50,7 @@ LayoutForBottomTabs.BottomTabs = ({ routes = [LayoutForBottomTabs.BottomTabs.def
           return (
             <Ripple
               ctw={cn('h-full flex-1 grow items-center justify-center rounded-full')}
-              onPress={() => (console.log('PRESS'), Go.toScreen(route.goToScreen))}
+              onPress={() => ( Go.toScreen(route.goToScreen))}
             >
               <View>
                 <Icon
