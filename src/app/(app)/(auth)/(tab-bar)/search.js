@@ -1,9 +1,8 @@
+import FadingOverlay from '@components/FadingOverlay'
 import Food from '@components/Food/Food'
 import SearchPanel from '@components/SearchPanel'
 import LayoutForBottomTabs from '@layouts/LayoutForBottomTabs'
 import { Algebra } from '@libs/Algebra'
-import { useAppTheme } from '@providers/AppTheme'
-import { LinearGradient } from 'expo-linear-gradient'
 import { FlatList } from 'react-native'
 const COLUMNS_COUNT = 2
 
@@ -101,23 +100,5 @@ function FoodList({ items = [], itemsCount = 0 }) {
         showsVerticalScrollIndicator={false}
       />
     </View>
-  )
-}
-
-function FadingOverlay({ color }) {
-  const { theme } = useAppTheme()
-  if (!color) color = theme.colors.background
-
-  return (
-    <LinearGradient
-      colors={[color, 'transparent']}
-      style={{
-        position: 'absolute',
-        top: 0,
-        height: 20,
-        width: '100%',
-        zIndex: 1,
-      }}
-    />
   )
 }
