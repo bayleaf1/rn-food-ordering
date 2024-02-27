@@ -11,6 +11,7 @@ let tabBarNavigationItems = {
   home: { label: 'Home', iconName: 'home', goToScreen: 'home' },
   favourites: { label: 'Fav', iconName: 'heart-outlined', goToScreen: 'favourites' },
   search: { label: 'Search', iconName: 'search', goToScreen: 'search' },
+  cart: { label: 'Cart', iconName: 'cart', goToScreen: 'cart' },
   // 'food-review': { label: 'Food', iconName: 'cart', goToScreen: 'food-review' },
 }
 export default function AuthorizedLayout() {
@@ -57,12 +58,15 @@ export default function AuthorizedLayout() {
           ),
         }}
       />
-      {/* <BottomTabsStack.Screen
-        name="food-review"
+      <BottomTabsStack.Screen
+        name="cart"
         options={{
-          animation: 'slide',
+          headerShown: true,
+          header: ({ navigation }) => (
+            <Layout.Header renderLeftElement={null} navigation={navigation} title={'Cart'} />
+          ),
         }}
-      /> */}
+      />
     </BottomTabsStack>
   )
 }

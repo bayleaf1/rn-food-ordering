@@ -1,7 +1,9 @@
 import Icon from '@components/Pictures/Icon'
+import LocalPicture from '@components/Pictures/LocalPicture'
 import ViewWithShadow from '@components/ViewWithShadow'
 import Go from '@libs/Navigation/Go'
-import LocalPicture from '@components/Pictures/LocalPicture'
+
+import Rhomb from '@components/Rhomb'
 
 export default function Food({}) {
   return <View tw={cn('')}></View>
@@ -16,9 +18,16 @@ Food.Rating = ({ value = 0, iconTw, containerTw, valueTextSize = { md: true } })
   </View>
 )
 
-Food.Price = ({ containerTw, priceTw, value, currencySize = {}, priceSize = { xl2: true } }) => (
+Food.Price = ({
+  containerTw,
+  priceTw,
+  value,
+  currencyLineHeight,
+  currencySize = {},
+  priceSize = { xl2: true },
+}) => (
   <View tw={cn('mt-6', containerTw)}>
-    <Writing {...currencySize} ctw={cn('text-primary')}>
+    <Writing {...currencySize} lineHeight={currencyLineHeight} ctw={cn('text-primary')}>
       ${' '}
       <Writing {...priceSize} ctw={cn('text-black', priceTw)}>
         {value}
@@ -80,7 +89,7 @@ Food.Showcase.propsModel = Object.freeze({
 
 Food.Showcase.propsModels = (count = 3) => new Array(count).fill(Food.Showcase.propsModel)
 
-Food.CompactShowcase = ({ name, imageName, containerTw }) => {
+Food.CompactShowcase = ({ name, imageName, elementNearTitle, containerTw }) => {
   return (
     <Go toScreen="food-review">
       <ViewWithShadow elevation={1} ctw={cn('rounded-3xl', containerTw)}>
@@ -92,7 +101,12 @@ Food.CompactShowcase = ({ name, imageName, containerTw }) => {
           />
 
           <View tw={cn('mt-3 ml-3 grow')}>
-            <Writing lg>{name}</Writing>
+            <View tw={cn('flex flex-row justify-between')}>
+              <Writing lg ctw="inline self-start">
+                {name}
+              </Writing>
+              {elementNearTitle}
+            </View>
 
             <View tw={cn('bg-gray-600x mt-2 flex flex-row justify-between')}>
               <Food.Price
@@ -118,3 +132,108 @@ Food.CompactShowcase = ({ name, imageName, containerTw }) => {
 }
 
 Food.CompactShowcase.propsModels = Food.Showcase.propsModels
+
+Food.CardOverview = () => {
+  let categoryName = 'Fast food'
+  let foodName = 'Fried chicken'
+  let rating = 5
+  let foodDescription = `lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
+  dolor sit amet lorem ipsum dolor sit amet ipsum dolor sit amet lorem ipsum dolor sit amet`
+  let deliveryMinutes = 25
+  let foodPrice = 21
+
+  function Header(props) {
+    return (
+      <>
+        <Writing sm light ctw={cn('font-light text-black')}>
+          {props.categoryName}
+        </Writing>
+
+        <View tw={cn('mt-2 flex flex-row items-center justify-between')}>
+          <Writing lg ctw={cn('')}>
+            {props.foodName}
+          </Writing>
+
+          <Food.Rating value={props.rating} />
+        </View>
+      </>
+    )
+  }
+  function Description(props) {
+    return (
+      <Writing
+        sm
+        ctw={cn('mt-3 text-gray-600')}
+        numberOfLines={3}
+        children={props.foodDescription}
+      />
+    )
+  }
+  return (
+    <ViewWithShadow ctw={cn('mt-auto rounded-2xl px-5 py-4')}>
+      <Header categoryName={categoryName} foodName={foodName} rating={rating}></Header>
+      <Description foodDescription={foodDescription}></Description>
+      <Food.CardOverview.DeliveryDuration minutes={deliveryMinutes} />
+      <Food.CardOverview.TotalPriceWithAction
+        price={foodPrice}
+        actionElement={
+          <Rhomb ctw={cn('h-[64px]')} elevation={3}>
+            <Icon name="cart" ctw={cn('h-8 w-8 translate-y-0.5 ')} iconElementTw="fill-white" />
+          </Rhomb>
+        }
+      />
+    </ViewWithShadow>
+  )
+}
+
+Food.CardOverview.DeliveryDuration = ({
+  minutes,
+  containerTw,
+  iconTw,
+  durationSize = { sm: true },
+  labelWeight = { light: true },
+  labelSize = {},
+}) => {
+  return (
+    <View tw={cn('mt-4 flex flex-row flex-wrap items-center', containerTw)}>
+      <Writing {...labelWeight} {...labelSize} ctw={cn('')}>
+        Delivery time
+      </Writing>
+      <View tw={cn(' ml-8 flex flex-row items-center')}>
+        <Icon name="clock-red" ctw={cn('h-[24px] w-[24px]', iconTw)} />
+        <Writing {...durationSize} medium ctw={cn('ml-1 text-black')}>
+          {minutes} mins
+        </Writing>
+      </View>
+    </View>
+  )
+}
+
+Food.CardOverview.TotalPriceWithAction = ({
+  price,
+  actionElement,
+  labelSize = { xs: true },
+  currencySize = {},
+  priceSize = { xl2: true },
+  labelTw,
+  bottomSectionTw,
+  currencyLineHeight,
+}) => {
+  return (
+    <View>
+      <Writing {...labelSize} semibold ctw={cn('mt-8', labelTw)}>
+        Total price
+      </Writing>
+
+      <View tw={cn('mt-2 flex flex-row items-center justify-between', bottomSectionTw)}>
+        <Food.Price
+          value={price}
+          currencyLineHeight={currencyLineHeight}
+          currencySize={currencySize}
+          priceSize={priceSize}
+        />
+        {actionElement}
+      </View>
+    </View>
+  )
+}

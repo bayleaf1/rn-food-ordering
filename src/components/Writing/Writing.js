@@ -4,6 +4,9 @@ import { Fragment } from 'react'
 import normalizeFontSize from './normalizeFontSize'
 
 function Writing({
+  xl6,
+  xl5,
+  xl4,
   xl3,
   xl2,
   xl,
@@ -28,6 +31,9 @@ function Writing({
   t = '',
 }) {
   const size = [
+    [xl6, 40],
+    [xl5, 36],
+    [xl4, 32],
     [xl3, 28],
     [xl2, 24],
     [xl, 20],

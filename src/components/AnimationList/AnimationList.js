@@ -5,7 +5,7 @@ export default function AnimationList({ children }) {
   return children
 }
 
-AnimationList.ZoomOutOnClick = ({ containerTw = 'flex-start', onPress = () => '', children }) => {
+AnimationList.ZoomOutOnPress = ({ containerTw = 'flex-start', onPress = () => '', children }) => {
   let size = useSharedValue(1)
   let [targetSize, setTargetSize] = useState(1)
 

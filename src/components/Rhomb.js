@@ -3,7 +3,7 @@ import ViewWithShadow from "./ViewWithShadow";
 
 export default function Rhomb({ ctw, squareTw = 'bg-primary', elevation = 3, onPress, children }) {
     return (
-      <AnimationList.ZoomOutOnClick onPress={onPress}>
+      <AnimationList.ZoomOutOnPress onPress={onPress}>
         <View tw={cn('relative aspect-square py-1 px-1', ctw)}>
           <ViewWithShadow
             elevation={elevation}
@@ -11,6 +11,6 @@ export default function Rhomb({ ctw, squareTw = 'bg-primary', elevation = 3, onP
           />
           <View tw="absolute inset-0 flex items-center justify-center">{children}</View>
         </View>
-      </AnimationList.ZoomOutOnClick>
+      </AnimationList.ZoomOutOnPress>
     )
   }
