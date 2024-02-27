@@ -5,6 +5,7 @@ import ViewWithShadow from '@components/ViewWithShadow'
 import Writing from '@components/Writing/Writing'
 import LayoutForBottomTabs from '@layouts/LayoutForBottomTabs'
 import { Algebra } from '@libs/Algebra'
+import Go from '@libs/Navigation/Go'
 import { FlatList } from 'react-native'
 
 export default function Page() {
@@ -41,7 +42,11 @@ function OrderDetails() {
       />
       <Food.CardOverview.TotalPriceWithAction
         price={22}
-        actionElement={<Button label="Place order" />}
+        actionElement={
+          // <Go toScreen="select-address">
+          <Button label="Place order" toScreen={'select-address'} />
+          // </Go>
+        }
         currencySize={{
           xl2: true,
         }}
@@ -59,9 +64,9 @@ function OrderDetails() {
   )
 }
 
-function Button({ label, ctw }) {
+function Button({ label, ctw, toScreen }) {
   return (
-    <AnimationList.ZoomOutOnPress>
+    <AnimationList.ZoomOutOnPress goToScreen={() => toScreen && Go.toScreen(toScreen)}>
       <View tw={cn('rounded-xl bg-primary p-3 px-6', ctw)}>
         <Writing ctw="text-white">{label}</Writing>
       </View>

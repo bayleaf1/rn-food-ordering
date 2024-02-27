@@ -13,18 +13,7 @@ function Go({
   doNotUsePressable,
   ...rest
 }) {
-  let href = useMemo(() => {
-    if (!Array.isArray(toScreen)) toScreen = [toScreen]
-
-    let [screenName, ...params] = toScreen
-
-    let route = Screens[screenName]
-
-    let result = defaultScreen
-
-    if (route) result = typeof route === 'string' ? route : route(...params)
-    return result
-  }, [toScreen])
+  let href = useMemo(() => getRoute(toScreen), [toScreen])
   // if (doNotUsePressable) {
   //   return (
   //     <Link asChild {...rest} href={href} tw={ctw}>
@@ -40,5 +29,20 @@ function Go({
   )
 }
 
-Go.toScreen = (name) => router.push(name)
+function getRoute(toScreen) {
+  if (!Array.isArray(toScreen)) toScreen = [toScreen]
+
+  let [screenName, ...params] = toScreen
+
+  let route = Screens[screenName]
+
+  let result = defaultScreen
+
+  if (route) result = typeof route === 'string' ? route : route(...params)
+
+  return result
+}
+
+Go.toScreen = (name) => router.push(getRoute(name))
+
 export default Go

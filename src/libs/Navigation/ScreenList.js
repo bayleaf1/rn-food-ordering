@@ -15,6 +15,7 @@ const Screens = {
   tabstwo: '/tabs/two',
   'shared-one': '/shared/one',
   'shared-two': '/shared/two',
+  'select-address': '/select-address'
 }
 
 export default Screens;
