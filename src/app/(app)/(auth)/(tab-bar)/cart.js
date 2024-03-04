@@ -42,11 +42,7 @@ function OrderDetails() {
       />
       <Food.CardOverview.TotalPriceWithAction
         price={22}
-        actionElement={
-          // <Go toScreen="select-address">
-          <Button label="Place order" toScreen={'select-address'} />
-          // </Go>
-        }
+        actionElement={<Button label="Place order" screenNameToGoOnPress={'select-address'} />}
         currencySize={{
           xl2: true,
         }}
@@ -64,15 +60,32 @@ function OrderDetails() {
   )
 }
 
-function Button({ label, ctw, toScreen }) {
+function Button({ label, ctw, screenNameToGoOnPress, variant = 'contained' }) {
+  let style = {
+    contained: {
+      viewTw: `bg-primary p-3 px-6`,
+      labelTw: `text-white`,
+    },
+    outlined: {
+      viewTw: `bg-transparent p-3 px-6 border border-primary`,
+      labelTw: `text-primary`,
+    },
+  }[variant]
+
   return (
-    <AnimationList.ZoomOutOnPress goToScreen={() => toScreen && Go.toScreen(toScreen)}>
-      <View tw={cn('rounded-xl bg-primary p-3 px-6', ctw)}>
-        <Writing ctw="text-white">{label}</Writing>
+    <AnimationList.ZoomOutOnPress
+      goToScreen={() => screenNameToGoOnPress && Go.toScreen(screenNameToGoOnPress)}
+    >
+      <View tw={cn('rounded-lg', style.viewTw, ctw)}>
+        <Writing ctw={cn(style.labelTw)}>{label}</Writing>
       </View>
     </AnimationList.ZoomOutOnPress>
   )
 }
+Button.Outlined = ({ label, ctw, screenNameToGoOnPress }) => {
+  return <Button {...{ label, ctw, screenNameToGoOnPress }} variant="outlined" />
+}
+
 function Card({ children, ctw, elevation = 1 }) {
   return (
     <ViewWithShadow ctw={cn('rounded-xl p-4', ctw)} elevation={elevation}>

@@ -10,15 +10,15 @@ const Screens = {
   'food-review': '/food-review',
   search: '/search',
   favourites: '/favourites',
-  cart: '/cart',
   settings: '/settings',
+  cart: '/cart',
+  'select-address': '/place-order/select-address',
   drawerone: '/drawer/one',
   drawertwo: '/drawer/two',
   tabsone: '/tabs/one',
   tabstwo: '/tabs/two',
   'shared-one': '/shared/one',
   'shared-two': '/shared/two',
-  'select-address': '/select-address'
 }
 
 export default Screens;

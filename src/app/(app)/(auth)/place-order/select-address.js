@@ -10,45 +10,46 @@ export default function SelectAddress({}) {
 
   return (
     <SafeFullScreenLayout contentTw="flex-1" headerIsShown>
-      <PictureWithCounter></PictureWithCounter>
-      <SpacerView />
-      <Food.CardOverview></Food.CardOverview>
+      <Writing ctw={cn("")}> WRITING SELECT ADDRESS </Writing>
+      {/* <PictureWithCounter></PictureWithCounter> */}
+      {/* <SpacerView /> */}
+      {/* <Food.CardOverview></Food.CardOverview> */}
     </SafeFullScreenLayout>
   )
 }
 
-function Counter() {
-  return (
-    <View tw={cn('mx-auto mt-[5%] flex flex-row items-center ')}>
-      <Rhomb ctw={cn('h-[55px]')} elevation={1}>
-        <Writing xl2 ctw={cn(' text-white')}>
-          -
-        </Writing>
-      </Rhomb>
-      <Writing xl ctw={cn('px-4 text-primary ')}>
-        1
-      </Writing>
-      <Rhomb ctw={cn('h-[55px]')} elevation={1}>
-        <Writing xl2 ctw={cn('text-white')}>
-          +
-        </Writing>
-      </Rhomb>
-    </View>
-  )
-}
+// function Counter() {
+//   return (
+//     <View tw={cn('mx-auto mt-[5%] flex flex-row items-center ')}>
+//       <Rhomb ctw={cn('h-[55px]')} elevation={1}>
+//         <Writing xl2 ctw={cn(' text-white')}>
+//           -
+//         </Writing>
+//       </Rhomb>
+//       <Writing xl ctw={cn('px-4 text-primary ')}>
+//         1
+//       </Writing>
+//       <Rhomb ctw={cn('h-[55px]')} elevation={1}>
+//         <Writing xl2 ctw={cn('text-white')}>
+//           +
+//         </Writing>
+//       </Rhomb>
+//     </View>
+//   )
+// }
 
-function PictureWithCounter() {
-  return (
-    <View tw={cn('bg-gray-300x relative flex-1')}>
-      <LocalPicture
-        name="egg-pasta"
-        ctw={cn('mx-auto h-[95%] max-h-[320px] w-[100%] flex-shrink')}
-        imageResizeMode="contain"
-      />
-      <Counter></Counter>
-    </View>
-  )
-}
+// function PictureWithCounter() {
+//   return (
+//     <View tw={cn('bg-gray-300x relative flex-1')}>
+//       <LocalPicture
+//         name="egg-pasta"
+//         ctw={cn('mx-auto h-[95%] max-h-[320px] w-[100%] flex-shrink')}
+//         imageResizeMode="contain"
+//       />
+//       <Counter></Counter>
+//     </View>
+//   )
+// }
 
 // function FoodOverviewCard() {
 //   let categoryName = 'Fast food'
