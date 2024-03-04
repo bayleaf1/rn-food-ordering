@@ -8,6 +8,9 @@ const Screens = {
   //
   home: '/home',
   'food-review': '/food-review',
+  search: '/search',
+  favourites: '/favourites',
+  cart: '/cart',
   settings: '/settings',
   drawerone: '/drawer/one',
   drawertwo: '/drawer/two',

@@ -50,7 +50,8 @@ LayoutForBottomTabs.BottomTabs = ({ routes = [LayoutForBottomTabs.BottomTabs.def
           return (
             <Ripple
               ctw={cn('h-full flex-1 grow items-center justify-center rounded-full')}
-              onPress={() => ( Go.toScreen(route.goToScreen))}
+              onPress={Go.getGoToScreen(route.screenName)}
+              key={key}
             >
               <View>
                 <Icon

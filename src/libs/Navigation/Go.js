@@ -31,18 +31,16 @@ function Go({
 
 function getRoute(toScreen) {
   if (!Array.isArray(toScreen)) toScreen = [toScreen]
-
   let [screenName, ...params] = toScreen
-
   let route = Screens[screenName]
+  // console.log(`route:`, screenName, route)
 
   let result = defaultScreen
-
   if (route) result = typeof route === 'string' ? route : route(...params)
-
   return result
 }
 
 Go.toScreen = (name) => router.push(getRoute(name))
+Go.getGoToScreen = (name) => () => Go.toScreen(name)
 
 export default Go

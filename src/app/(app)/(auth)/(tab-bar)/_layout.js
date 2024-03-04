@@ -8,11 +8,10 @@ import { Redirect } from 'expo-router'
 //TODO RESTORE
 // export const ErrorBoundary = CustomErrorBoundary
 let tabBarNavigationItems = {
-  home: { label: 'Home', iconName: 'home', goToScreen: 'home' },
-  favourites: { label: 'Fav', iconName: 'heart-outlined', goToScreen: 'favourites' },
-  search: { label: 'Search', iconName: 'search', goToScreen: 'search' },
-  cart: { label: 'Cart', iconName: 'cart', goToScreen: 'cart' },
-  // 'food-review': { label: 'Food', iconName: 'cart', goToScreen: 'food-review' },
+  home: { label: 'Home', iconName: 'home', screenName: 'home' },
+  favourites: { label: 'Fav', iconName: 'heart-outlined', screenName: 'favourites' },
+  search: { label: 'Search', iconName: 'search', screenName: 'search' },
+  cart: { label: 'Cart', iconName: 'cart', screenName: 'cart' },
 }
 export default function AuthorizedLayout() {
   const { isSignedOut } = useSessionProvider()
