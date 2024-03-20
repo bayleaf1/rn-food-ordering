@@ -2,6 +2,7 @@ import { Pressable, Text } from 'react-native'
 import { useTranslationProvider } from '../../providers/TranslationProvider'
 import { Fragment } from 'react'
 import normalizeFontSize from './normalizeFontSize'
+import { cn } from '@libs/Styling'
 
 function Writing({
   xl6,
@@ -24,6 +25,7 @@ function Writing({
   regular = true,
   numberOfLines,
   lineHeight = null,
+  additionalLineHeight = 0,
   ctw = '',
   style = {},
   children,
@@ -61,11 +63,13 @@ function Writing({
         style={{
           // fontSize: size[1] * (width() * (1 / 300)),
           fontSize: normalizeFontSize(size[1]),
-          lineHeight: normalizeFontSize(lineHeight === null ? size[1] + 4 : lineHeight),
+          lineHeight: normalizeFontSize(
+            lineHeight === null ? size[1] + 4 + additionalLineHeight : lineHeight
+          ),
           fontFamily: weight[1],
           ...style,
         }}
-        tw={ctw}
+        tw={cn(ctw)}
         numberOfLines={numberOfLines}
       >
         {t && translation(...(Array.isArray(t) ? t : [t]))}

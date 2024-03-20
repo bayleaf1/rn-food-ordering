@@ -1,11 +1,11 @@
-import AnimationList from '@components/AnimationList/AnimationList'
+import Button from '@components/Button'
+import Card from '@components/Card'
 import FadingOverlay from '@components/FadingOverlay'
 import Food from '@components/Food/Food'
 import ViewWithShadow from '@components/ViewWithShadow'
 import Writing from '@components/Writing/Writing'
 import LayoutForBottomTabs from '@layouts/LayoutForBottomTabs'
 import { Algebra } from '@libs/Algebra'
-import Go from '@libs/Navigation/Go'
 import { FlatList } from 'react-native'
 
 export default function Page() {
@@ -60,39 +60,8 @@ function OrderDetails() {
   )
 }
 
-function Button({ label, ctw, screenNameToGoOnPress, variant = 'contained' }) {
-  let style = {
-    contained: {
-      viewTw: `bg-primary p-3 px-6`,
-      labelTw: `text-white`,
-    },
-    outlined: {
-      viewTw: `bg-transparent p-3 px-6 border border-primary`,
-      labelTw: `text-primary`,
-    },
-  }[variant]
 
-  return (
-    <AnimationList.ZoomOutOnPress
-      goToScreen={() => screenNameToGoOnPress && Go.toScreen(screenNameToGoOnPress)}
-    >
-      <View tw={cn('rounded-lg', style.viewTw, ctw)}>
-        <Writing ctw={cn(style.labelTw)}>{label}</Writing>
-      </View>
-    </AnimationList.ZoomOutOnPress>
-  )
-}
-Button.Outlined = ({ label, ctw, screenNameToGoOnPress }) => {
-  return <Button {...{ label, ctw, screenNameToGoOnPress }} variant="outlined" />
-}
 
-function Card({ children, ctw, elevation = 1 }) {
-  return (
-    <ViewWithShadow ctw={cn('rounded-xl p-4', ctw)} elevation={elevation}>
-      {children}
-    </ViewWithShadow>
-  )
-}
 function FoodList({ items = [], itemsCount = 0 }) {
   const renderItem = useCallback(
     ({ item, index }) => {

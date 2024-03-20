@@ -8,11 +8,13 @@ let Context = createContext({
 //TODO move to main repo and add hook useSetBackgroundOnMountAndRestore()
 export const useAppTheme = () => useContext(Context)
 
+//TODO move to Styling.js
 let defTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
     background: '#fcfcfc',
+    primary: '#e60023',
   },
 }
 export default function AppThemeProvider({ children }) {

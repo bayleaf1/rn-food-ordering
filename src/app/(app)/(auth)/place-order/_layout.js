@@ -8,10 +8,7 @@ export default function SelectAddressLayout() {
       screenOptions={{
         headerShown: true,
         header: ({ navigation }) => (
-          <Layout.Header
-            navigation={navigation}
-            // renderRightElement={() => <Layout.Header.AddToFavorites />}
-          />
+          <Layout.Header navigation={navigation} title={'Select address'} />
         ),
       }}
     >

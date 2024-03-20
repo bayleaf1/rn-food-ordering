@@ -1,7 +1,7 @@
 import { useAppTheme } from '@providers/AppTheme'
 import { LinearGradient } from 'expo-linear-gradient'
 
-export default function FadingOverlay({ color, direction = 'top->bottom' }) {
+export default function FadingOverlay({height = 20, color, direction = 'top->bottom' }) {
   const { theme } = useAppTheme()
 
   if (!color) color = theme.colors.background
@@ -21,7 +21,7 @@ export default function FadingOverlay({ color, direction = 'top->bottom' }) {
       colors={result.gradient}
       style={{
         position: 'absolute',
-        height: 20,
+        height,
         width: '100%',
         zIndex: 1,
         ...result.style,

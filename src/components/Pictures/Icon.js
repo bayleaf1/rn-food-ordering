@@ -14,6 +14,7 @@ import HeartGrey from '@icons/heart-grey.svg'
 import HeartOutlined from '@icons/heart-outlined.svg'
 import ClockRed from '@icons/clock-red.svg'
 import Close from '@icons/close.svg'
+import Plus from '@icons/plus.svg'
 
 const ICONS = {
   home: Home, //require('@icons/home.svg'),
@@ -29,7 +30,8 @@ const ICONS = {
   'clock-red': ClockRed,
   'heart-grey': HeartGrey,
   'heart-outlined': HeartOutlined,
-  close: Close
+  close: Close,
+  plus: Plus
 }
 
 function Icon({ name = 'home', ctw, iconElementTw = '', iconProps = {} }) {
