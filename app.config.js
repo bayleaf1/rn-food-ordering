@@ -17,6 +17,7 @@ export default ({ config }) => {
       assetBundlePatterns: ['**/*'],
       ios: {
         supportsTablet: true,
+        "bundleIdentifier": "com.anonymous.rn-pr-1"
       },
       android: {
         adaptiveIcon: {
