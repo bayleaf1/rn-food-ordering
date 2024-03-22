@@ -1,5 +1,6 @@
 import { Dimensions, Platform } from 'react-native'
 
+//TODO COPY IN BOILERPLATE
 export default {
   androidOrOther(android, other) {
     return Platform.OS == 'android' ? android : other

@@ -21,6 +21,7 @@ export default function Button({
   variant = 'contained',
   labelTw,
   fullWidth,
+  onPress = ()=>'',
 }) {
   let style = variants[variant]
 
@@ -28,6 +29,7 @@ export default function Button({
     <AnimationList.ZoomOutOnPress
       goToScreen={() => screenNameToGoOnPress && Go.toScreen(screenNameToGoOnPress)}
       targetSize={0.99}
+      onPress={onPress}
     >
       <View tw={cn({ 'w-full': fullWidth }, 'self-start rounded-lg p-3 px-6', style.viewTw, ctw)}>
         {renderLabel ? (
@@ -39,8 +41,11 @@ export default function Button({
     </AnimationList.ZoomOutOnPress>
   )
 }
-Button.Outlined = ({ label, renderLabel, ctw, screenNameToGoOnPress, fullWidth }) => {
+Button.Outlined = ({ label, renderLabel, ctw, screenNameToGoOnPress, fullWidth, onPress }) => {
   return (
-    <Button {...{ label, renderLabel, ctw, screenNameToGoOnPress, fullWidth }} variant="outlined" />
+    <Button
+      {...{ label, renderLabel, ctw, screenNameToGoOnPress, fullWidth, onPress }}
+      variant="outlined"
+    />
   )
 }

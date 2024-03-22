@@ -13,6 +13,7 @@ const Screens = {
   settings: '/settings',
   cart: '/cart',
   'select-address': '/place-order/select-address',
+  'create-address': '/place-order/modal',
   drawerone: '/drawer/one',
   drawertwo: '/drawer/two',
   tabsone: '/tabs/one',
@@ -21,4 +22,4 @@ const Screens = {
   'shared-two': '/shared/two',
 }
 
-export default Screens;
+export default Screens

@@ -1,5 +1,7 @@
 import { Layout } from '@layouts/BaseLayout'
+import DeviceMeta from '@libs/DeviceMeta'
 import PrimaryStack from '@libs/Navigation/PrimaryStack'
+import { TransitionPresets } from '@react-navigation/stack'
 
 export default function SelectAddressLayout() {
   return (
@@ -13,6 +15,17 @@ export default function SelectAddressLayout() {
       }}
     >
       <PrimaryStack.Screen name="select-address" />
+      <PrimaryStack.Screen
+        name="modal"
+        options={{
+          presentation: 'modal',
+          gestEnabled: true,
+          ...DeviceMeta.iosOrOther(
+            TransitionPresets.ModalPresentationIOS,
+            TransitionPresets.ModalTransition
+          ),
+        }}
+      />
     </PrimaryStack>
   )
 }
