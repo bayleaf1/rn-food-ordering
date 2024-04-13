@@ -31,6 +31,7 @@ function Writing({
   children,
   onPress,
   t = '',
+  styles
 }) {
   const size = [
     [xl6, 40],
@@ -56,9 +57,9 @@ function Writing({
     [regular, 'Primary'],
   ].find((v) => v[0])
   let { t: translation } = useTranslationProvider()
-  let Wrapper = onPress ? (p) => <Pressable onPress={onPress} children={p.children} /> : Fragment
+  let Wrapper = onPress ? (p) => <Pressable onPress={onPress} children={p.children} style={p.styles} /> : Fragment
   return (
-    <Wrapper>
+    <Wrapper styles={styles}>
       <Text
         style={{
           // fontSize: size[1] * (width() * (1 / 300)),

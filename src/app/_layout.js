@@ -22,6 +22,7 @@ LogBox.ignoreLogs(['NativeEvent'])
 //TODO change splash view visibility prop name in dev mode hideInDev=true
 //TODO add lottie
 //TODO add auth token to useApi and get, post, patch
+//TODO add useAync storage provider
 NativeWindStyleSheet.setOutput({ default: 'native' })
 
 export default function AppLayout() {
