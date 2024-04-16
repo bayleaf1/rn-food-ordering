@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { initReactI18next } from 'react-i18next'
 import en from './en'
 import ro from './ro'
-import { isProdEnv } from '@config/globalConfig'
+import AppConfig from '@constants/AppConfig'
 
 export const AppLanguages = Object.freeze({
   EN: 'en',
@@ -11,7 +11,7 @@ export const AppLanguages = Object.freeze({
 })
 export const DEFAULT_LANGUAGE = AppLanguages.EN
 
-if(!isProdEnv()) verifyCompletnessOfTranslationsOrThrow(en, [ro])
+if (!AppConfig.isProdEnv()) verifyCompletnessOfTranslationsOrThrow(en, [ro])
 
 const resources = {
   en: {
@@ -35,7 +35,6 @@ i18n.use(initReactI18next).init({
 export default i18n
 
 function verifyCompletnessOfTranslationsOrThrow(baseTranslation, otherTranslations) {
-
   otherTranslations.forEach((tr) =>
     verifyAndThrowPropertiesPresenceOrPropertiesWithDifferentType(
       baseTranslation.value,

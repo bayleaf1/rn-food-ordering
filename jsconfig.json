@@ -7,7 +7,7 @@
       "@libs/*": ["./src/libs/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@providers/*": ["./src/providers/*"],
-      "@config/*": ["./src/config/*"],
+      "@constants/*": ["src/constants/*"],
       "@assets/*": ["./assets/*"],
       "@icons/*": ["./assets/icons/*"],
       "@images/*": ["./assets/images/*"],
@@ -16,7 +16,7 @@
   },
 
   "typeAcquisition": {
-    "include": ["./src/config/globalDeclarations.d.ts"],
+    "include": ["./src/constants/globalDeclarations.d.ts"],
   },
   "exclude": ["node_modules", ".expo", ".vscode"],
 }

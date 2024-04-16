@@ -5,6 +5,7 @@ import LayoutForBottomTabs from '@layouts/LayoutForBottomTabs'
 import { Algebra } from '@libs/Algebra'
 import { FlatList } from 'react-native'
 const COLUMNS_COUNT = 2
+import Writing from '@components/Writing/Writing'
 
 export default function Page() {
   let items = Food.Showcase.propsModels(10)

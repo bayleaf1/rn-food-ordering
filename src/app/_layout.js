@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler'
-import '@config/globalConfig'
-import '@config/globalDeclarations'
+import '@constants/AppConfig'
+import '@constants/globalDeclarations'
 import SplashView from '@components/SplashView/SplashView'
 import NativeStackResponsableForScreenOrientation from '@libs/Navigation/NativeStackResponsableForScreenOrientation'
 import AppLoadingProvider, { useAppLoadingProvider } from '@providers/AppLoadingProvider'

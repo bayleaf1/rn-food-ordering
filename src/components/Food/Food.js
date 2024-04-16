@@ -2,6 +2,7 @@ import Icon from '@components/Pictures/Icon'
 import LocalPicture from '@components/Pictures/LocalPicture'
 import ViewWithShadow from '@components/ViewWithShadow'
 import Go from '@libs/Navigation/Go'
+import Writing from '@components/Writing/Writing'
 
 import Rhomb from '@components/Rhomb'
 

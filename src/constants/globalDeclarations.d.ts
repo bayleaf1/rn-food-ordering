@@ -6,4 +6,5 @@ interface RC {
   key: any
   children: any
 }
+
 function View(props: RC): any

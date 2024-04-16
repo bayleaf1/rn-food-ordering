@@ -18,7 +18,7 @@ module.exports = function (api) {
         '@libs': './src/libs',
         '@layouts': './src/layouts',
         '@providers': './src/providers',
-        '@config': './src/config',
+        '@constants': './src/constants',
         '@assets': './assets',
         '@icons': './assets/icons',
         '@images': './assets/images',

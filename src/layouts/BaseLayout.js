@@ -4,6 +4,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import LayoutWithGaps from './LayoutWithGaps'
+import Writing from '@components/Writing/Writing'
 
 export function Layout({ children }) {
   return children

@@ -1,4 +1,4 @@
-import { GLOBAL_CONFIG } from '@config/globalConfig'
+import AppConfig from '@constants/AppConfig'
 import axios from 'axios'
 import useSWR from 'swr'
 
@@ -22,7 +22,7 @@ async function fetcherWithoutAnApi(endpoint) {
 //   products: (id) => '/product/' + id,
 // }
 
-const instance = axios.create({ baseURL: GLOBAL_CONFIG.API_BASE_URL })
+const instance = axios.create({ baseURL: AppConfig.API_BASE_URL })
 
 async function fetcher(endpoint) {
   return instance.get(endpoint)

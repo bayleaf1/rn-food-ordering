@@ -5,6 +5,7 @@ import Rhomb from '@components/Rhomb'
 import SpacerView from '@components/SpacerView'
 import ViewWithShadow from '@components/ViewWithShadow'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import Writing from '@components/Writing/Writing'
 
 export default function FoodReview({}) {
 

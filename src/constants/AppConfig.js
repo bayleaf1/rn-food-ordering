@@ -1,13 +1,18 @@
 import _ from 'lodash'
 
-export const GLOBAL_CONFIG = Object.freeze({
+const AppConfig = Object.freeze({
   ENV: process.env.EXPO_PUBLIC_ENV || reportMissing('ENV'),
   API_BASE_URL: process.env.EXPO_PUBLIC_API_BASE_URL || reportMissing('API_BASE_URL'),
+  SCREEN_NAME_TO_REDIRECT_IF_AUTHORIZED: 'home',
+  isDevEnv() {
+    return this.ENV === 'development'
+  },
+  isProdEnv() {
+    return this.ENV === 'production'
+  },
 })
 
-export const isDevEnv = () => GLOBAL_CONFIG.ENV === 'development'
-
-export const isProdEnv = () => GLOBAL_CONFIG.ENV === 'production'
+export default AppConfig;
 
 function reportMissing(envName, defValueToReturn) {
   console.warn(

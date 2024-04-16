@@ -1,14 +1,14 @@
+import AppConfig from '@constants/AppConfig'
 import { useOnMount } from '@libs/LifecycleHooks'
 import { useAppLoadingProvider } from '@providers/AppLoadingProvider'
 import Constants from 'expo-constants'
 import { SplashScreen } from 'expo-router'
 import { useEffect, useMemo, useState } from 'react'
 import { Animated, StyleSheet, View } from 'react-native'
-import { isDevEnv } from '@config/globalConfig'
 export { ErrorBoundary } from 'expo-router'
 
 const loadedSplashImage = require('@assets/splash.jpg')
-const IS_DEV_ENV = isDevEnv();
+const IS_DEV_ENV = AppConfig.isDevEnv();
 
 try {
   SplashScreen.preventAutoHideAsync()

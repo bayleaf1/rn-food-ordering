@@ -1,5 +1,6 @@
 import Go from '@libs/Navigation/Go'
 import AnimationList from './AnimationList/AnimationList'
+import Writing from '@components/Writing/Writing'
 
 //TODO copy to main repo
 
