@@ -13,7 +13,7 @@ const Screens = {
   settings: '/settings',
   cart: '/cart',
   'select-address': '/place-order/select-address',
-  'create-address': '/place-order/modal',
+  'create-address': '/place-order/create-address',
   drawerone: '/drawer/one',
   drawertwo: '/drawer/two',
   tabsone: '/tabs/one',

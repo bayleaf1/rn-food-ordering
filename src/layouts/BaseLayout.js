@@ -18,31 +18,63 @@ Layout.VERTICAL_TOP_SPACE = 16
 Layout.VERTICAL_BOTTOM_SPACE = 16
 Layout.TOTAL_HORIZONTAL_SPACE = Layout.HORIZONTAL_SPACE * 2
 Layout.Header = Header
+Layout.Header.Modal = ModalHeader
 
 function Header({
   title,
   renderLeftElement = renderGoBackButton,
-  renderRightElement = null, 
+  renderRightElement = null,
   navigation,
+  topSpaceForVerticalPart
 }) {
   return (
-    <LayoutWithGaps.TopSection>
-      <View tw={cn('relative flex flex-row items-center')}>
-        <View tw={cn('z-10 shrink grow')}>
-          {renderLeftElement ? renderLeftElement(navigation) : <Header.Placeholder />}
-        </View>
-
-        <View tw={cn('absolute left-0 right-0 shrink grow')}>
-          <Writing ctw={cn('text-center')}>{title}</Writing>
-        </View>
-
-        <View tw={cn('z-10 flex shrink grow flex-row justify-end')}>
-          {renderRightElement ? renderRightElement() : <Header.Placeholder />}
-        </View>
-      </View>
+    <LayoutWithGaps.TopSection topSpaceForVerticalPart={topSpaceForVerticalPart}>
+      {renderHeader({
+        title,
+        renderLeftElement,
+        renderRightElement,
+        navigation,
+      })}
     </LayoutWithGaps.TopSection>
   )
 }
+
+function ModalHeader({
+  title,
+  renderLeftElement = renderGoBackButton,
+  renderRightElement = null,
+  navigation,
+}) {
+  return (
+    <Layout.HorizontalPart moreTw="flex-0 py-2">
+      {renderHeader({
+        title,
+        renderLeftElement,
+        renderRightElement,
+        navigation,
+        titleContainerTw: "top-[30%]"
+      })}
+    </Layout.HorizontalPart>
+  )
+}
+function renderHeader({ title, renderRightElement, renderLeftElement,titleContainerTw, navigation }) {
+  return (
+    <View tw={cn('relative flex-row items-center')}>
+      <View tw={cn('z-10 shrink grow')}>
+        {renderLeftElement ? renderLeftElement(navigation) : <Header.Placeholder />}
+      </View>
+
+      <View tw={cn('absolute left-0 right-0 shrink grow top-0', titleContainerTw)}>
+        <Writing ctw={cn('text-center')}>{title}</Writing>
+      </View>
+
+      <View tw={cn('z-10 flex shrink grow flex-row justify-end')}>
+        {renderRightElement ? renderRightElement() : <Header.Placeholder />}
+      </View>
+    </View>
+  )
+}
+
 Header.Placeholder = () => <View tw={cn('w-[56px]')} />
 
 function renderGoBackButton(navigation) {

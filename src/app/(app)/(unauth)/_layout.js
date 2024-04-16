@@ -13,7 +13,7 @@ export default function AppLayout() {
     return <Text tw="mt-20">Loading...</Text>
   }
 
-  if (isSignedIn) return <Redirect href={Screens.home} />
+  if (isSignedIn) return <Redirect href={Screens['select-address']} /> // TODO change to home
 
   return (
     <PrimaryStack initialRouteName="index">

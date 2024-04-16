@@ -10,14 +10,20 @@ export default function SelectAddressLayout() {
       screenOptions={{
         headerShown: true,
         header: ({ navigation }) => (
-          <Layout.Header navigation={navigation} title={'Select address'} />
+          <Layout.Header topSpaceForVerticalPart={0} navigation={navigation} title={'Select address'} />
         ),
       }}
     >
       <PrimaryStack.Screen name="select-address" />
       <PrimaryStack.Screen
-        name="modal"
+        name="create-address"
         options={{
+          header: ({ navigation }) => (
+            <Layout.Header.Modal
+              navigation={navigation}
+              title={'Create address'}
+            />
+          ),
           presentation: 'modal',
           gestEnabled: true,
           ...DeviceMeta.iosOrOther(

@@ -21,24 +21,42 @@ export default function Button({
   variant = 'contained',
   labelTw,
   fullWidth,
-  onPress = ()=>'',
+  onPress = () => '',
+  disabled,
 }) {
   let style = variants[variant]
 
+  let Wrapper = disabled
+    ? ({ children }) => children
+    : ({ children }) => (
+        <AnimationList.ZoomOutOnPress
+          goToScreen={() => screenNameToGoOnPress && Go.toScreen(screenNameToGoOnPress)}
+          targetSize={0.99}
+          onPress={onPress}
+        >
+          {children}
+        </AnimationList.ZoomOutOnPress>
+      )
+
   return (
-    <AnimationList.ZoomOutOnPress
-      goToScreen={() => screenNameToGoOnPress && Go.toScreen(screenNameToGoOnPress)}
-      targetSize={0.99}
-      onPress={onPress}
-    >
-      <View tw={cn({ 'w-full': fullWidth }, 'self-start rounded-lg p-3 px-6', style.viewTw, ctw)}>
+    <Wrapper>
+      <View
+        pointerEvents={disabled}
+        tw={cn(
+          { 'w-full': fullWidth },
+          'self-start rounded-lg p-3 px-6',
+          style.viewTw,
+          ctw,
+          disabled && 'pointer-events-none bg-gray-100'
+        )}
+      >
         {renderLabel ? (
           renderLabel({ labelTw: style.labelTw })
         ) : (
           <Writing ctw={cn('text-center', style.labelTw, labelTw)}>{label}</Writing>
         )}
       </View>
-    </AnimationList.ZoomOutOnPress>
+    </Wrapper>
   )
 }
 Button.Outlined = ({ label, renderLabel, ctw, screenNameToGoOnPress, fullWidth, onPress }) => {
