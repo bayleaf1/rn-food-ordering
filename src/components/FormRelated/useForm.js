@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import * as changeCase from 'change-case'
 
 export default function useForm({ fields = {} }) {
   const { getValueForField, setFieldValue, validateFields, getFieldsRegister } = useFields(fields)
@@ -11,14 +12,19 @@ export default function useForm({ fields = {} }) {
   } = useErrors()
 
   const getPropsForField = useCallback(
-    (fieldName) => ({
-      onChangeText: (t) => {
-        removeErrorForField(fieldName)
-        setFieldValue(fieldName, t)
-      },
-      value: getValueForField(fieldName),
-      errorMessage: getErrorMessageForField(fieldName),
-    }),
+    (fieldName) => {
+      let name = changeCase.sentenceCase(fieldName)
+      return {
+        onChangeText: (t) => {
+          removeErrorForField(fieldName)
+          setFieldValue(fieldName, t)
+        },
+        value: getValueForField(fieldName),
+        errorMessage: getErrorMessageForField(fieldName),
+        label: name,
+        placeholder: name,
+      }
+    },
     [getValueForField, getErrorMessageForField, getValueForField]
   )
 
@@ -61,6 +67,9 @@ useForm.validators = {
   minLength:
     (length = 1) =>
     (v) => ({ ok: v.length >= length, message: 'Min length must be ' + length }),
+  length:
+    (length = 1) =>
+    (v) => ({ ok: v.length === length, message: 'Length must be ' + length }),
   selectDropdownItem: (v) => ({ ok: !!v.length, message: 'Select an item' }),
 }
 

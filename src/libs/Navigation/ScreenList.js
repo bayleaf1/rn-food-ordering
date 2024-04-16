@@ -14,6 +14,8 @@ const Screens = {
   cart: '/cart',
   'select-address': '/place-order/select-address',
   'create-address': '/place-order/create-address',
+  'select-card': '/place-order/select-card',
+  'create-card': '/place-order/create-card',
   drawerone: '/drawer/one',
   drawertwo: '/drawer/two',
   tabsone: '/tabs/one',

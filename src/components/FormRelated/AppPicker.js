@@ -17,7 +17,7 @@ export default function AppPicker({
 
   return (
     <View style={style}>
-      <WritingInput.Label value={label} />
+      <WritingInput.LabelIfExists value={label} />
       <View tw="relative">
         <RNPickerSelect
           onValueChange={(value) => onChangeText(value === null ? '' : value)}
@@ -38,7 +38,7 @@ export default function AppPicker({
         />
         <WritingInput.InnerBorder focus={focus} />
       </View>
-      <WritingInput.ErrorMessage message={errorMessage} />
+      <WritingInput.ErrorMessageIfExists message={errorMessage} />
     </View>
   )
 }

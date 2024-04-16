@@ -3,12 +3,13 @@ import Card from '@components/Card'
 import FadingOverlay from '@components/FadingOverlay'
 import Radio from '@components/FormRelated/Radio'
 import Icon from '@components/Pictures/Icon'
+import LocalPicture from '@components/Pictures/LocalPicture'
 import Writing from '@components/Writing/Writing'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import React from 'react'
 import { ScrollView, View } from 'react-native'
 
-export default function SelectAddress({}) {
+export default function SelectCard({}) {
   const [checked, setChecked] = React.useState('first')
 
   return (
@@ -18,11 +19,11 @@ export default function SelectAddress({}) {
           <View ctw={'flex flex-row items-center bg-gray-600'} style={{ flexDirection: 'row' }}>
             <Icon name="plus" ctw={'mr-2 mt-[3px] h-4 w-4 '} iconElementTw={labelTw} />
             <Writing sm ctw={cn('relative self-start', labelTw)}>
-              Add New Address
+              Add New Card
             </Writing>
           </View>
         )}
-        screenNameToGoOnPress={'create-address'}
+        screenNameToGoOnPress={'create-card'}
         ctw={'self-center'}
       />
 
@@ -41,22 +42,25 @@ export default function SelectAddress({}) {
           }}
           showsVerticalScrollIndicator={false}
         >
-          {[1, 2, 1, 1, 1, 1, 1, 1, 1, 1].map((item, key) => (
-            <Card ctw={cn(key === 0 && 'mt-[30px]')} key={key} onPress={() => setChecked(item)}>
-              <View tw={cn('flex flex-row justify-between')}>
-                <Writing semibold ctw={cn('')}>
-                  My home address
+          {[1, 2, 1, 1].map((item, key) => (
+            <Card
+              ctw={cn(key === 0 && 'mt-[30px]', 'realtive h-[200px] p-0')}
+              key={key}
+              onPress={() => setChecked(item)}
+            >
+              <LocalPicture name="credit-card" />
+              <View tw={cn('absolute top-0 left-0 bottom-0 right-0', Card.paddingTw)}>
+                <Writing xl ctw={cn('mt-[20%] text-white')}>
+                  {' '}
+                  1234 1234 1234 1234{' '}
                 </Writing>
-                <View tw={cn('rounded-fullx bg-gray-200x')}>
-                  <Radio checked={item === checked} onPress={() => setChecked(item)} />
-                </View>
+                <Writing lg ctw={cn('mt-[8%] text-white')}>
+                  {' '}
+                  Joker Joker{' '}
+                </Writing>
+
+                <Radio checked={true} color={"white"} ctw="absolute right-2 top-2" />
               </View>
-              <Writing sm ctw={cn('text-gray-400')}>
-                Home
-              </Writing>
-              <Writing sm ctw={cn('mt-3 text-gray-400')} numberOfLines={2} additionalLineHeight={2}>
-                (503) 338-5200 15612 Fisher Island Dr Miami Beach, Florida(FL), 33109
-              </Writing>
             </Card>
           ))}
         </ScrollView>
@@ -66,8 +70,8 @@ export default function SelectAddress({}) {
         label={'Next'}
         ctw="mt-10"
         fullWidth
-        screenNameToGoOnPress={'select-card'}
-        // onPress={Go.getGoToScreen(Screens['search'])}
+
+        // onPress={() => console.log('07-08', 'press')}
       />
     </SafeFullScreenLayout>
   )
