@@ -16,6 +16,7 @@ const Screens = {
   'create-address': '/place-order/create-address',
   'select-card': '/place-order/select-card',
   'create-card': '/place-order/create-card',
+  'show-delivery': '/place-order/show-delivery',
   drawerone: '/drawer/one',
   drawertwo: '/drawer/two',
   tabsone: '/tabs/one',

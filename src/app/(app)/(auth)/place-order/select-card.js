@@ -70,7 +70,7 @@ export default function SelectCard({}) {
         label={'Next'}
         ctw="mt-10"
         fullWidth
-
+          screenNameToGoOnPress={'show-delivery'}
         // onPress={() => console.log('07-08', 'press')}
       />
     </SafeFullScreenLayout>

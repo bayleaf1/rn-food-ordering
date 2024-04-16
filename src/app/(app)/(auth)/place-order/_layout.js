@@ -62,6 +62,13 @@ export default function SelectAddressLayout() {
           ),
         }}
       />
+      <PrimaryStack.Screen
+        name="show-delivery"
+        options={{
+          headerShown: false,
+          gestEnabled: true,
+        }}
+      />
     </PrimaryStack>
   )
 }
