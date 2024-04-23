@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler'
 import '@constants/AppConfig'
 import '@constants/globalDeclarations'
-import SplashView from '@components/SplashView/SplashView'
+import SplashView from '@screens/splash/SplashView'
 import NativeStackResponsableForScreenOrientation from '@libs/Navigation/NativeStackResponsableForScreenOrientation'
 import AppLoadingProvider, { useAppLoadingProvider } from '@providers/AppLoadingProvider'
 import FontsProvider from '@providers/FontsProvider'
@@ -35,7 +35,7 @@ export default function AppLayout() {
               <FontsProvider>
                 <ScreenOrientationProvider>
                   <SessionProvider>
-                    <SplashView>
+                    <SplashView showInDev={true}>
                       <StopRenderIfAppNotLoaded>
                         {/* Might change name */}
                         <NativeStackResponsableForScreenOrientation />
