@@ -23,6 +23,9 @@ const Screens = {
   tabstwo: '/tabs/two',
   'shared-one': '/shared/one',
   'shared-two': '/shared/two',
+  'landing-first': '/landing/first',
+  'landing-second': '/landing/second',
+  'landing-third': '/landing/third',
 }
 
 export default Screens
