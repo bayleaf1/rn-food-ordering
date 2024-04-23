@@ -4,7 +4,12 @@ export default function LayoutWithGaps({ children }) {
   return <Layout.VisibleArea>{children}</Layout.VisibleArea>
 }
 
-LayoutWithGaps.TopSection = ({ children, topSpaceForVerticalPart = Layout.VERTICAL_TOP_SPACE }) => (
+LayoutWithGaps.TopSection = ({
+  children,
+  moreContentTw,
+  topSpaceForVerticalPart = Layout.VERTICAL_TOP_SPACE,
+  moreContentStyles,
+}) => (
   <Layout.SafeArea top left right moreTw={'flex-0'}>
     <Layout.VerticalPart topSpace={topSpaceForVerticalPart} bottomSpace={0} moreTw="flex-grow-0">
       <Layout.HorizontalPart
@@ -12,13 +17,19 @@ LayoutWithGaps.TopSection = ({ children, topSpaceForVerticalPart = Layout.VERTIC
         rightSpace={Layout.HORIZONTAL_SPACE}
         moreTw="flex-grow-0"
       >
-        <Layout.Content>{children}</Layout.Content>
+        <Layout.Content moreTw={moreContentTw} moreStyles={moreContentStyles}>
+          {children}
+        </Layout.Content>
       </Layout.HorizontalPart>
     </Layout.VerticalPart>
   </Layout.SafeArea>
 )
 
-LayoutWithGaps.Gap = ({ moreContentTw,  children }) => <Layout.Content moreTw={moreContentTw}>{children}</Layout.Content>
+LayoutWithGaps.Gap = ({ moreContentTw, moreContentStyles, children }) => (
+  <Layout.Content moreStyles={moreContentStyles} moreTw={moreContentTw}>
+    {children}
+  </Layout.Content>
+)
 
 LayoutWithGaps.BottomSection = ({ children, contentTw }) => (
   <Layout.SafeArea bottom left right>

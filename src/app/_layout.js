@@ -35,7 +35,7 @@ export default function AppLayout() {
               <FontsProvider>
                 <ScreenOrientationProvider>
                   <SessionProvider>
-                    <SplashView showInDev={true}>
+                    <SplashView showInDev={false}>
                       <StopRenderIfAppNotLoaded>
                         {/* Might change name */}
                         <NativeStackResponsableForScreenOrientation />

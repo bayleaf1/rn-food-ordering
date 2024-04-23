@@ -5,14 +5,14 @@ import Rhomb from "./Rhomb";
 export default function SearchPanel() {
     return (
       <View
-        tw="mt-4 flex flex-row"
+        tw="mt-4x flex flex-row"
         style={{
           columnGap: 20,
         }}
       >
         <WritingInput
           placeholder={'Search food...'}
-          inputViewTw={'bg-gray-50 h-14'}
+          inputViewTw={'bg-gray-50 h-12'}
           containerTw={'grow'}
           leftAddornment={
             <Icon
@@ -23,7 +23,7 @@ export default function SearchPanel() {
           }
         />
   
-        <Rhomb ctw="h-[54px]">
+        <Rhomb ctw="h-[50px]">
           <Icon name="filters" iconElementTw="pointer-events-none fill-white" />
         </Rhomb>
       </View>

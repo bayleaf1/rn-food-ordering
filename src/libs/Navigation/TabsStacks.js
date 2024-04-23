@@ -34,7 +34,7 @@ BottomTabsStack.CustomTabBar = CustomTabBar
 function CustomTabBar({ navigationItems = {}, state }) {
   return (
     <>
-      <View tw="flex h-14 justify-center border-t border-gray-200 bg-slate-50">
+      <View tw="flex h-10 justify-center border-t border-gray-200 bg-slate-50">
         {/* <Layout.HorizontalPart baseTw="flex-0"> */}
         <Layout.Content tw="flex flex-row justify-around">
           {state.routes.map((route, idx) => {
@@ -45,7 +45,7 @@ function CustomTabBar({ navigationItems = {}, state }) {
                 <Go toScreen={'tabs' + route.name}>
                   <LocalPicture
                     icon={item.iconName}
-                    ctw="h-6"
+                    ctw="h-[20px]"
                     iconProps={{ fill: isActive && 'red' }}
                   />
                   <Writing xs>{item.label}</Writing>

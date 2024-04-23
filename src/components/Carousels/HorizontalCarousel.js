@@ -1,4 +1,5 @@
 import DeviceMeta from '@libs/DeviceMeta'
+import { hp } from '@libs/Styling'
 import { Animated } from 'react-native'
 
 const width = DeviceMeta.windowWidth()
@@ -25,7 +26,7 @@ export default function HorizontalCarousel({
   const SNAP_INTERVAL = ITEM_SIZE + HORIZONTAL_SPACE * 2
   const PLACEHOLDER_ITEM_WIDTH = SPACER_ITEM_SIZE - HORIZONTAL_SPACE * 2
   return (
-    <View style={{ width: WIDTH }}>
+    <View style={{ width: WIDTH, backgroundColor: 'red', height: '100%' }} >
       <Animated.FlatList
         horizontal
         bounces={false}
@@ -41,7 +42,7 @@ export default function HorizontalCarousel({
         keyExtractor={(_item, index) => index}
         snapToAlignment={'start'}
         data={[...items, PLACEHOLDER_ITEM]}
-        contentContainerStyle={{ alignItems: 'flex-end', ...contentContainerStyle  }}
+        contentContainerStyle={{ alignItems: 'flex-center', ...contentContainerStyle  }}
         renderItem={({ index, item }) => {
           if (Object.is(item, PLACEHOLDER_ITEM))
             return <View style={{ width: PLACEHOLDER_ITEM_WIDTH }} />

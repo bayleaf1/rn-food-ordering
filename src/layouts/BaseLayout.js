@@ -165,8 +165,8 @@ export const LayoutForBottomTabs = ({ headerIsShown, children, contentTw = '' })
   }
 }
 
-function Content({ moreTw, children }) {
-  return <View tw={cn(moreTw)}>{children}</View>
+function Content({ moreTw, children, moreStyles }) {
+  return <View tw={cn(moreTw)} style={moreStyles}>{children}</View>
 }
 function VisibleArea({ moreTw = '', children }) {
   return <View tw={cn('flex-1', moreTw)} children={children} />

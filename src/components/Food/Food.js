@@ -5,6 +5,7 @@ import Go from '@libs/Navigation/Go'
 import Writing from '@components/Writing/Writing'
 
 import Rhomb from '@components/Rhomb'
+import { hp } from '@libs/Styling'
 
 export default function Food({}) {
   return <View tw={cn('')}></View>
@@ -52,31 +53,41 @@ Food.Showcase = ({
   ratingContainerTw,
 }) => {
   return (
-    <Go toScreen="food-review">
-      <ViewWithShadow
-        elevation={elevation}
-        ctw={cn('w-full items-center self-start rounded-3xl p-4', containerTw, 'pt-0')}
-      >
-        <LocalPicture name={imageName} ctw="h-[200px] self-stretch" imageResizeMode="contain" />
-        <Writing {...titleSize} ctw={cn(titleMtTw)}>
-          {name}
-        </Writing>
+    // <Go toScreen="food-review">
+    <ViewWithShadow
+      elevation={elevation}
+      style={{maxHeight: hp(50)}}
+      ctw={cn(
+        'w-full h-full flex-1 items-center self-start rounded-3xl p-4',
+        containerTw,
+        'pt-0'
+      )}
+    >
+      <LocalPicture
+        style={{ height: hp(20) }}
+        name={imageName}
+        ctw="h-[200px]x self-stretch"
+        imageResizeMode="contain"
+      />
+      <Writing {...titleSize} ctw={cn(titleMtTw)}>
+        {name}
+      </Writing>
 
-        <Food.Rating
-          value={2}
-          iconTw={cn('h-[18px] w-[18px]', ratingIconTw)}
-          valueTextSize={valueTextSize}
-          containerTw={ratingContainerTw}
-        />
-        <Food.Price
-          value={15}
-          priceTw={'text-primary'}
-          currencySize={currencySize}
-          priceSize={priceSize}
-          containerTw={priceContainerTw}
-        />
-      </ViewWithShadow>
-    </Go>
+      <Food.Rating
+        value={2}
+        iconTw={cn('h-[18px] w-[18px]', ratingIconTw)}
+        valueTextSize={valueTextSize}
+        containerTw={ratingContainerTw}
+      />
+      <Food.Price
+        value={15}
+        priceTw={'text-primary'}
+        currencySize={currencySize}
+        priceSize={priceSize}
+        containerTw={priceContainerTw}
+      />
+    </ViewWithShadow>
+    // </Go>
   )
 }
 

@@ -44,7 +44,7 @@ LayoutForBottomTabs.defaultVerticalPartBottomSpace = 143
 
 LayoutForBottomTabs.BottomTabs = ({ routes = [LayoutForBottomTabs.BottomTabs.defaultRoute] }) => {
   return (
-    <ViewWithShadow elevation={5} ctw="flex-0 h-[62px] justify-center rounded-t-[30px]">
+    <ViewWithShadow elevation={5} ctw="flex-0 h-[50px] justify-center rounded-t-[30px]">
       <View tw={cn('flex-0 mx-10 h-full flex-row justify-around')}>
         {routes.map((route, key) => {
           return (
@@ -56,7 +56,7 @@ LayoutForBottomTabs.BottomTabs = ({ routes = [LayoutForBottomTabs.BottomTabs.def
               <View>
                 <Icon
                   name={route.iconName}
-                  ctw={'h-8 w-10'}
+                  ctw={'h-6 w-10'}
                   iconElementTw={cn(
                     route.isActive ? 'fill-primary stroke-primary' : 'fill-black stroke-black'
                   )}
