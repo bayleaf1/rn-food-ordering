@@ -68,6 +68,7 @@ export default function HorizontalCarousel({
                 width: ITEM_SIZE,
                 marginHorizontal: HORIZONTAL_SPACE,
                 transform: [{ scale }, { translateY }],
+                backgroundColor:'blue'
               }}
             >
               {renderItem({ item, index })}

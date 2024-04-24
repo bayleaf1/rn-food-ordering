@@ -57,20 +57,21 @@ export default function Page() {
       <LayoutWithGaps.TopSection
         moreContentTw={'flex justify-between'}
         moreContentStyles={{
-          height: wp('55%'),
+          height: wp(48),
         }}
       >
         <Title />
         <SearchPanel />
         <FoodCategories categories={categories} />
-        <SeeAll />
       </LayoutWithGaps.TopSection>
-      {/* </View> */}
 
-      <View tw={cn('flex-1 bg-gray-600')} style={{ heightx: hp(20), overflow: 'hidden' }}>
-        <Writing ctw={cn('')}> dsfsdfsdf </Writing>
+      <View tw={cn('')} style={{ marginTop: wp(7) }}>
+        <SeeAll />
       </View>
-      {/* <FoodListAsCarousel foods={foods} /> */}
+
+      <View tw={cn('flex-1 bg-gray-600')} style={{ marginTop: wp(5) }}>
+        <FoodListAsCarousel foods={foods} />
+      </View>
       {/* </View> */}
     </LayoutWithGaps>
   )
@@ -91,40 +92,18 @@ function SeeAll() {
 }
 function FoodListAsCarousel() {
   return (
-    <View tw={cn('')}>
-      {/* <Writing
-        medium
-        ctw={cn('text-right text-primary')}
-        style={{
-          marginRight: Layout.HORIZONTAL_SPACE,
-        }}
-      >
-        See all
-      </Writing> */}
-      <View style={{}}>
-        {/* //TODO add link */}
-        {/* <Writing
-        medium
-        ctw={cn('text-right text-primary')}
-        style={{
-          marginRight: Layout.HORIZONTAL_SPACE,
-        }}
-      >
-        See all
-      </Writing> */}
-        <HorizontalCarousel
-          items={foods}
-          NORMALIZED_ITEM_WIDTH={0.63}
-          HORIZONTAL_SPACE={Layout.HORIZONTAL_SPACE}
-          // contentContainerStyle={{
-          //   paddingBottom: 15,
-          //   paddingTop: 5,
-          //   marginTop: 30,
-          // }}
-          renderItem={({ item }) => <Food.Showcase {...item} ratingContainerTw={'mt-4'} />}
-        />
-      </View>
-    </View>
+    <HorizontalCarousel
+      items={foods}
+      swipeSpeed={0.3}
+      NORMALIZED_ITEM_WIDTH={0.63}
+      HORIZONTAL_SPACE={Layout.HORIZONTAL_SPACE}
+      contentContainerStyle={{
+        // paddingBottom: 15,
+        //   paddingTop: 5,
+        //   marginTop: 30,
+      }}
+      renderItem={({ item }) => <Food.Showcase {...item} ratingContainerTw={'mt-4'} />}
+    />
   )
 }
 

@@ -56,17 +56,17 @@ Food.Showcase = ({
     // <Go toScreen="food-review">
     <ViewWithShadow
       elevation={elevation}
-      style={{maxHeight: hp(50)}}
+      // style={{maxHeight: hp(60)}}
       ctw={cn(
-        'w-full h-full flex-1 items-center self-start rounded-3xl p-4',
+        'w-full h-full flex-1 items-center flex-0 self-start rounded-3xl p-4',
         containerTw,
         'pt-0'
       )}
     >
       <LocalPicture
-        style={{ height: hp(20) }}
+        // style={{ height: hp(20) }}
         name={imageName}
-        ctw="h-[200px]x self-stretch"
+        ctw="h-[200px] self-stretch"
         imageResizeMode="contain"
       />
       <Writing {...titleSize} ctw={cn(titleMtTw)}>
