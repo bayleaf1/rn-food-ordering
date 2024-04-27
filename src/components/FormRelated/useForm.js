@@ -70,7 +70,6 @@ useForm.validators = {
   length:
     (length = 1) =>
     (v) => ({ ok: v.length === length, message: 'Length must be ' + length }),
-  selectDropdownItem: (v) => ({ ok: !!v.length, message: 'Select an item' }),
 }
 
 function useErrors() {
