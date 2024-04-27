@@ -1,9 +1,9 @@
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 
 export default function Page() {
   // <SafeFullScreenLayout>
-  return <Writing>Tabs - two</Writing>
+  return <AppText>Tabs - two</AppText>
   {
     /* </SafeFullScreenLayout> */
   }

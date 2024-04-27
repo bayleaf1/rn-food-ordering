@@ -5,7 +5,7 @@ import LayoutForBottomTabs from '@layouts/LayoutForBottomTabs'
 import { Algebra } from '@libs/Algebra'
 import { FlatList } from 'react-native'
 const COLUMNS_COUNT = 2
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 
 export default function Page() {
   let items = Food.Showcase.propsModels(10)
@@ -50,10 +50,10 @@ function FoodList({ items = [], itemsCount = 0 }) {
           })}
         >
           {isFirst && (
-            <Writing xl3 medium lineHeight={37} ctw={cn('mb-3 mt-0 self-start')}>
+            <AppText xl3 medium lineHeight={37} ctw={cn('mb-3 mt-0 self-start')}>
               Found {'\n'}
               {itemsCount} result
-            </Writing>
+            </AppText>
           )}
           <Food.Showcase
             {...item}

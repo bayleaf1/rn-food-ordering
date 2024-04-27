@@ -3,7 +3,7 @@ import Card from '@components/Card'
 import FadingOverlay from '@components/FadingOverlay'
 import Food from '@components/Food/Food'
 import ViewWithShadow from '@components/ViewWithShadow'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 import LayoutForBottomTabs from '@layouts/LayoutForBottomTabs'
 import { Algebra } from '@libs/Algebra'
 import { FlatList } from 'react-native'
@@ -84,9 +84,9 @@ function FoodList({ items = [], itemsCount = 0 }) {
           <Food.CompactShowcase
             {...item}
             elementNearTitle={
-              <Writing sm ctw="self-start text-primary">
+              <AppText sm ctw="self-start text-primary">
                 x{2}
-              </Writing>
+              </AppText>
             }
             containerTw="p-1"
           />

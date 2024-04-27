@@ -1,6 +1,6 @@
 import { Text } from 'react-native'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 
 import Go from '@libs/Navigation/Go'
 export default function Page() {
@@ -8,7 +8,7 @@ export default function Page() {
     <SafeFullScreenLayout headerIsShown>
       <Text>Terms of use</Text>
       <Go toScreen={'drawerOne'}>
-        <Writing>Go to drawer</Writing>
+        <AppText>Go to drawer</AppText>
       </Go>
     </SafeFullScreenLayout>
   )

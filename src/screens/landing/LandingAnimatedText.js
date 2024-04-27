@@ -1,4 +1,4 @@
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 import { useAppTheme } from '@providers/AppTheme'
 import { TextInput } from 'react-native'
 import Animated, {
@@ -24,9 +24,9 @@ export default function LandingAnimatedText({ title, subtitle }) {
         tw={cn('mt-2')}
         entering={FadeInLeft.delay(1400).duration(700).easing(Easing.out(Easing.ease))}
       >
-        <Writing ctw={cn('text-center text-primary')} semibold xl2>
+        <AppText ctw={cn('text-center text-primary')} semibold xl2>
           {subtitle}
-        </Writing>
+        </AppText>
       </Animated.View>
     </View>
   )
@@ -56,7 +56,7 @@ function AnimatedText({ value = '', duration = 1500 }) {
       style={{
         color: theme.colors.primary,
         textAlign: 'center',
-        ...Writing.textStyle({ xl: true }),
+        ...AppText.textStyle({ xl: true }),
       }}
     />
   )

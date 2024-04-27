@@ -3,7 +3,7 @@ import Card from '@components/Card'
 import FadingOverlay from '@components/FadingOverlay'
 import Radio from '@components/FormRelated/Radio'
 import Icon from '@components/Pictures/Icon'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import React from 'react'
 import { ScrollView, View } from 'react-native'
@@ -17,9 +17,9 @@ export default function SelectAddress({}) {
         renderLabel={({ labelTw }) => (
           <View ctw={'flex flex-row items-center bg-gray-600'} style={{ flexDirection: 'row' }}>
             <Icon name="plus" ctw={'mr-2 mt-[3px] h-4 w-4 '} iconElementTw={labelTw} />
-            <Writing sm ctw={cn('relative self-start', labelTw)}>
+            <AppText sm ctw={cn('relative self-start', labelTw)}>
               Add New Address
-            </Writing>
+            </AppText>
           </View>
         )}
         screenNameToGoOnPress={'create-address'}
@@ -44,19 +44,19 @@ export default function SelectAddress({}) {
           {[1, 2, 1, 1, 1, 1, 1, 1, 1, 1].map((item, key) => (
             <Card ctw={cn(key === 0 && 'mt-[30px]')} key={key} onPress={() => setChecked(item)}>
               <View tw={cn('flex flex-row justify-between')}>
-                <Writing semibold ctw={cn('')}>
+                <AppText semibold ctw={cn('')}>
                   My home address
-                </Writing>
+                </AppText>
                 <View tw={cn('rounded-fullx bg-gray-200x')}>
                   <Radio checked={item === checked} onPress={() => setChecked(item)} />
                 </View>
               </View>
-              <Writing sm ctw={cn('text-gray-400')}>
+              <AppText sm ctw={cn('text-gray-400')}>
                 Home
-              </Writing>
-              <Writing sm ctw={cn('mt-3 text-gray-400')} numberOfLines={2} additionalLineHeight={2}>
+              </AppText>
+              <AppText sm ctw={cn('mt-3 text-gray-400')} numberOfLines={2} additionalLineHeight={2}>
                 (503) 338-5200 15612 Fisher Island Dr Miami Beach, Florida(FL), 33109
-              </Writing>
+              </AppText>
             </Card>
           ))}
         </ScrollView>

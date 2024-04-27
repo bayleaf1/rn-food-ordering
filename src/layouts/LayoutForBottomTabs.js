@@ -1,6 +1,6 @@
 import Icon from '@components/Pictures/Icon'
 import ViewWithShadow from '@components/ViewWithShadow'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 import Go from '@libs/Navigation/Go'
 import { View } from 'react-native'
 import { Layout } from './BaseLayout'
@@ -61,9 +61,9 @@ LayoutForBottomTabs.BottomTabs = ({ routes = [LayoutForBottomTabs.BottomTabs.def
                     route.isActive ? 'fill-primary stroke-primary' : 'fill-black stroke-black'
                   )}
                 />
-                {/* <Writing s9 ctw={cn('text-center', route.isActive && 'text-primary')}>
+                {/* <AppText s9 ctw={cn('text-center', route.isActive && 'text-primary')}>
                   {route.label}
-                </Writing> */}
+                </AppText> */}
               </View>
             </Ripple>
           )

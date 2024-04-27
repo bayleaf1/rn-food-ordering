@@ -1,4 +1,4 @@
-import WritingInput from '@components/FormRelated/WritingInput'
+import AppTextInput from '@components/FormRelated/AppTextInput'
 import { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select'
@@ -17,7 +17,7 @@ export default function AppPicker({
 
   return (
     <View style={style}>
-      <WritingInput.LabelIfExists value={label} />
+      <AppTextInput.LabelIfExists value={label} />
       <View tw="relative">
         <RNPickerSelect
           onValueChange={(value) => onChangeText(value === null ? '' : value)}
@@ -36,16 +36,16 @@ export default function AppPicker({
           onOpen={() => setFocus(true)}
           items={items}
         />
-        <WritingInput.InnerBorder focus={focus} />
+        <AppTextInput.InnerBorder focus={focus} />
       </View>
-      <WritingInput.ErrorMessageIfExists message={errorMessage} />
+      <AppTextInput.ErrorMessageIfExists message={errorMessage} />
     </View>
   )
 }
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
-    fontSize: WritingInput.normalizedInputFontSize,
+    fontSize: AppTextInput.normalizedInputFontSize,
     paddingVertical: 8,
     paddingHorizontal: 5,
     // borderWidth: 0,
@@ -57,7 +57,7 @@ const pickerSelectStyles = StyleSheet.create({
     height: '100',
   },
   inputAndroid: {
-    fontSize: WritingInput.normalizedInputFontSize,
+    fontSize: AppTextInput.normalizedInputFontSize,
     paddingHorizontal: 5,
     paddingVertical: 8,
     // backgroundColor: 'red',

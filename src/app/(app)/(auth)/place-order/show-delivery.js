@@ -1,6 +1,6 @@
 import Button from '@components/Button'
 import LottieAnimation from '@components/LottieAnimation'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import Screens from '@libs/Navigation/ScreenList'
 import { useRouter } from 'expo-router'
@@ -24,14 +24,14 @@ export default function ShowDelivery({}) {
         durationInMs={3000}
       />
       <View tw={cn('flex-1')}>
-        <Writing xl2 semibold ctw={cn('text-center text-primary')}>
+        <AppText xl2 semibold ctw={cn('text-center text-primary')}>
           {' '}
           Your food is on the way{' '}
-        </Writing>
-        <Writing lg ctw={cn('mt-3 text-center')}>
+        </AppText>
+        <AppText lg ctw={cn('mt-3 text-center')}>
           {' '}
           Estimated time: 25 min{' '}
-        </Writing>
+        </AppText>
       </View>
 
       <Button.Outlined label={'Return to home screen'} fullWidth screenNameToGoOnPress={'home'} />

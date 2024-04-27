@@ -2,7 +2,7 @@ import Icon from '@components/Pictures/Icon'
 import LocalPicture from '@components/Pictures/LocalPicture'
 import ViewWithShadow from '@components/ViewWithShadow'
 import Go from '@libs/Navigation/Go'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 
 import Rhomb from '@components/Rhomb'
 import { hp } from '@libs/Styling'
@@ -14,9 +14,9 @@ export default function Food({}) {
 Food.Rating = ({ value = 0, iconTw, containerTw, valueTextSize = { md: true } }) => (
   <View tw={cn('flex flex-row items-center justify-center self-center', containerTw)}>
     <Icon name="rating-star" ctw={cn('h-[22px] w-[22px]', iconTw)} />
-    <Writing {...valueTextSize} ctw={cn('ml-1 text-gray-400')}>
+    <AppText {...valueTextSize} ctw={cn('ml-1 text-gray-400')}>
       {value}.0
-    </Writing>
+    </AppText>
   </View>
 )
 
@@ -29,12 +29,12 @@ Food.Price = ({
   priceSize = { xl2: true },
 }) => (
   <View tw={cn('mt-6', containerTw)}>
-    <Writing {...currencySize} lineHeight={currencyLineHeight} ctw={cn('text-primary')}>
+    <AppText {...currencySize} lineHeight={currencyLineHeight} ctw={cn('text-primary')}>
       ${' '}
-      <Writing {...priceSize} ctw={cn('text-black', priceTw)}>
+      <AppText {...priceSize} ctw={cn('text-black', priceTw)}>
         {value}
-      </Writing>
-    </Writing>
+      </AppText>
+    </AppText>
   </View>
 )
 
@@ -69,9 +69,9 @@ Food.Showcase = ({
         ctw="h-[200px] self-stretch"
         imageResizeMode="contain"
       />
-      <Writing {...titleSize} ctw={cn(titleMtTw)}>
+      <AppText {...titleSize} ctw={cn(titleMtTw)}>
         {name}
-      </Writing>
+      </AppText>
 
       <Food.Rating
         value={2}
@@ -114,9 +114,9 @@ Food.CompactShowcase = ({ name, imageName, elementNearTitle, containerTw }) => {
 
           <View tw={cn('mt-3 ml-3 grow')}>
             <View tw={cn('flex flex-row justify-between')}>
-              <Writing lg ctw="inline self-start">
+              <AppText lg ctw="inline self-start">
                 {name}
-              </Writing>
+              </AppText>
               {elementNearTitle}
             </View>
 
@@ -157,14 +157,14 @@ Food.CardOverview = () => {
   function Header(props) {
     return (
       <>
-        <Writing sm light ctw={cn('font-light text-black')}>
+        <AppText sm light ctw={cn('font-light text-black')}>
           {props.categoryName}
-        </Writing>
+        </AppText>
 
         <View tw={cn('mt-2 flex flex-row items-center justify-between')}>
-          <Writing lg ctw={cn('')}>
+          <AppText lg ctw={cn('')}>
             {props.foodName}
-          </Writing>
+          </AppText>
 
           <Food.Rating value={props.rating} />
         </View>
@@ -173,7 +173,7 @@ Food.CardOverview = () => {
   }
   function Description(props) {
     return (
-      <Writing
+      <AppText
         sm
         ctw={cn('mt-3 text-gray-600')}
         numberOfLines={3}
@@ -208,14 +208,14 @@ Food.CardOverview.DeliveryDuration = ({
 }) => {
   return (
     <View tw={cn('mt-4 flex flex-row flex-wrap items-center', containerTw)}>
-      <Writing {...labelWeight} {...labelSize} ctw={cn('')}>
+      <AppText {...labelWeight} {...labelSize} ctw={cn('')}>
         Delivery time
-      </Writing>
+      </AppText>
       <View tw={cn(' ml-8 flex flex-row items-center')}>
         <Icon name="clock-red" ctw={cn('h-[24px] w-[24px]', iconTw)} />
-        <Writing {...durationSize} medium ctw={cn('ml-1 text-black')}>
+        <AppText {...durationSize} medium ctw={cn('ml-1 text-black')}>
           {minutes} mins
-        </Writing>
+        </AppText>
       </View>
     </View>
   )
@@ -233,9 +233,9 @@ Food.CardOverview.TotalPriceWithAction = ({
 }) => {
   return (
     <View>
-      <Writing {...labelSize} semibold ctw={cn('mt-8', labelTw)}>
+      <AppText {...labelSize} semibold ctw={cn('mt-8', labelTw)}>
         Total price
-      </Writing>
+      </AppText>
 
       <View tw={cn('mt-2 flex flex-row items-center justify-between', bottomSectionTw)}>
         <Food.Price

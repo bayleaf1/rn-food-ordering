@@ -1,10 +1,10 @@
-import Writing from '@components/Writing/Writing';
+import AppText from '@components/AppText/AppText';
 import { LayoutWithTopContent, SafeFullScreenLayout } from '@layouts/BaseLayout';
 
 export default function Page() {
   return (
     <SafeFullScreenLayout headerIsShown>
-      <Writing>Drawer - second</Writing>
+      <AppText>Drawer - second</AppText>
     </SafeFullScreenLayout>
   )
 }

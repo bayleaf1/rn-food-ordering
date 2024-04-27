@@ -4,7 +4,7 @@ import FadingOverlay from '@components/FadingOverlay'
 import Radio from '@components/FormRelated/Radio'
 import Icon from '@components/Pictures/Icon'
 import LocalPicture from '@components/Pictures/LocalPicture'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import React from 'react'
 import { ScrollView, View } from 'react-native'
@@ -18,9 +18,9 @@ export default function SelectCard({}) {
         renderLabel={({ labelTw }) => (
           <View ctw={'flex flex-row items-center bg-gray-600'} style={{ flexDirection: 'row' }}>
             <Icon name="plus" ctw={'mr-2 mt-[3px] h-4 w-4 '} iconElementTw={labelTw} />
-            <Writing sm ctw={cn('relative self-start', labelTw)}>
+            <AppText sm ctw={cn('relative self-start', labelTw)}>
               Add New Card
-            </Writing>
+            </AppText>
           </View>
         )}
         screenNameToGoOnPress={'create-card'}
@@ -50,14 +50,14 @@ export default function SelectCard({}) {
             >
               <LocalPicture name="credit-card" />
               <View tw={cn('absolute top-0 left-0 bottom-0 right-0', Card.paddingTw)}>
-                <Writing xl ctw={cn('mt-[20%] text-white')}>
+                <AppText xl ctw={cn('mt-[20%] text-white')}>
                   {' '}
                   1234 1234 1234 1234{' '}
-                </Writing>
-                <Writing lg ctw={cn('mt-[8%] text-white')}>
+                </AppText>
+                <AppText lg ctw={cn('mt-[8%] text-white')}>
                   {' '}
                   Joker Joker{' '}
-                </Writing>
+                </AppText>
 
                 <Radio checked={true} color={"white"} ctw="absolute right-2 top-2" />
               </View>

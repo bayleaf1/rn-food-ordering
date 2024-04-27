@@ -1,6 +1,6 @@
 import Button from '@components/Button'
 import AppPicker from '@components/FormRelated/AppPicker'
-import WritingInput from '@components/FormRelated/WritingInput'
+import AppTextInput from '@components/FormRelated/AppTextInput'
 import useForm from '@components/FormRelated/useForm'
 import LayoutWithGaps from '@layouts/LayoutWithGaps'
 import { useRouter } from 'expo-router'
@@ -28,7 +28,7 @@ export default function Modal() {
       <StatusBar style="light" />
       <LayoutWithGaps.BottomSection contentTw={'bg-gray-300x mt-6 flex-1 justify-between'}>
         <View tw="flex gap-4">
-          <WritingInput
+          <AppTextInput
             placeholder={'Title'}
             label={'Title'}
             {...getPropsForField('title')}
@@ -43,19 +43,19 @@ export default function Modal() {
               { label: 'Office', value: 'office' },
             ]}
           />
-          <WritingInput
+          <AppTextInput
             placeholder={'Phone'}
             label={'Phone'}
             inputTw={inputTw}
             {...getPropsForField('phone')}
           />
-          <WritingInput
+          <AppTextInput
             placeholder={'Address'}
             label={'Address'}
             inputTw={inputTw}
             {...getPropsForField('address')}
           />
-          <WritingInput
+          <AppTextInput
             placeholder={'Zip code'}
             label={'Zip code'}
             inputTw={inputTw}

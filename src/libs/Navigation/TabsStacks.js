@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 import Go from '../../libs/Navigation/Go'
 import { Layout } from '../../layouts/BaseLayout'
 import LocalPicture from '../../components/Pictures/LocalPicture'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 
 // Example
 // let tabBarNavigationItems = {
@@ -48,7 +48,7 @@ function CustomTabBar({ navigationItems = {}, state }) {
                     ctw="h-[20px]"
                     iconProps={{ fill: isActive && 'red' }}
                   />
-                  <Writing xs>{item.label}</Writing>
+                  <AppText xs>{item.label}</AppText>
                 </Go>
               </View>
             )

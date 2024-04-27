@@ -1,6 +1,6 @@
 import React from 'react'
 import { Image, View } from 'react-native'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 
 const IMAGES = {
   home: require('@images/colibri.jpg'),
@@ -29,7 +29,7 @@ function LocalPicture({ image = '', name = '', ctw = '', imageResizeMode = 'cove
 
   return (
     <View tw={ctw}>
-      <Writing xs>{image && `Image (${image}) is missing`}</Writing>
+      <AppText xs>{image && `Image (${image}) is missing`}</AppText>
     </View>
   )
 }

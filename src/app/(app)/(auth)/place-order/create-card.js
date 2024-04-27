@@ -1,6 +1,6 @@
 import Button from '@components/Button'
 import AppPicker from '@components/FormRelated/AppPicker'
-import WritingInput from '@components/FormRelated/WritingInput'
+import AppTextInput from '@components/FormRelated/AppTextInput'
 import useForm from '@components/FormRelated/useForm'
 import SpacerView from '@components/SpacerView'
 import LayoutWithGaps from '@layouts/LayoutWithGaps'
@@ -28,22 +28,22 @@ export default function Modal() {
       <StatusBar style="light" />
       <LayoutWithGaps.BottomSection contentTw={'bg-gray-300x mt-6 flex-1 justify-between'}>
         <View tw="flex gap-4">
-          <WritingInput {...getPropsForField('fullName')} inputTw={inputTw} />
-          <WritingInput.CardNumber
+          <AppTextInput {...getPropsForField('fullName')} inputTw={inputTw} />
+          <AppTextInput.CardNumber
             {...getPropsForField('cardNumber')}
             placeholder="1234 1234 1234 1234"
             inputTw={inputTw}
           />
 
           <View tw={cn('flex flex-row ')}>
-            <WritingInput.CardExpiration
+            <AppTextInput.CardExpiration
               {...getPropsForField('expiration')}
               inputTw={inputTw}
               placeholder="12/34"
               containerTw="flex-1"
             />
             <SpacerView ctw={'w-3'} />
-            <WritingInput.CardCVV
+            <AppTextInput.CardCVV
               {...getPropsForField('cvv')}
               inputTw={inputTw}
               containerTw="flex-1"
@@ -92,7 +92,7 @@ function CardNumber({
 
   return (
     <Pressable onPress={() => setFocus(true)} tw={cn('flex-0 w-ful', containerTw)} style={style}>
-      <WritingInput.LabelIfExists value={label} />
+      <AppTextInput.LabelIfExists value={label} />
 
       <View
         tw={cn(
@@ -110,13 +110,13 @@ function CardNumber({
           mask={Masks.CREDIT_CARD}
           placeholder={placeholder}
           tw={cn('flex-1 px-2 py-2', inputTw)}
-          style={{ fontSize: WritingInput.normalizedInputFontSize, fontFamily: 'Primary' }}
+          style={{ fontSize: AppTextInput.normalizedInputFontSize, fontFamily: 'Primary' }}
           ref={ref}
         />
         {rightAddornment}
-        <WritingInput.InnerBorder focus={focus} />
+        <AppTextInput.InnerBorder focus={focus} />
       </View>
-      <WritingInput.ErrorMessageIfExists message={errorMessage} />
+      <AppTextInput.ErrorMessageIfExists message={errorMessage} />
     </Pressable>
   )
 }

@@ -1,4 +1,4 @@
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 import { LayoutForBottomTabs } from '@layouts/BaseLayout'
 
 export default function Page() {
@@ -6,37 +6,37 @@ export default function Page() {
     <LayoutForBottomTabs headerIsShown bgColor={'blue'}>
       {/* <View tw="mt-20" /> */}
 
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - onxe</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - onxe</Writing>
-      <Writing>Tabs - onex</Writing>
-      <Writing>Tabs - onez</Writing>
-      <Writing>Tabs - oney</Writing>
-      <Writing>Tabs - one</Writing>
-      <Writing>Tabs - one</Writing>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - onxe</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - onxe</AppText>
+      <AppText>Tabs - onex</AppText>
+      <AppText>Tabs - onez</AppText>
+      <AppText>Tabs - oney</AppText>
+      <AppText>Tabs - one</AppText>
+      <AppText>Tabs - one</AppText>
     </LayoutForBottomTabs>
   )
 }

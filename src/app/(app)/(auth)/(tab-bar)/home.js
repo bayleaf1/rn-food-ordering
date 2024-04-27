@@ -4,7 +4,7 @@ import Icon from '@components/Pictures/Icon'
 import LocalPicture from '@components/Pictures/LocalPicture'
 import SearchPanel from '@components/SearchPanel'
 import ViewWithShadow from '@components/ViewWithShadow'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 import { Layout } from '@layouts/BaseLayout'
 import LayoutWithGaps from '@layouts/LayoutWithGaps'
 import useApi from '@libs/Api'
@@ -79,7 +79,7 @@ export default function Page() {
 
 function SeeAll() {
   return (
-    <Writing
+    <AppText
       medium
       ctw={cn('text-right text-primary')}
       style={{
@@ -87,7 +87,7 @@ function SeeAll() {
       }}
     >
       See all
-    </Writing>
+    </AppText>
   )
 }
 function FoodListAsCarousel() {
@@ -138,9 +138,9 @@ function FoodCategories(props) {
                   isActive && 'fill-white stroke-white'
                 )}
               />
-              <Writing xs ctw={cn('ml-2 text-gray-500', isActive && 'text-white')}>
+              <AppText xs ctw={cn('ml-2 text-gray-500', isActive && 'text-white')}>
                 {label}
-              </Writing>
+              </AppText>
             </View>
           )
         })}
@@ -152,10 +152,10 @@ function FoodCategories(props) {
 function Title() {
   return (
     <View style={{ marginTopx: hp(1) }}>
-      <Writing xl>Find Your</Writing>
-      <Writing semibold xl>
-        Best food <Writing xl>here</Writing>
-      </Writing>
+      <AppText xl>Find Your</AppText>
+      <AppText semibold xl>
+        Best food <AppText xl>here</AppText>
+      </AppText>
     </View>
   )
 }

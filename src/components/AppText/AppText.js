@@ -33,7 +33,7 @@ const propsForHint = {
   t: '',
   styles: {},
 }
-function Writing(props = propsForHint) {
+function AppText(props = propsForHint) {
   const { numberOfLines, ctw, style, children, onPress, t, styles } = props
 
   let { t: translation } = useTranslationProvider()
@@ -44,7 +44,7 @@ function Writing(props = propsForHint) {
     <Wrapper styles={styles}>
       <Text
         style={{
-          ...Writing.textStyle(props),
+          ...AppText.textStyle(props),
           ...style,
         }}
         tw={cn(ctw)}
@@ -57,7 +57,7 @@ function Writing(props = propsForHint) {
   )
 }
 
-Writing.textStyle = (props = propsForHint) => {
+AppText.textStyle = (props = propsForHint) => {
   const {
     xl6,
     xl5,
@@ -114,7 +114,7 @@ Writing.textStyle = (props = propsForHint) => {
   }
 }
 
-export default Writing
+export default AppText
 
 // function textStyles({ fontSize = 'base', lineHeight: {}, weight: {}, additionalLineHeight }) {
 //   const sizes = {

@@ -5,7 +5,7 @@ import Rhomb from '@components/Rhomb'
 import SpacerView from '@components/SpacerView'
 import ViewWithShadow from '@components/ViewWithShadow'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 
 export default function FoodReview({}) {
 
@@ -22,17 +22,17 @@ function Counter() {
   return (
     <View tw={cn('mx-auto mt-[5%] flex flex-row items-center ')}>
       <Rhomb ctw={cn('h-[55px]')} elevation={1}>
-        <Writing xl2 ctw={cn(' text-white')}>
+        <AppText xl2 ctw={cn(' text-white')}>
           -
-        </Writing>
+        </AppText>
       </Rhomb>
-      <Writing xl ctw={cn('px-4 text-primary ')}>
+      <AppText xl ctw={cn('px-4 text-primary ')}>
         1
-      </Writing>
+      </AppText>
       <Rhomb ctw={cn('h-[55px]')} elevation={1}>
-        <Writing xl2 ctw={cn('text-white')}>
+        <AppText xl2 ctw={cn('text-white')}>
           +
-        </Writing>
+        </AppText>
       </Rhomb>
     </View>
   )
@@ -72,14 +72,14 @@ function PictureWithCounter() {
 // function Header(props) {
 //   return (
 //     <>
-//       <Writing sm light ctw={cn('font-light text-black')}>
+//       <AppText sm light ctw={cn('font-light text-black')}>
 //         {props.categoryName}
-//       </Writing>
+//       </AppText>
 
 //       <View tw={cn('mt-2 flex flex-row items-center justify-between')}>
-//         <Writing lg ctw={cn('')}>
+//         <AppText lg ctw={cn('')}>
 //           {props.foodName}
-//         </Writing>
+//         </AppText>
 
 //         <Food.Rating value={props.rating} />
 //       </View>
@@ -89,21 +89,21 @@ function PictureWithCounter() {
 
 // function Description(props) {
 //   return (
-//     <Writing sm ctw={cn('mt-3 text-gray-600')} numberOfLines={3} children={props.foodDescription} />
+//     <AppText sm ctw={cn('mt-3 text-gray-600')} numberOfLines={3} children={props.foodDescription} />
 //   )
 // }
 
 // function DeliveryDuration(props) {
 //   return (
 //     <View tw={cn('mt-4 flex flex-row flex-wrap items-center')}>
-//       <Writing light ctw={cn('')}>
+//       <AppText light ctw={cn('')}>
 //         Delivery time
-//       </Writing>
+//       </AppText>
 //       <View tw={cn(' ml-8 flex flex-row items-center')}>
 //         <Icon name="clock-red" ctw="h-[24px] w-[24px]" />
-//         <Writing sm semibold ctw={cn('ml-1 text-black')}>
+//         <AppText sm semibold ctw={cn('ml-1 text-black')}>
 //           {props.deliveryMinutes} mins
-//         </Writing>
+//         </AppText>
 //       </View>
 //     </View>
 //   )
@@ -112,9 +112,9 @@ function PictureWithCounter() {
 // function Footer(props) {
 //   return (
 //     <>
-//       <Writing xs semibold ctw={cn('mt-8')}>
+//       <AppText xs semibold ctw={cn('mt-8')}>
 //         Total price
-//       </Writing>
+//       </AppText>
 
 //       <View tw={cn('mt-2 flex flex-row items-center justify-between')}>
 //         <Food.Price value={props.foodPrice} />

@@ -1,4 +1,4 @@
-import WritingInput from "./FormRelated/WritingInput";
+import AppTextInput from "./FormRelated/AppTextInput";
 import Icon from "./Pictures/Icon";
 import Rhomb from "./Rhomb";
 
@@ -10,7 +10,7 @@ export default function SearchPanel() {
           columnGap: 20,
         }}
       >
-        <WritingInput
+        <AppTextInput
           placeholder={'Search food...'}
           inputViewTw={'bg-gray-50 h-12'}
           containerTw={'grow'}

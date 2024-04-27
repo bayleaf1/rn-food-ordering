@@ -5,7 +5,7 @@ import Go from './Go'
 import { useDrawerProgress } from '@react-navigation/drawer'
 import { useWindowDimensions } from 'react-native'
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 
 let withDefaultScreenOptions = (passed = {}) => ({
   overlayColor: 'transparent',
@@ -35,9 +35,9 @@ SliderDrawerStack.SceneZoomOut = SceneScreenZoomOut
 function CustomSlideDrawerContent({ state, navigation }) {
   return (
     <SafeFullScreenLayout>
-      <Writing h2>Custom drawer</Writing>
+      <AppText h2>Custom drawer</AppText>
 
-      <Writing onPress={navigation.closeDrawer}>Close</Writing>
+      <AppText onPress={navigation.closeDrawer}>Close</AppText>
 
       {state.routes.map((route, idx) => {
         let isActive = idx === state.index
@@ -47,7 +47,7 @@ function CustomSlideDrawerContent({ state, navigation }) {
             toScreen={'drawer' + route.name}
             key={idx}
           >
-            <Writing>{route.name}</Writing>
+            <AppText>{route.name}</AppText>
           </Go>
         )
       })}

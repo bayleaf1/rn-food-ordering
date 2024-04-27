@@ -4,7 +4,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import LayoutWithGaps from './LayoutWithGaps'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 
 export function Layout({ children }) {
   return children
@@ -66,7 +66,7 @@ function renderHeader({ title, renderRightElement, renderLeftElement,titleContai
       </View>
 
       <View tw={cn('absolute left-0 right-0 shrink grow top-0', titleContainerTw)}>
-        <Writing ctw={cn('text-center')}>{title}</Writing>
+        <AppText ctw={cn('text-center')}>{title}</AppText>
       </View>
 
       <View tw={cn('z-10 flex shrink grow flex-row justify-end')}>

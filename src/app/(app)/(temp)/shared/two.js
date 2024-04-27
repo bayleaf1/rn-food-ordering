@@ -1,4 +1,4 @@
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import Go from '@libs/Navigation/Go'
 import { View } from 'react-native'
@@ -44,9 +44,9 @@ export default function Page() {
   })
   return (
     <SafeFullScreenLayout contentTw="bg-red-200 relative">
-      <Writing>Shared two</Writing>
+      <AppText>Shared two</AppText>
       <Go toScreen="shared-one">
-        <Writing>Go to shared one</Writing>
+        <AppText>Go to shared one</AppText>
       </Go>
       <Animated.View
         // tw="h-5 w-5 bg-sky-400"

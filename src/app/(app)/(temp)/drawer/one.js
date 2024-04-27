@@ -1,4 +1,4 @@
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import { SliderDrawerStack } from '@libs/Navigation/DrawerStacks'
 
@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <SliderDrawerStack.SceneZoomOut>
       <SafeFullScreenLayout headerIsShown>
-        <Writing>Drawer - home</Writing>
+        <AppText>Drawer - home</AppText>
       </SafeFullScreenLayout>
     </SliderDrawerStack.SceneZoomOut>
   )

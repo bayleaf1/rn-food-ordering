@@ -1,5 +1,5 @@
-import Writing from '@components/Writing/Writing'
-import normalizeFontSize from '@components/Writing/normalizeFontSize'
+import AppText from '@components/AppText/AppText'
+import normalizeFontSize from '@components/AppText/normalizeFontSize'
 import { getViews } from '@components/components'
 import DeviceMeta from '@libs/DeviceMeta'
 import { cn } from '@libs/Styling'
@@ -22,7 +22,7 @@ const codeHitingProps = {
   style: {},
 }
 
-function WritingInput(props = codeHitingProps) {
+function AppTextInput(props = codeHitingProps) {
   return (
     <BaseInput {...props}>
       {({ commonInputProps, getTw, onChangeText }) =>
@@ -41,16 +41,16 @@ function WritingInput(props = codeHitingProps) {
   )
 }
 
-WritingInput.CardNumber = (props = codeHitingProps) => (
-  <WritingInput {...props} mask={Masks.CREDIT_CARD} />
+AppTextInput.CardNumber = (props = codeHitingProps) => (
+  <AppTextInput {...props} mask={Masks.CREDIT_CARD} />
 )
 
-WritingInput.CardExpiration = (props = codeHitingProps) => (
-  <WritingInput {...props} mask={[/\d/, /\d/, '/', /\d/, /\d/]} />
+AppTextInput.CardExpiration = (props = codeHitingProps) => (
+  <AppTextInput {...props} mask={[/\d/, /\d/, '/', /\d/, /\d/]} />
 )
 
-WritingInput.CardCVV = (props = codeHitingProps) => (
-  <WritingInput {...props} mask={[/\d/, /\d/, /\d/]} />
+AppTextInput.CardCVV = (props = codeHitingProps) => (
+  <AppTextInput {...props} mask={[/\d/, /\d/, /\d/]} />
 )
 
 const ComponentParts = {
@@ -64,14 +64,14 @@ const ComponentParts = {
       )}
     />
   ),
-  LabelIfExists: ({ value }) => (value ? <Writing label ctw="mb-1" children={value} /> : null),
+  LabelIfExists: ({ value }) => (value ? <AppText label ctw="mb-1" children={value} /> : null),
   ErrorMessageIfExists: ({ message }) =>
-    message ? <Writing xs ctw="mt-1 text-primary" children={message} /> : null,
+    message ? <AppText xs ctw="mt-1 text-primary" children={message} /> : null,
 }
 
-_.merge(WritingInput, ComponentParts)
+_.merge(AppTextInput, ComponentParts)
 
-export default WritingInput
+export default AppTextInput
 
 let [InputView] = getViews()
 
@@ -89,7 +89,7 @@ function BaseInput(props = codeHitingProps) {
       tw={cn('flex-0 w-ful', props.containerTw)}
       style={props.style}
     >
-      <WritingInput.LabelIfExists value={props.label} />
+      <AppTextInput.LabelIfExists value={props.label} />
 
       <InputView
         tw={cn(
@@ -106,15 +106,15 @@ function BaseInput(props = codeHitingProps) {
             value: props.value,
             onChangeText: props.onChangeText,
             placeholder: props.placeholder,
-            style: { fontSize: WritingInput.normalizedInputFontSize, fontFamily: 'Primary' },
+            style: { fontSize: AppTextInput.normalizedInputFontSize, fontFamily: 'Primary' },
             ref: ref,
           },
           getTw: () => cn('flex-1 px-2 py-2', props.inputTw),
         })}
         {props.rightAddornment}
-        <WritingInput.InnerBorder focus={focus} />
+        <AppTextInput.InnerBorder focus={focus} />
       </InputView>
-      <WritingInput.ErrorMessageIfExists message={props.errorMessage} />
+      <AppTextInput.ErrorMessageIfExists message={props.errorMessage} />
     </Pressable>
   )
 }

@@ -1,6 +1,6 @@
 import Go from '@libs/Navigation/Go'
 import AnimationList from './AnimationList/AnimationList'
-import Writing from '@components/Writing/Writing'
+import AppText from '@components/AppText/AppText'
 
 //TODO copy to main repo
 
@@ -54,7 +54,7 @@ export default function Button({
         {renderLabel ? (
           renderLabel({ labelTw: style.labelTw })
         ) : (
-          <Writing ctw={cn('text-center', style.labelTw, labelTw)}>{label}</Writing>
+          <AppText ctw={cn('text-center', style.labelTw, labelTw)}>{label}</AppText>
         )}
       </View>
     </Wrapper>
