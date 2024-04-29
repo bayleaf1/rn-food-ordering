@@ -26,7 +26,7 @@ function Counter() {
           -
         </AppText>
       </Rhomb>
-      <AppText xl ctw={cn('px-4 text-primary ')}>
+      <AppText size="xl"ctw={cn('px-4 text-primary ')}>
         1
       </AppText>
       <Rhomb ctw={cn('h-[55px]')} elevation={1}>
@@ -72,12 +72,12 @@ function PictureWithCounter() {
 // function Header(props) {
 //   return (
 //     <>
-//       <AppText sm light ctw={cn('font-light text-black')}>
+//       <AppText size="sm"light ctw={cn('font-light text-black')}>
 //         {props.categoryName}
 //       </AppText>
 
 //       <View tw={cn('mt-2 flex flex-row items-center justify-between')}>
-//         <AppText lg ctw={cn('')}>
+//         <AppText size="lg"ctw={cn('')}>
 //           {props.foodName}
 //         </AppText>
 
@@ -89,7 +89,7 @@ function PictureWithCounter() {
 
 // function Description(props) {
 //   return (
-//     <AppText sm ctw={cn('mt-3 text-gray-600')} numberOfLines={3} children={props.foodDescription} />
+//     <AppText size="sm"ctw={cn('mt-3 text-gray-600')} numberOfLines={3} children={props.foodDescription} />
 //   )
 // }
 
@@ -101,7 +101,7 @@ function PictureWithCounter() {
 //       </AppText>
 //       <View tw={cn(' ml-8 flex flex-row items-center')}>
 //         <Icon name="clock-red" ctw="h-[24px] w-[24px]" />
-//         <AppText sm semibold ctw={cn('ml-1 text-black')}>
+//         <AppText size="sm"semibold ctw={cn('ml-1 text-black')}>
 //           {props.deliveryMinutes} mins
 //         </AppText>
 //       </View>
@@ -112,7 +112,7 @@ function PictureWithCounter() {
 // function Footer(props) {
 //   return (
 //     <>
-//       <AppText xs semibold ctw={cn('mt-8')}>
+//       <AppText size="xs" semibold ctw={cn('mt-8')}>
 //         Total price
 //       </AppText>
 

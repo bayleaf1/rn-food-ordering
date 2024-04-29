@@ -17,7 +17,7 @@ export default function SelectAddress({}) {
         renderLabel={({ labelTw }) => (
           <View ctw={'flex flex-row items-center bg-gray-600'} style={{ flexDirection: 'row' }}>
             <Icon name="plus" ctw={'mr-2 mt-[3px] h-4 w-4 '} iconElementTw={labelTw} />
-            <AppText sm ctw={cn('relative self-start', labelTw)}>
+            <AppText size="sm"ctw={cn('relative self-start', labelTw)}>
               Add New Address
             </AppText>
           </View>
@@ -51,10 +51,10 @@ export default function SelectAddress({}) {
                   <Radio checked={item === checked} onPress={() => setChecked(item)} />
                 </View>
               </View>
-              <AppText sm ctw={cn('text-gray-400')}>
+              <AppText size="sm"ctw={cn('text-gray-400')}>
                 Home
               </AppText>
-              <AppText sm ctw={cn('mt-3 text-gray-400')} numberOfLines={2} additionalLineHeight={2}>
+              <AppText size="sm"ctw={cn('mt-3 text-gray-400')} numberOfLines={2} additionalLineHeight={2}>
                 (503) 338-5200 15612 Fisher Island Dr Miami Beach, Florida(FL), 33109
               </AppText>
             </Card>

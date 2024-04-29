@@ -11,13 +11,13 @@ function ErrorBoundary(props) {
       <AppText xl2 semibold ctw="mx-auto">
         Smth went wrong
       </AppText>
-      <AppText lg ctw="mx-auto">
+      <AppText size="lg"ctw="mx-auto">
         Message: {props.error.message}
       </AppText>
-      <AppText sm onPress={props.retry} ctw="mx-auto mt-8">
+      <AppText size="sm"onPress={props.retry} ctw="mx-auto mt-8">
         Try Again?
       </AppText>
-      {/* <AppText xs ctw="mx-auto">
+      {/* <AppText size="xs" ctw="mx-auto">
         or
       </AppText>
       <Go toScreen="settings" ctw="mx-auto">

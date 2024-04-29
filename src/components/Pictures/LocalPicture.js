@@ -29,7 +29,7 @@ function LocalPicture({ image = '', name = '', ctw = '', imageResizeMode = 'cove
 
   return (
     <View tw={ctw}>
-      <AppText xs>{image && `Image (${image}) is missing`}</AppText>
+      <AppText size="xs">{image && `Image (${image}) is missing`}</AppText>
     </View>
   )
 }

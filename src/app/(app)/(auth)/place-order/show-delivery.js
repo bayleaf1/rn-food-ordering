@@ -28,7 +28,7 @@ export default function ShowDelivery({}) {
           {' '}
           Your food is on the way{' '}
         </AppText>
-        <AppText lg ctw={cn('mt-3 text-center')}>
+        <AppText size="lg"ctw={cn('mt-3 text-center')}>
           {' '}
           Estimated time: 25 min{' '}
         </AppText>

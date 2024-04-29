@@ -48,7 +48,7 @@ function CustomTabBar({ navigationItems = {}, state }) {
                     ctw="h-[20px]"
                     iconProps={{ fill: isActive && 'red' }}
                   />
-                  <AppText xs>{item.label}</AppText>
+                  <AppText size="xs">{item.label}</AppText>
                 </Go>
               </View>
             )

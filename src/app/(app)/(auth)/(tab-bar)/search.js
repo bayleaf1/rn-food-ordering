@@ -58,7 +58,7 @@ function FoodList({ items = [], itemsCount = 0 }) {
           <Food.Showcase
             {...item}
             elevation={1}
-            subtitleSize={{ xs: true }}
+            size="xs"
             titleSize={{ lg: true }}
             subtitleTw="mt-1"
             titleMtTw="-mt-3"

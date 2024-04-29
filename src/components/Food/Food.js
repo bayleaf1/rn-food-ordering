@@ -114,7 +114,7 @@ Food.CompactShowcase = ({ name, imageName, elementNearTitle, containerTw }) => {
 
           <View tw={cn('mt-3 ml-3 grow')}>
             <View tw={cn('flex flex-row justify-between')}>
-              <AppText lg ctw="inline self-start">
+              <AppText size="lg"ctw="inline self-start">
                 {name}
               </AppText>
               {elementNearTitle}
@@ -157,12 +157,12 @@ Food.CardOverview = () => {
   function Header(props) {
     return (
       <>
-        <AppText sm light ctw={cn('font-light text-black')}>
+        <AppText size="sm"light ctw={cn('font-light text-black')}>
           {props.categoryName}
         </AppText>
 
         <View tw={cn('mt-2 flex flex-row items-center justify-between')}>
-          <AppText lg ctw={cn('')}>
+          <AppText size="lg"ctw={cn('')}>
             {props.foodName}
           </AppText>
 
@@ -224,7 +224,7 @@ Food.CardOverview.DeliveryDuration = ({
 Food.CardOverview.TotalPriceWithAction = ({
   price,
   actionElement,
-  labelSize = { xs: true },
+  labelSize="xs",
   currencySize = {},
   priceSize = { xl2: true },
   labelTw,

@@ -66,7 +66,7 @@ const ComponentParts = {
   ),
   LabelIfExists: ({ value }) => (value ? <AppText label ctw="mb-1" children={value} /> : null),
   ErrorMessageIfExists: ({ message }) =>
-    message ? <AppText xs ctw="mt-1 text-primary" children={message} /> : null,
+    message ? <AppText size="xs" ctw="mt-1 text-primary" children={message} /> : null,
 }
 
 _.merge(AppTextInput, ComponentParts)

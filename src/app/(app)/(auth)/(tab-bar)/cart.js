@@ -84,7 +84,7 @@ function FoodList({ items = [], itemsCount = 0 }) {
           <Food.CompactShowcase
             {...item}
             elementNearTitle={
-              <AppText sm ctw="self-start text-primary">
+              <AppText size="sm"ctw="self-start text-primary">
                 x{2}
               </AppText>
             }

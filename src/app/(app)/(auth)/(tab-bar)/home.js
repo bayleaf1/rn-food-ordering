@@ -138,7 +138,7 @@ function FoodCategories(props) {
                   isActive && 'fill-white stroke-white'
                 )}
               />
-              <AppText xs ctw={cn('ml-2 text-gray-500', isActive && 'text-white')}>
+              <AppText size="xs" ctw={cn('ml-2 text-gray-500', isActive && 'text-white')}>
                 {label}
               </AppText>
             </View>
