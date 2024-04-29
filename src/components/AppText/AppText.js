@@ -1,45 +1,59 @@
-import { Pressable, Text } from 'react-native'
-import { useTranslationProvider } from '../../providers/TranslationProvider'
-import { Fragment } from 'react'
-import normalizeFontSize from './normalizeFontSize'
 import { cn } from '@libs/Styling'
+import { Text } from 'react-native-paper'
+import { useTranslationProvider } from '../../providers/TranslationProvider'
+import normalizeFontSize from './normalizeFontSize'
 
-const propsForHint = {
-  xl6: false,
-  xl5: false,
-  xl4: false,
-  xl3: false,
-  xl2: false,
-  xl: false,
-  lg: false,
-  sm: false,
-  xs: false,
-  s9: false,
-  s8: false,
-  base: true,
-  bold: false,
-  semibold: false,
-  medium: false,
-  light: false,
-  thin: false,
-  regular: true,
-  numberOfLines: undefined,
-  lineHeight: null,
-  additionalLineHeight: 0,
-  ctw: '',
-  style: {},
-  children: undefined,
-  onPress: undefined,
-  t: '',
-  styles: {},
-}
-function AppText(props = propsForHint) {
-  const { numberOfLines, ctw, style, children, onPress, t, styles } = props
+/**
+ * @param {Object} props - The component accepts text and onClick as props
+ * @param {('xs'|'sm'|'base'|'lg'|'xl'|'2xl')} props.size
+ * @param {('thin'|'light'|'regular'|'medium'|'semibold'|'bold')} props.weight
+ * @param {(number|undefined)} props.numberOfLines
+ * @param {string} props.ctw
+ * @param {Object} props.style
+ * @param {Object} props.children
+ * @param {string|[]} props.t
+ */
+function AppText(props) {
+  const {
+    numberOfLines,
+    weight = 'regular',
+    size = 'base',
+    ctw,
+    style,
+    children,
+    t,
+    styles,
+  } = props
 
   let { t: translation } = useTranslationProvider()
-  let Wrapper = onPress
-    ? (p) => <Pressable onPress={onPress} children={p.children} style={p.styles} />
-    : Fragment
+
+  let sizes = {
+    xs: 'labelSmall',
+    sm: 'labelMedium',
+    base: 'bodyLarge',
+    lg: 'titleMedium',
+    xl: 'headlineMedium',
+    '2xl': 'displayMedium',
+  }
+
+  const weights = {
+    bold: 'PrimaryBold',
+    semibold: 'PrimarySemiBold',
+    medium: 'PrimaryMedium',
+    light: 'PrimaryLight',
+    thin: 'PrimaryThin',
+    regular: 'Primary',
+  }
+
+  return (
+    <>
+      {/* <AppText size={''} /> */}
+      <Text variant={sizes[size]} style={{ color: 'black', fontFamily: weights[weight] }}>
+        {t && translation(...(Array.isArray(t) ? t : [t]))}
+        {children}
+      </Text>
+    </>
+  )
   return (
     <Wrapper styles={styles}>
       <Text
@@ -56,7 +70,6 @@ function AppText(props = propsForHint) {
     </Wrapper>
   )
 }
-
 AppText.textStyle = (props = propsForHint) => {
   const {
     xl6,
@@ -65,7 +78,7 @@ AppText.textStyle = (props = propsForHint) => {
     xl3,
     xl2,
     xl,
-    lg,
+    size = 'lg',
     sm,
     xs,
     s9,
@@ -81,7 +94,7 @@ AppText.textStyle = (props = propsForHint) => {
     additionalLineHeight,
   } = { ...propsForHint, ...props }
 
-  const size = [
+  const sizes = [
     [xl6, 40],
     [xl5, 36],
     [xl4, 32],
@@ -106,9 +119,9 @@ AppText.textStyle = (props = propsForHint) => {
   ].find((v) => v[0])
 
   return {
-    fontSize: normalizeFontSize(size[1]),
+    fontSize: normalizeFontSize(sizes[1]),
     lineHeight: normalizeFontSize(
-      typeof lineHeight === 'number' ? lineHeight : size[1] + 4 + additionalLineHeight
+      typeof lineHeight === 'number' ? lineHeight : sizes[1] + 4 + additionalLineHeight
     ),
     fontFamily: weight[1],
   }
@@ -124,7 +137,7 @@ export default AppText
 //     xl3: 28,
 //     xl2: 24,
 //     xl: 20,
-//     lg: 18,
+//     size="lg" : 18,
 //     sm: 14,
 //     xs: 11,
 //     s9: 9,
