@@ -1,22 +1,58 @@
-import { Pressable, Text } from 'react-native'
+import AppText from '@components/AppText/AppText'
+import Button from '@components/Button'
+import AppTextInput from '@components/FormRelated/AppTextInput'
+import useForm from '@components/FormRelated/useForm'
+import SpacerView from '@components/SpacerView'
+import endpoints from '@constants/endpoints'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
-import { useSessionProvider } from '@providers/SessionProvider'
+import Go from '@libs/Navigation/Go'
+import { wp } from '@libs/Styling'
 
-export default function Page() {
-  const { signIn } = useSessionProvider()
+let Spacer = SpacerView.createWithStyles(wp(4))
+
+export default function LoginPage() {
+  const { getPropsForField, validateFormAndFetch } = useForm({
+    fields: {
+      email: { value: '' },
+      password: { value: '' },
+    },
+    fetch: {
+      endpoint: endpoints.loginWithEmail,
+      onSuccess: ({ data }) => {
+        console.log('23-17', data)
+      },
+      onError: ({ error }) => {
+        console.log(`errorx:`, error)
+      },
+      method: 'get',
+    },
+  })
 
   return (
     <SafeFullScreenLayout>
-      <Text>Sign In</Text>
+      <AppText ctw={cn('text-center')} size="xl">
+        Fishbox
+      </AppText>
 
-      {/* <Link asChild href={'/'} onPress={signIn}> */}
-      {/* <Go gotoScreen="home" onPress={signIn}> */}
-       <Pressable onPress={signIn}>
+      <View tw={cn('')}>
+        <AppTextInput {...getPropsForField('email')} />
+        <Spacer />
+        <AppTextInput.Password {...getPropsForField('password')} />
+        <Spacer />
+        <Button
+          label={'Login'}
+          labelTw={'text-white'}
+          fullWidth
+          onPress={() => validateFormAndFetch()}
+        />
+      </View>
 
-        <Text>Home</Text>
-       </Pressable>
-      {/* </Compass> */}
-      {/* </Link> */}
+      <Go toScreen="forgot-password">
+        <AppText ctw={cn('')}> Forgot password? </AppText>
+      </Go>
+      <Go toScreen="sign-up">
+        <AppText ctw={cn('')}> Register </AppText>
+      </Go>
     </SafeFullScreenLayout>
   )
 }

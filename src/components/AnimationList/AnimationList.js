@@ -10,7 +10,7 @@ AnimationList.ZoomOutOnPress = ({
   goToScreen,
   onPress = () => '',
   children,
-  targetSize = 0.98
+  targetSize = 0.98,
 }) => {
   let size = useSharedValue(1)
   let [animTargetSize, setTargetSize] = useState(1)
@@ -25,8 +25,8 @@ AnimationList.ZoomOutOnPress = ({
     <Pressable
       onPressIn={() => {
         setTargetSize(targetSize)
-        onPress()
         setTimeout(() => {
+          onPress()
           if (goToScreen) goToScreen()
         }, 0)
       }}

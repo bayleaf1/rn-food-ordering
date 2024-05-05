@@ -15,11 +15,12 @@ const AuthContext = React.createContext({
 export const useSessionProvider = () => React.useContext(AuthContext)
 
 function SessionProvider(props) {
-  const [[isLoading, jwtToken], setJwtToken] = useStorageState('jwt-token')
+  const [[isLoading, jwtToken], setJwtToken, removeValue] = useStorageState('jwt-token')
   const isSignedIn = useMemo(() => !!jwtToken, [jwtToken])
   const isSignedOut = useMemo(() => !isSignedIn, [isSignedIn])
   let { setProviderAsLoaded } = useAppLoadingProvider()
 
+  // removeValue()
   useEffect(() => {
     if (!isLoading) setProviderAsLoaded('session')
   }, [isLoading])

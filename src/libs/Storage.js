@@ -23,7 +23,21 @@ export function useStorageState(key) {
     [key]
   )
 
-  return [state, setValue]
+  const removeValue = React.useCallback(() => removeStorageItemAsync(key), [key])
+
+  return [state, setValue, removeValue]
+
+  async function removeStorageItemAsync(key) {
+    if (Platform.OS === 'web') {
+      try {
+        localStorage.removeItem(key)
+      } catch (e) {
+        console.error('Local storage is unavailable:', e, '--libs/Storage')
+      }
+    } else {
+      await SecureStore.deleteItemAsync(key)
+    }
+  }
 }
 
 function useAsyncState(initialValue = [true, null]) {

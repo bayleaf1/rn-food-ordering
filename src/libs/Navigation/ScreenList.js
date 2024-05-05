@@ -1,8 +1,7 @@
 const Screens = {
   singIn: '/',
-  singUp: '/sign-up',
-  resetPassword: '/reset-password',
-  forgotPassword: '/forgot-password',
+  'sign-up': '/sign-up',
+  'forgot-password': '/forgot-password',
   TOS: '/terms-of-use',
   privacyPolicy: '/privacy-policy',
   //

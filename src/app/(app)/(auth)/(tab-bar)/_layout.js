@@ -3,7 +3,7 @@ import LayoutForBottomTabs from '@layouts/LayoutForBottomTabs'
 import Screens from '@libs/Navigation/ScreenList'
 import { BottomTabsStack } from '@libs/Navigation/TabsStacks'
 import { useSessionProvider } from '@providers/SessionProvider'
-import { Redirect } from 'expo-router'
+import { Redirect, Stack } from 'expo-router'
 
 //TODO RESTORE
 // export const ErrorBoundary = CustomErrorBoundary
@@ -17,6 +17,8 @@ export default function AuthorizedLayout() {
   const { isSignedOut } = useSessionProvider()
 
   if (isSignedOut) return <Redirect href={Screens.singIn} />
+
+  return <Stack />
 
   return (
     <BottomTabsStack

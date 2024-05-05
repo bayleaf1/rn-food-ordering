@@ -31,8 +31,8 @@ function AppText(props) {
     xs: 'labelSmall',
     sm: 'labelMedium',
     base: 'bodyLarge',
-    lg: 'titleMedium',
-    xl: 'headlineMedium',
+    lg: 'titleLarge',
+    xl: 'headlineLarge',
     '2xl': 'displayMedium',
   }
 
@@ -46,13 +46,10 @@ function AppText(props) {
   }
 
   return (
-    <>
-      {/* <AppText size={''} /> */}
-      <Text variant={sizes[size]} style={{ color: 'black', fontFamily: weights[weight] }}>
-        {t && translation(...(Array.isArray(t) ? t : [t]))}
-        {children}
-      </Text>
-    </>
+    <Text variant={sizes[size]} tw={ctw} style={{ color: 'black', fontFamily: weights[weight] }}>
+      {t && translation(...(Array.isArray(t) ? t : [t]))}
+      {children}
+    </Text>
   )
   return (
     <Wrapper styles={styles}>

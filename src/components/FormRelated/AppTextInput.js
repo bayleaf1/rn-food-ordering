@@ -41,6 +41,23 @@ function AppTextInput(props = codeHitingProps) {
   )
 }
 
+AppTextInput.Password = (props = codeHitingProps) => {
+  const [secure, setSecure] = useState(true)
+  return (
+    <AppTextInput
+      {...{
+        ...props,
+        secureTextEntry: secure,
+        rightAddornment: (
+          <Pressable onPress={() => setSecure((s) => !s)}>
+            <AppText ctw={cn('mr-2')}> {secure ? 'S' : 'H'} </AppText>
+          </Pressable>
+        ),
+      }}
+    />
+  )
+}
+
 AppTextInput.CardNumber = (props = codeHitingProps) => (
   <AppTextInput {...props} mask={Masks.CREDIT_CARD} />
 )
@@ -108,6 +125,7 @@ function BaseInput(props = codeHitingProps) {
             placeholder: props.placeholder,
             style: { fontSize: AppTextInput.normalizedInputFontSize, fontFamily: 'Primary' },
             ref: ref,
+            secureTextEntry: props.secureTextEntry,
           },
           getTw: () => cn('flex-1 px-2 py-2', props.inputTw),
         })}
