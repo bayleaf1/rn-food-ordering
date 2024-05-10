@@ -2,9 +2,14 @@ export default ({ config }) => {
   return {
     ...config,
     expo: {
-      name: 'rn-pr-1',
-      slug: 'rn-pr-1',
+      name: 'rn',
+      slug: 'rn',
       version: '1.0.0',
+      extra: {
+        eas: {
+          projectId: '0eba4bd8-ecef-4693-9a7f-d4cff6fc61f5',
+        },
+      },
       scheme: 'expo-top-app',
       orientation: 'portrait',
       icon: './assets/icon.png',
@@ -23,7 +28,7 @@ export default ({ config }) => {
           foregroundImage: './assets/adaptive-icon.png',
           backgroundColor: '#ffffff',
         },
-        package: 'com.dinu_ciobanu.rnpr1',
+        package: 'com.dinuciobanu.rn',
       },
       web: {
         favicon: './assets/favicon.png',
