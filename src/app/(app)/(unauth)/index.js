@@ -3,6 +3,7 @@ import Button from '@components/Button'
 import AppTextInput from '@components/FormRelated/AppTextInput'
 import useForm from '@components/FormRelated/useForm'
 import SpacerView from '@components/SpacerView'
+import AppConfig from '@constants/AppConfig'
 import endpoints from '@constants/endpoints'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import Go from '@libs/Navigation/Go'
@@ -31,7 +32,7 @@ export default function LoginPage() {
   return (
     <SafeFullScreenLayout>
       <AppText ctw={cn('text-center')} size="xl">
-        Fishbox
+        Fishbox - {AppConfig.TEST}
       </AppText>
 
       <View tw={cn('')}>

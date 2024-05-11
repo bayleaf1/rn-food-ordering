@@ -15,7 +15,7 @@ export default ({ config }) => {
       icon: './assets/icon.png',
       userInterfaceStyle: 'light',
       splash: {
-        image: './assets/splash.jpg',
+        image: './assets/splash.png',
         resizeMode: 'cover',
         backgroundColor: '#ffffff',
       },

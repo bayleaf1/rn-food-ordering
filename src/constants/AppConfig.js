@@ -4,6 +4,7 @@ const AppConfig = Object.freeze({
   ENV: process.env.EXPO_PUBLIC_ENV || reportMissing('ENV'),
   API_BASE_URL: process.env.EXPO_PUBLIC_API_BASE_URL || reportMissing('API_BASE_URL'),
   SCREEN_NAME_TO_REDIRECT_IF_AUTHORIZED: 'home',
+  TEST: process.env.EXPO_PUBLIC_TEST,
   isDevEnv() {
     return this.ENV === 'development'
   },
