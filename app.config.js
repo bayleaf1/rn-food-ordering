@@ -22,6 +22,7 @@ export default ({ config }) => {
       assetBundlePatterns: ['**/*'],
       ios: {
         supportsTablet: true,
+        bundleIdentifier: 'com.dinuciobanu.rn',
       },
       android: {
         adaptiveIcon: {
