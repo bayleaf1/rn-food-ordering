@@ -12,6 +12,7 @@ import normalizeFontSize from './normalizeFontSize'
  * @param {Object} props.style
  * @param {Object} props.children
  * @param {string|[]} props.t
+ * @param {string} props.testID
  */
 function AppText(props) {
   const {
@@ -23,6 +24,7 @@ function AppText(props) {
     children,
     t,
     styles,
+    testID
   } = props
 
   let { t: translation } = useTranslationProvider()
@@ -46,7 +48,7 @@ function AppText(props) {
   }
 
   return (
-    <Text variant={sizes[size]} tw={ctw} style={{ color: 'black', fontFamily: weights[weight] }}>
+    <Text testID={testID} variant={sizes[size]} tw={ctw} style={{ color: 'black', fontFamily: weights[weight] }}>
       {t && translation(...(Array.isArray(t) ? t : [t]))}
       {children}
     </Text>

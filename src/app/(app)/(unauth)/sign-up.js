@@ -23,7 +23,7 @@ export default function Page() {
 
   return (
     <SafeFullScreenLayout>
-      <View tw={cn('')}>
+      <View tw={cn('')} testID="reg">
         <AppTextInput {...getPropsForField('email')} />
         <Spacer />
         <AppTextInput {...getPropsForField('firstName')} />

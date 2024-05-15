@@ -47,12 +47,13 @@ export default function LoginPage() {
           onPress={() => validateFormAndFetch()}
         />
       </View>
+      <View testID="welcome" ><AppText>Lalalal</AppText></View>
 
       <Go toScreen="forgot-password">
         <AppText ctw={cn('')}> Forgot password? </AppText>
       </Go>
       <Go toScreen="sign-up">
-        <AppText ctw={cn('')}> Register </AppText>
+        <AppText ctw={cn('')} testID='register'> Register </AppText>
       </Go>
     </SafeFullScreenLayout>
   )
