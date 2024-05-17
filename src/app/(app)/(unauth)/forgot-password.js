@@ -17,9 +17,12 @@ export default function Page() {
 
   return (
     <SafeFullScreenLayout>
+      <View testID="forgot_password_screen">
+
       <AppText ctw={cn('text-center')} size="xl">
         Forgot password
       </AppText>
+      </View>
 
       <View tw={cn('')}>
         <AppTextInput {...getPropsForField('email')} />

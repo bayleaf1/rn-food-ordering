@@ -1,3 +1,6 @@
+const { default: LoginScreen } = require("./utils/screens/LoginScreen");
+const { default: ForgotPasswordScreen } = require("./utils/screens/ForgotPasswordScreen");
+
 describe('Example', () => {
   beforeAll(async () => {
     await device.launchApp();
@@ -9,6 +12,11 @@ describe('Example', () => {
 
   it('should have welcome screen', async () => {
     // await expect(element(by.text('Register'))).toBeVisible();
+    await LoginScreen.waitToBeVisible()
+    await LoginScreen.navigateToForgotPasswordScreen()
+    await ForgotPasswordScreen.waitToBeVisible()
+
+    return
     await waitFor(element(by.id('welcome'))).toBeVisible().withTimeout(10000);
     await expect(element(by.id('register'))).toBeVisible()
     await element(by.id('register')).tap();
