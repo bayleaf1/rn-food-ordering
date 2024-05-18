@@ -6,13 +6,14 @@
     "expo": "expo start",
     "start": "expo start",
     "android": "expo run:android",
-    "ios": "expo run:ios",
+    "makeLocaleIosBuild": "expo run:ios",
     "web": "expo start --web",
     "format": "npx prettier . --write",
     "build": "set NODE_ENV=production& echo todo",
     "clean": "npx expo start -c",
     "emulator": "emulator -avd Medium_Phone_API_34",
-    "test": "npx detox test --configuration ios.sim.debug"
+    "test": "npx detox test --configuration ios.sim.debug",
+    "makeTestIosBuild": "detox build --configuration ios.sim.debug"
   },
   "dependencies": {
     "@babel/helper-module-imports": "^7.22.15",
