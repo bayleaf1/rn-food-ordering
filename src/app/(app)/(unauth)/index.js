@@ -36,7 +36,7 @@ export default function LoginPage() {
       </AppText>
 
       <View tw={cn('')}>
-        <AppTextInput {...getPropsForField('email')} />
+        <AppTextInput {...getPropsForField('email')}/>
         <Spacer />
         <AppTextInput.Password {...getPropsForField('password')} />
         <Spacer />
@@ -45,6 +45,8 @@ export default function LoginPage() {
           labelTw={'text-white'}
           fullWidth
           onPress={() => validateFormAndFetch()}
+          // onPress={() => Go.toScreen('home')}
+          testID="login"
         />
       </View>
       <View testID="login_screen" ><AppText>Lalalal</AppText></View>
@@ -53,7 +55,7 @@ export default function LoginPage() {
         <AppText ctw={cn('')} testID='forgot_password_button'> Forgot password? </AppText>
       </Go>
       <Go toScreen="sign-up">
-        <AppText ctw={cn('')} testID='register'> Register </AppText>
+        <AppText ctw={cn('')} testID='sign_up_button'> Register </AppText>
       </Go>
     </SafeFullScreenLayout>
   )

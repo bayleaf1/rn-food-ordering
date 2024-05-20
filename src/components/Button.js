@@ -24,6 +24,7 @@ export default function Button({
   fullWidth,
   onPress = () => '',
   disabled,
+  testID
 }) {
   let style = variants[variant]
 
@@ -50,6 +51,7 @@ export default function Button({
           ctw,
           disabled && 'pointer-events-none bg-gray-100'
         )}
+        testID={testID ? testID + '_button' : ''}
       >
         {renderLabel ? (
           renderLabel({ labelTw: style.labelTw })

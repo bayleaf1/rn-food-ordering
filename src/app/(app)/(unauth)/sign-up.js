@@ -23,7 +23,7 @@ export default function Page() {
 
   return (
     <SafeFullScreenLayout>
-      <View tw={cn('')} testID="reg">
+      <View tw={cn('')} testID="sign_up_screen">
         <AppTextInput {...getPropsForField('email')} />
         <Spacer />
         <AppTextInput {...getPropsForField('firstName')} />
@@ -37,6 +37,7 @@ export default function Page() {
           labelTw={'text-white'}
           fullWidth
           onPress={() => validateFormAndFetch()}
+          testID={'sign_up'}
         />
       </View>
     </SafeFullScreenLayout>

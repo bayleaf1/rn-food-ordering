@@ -20,6 +20,7 @@ const codeHitingProps = {
   rightAddornment: null,
   errorMessage: '',
   style: {},
+  testID: '',
 }
 
 function AppTextInput(props = codeHitingProps) {
@@ -105,6 +106,7 @@ function BaseInput(props = codeHitingProps) {
       onPress={() => setFocus(true)}
       tw={cn('flex-0 w-ful', props.containerTw)}
       style={props.style}
+      testID={props.testID}
     >
       <AppTextInput.LabelIfExists value={props.label} />
 

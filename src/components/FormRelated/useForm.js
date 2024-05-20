@@ -49,6 +49,7 @@ export default function useForm({ fields = {}, fetch = defFetchProps, accessToke
         errorMessage: getErrorMessageForField(fieldName),
         label: name,
         placeholder: name,
+        testID: fieldName
       }
     },
     [getValueForField, getErrorMessageForField]
