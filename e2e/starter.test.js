@@ -8,6 +8,7 @@ const { default: SignUpScreen } = require('./utils/screens/SignUpScreen')
 describe('Example', () => {
   beforeAll(async () => {
     await device.launchApp()
+    await TestDevice.clearAuthToken()
   })
 
   beforeEach(async () => {
@@ -27,6 +28,7 @@ describe('Example', () => {
 
     await SignUpScreen.signUp(credentials)
     await HomeScreen.waitToBeVisible()
+    // await TestDevice.screenshot()
   })
 
   // it('should have welcome screen', async () => {

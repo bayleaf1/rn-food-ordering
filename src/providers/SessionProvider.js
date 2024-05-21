@@ -1,10 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useStorageState } from '../libs/Storage'
 import { useAppLoadingProvider } from './AppLoadingProvider'
+import Go from '@libs/Navigation/Go'
+import AppConfig from '@constants/AppConfig'
 
 const AuthContext = React.createContext({
-  signIn: () => null,
+  // signIn: () => null,
   signOut: () => null,
+  signInAndRedirectToHomeScreen: ()=>null,
   // session: null,llllllpppppoiuytr
   isSignedIn: false,
   isSignedOut: true,
@@ -15,7 +18,7 @@ const AuthContext = React.createContext({
 export const useSessionProvider = () => React.useContext(AuthContext)
 
 function SessionProvider(props) {
-  const [[isLoading, jwtToken], setJwtToken, removeValue] = useStorageState('jwt-token')
+  const [[isLoading, jwtToken], setJwtToken, removeValue] = useStorageState(AppConfig.AUTH_TOKEN_NAME)
   const isSignedIn = useMemo(() => !!jwtToken, [jwtToken])
   const isSignedOut = useMemo(() => !isSignedIn, [isSignedIn])
   let { setProviderAsLoaded } = useAppLoadingProvider()
@@ -25,12 +28,15 @@ function SessionProvider(props) {
     if (!isLoading) setProviderAsLoaded('session')
   }, [isLoading])
 
+  const signIn = (token = '') => setJwtToken(token)
+  const signInAndRedirectToHomeScreen = (token) => {
+    signIn(token);
+    Go.toScreen('home')
+  }
   return (
     <AuthContext.Provider
       value={{
-        signIn: () => {
-          setJwtToken('someJwt')
-        },
+        signInAndRedirectToHomeScreen,
         signOut: () => {
           setJwtToken(null)
         },

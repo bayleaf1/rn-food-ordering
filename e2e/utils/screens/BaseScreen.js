@@ -7,7 +7,7 @@ export class BaseScreen {
     }
     postConstructor(){}
 
-    async waitToBeVisible() {
-      return TestUtils.waitToBeVisibleById(this.screenName + '_screen')
+    async waitToBeVisible(timeout) {
+      return TestUtils.waitToBeVisibleById(this.screenName + '_screen', timeout)
     }
   }

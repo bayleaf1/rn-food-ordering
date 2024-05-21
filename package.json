@@ -5,6 +5,7 @@
   "scripts": {
     "expo": "expo start",
     "start": "expo start",
+    "start:test": "NODE_ENV=test expo start",
     "android": "expo run:android",
     "makeLocaleIosBuild": "expo run:ios",
     "web": "expo start --web",
@@ -13,7 +14,8 @@
     "clean": "npx expo start -c",
     "emulator": "emulator -avd Medium_Phone_API_34",
     "test": "npx detox test --configuration ios.sim.debug",
-    "makeTestIosBuild": "detox build --configuration ios.sim.debug"
+    "makeTestIosBuild": "detox build --configuration ios.sim.debug",
+    "ios": "expo run:ios"
   },
   "dependencies": {
     "@babel/helper-module-imports": "^7.22.15",
@@ -29,6 +31,7 @@
     "babel-plugin-transform-remove-console": "^6.9.4",
     "change-case": "^5.4.4",
     "clsx": "^2.0.0",
+    "dotenv": "^16.4.5",
     "expo": "~49.0.15",
     "expo-font": "~11.4.0",
     "expo-linear-gradient": "~12.3.0",

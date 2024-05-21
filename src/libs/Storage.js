@@ -27,23 +27,23 @@ export function useStorageState(key) {
 
   return [state, setValue, removeValue]
 
-  async function removeStorageItemAsync(key) {
-    if (Platform.OS === 'web') {
-      try {
-        localStorage.removeItem(key)
-      } catch (e) {
-        console.error('Local storage is unavailable:', e, '--libs/Storage')
-      }
-    } else {
-      await SecureStore.deleteItemAsync(key)
-    }
-  }
+  
 }
 
 function useAsyncState(initialValue = [true, null]) {
   return React.useReducer((state, action) => [false, action], initialValue)
 }
-
+export async function removeStorageItemAsync(key) {
+  if (Platform.OS === 'web') {
+    try {
+      localStorage.removeItem(key)
+    } catch (e) {
+      console.error('Local storage is unavailable:', e, '--libs/Storage')
+    }
+  } else {
+    await SecureStore.deleteItemAsync(key)
+  }
+}
 async function setStorageItemAsync(key, value) {
   if (Platform.OS === 'web') {
     try {

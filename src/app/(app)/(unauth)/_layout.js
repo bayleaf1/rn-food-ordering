@@ -19,4 +19,5 @@ export default function AppLayout() {
       <PrimaryStack.Screen name="forgot-password" />
     </PrimaryStack>
   )
+  // </PrimaryStack>
 }

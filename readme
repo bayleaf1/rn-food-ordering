@@ -27,4 +27,4 @@ new NativeEventEmitter() warns comes from screen orientation library.
 
 Screen orientation plugin has some annoying warns. TO surpress all warnings is used a babel plugin. Sometime it should be suspended to inspect the warnings. 
 
-For testing is used detox, please install the required emulator versio. In order to run tests execute once npm run makeTestIosBuild and run tests with npm test
+For testing is used detox, please install the required emulator version. In order to run tests execute once npm run makeTestIosBuild then npm run start:test and then npm test

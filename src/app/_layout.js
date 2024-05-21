@@ -15,6 +15,8 @@ import { Slot } from 'expo-router'
 import { LogBox } from 'react-native'
 import { BottomTabsStack } from '@libs/Navigation/TabsStacks'
 import AppThemeProvider from '@providers/AppTheme'
+import TestActionsProvider from '@providers/TestActionsProvider'
+import AppConfig from '@constants/AppConfig'
 
 LogBox.ignoreLogs(['NativeEvent'])
 //TODO add Localizations or Cronos objectx
@@ -24,6 +26,8 @@ LogBox.ignoreLogs(['NativeEvent'])
 //TODO add auth token to useApi and get, post, patch
 //TODO add useAync storage provider
 NativeWindStyleSheet.setOutput({ default: 'native' })
+
+const PossibleTestActionsProvider = AppConfig.testEnvOrOther(TestActionsProvider, (p) => p.children) 
 
 export default function AppLayout() {
   return (
@@ -36,10 +40,12 @@ export default function AppLayout() {
                 <ScreenOrientationProvider>
                   <SessionProvider>
                     {/* <SplashView showInDev={false}> */}
-                      <StopRenderIfAppNotLoaded>
+                    <StopRenderIfAppNotLoaded>
+                      <PossibleTestActionsProvider>
                         {/* Might change name */}
                         <NativeStackResponsableForScreenOrientation />
-                      </StopRenderIfAppNotLoaded>
+                      </PossibleTestActionsProvider>
+                    </StopRenderIfAppNotLoaded>
                     {/* </SplashView> */}
                   </SessionProvider>
                 </ScreenOrientationProvider>

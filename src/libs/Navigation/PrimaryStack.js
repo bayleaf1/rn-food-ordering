@@ -3,8 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { Animated } from 'react-native'
 import { withLayoutContext } from 'expo-router'
 
-
-
 const config = {
   animation: 'spring',
   config: {
@@ -22,17 +20,18 @@ let { Navigator } = createStackNavigator()
 let StackForExpoRouter = withLayoutContext(Navigator)
 
 function StackWithDefaultOptions({ children, screenOptions, ...props }) {
+  //  return null
   return (
-    <StackForExpoRouter
-      screenOptions={(...args) => {
-        let passed =
-          typeof props.screenOptions === 'function' ? screenOptions(...args) : screenOptions
-        return withDefaultScreenOptions(passed)
-      }}
-      {...props}
-    >
-      {children}
-    </StackForExpoRouter>
+      <StackForExpoRouter
+        screenOptions={(...args) => {
+          let passed =
+            typeof props.screenOptions === 'function' ? screenOptions(...args) : screenOptions
+          return withDefaultScreenOptions(passed)
+        }}
+        {...props}
+      >
+        <View tw={cn('h-[200px] w-[200px] bg-gray-600')}>{/* {children} */}</View>
+      </StackForExpoRouter>
   )
 }
 

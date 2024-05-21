@@ -6,11 +6,12 @@ import AppTextInput from '@components/FormRelated/AppTextInput'
 import SpacerView from '@components/SpacerView'
 import { wp } from '@libs/Styling'
 import Button from '@components/Button'
+import Go from '@libs/Navigation/Go'
 
 let Spacer = SpacerView.createWithStyles(wp(4))
 
 export default function Page() {
-  // const { signIn } = useSessionProvider()
+  const { signInAndRedirectToHomeScreen } = useSessionProvider()
 
   const { getPropsForField, validateFormAndFetch } = useForm({
     fields: {
@@ -36,7 +37,8 @@ export default function Page() {
           label={'Sign up'}
           labelTw={'text-white'}
           fullWidth
-          onPress={() => validateFormAndFetch()}
+          // onPress={() => validateFormAndFetch()}
+          onPress={()=> {signInAndRedirectToHomeScreen('my-token'); Go.toScreen('home')}}
           testID={'sign_up'}
         />
       </View>

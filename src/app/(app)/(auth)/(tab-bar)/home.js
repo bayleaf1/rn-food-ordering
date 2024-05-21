@@ -17,7 +17,7 @@ export default function Page() {
   return (
     <SafeFullScreenLayout>
       <AppText ctw={cn('')} testID="home_screen">Home</AppText>
-      <Pressable onPress={signOut}>
+      <Pressable onPress={signOut} >
         <AppText ctw={cn('')}> Sing out </AppText>
       </Pressable>
     </SafeFullScreenLayout>
