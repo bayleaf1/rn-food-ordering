@@ -7,8 +7,7 @@ const { default: SignUpScreen } = require('./utils/screens/SignUpScreen')
 
 describe('Example', () => {
   beforeAll(async () => {
-    await device.launchApp()
-    await TestDevice.clearAuthToken()
+    await TestDevice.launchAppAsUnauthorized()
   })
 
   beforeEach(async () => {

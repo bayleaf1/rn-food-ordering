@@ -1,22 +1,19 @@
-import 'react-native-gesture-handler'
 import '@constants/AppConfig'
 import '@constants/globalDeclarations'
+import 'react-native-gesture-handler'
 // import SplashView from '@screens/splash/SplashView'
 import NativeStackResponsableForScreenOrientation from '@libs/Navigation/NativeStackResponsableForScreenOrientation'
 import AppLoadingProvider, { useAppLoadingProvider } from '@providers/AppLoadingProvider'
+import AppThemeProvider from '@providers/AppTheme'
+import DeepLinksProvider from '@providers/DeepLinksProvider'
 import FontsProvider from '@providers/FontsProvider'
 import ScreenOrientationProvider from '@providers/ScreenOrientationProvider'
 import SessionProvider from '@providers/SessionProvider'
 import ToastsProvider from '@providers/ToastsProvider'
 import TranslationProvider from '@providers/TranslationProvider'
 import { NativeWindStyleSheet } from 'nativewind'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { Slot } from 'expo-router'
 import { LogBox } from 'react-native'
-import { BottomTabsStack } from '@libs/Navigation/TabsStacks'
-import AppThemeProvider from '@providers/AppTheme'
-import TestActionsProvider from '@providers/TestActionsProvider'
-import AppConfig from '@constants/AppConfig'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 LogBox.ignoreLogs(['NativeEvent'])
 //TODO add Localizations or Cronos objectx
@@ -27,10 +24,16 @@ LogBox.ignoreLogs(['NativeEvent'])
 //TODO add useAync storage provider
 NativeWindStyleSheet.setOutput({ default: 'native' })
 
-const PossibleTestActionsProvider = AppConfig.testEnvOrOther(TestActionsProvider, (p) => p.children) 
 
 export default function AppLayout() {
+  // const response = Linking.useURL()
+  // const { queryParams } = response ? Linking.parse(response) : { queryParams: {} }
+  // // console.log(`res:`, res);
+  // console.log(`response:`, queryParams)
+  // if (queryParams.authToken === 'clear') removeStorageItemAsync(AppConfig.AUTH_TOKEN_NAME)
   return (
+    <DeepLinksProvider>
+
     <AppLoadingProvider>
       <AppThemeProvider>
         <ToastsProvider>
@@ -41,10 +44,8 @@ export default function AppLayout() {
                   <SessionProvider>
                     {/* <SplashView showInDev={false}> */}
                     <StopRenderIfAppNotLoaded>
-                      <PossibleTestActionsProvider>
                         {/* Might change name */}
                         <NativeStackResponsableForScreenOrientation />
-                      </PossibleTestActionsProvider>
                     </StopRenderIfAppNotLoaded>
                     {/* </SplashView> */}
                   </SessionProvider>
@@ -55,6 +56,8 @@ export default function AppLayout() {
         </ToastsProvider>
       </AppThemeProvider>
     </AppLoadingProvider>
+    </DeepLinksProvider>
+
   )
 }
 
