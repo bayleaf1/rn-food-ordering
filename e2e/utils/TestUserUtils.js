@@ -1,5 +1,4 @@
 const casual = require('casual')
-const res  =  require('dotenv').parse('../../.env.test')
 
 const TestUserUtils = {
   generateEmail() {
