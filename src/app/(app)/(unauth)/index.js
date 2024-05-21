@@ -6,26 +6,29 @@ import SpacerView from '@components/SpacerView'
 import AppConfig from '@constants/AppConfig'
 import endpoints from '@constants/endpoints'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import Clock from '@libs/Clock'
 import Go from '@libs/Navigation/Go'
 import { wp } from '@libs/Styling'
+import { useSessionProvider } from '@providers/SessionProvider'
 
 let Spacer = SpacerView.createWithStyles(wp(4))
 
 export default function LoginPage() {
+  const { signIn } = useSessionProvider()
   const { getPropsForField, validateFormAndFetch } = useForm({
     fields: {
       email: { value: '' },
       password: { value: '' },
+      timezone: {value: Clock.timezone()}
     },
     fetch: {
       endpoint: endpoints.loginWithEmail,
       onSuccess: ({ data }) => {
-        console.log('23-17', data)
+        signIn(data.auth.accessToken)
       },
       onError: ({ error }) => {
         console.log(`errorx:`, error)
       },
-      method: 'get',
     },
   })
 

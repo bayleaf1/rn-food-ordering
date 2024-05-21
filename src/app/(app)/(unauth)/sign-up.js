@@ -7,11 +7,13 @@ import SpacerView from '@components/SpacerView'
 import { wp } from '@libs/Styling'
 import Button from '@components/Button'
 import Go from '@libs/Navigation/Go'
+import endpoints from '@constants/endpoints'
+import Clock from '@libs/Clock'
 
 let Spacer = SpacerView.createWithStyles(wp(4))
 
 export default function Page() {
-  const { signInAndRedirectToHomeScreen } = useSessionProvider()
+  const { signIn } = useSessionProvider()
 
   const { getPropsForField, validateFormAndFetch } = useForm({
     fields: {
@@ -19,6 +21,18 @@ export default function Page() {
       firstName: { value: '' },
       lastName: { value: '' },
       password: { value: '' },
+      timezone: {value: Clock.timezone()}
+
+    },
+    fetch: {
+      endpoint: endpoints.registerWithEmailAndLogin,
+      onSuccess: ({ data }) => {
+        signIn(data.auth.accessToken)
+      },
+      onError: ({error, message, status}) => {
+        console.log("04-18", error, message, status)
+      },
+
     },
   })
 
@@ -37,8 +51,7 @@ export default function Page() {
           label={'Sign up'}
           labelTw={'text-white'}
           fullWidth
-          // onPress={() => validateFormAndFetch()}
-          onPress={()=> {signInAndRedirectToHomeScreen('my-token'); Go.toScreen('home')}}
+          onPress={() => validateFormAndFetch()}
           testID={'sign_up'}
         />
       </View>

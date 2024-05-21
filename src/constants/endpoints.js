@@ -15,7 +15,7 @@ function tableEndpoint(segment) {
 }
 
 const endpoints = {
-//   userProfile: '/api/users/profile',
+  userProfile: '/api/users/profile',
 //   userProfileOverview: (id) => `/api/users/profile/` + id,
 //   updateUserProfileAsAdmin: (id) => `/api/users/profile/` + id,
 //   updateUserProfile: `/api/users/profile/update`,
@@ -43,6 +43,7 @@ const endpoints = {
   //
 //   checkAuthForUserDashboard: `/api/sessions/check-auth/user-dashboard`,
   registerWithEmail: `/api/sessions/register/user/email`,
+  registerWithEmailAndLogin: `/api/sessions/register/user/email/and-login`,
   registerSystemUserWithEmail: `/api/sessions/register/system-user`,
   loginWithEmail: `/api/sessions/login/email`,
   loginSystemUser: `/api/sessions/login/system-user`,

@@ -3,11 +3,13 @@ import { useStorageState } from '../libs/Storage'
 import { useAppLoadingProvider } from './AppLoadingProvider'
 import Go from '@libs/Navigation/Go'
 import AppConfig from '@constants/AppConfig'
+import { fetchBackend } from '@libs/Api'
+import endpoints from '@constants/endpoints'
 
 const AuthContext = React.createContext({
-  // signIn: () => null,
+  signIn: () => null,
   signOut: () => null,
-  signInAndRedirectToHomeScreen: ()=>null,
+  // signInAndRedirectToHomeScreen: () => null,
   // session: null,llllllpppppoiuytr
   isSignedIn: false,
   isSignedOut: true,
@@ -18,10 +20,35 @@ const AuthContext = React.createContext({
 export const useSessionProvider = () => React.useContext(AuthContext)
 
 function SessionProvider(props) {
-  const [[isLoading, jwtToken], setJwtToken, removeValue] = useStorageState(AppConfig.AUTH_TOKEN_NAME)
+  const [[isLoading, jwtToken], setJwtToken, removeValue] = useStorageState(
+    AppConfig.AUTH_TOKEN_NAME
+  )
   const isSignedIn = useMemo(() => !!jwtToken, [jwtToken])
   const isSignedOut = useMemo(() => !isSignedIn, [isSignedIn])
   let { setProviderAsLoaded } = useAppLoadingProvider()
+
+  const [user, setUser] = useState({})
+
+  const signOut = () => {
+    // console.log("53-36", 'SIGN OUT')
+    // removeValue()
+    setJwtToken(null)
+    // Go.toScreen('login')
+  }
+  useEffect(() => {
+    if (jwtToken) {
+      fetchBackend({
+        endpoint: endpoints.userProfile,
+        jwt: jwtToken,
+        onSuccess: ({ data }) => {
+          // console.log(`data:`, data)
+        },
+        onError: ({ status, error, message }) => {
+          if (status === 401) signOut()
+        },
+      })
+    }
+  }, [jwtToken])
 
   // removeValue()
   useEffect(() => {
@@ -29,16 +56,14 @@ function SessionProvider(props) {
   }, [isLoading])
 
   const signIn = (token = '') => setJwtToken(token)
-  const signInAndRedirectToHomeScreen = (token) => {
-    signIn(token);
-    Go.toScreen('home')
-  }
+  
   return (
     <AuthContext.Provider
       value={{
-        signInAndRedirectToHomeScreen,
+        signIn,
         signOut: () => {
-          setJwtToken(null)
+          signOut()
+          // setJwtToken(null)
         },
         isSignedIn,
         isSignedOut,

@@ -8,7 +8,7 @@ const { default: BackEnd } = require('./utils/BackEnd')
 const { default: TestUserUtils } = require('./utils/TestUserUtils')
 
 describe('Example', () => {
-  const registrationFields = TestUserUtils.getRegistrationFields()
+  const fields = TestUserUtils.getRegistrationFields()
 
   beforeAll(async () => {
     await TestDevice.launchAppAsUnauthorized()
@@ -19,17 +19,30 @@ describe('Example', () => {
   })
 
   afterAll(async () => {
-    await BackEnd.eraseUserWithRelatedByEmail(registrationFields.email)
+    await BackEnd.eraseUserWithRelatedByEmail(fields.email)
   });
-
+//TODO test for outdated jwt
   it('registers and login', async () => {
     
     await LoginScreen.waitToBeVisible()
     await LoginScreen.navigateToSignUpScreen()
     await SignUpScreen.waitToBeVisible()
 
-    await SignUpScreen.signUp(registrationFields)
+    await SignUpScreen.signUp(fields)
     await HomeScreen.waitToBeVisible()
+
+    await HomeScreen.signOut()
+    await LoginScreen.waitToBeVisible()
+
+    await LoginScreen.signIn(fields.email, fields.password)
+    await HomeScreen.waitToBeVisible()
+
+
+
+
+
+
+    // await LoginScreen.waitToBeVisible()
     // await TestDevice.screenshot()
   })
 

@@ -11,7 +11,7 @@ class LoginScreen extends BaseScreen {
     return TestUtils.pressById('sign_up_button')
   }
 
-  async tryToLogin(email = '123tes', password = '123') {
+  async signIn(email = '123tes', password = '123') {
     await TestUtils.fillFields({ email, password })
     await TestUtils.pressButtonById('login')
   }

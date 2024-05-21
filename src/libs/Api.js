@@ -3,24 +3,20 @@ import axios from 'axios'
 import useSWR from 'swr'
 
 //Endpoints for when back-end no involved
-export const Endpoints = {
-  me: {
-    value: () => '/me',
-    response: () => ({ name: 'Darius' }),
-  },
-}
-async function fetcherWithoutAnApi(endpoint) {
-  let endpointObject = Object.values(Endpoints).find((end) => end.value() === endpoint) // || defaultEndpoint
-
-  if (!endpointObject) throw new Error(`Missing endpoint (${endpoint}). Please add in libs/Api.js`)
-
-  return Promise.resolve(endpointObject.response())
-}
-
 // export const Endpoints = {
-//   me: '/me',
-//   products: (id) => '/product/' + id,
+//   me: {
+//     value: () => '/me',
+//     response: () => ({ name: 'Darius' }),
+//   },
 // }
+// async function fetcherWithoutAnApi(endpoint) {
+//   let endpointObject = Object.values(Endpoints).find((end) => end.value() === endpoint) // || defaultEndpoint
+
+//   if (!endpointObject) throw new Error(`Missing endpoint (${endpoint}). Please add in libs/Api.js`)
+
+//   return Promise.resolve(endpointObject.response())
+// }
+
 
 const instance = axios.create({ baseURL: AppConfig.API_BASE_URL })
 
@@ -41,105 +37,58 @@ function useApi(endpoint = '', opts = { defaultData: null }) {
 
 export default useApi
 
-export const AppFetcher = {
-  get({
-    endpoint,
-    onSuccess = () => '',
-    token,
-    onError = ({ error }) => console.log('Error', error),
-  }) {
-    return instance
-      .get(endpoint, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token || ''}`,
-        },
-      })
-      .then((r) => {
-        onSuccess({ data: r.data })
-      })
-      .catch((e) => {
-        onError({
-          error: e.response.data.error,
-          message: e?.response?.data?.message,
-          status: e?.response?.status,
-        })
-      })
-  },
+const backendDefProps = {
+  endpoint: '',
+  method: 'get',
+  body: {},
+  headers: {},
+  jwt: '',
+  onSuccess: () => '',
+  onError: () => '',
+}
 
-  post({
-    endpoint,
-    body,
-    token,
-    onSuccess = () => '',
-    onError = ({ error }) => console.log('Error', error),
-  }) {
-    // console.log(`token:`, token)
-    return instance
-      .post(endpoint, body, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token || ''}`,
-        },
-      })
-      .then((r) => {
-        onSuccess({ data: r.data })
-      })
-      .catch((e) => {
-        // console.log(`post error:`, e)
-        onError({
-          error: e?.response?.error || { message: e.message },
-          data: e?.response?.data,
-          status: e?.response?.status,
-          message: e?.response?.data?.message || e.message,
-        })
-      })
-  },
+export function fetchBackend(opts = backendDefProps) {
+  return appFetch({ ...opts, baseURL: AppConfig.API_BASE_URL })
+}
+const appFetchDefProps = {
+  ...backendDefProps,
+  baseURL: '',
+}
 
-  patch({
-    endpoint,
-    body,
-    token,
-    onSuccess = () => '',
-    onError = ({ error }) => console.log('Error', error),
-  }) {
-    return instance
-      .patch(endpoint, body, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token || ''}`,
-        },
-      })
-      .then((r) => {
-        onSuccess({ data: r.data })
-      })
-      .catch((e) => {
-        onError({
-          error: e?.response?.data,
-          data: e?.response?.data,
-          status: e?.response?.status,
-          message: e.message,
+function appFetch(opts = appFetchDefProps) {
+  opts = { ...appFetchDefProps, ...opts }
+  
+  let optionalBody  = ['get', 'head'].findIndex(v=>opts.method.toLowerCase() === v ) > -1 ? {} : {body:JSON.stringify(opts.body)} 
+  
+  fetch(opts.baseURL + opts.endpoint, {
+    method: opts.method,
+    ...optionalBody,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${opts.jwt || ''}`,
+      ...opts.headers,
+    },
+  })
+    .then(async (r) => ({ status: r.status, response: await r.json() }))
+    .then((result) => {
+      if (result.status > 299) {
+        let res = result.response
+        let defMsg = 'Default message from front-end'
+        opts.onError({
+          error: { ...(res?.error || {}), message: res?.message || defMsg },
+          message: res?.message || defMsg,
+          status: result.status,
         })
-      })
-  },
+      } else opts.onSuccess({ data: result.response })
 
-  getAsPromise({ endpoint, token }) {
-    return new Promise((resolve, reject) => {
-      AppFetcher.get({
-        endpoint,
-        token,
-        onSuccess: ({ data }) => {
-          resolve(data)
-        },
-        onError: ({ error }) => {
-          reject(error)
-        },
-      })
+      // console.log('44-58 success', res)
     })
-  },
-
-
-  getForSwr(url) {
-    return
-  },
+    .catch((res) => {
+      opts.onError({
+        error: { ...(res?.error || {}), message: res?.message || '' },
+        message: res?.message || '',
+        status: res?.error?.status || 500,
+      })
+      // console.log('44-58 error', e)
+    })
 }

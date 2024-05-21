@@ -1,5 +1,6 @@
+import AppText from '@components/AppText/AppText'
 import SpacerView from '@components/SpacerView'
-import { AppFetcher } from '@libs/Api'
+import { fetchBackend } from '@libs/Api'
 import * as changeCase from 'change-case'
 import { useCallback, useState } from 'react'
 // import { BaseForm } from '../components/Form'
@@ -91,27 +92,26 @@ export default function useForm({ fields = {}, fetch = defFetchProps, accessToke
         onOk: () => {
           let body = getFieldsRegister()
 
-          let caller = AppFetcher.post
-
-          if (method === 'get') caller = AppFetcher.get
-
-          caller({
+          fetchBackend({
             endpoint: endpoint,
+            method,
             body: formatFieldsForFetching(body),
-            token: token || accessToken,
+            jwt: token || accessToken,
             onSuccess: ({ data }) => {
               resetErrorsRegister()
               onSuccess({ fields: body, data })
             },
 
-            onError: ({ status, data, message, error }) => {
-              console.log(`status, data, message, error:`, status, data, message, error);
+            onError: ({ status, message, error }) => {
+              // console.log(`status, data, message, error:`, status, data, message, error);
               if (status === 422) {
                 // const errors = BaseForm.parseValidationErrors({
                 //   error: data.error,
                 //   goToSingInForm: () => AuhtorizationModal.show(), //
                 // })
-                const errors = {}
+                const errors = parseValidationErrors({error})
+                console.log(`validation errors:`, errors);
+
                 setErrorsRegister(errors)
               } else {
                 onError({ status, message, error })
@@ -137,6 +137,8 @@ export default function useForm({ fields = {}, fetch = defFetchProps, accessToke
 
   return { getPropsForField, formIsValid, validateForm, validateFormAndFetch }
 }
+
+
 
 useForm.validators = {
   minLength:
@@ -228,6 +230,32 @@ function useFields(fieldsObject = {}) {
   }
 }
 
+function parseValidationErrors ({ error }) {
+  // function renderSingIn() {
+  //   return (
+  //     <span onClick={() => goToSingInForm && goToSingInForm()} className="cursor-pointer underline">
+  //       sign in
+  //     </span>
+  //   )
+  // }
+  //TODO implenment goToSingInForm
+  let formaters = {
+    ':used-email:': () => <AppText>This email is in use. Please {"renderSingIn()"} or choose a new email</AppText>,
+    ':not-found-fishboxcellnumber-on-request-delivery:': () => (
+      <AppText>This number is not correct. Please try again or {"renderSingIn()"}</AppText>
+    ),
+    _uppercase: (v) => (v.message),
+    // _uppercase: (v) => uppercaseFirstChar(v.message),
+  }
+  let result = error.details.reduce(
+    (acc, v) => ({
+      ...acc,
+      [v.context.key]: formaters[v.message] ? formaters[v.message](v) : formaters._uppercase(v),
+    }),
+    {}
+  )
+  return result
+}
 //
 //
 //
