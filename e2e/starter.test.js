@@ -4,8 +4,12 @@ const { default: TestUtils } = require('./utils/TestUtils')
 const { default: TestDevice } = require('./utils/TestDevice')
 const { default: HomeScreen } = require('./utils/screens/HomeScreen')
 const { default: SignUpScreen } = require('./utils/screens/SignUpScreen')
+const { default: BackEnd } = require('./utils/BackEnd')
+const { default: TestUserUtils } = require('./utils/TestUserUtils')
 
 describe('Example', () => {
+  const registrationFields = TestUserUtils.getRegistrationFields()
+
   beforeAll(async () => {
     await TestDevice.launchAppAsUnauthorized()
   })
@@ -14,18 +18,17 @@ describe('Example', () => {
     await device.reloadReactNative()
   })
 
+  afterAll(async () => {
+    await BackEnd.eraseUserWithRelatedByEmail(registrationFields.email)
+  });
+
   it('registers and login', async () => {
-    const credentials = {
-      email: 'testmobileapp@mail.com',
-      firstName: 'Mihai',
-      lastName: 'Mircea',
-      password: 'qwer1234',
-    }
+    
     await LoginScreen.waitToBeVisible()
     await LoginScreen.navigateToSignUpScreen()
     await SignUpScreen.waitToBeVisible()
 
-    await SignUpScreen.signUp(credentials)
+    await SignUpScreen.signUp(registrationFields)
     await HomeScreen.waitToBeVisible()
     // await TestDevice.screenshot()
   })
