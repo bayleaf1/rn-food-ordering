@@ -1,4 +1,4 @@
-const { default: LoginScreen } = require('./utils/screens/LoginScreen')
+const { default: SignInScreen } = require('./utils/screens/SignInScreen')
 const { default: ForgotPasswordScreen } = require('./utils/screens/ForgotPasswordScreen')
 const { default: TestUtils } = require('./utils/TestUtils')
 const { default: TestDevice } = require('./utils/TestDevice')
@@ -24,17 +24,17 @@ describe('Example', () => {
 //TODO test for outdated jwt
   it('registers and login', async () => {
     
-    await LoginScreen.waitToBeVisible()
-    await LoginScreen.navigateToSignUpScreen()
+    await SignInScreen.waitToBeVisible()
+    await SignInScreen.navigateToSignUpScreen()
     await SignUpScreen.waitToBeVisible()
 
     await SignUpScreen.signUp(fields)
     await HomeScreen.waitToBeVisible()
 
     await HomeScreen.signOut()
-    await LoginScreen.waitToBeVisible()
+    await SignInScreen.waitToBeVisible()
 
-    await LoginScreen.signIn(fields.email, fields.password)
+    await SignInScreen.signIn(fields.email, fields.password)
     await HomeScreen.waitToBeVisible()
 
 
@@ -42,17 +42,17 @@ describe('Example', () => {
 
 
 
-    // await LoginScreen.waitToBeVisible()
+    // await SignInScreen.waitToBeVisible()
     // await TestDevice.screenshot()
   })
 
   // it('should have welcome screen', async () => {
   //   // await expect(element(by.text('Register'))).toBeVisible();
-  //   await LoginScreen.waitToBeVisible()
+  //   await SignInScreen.waitToBeVisible()
 
   //   // await TestUtils.fillFields({ email: '123testx', password: '123' })
 
-  //   await LoginScreen.tryToLogin()
+  //   await SignInScreen.tryToLogin()
 
   //   await HomeScreen.waitToBeVisible()
 
@@ -60,7 +60,7 @@ describe('Example', () => {
   //   // await element(by.id('emailInput')).typeText('test@mail')
   //   // await device.takeScreenshot('opened general section2')
   //   return
-  //   await LoginScreen.navigateToForgotPasswordScreen()
+  //   await SignInScreen.navigateToForgotPasswordScreen()
   //   await ForgotPasswordScreen.waitToBeVisible()
 
   //   return

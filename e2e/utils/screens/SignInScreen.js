@@ -2,7 +2,7 @@ import { BaseScreen } from './BaseScreen'
 
 const { default: TestUtils } = require('../TestUtils')
 
-class LoginScreen extends BaseScreen {
+class SignInScreen extends BaseScreen {
   async navigateToForgotPasswordScreen() {
     return TestUtils.pressById('forgot_password_button')
   }
@@ -17,4 +17,4 @@ class LoginScreen extends BaseScreen {
   }
 }
 
-export default new LoginScreen('login')
+export default new SignInScreen('login')
