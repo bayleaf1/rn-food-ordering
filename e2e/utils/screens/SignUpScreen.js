@@ -7,7 +7,7 @@ class SignUpScreen extends BaseScreen {
     async signUp(credetials){
         await TestUtils.fillFields(credetials)
         await TestUtils.pressButtonById('sign_up')
-    } 
+    }  
 }
 
 export default new SignUpScreen('sign_up')
