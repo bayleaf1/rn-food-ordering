@@ -1,4 +1,4 @@
-import Icon from '@components/Pictures/Icon'
+import AppIcon from '@components/Pictures/AppIcon'
 import LocalPicture from '@components/Pictures/LocalPicture'
 import ViewWithShadow from '@components/ViewWithShadow'
 import Go from '@libs/Navigation/Go'
@@ -13,7 +13,7 @@ export default function Food({}) {
 
 Food.Rating = ({ value = 0, iconTw, containerTw, valueTextSize = { md: true } }) => (
   <View tw={cn('flex flex-row items-center justify-center self-center', containerTw)}>
-    <Icon name="rating-star" ctw={cn('h-[22px] w-[22px]', iconTw)} />
+    <AppIcon name="rating-star" ctw={cn('h-[22px] w-[22px]', iconTw)} />
     <AppText {...valueTextSize} ctw={cn('ml-1 text-gray-400')}>
       {value}.0
     </AppText>
@@ -135,7 +135,7 @@ Food.CompactShowcase = ({ name, imageName, elementNearTitle, containerTw }) => {
           </View>
 
           <View tw={cn('translate-x-2 self-start')}>
-            <Icon name="close" />
+            <AppIcon name="close" />
           </View>
         </View>
       </ViewWithShadow>
@@ -190,7 +190,7 @@ Food.CardOverview = () => {
         price={foodPrice}
         actionElement={
           <Rhomb ctw={cn('h-[64px]')} elevation={3}>
-            <Icon name="cart" ctw={cn('h-8 w-8 translate-y-0.5 ')} iconElementTw="fill-white" />
+            <AppIcon name="cart" ctw={cn('h-8 w-8 translate-y-0.5 ')} iconElementTw="fill-white" />
           </Rhomb>
         }
       />
@@ -212,7 +212,7 @@ Food.CardOverview.DeliveryDuration = ({
         Delivery time
       </AppText>
       <View tw={cn(' ml-8 flex flex-row items-center')}>
-        <Icon name="clock-red" ctw={cn('h-[24px] w-[24px]', iconTw)} />
+        <AppIcon name="clock-red" ctw={cn('h-[24px] w-[24px]', iconTw)} />
         <AppText {...durationSize} medium ctw={cn('ml-1 text-black')}>
           {minutes} mins
         </AppText>

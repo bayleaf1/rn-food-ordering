@@ -1,5 +1,5 @@
 import Food from '@components/Food/Food'
-import Icon from '@components/Pictures/Icon'
+import AppIcon from '@components/Pictures/AppIcon'
 import LocalPicture from '@components/Pictures/LocalPicture'
 import Rhomb from '@components/Rhomb'
 import SpacerView from '@components/SpacerView'
@@ -100,7 +100,7 @@ function PictureWithCounter() {
 //         Delivery time
 //       </AppText>
 //       <View tw={cn(' ml-8 flex flex-row items-center')}>
-//         <Icon name="clock-red" ctw="h-[24px] w-[24px]" />
+//         <AppIcon name="clock-red" ctw="h-[24px] w-[24px]" />
 //         <AppText size="sm"semibold ctw={cn('ml-1 text-black')}>
 //           {props.deliveryMinutes} mins
 //         </AppText>
@@ -120,7 +120,7 @@ function PictureWithCounter() {
 //         <Food.Price value={props.foodPrice} />
 
 //         <Rhomb ctw={cn('h-[64px]')} elevation={3}>
-//           <Icon name="cart" ctw={cn('h-8 w-8 translate-y-0.5 ')} iconElementTw="fill-white" />
+//           <AppIcon name="cart" ctw={cn('h-8 w-8 translate-y-0.5 ')} iconElementTw="fill-white" />
 //         </Rhomb>
 //       </View>
 //     </>

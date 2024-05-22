@@ -1,4 +1,4 @@
-import Icon from '@components/Pictures/Icon'
+import AppIcon from '@components/Pictures/AppIcon'
 import Rhomb from '@components/Rhomb'
 import React from 'react'
 import { View } from 'react-native'
@@ -88,7 +88,7 @@ function renderGoBackButton(navigation) {
         if (navigation.canGoBack()) navigation.goBack()
       }}
     >
-      <Icon name="chevron-left" ctw={cn('h-8 w-8 -translate-x-0.5')} />
+      <AppIcon name="chevron-left" ctw={cn('h-8 w-8 -translate-x-0.5')} />
     </Rhomb>
   )
 }
@@ -101,7 +101,7 @@ Header.AddToFavorites = () => (
       // if (navigation.canGoBack()) navigation.goBack()
     }}
   >
-    <Icon name="heart-grey" ctw={cn('h-6 w-6 translate-y-0.5')} />
+    <AppIcon name="heart-grey" ctw={cn('h-6 w-6 translate-y-0.5')} />
   </Rhomb>
 )
 

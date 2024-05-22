@@ -34,7 +34,7 @@ const ICONS = {
   plus: Plus
 }
 
-function Icon({ name = 'home', ctw, iconElementTw = '', iconProps = {} }) {
+function AppIcon({ name = 'home', ctw, iconElementTw = '', iconProps = {} }) {
   let SelectedIcon = ICONS[name] || ICONS.home
 
   return (
@@ -44,4 +44,4 @@ function Icon({ name = 'home', ctw, iconElementTw = '', iconProps = {} }) {
   )
 }
 
-export default Icon
+export default AppIcon

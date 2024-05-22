@@ -1,5 +1,5 @@
 import AppTextInput from "./FormRelated/AppTextInput";
-import Icon from "./Pictures/Icon";
+import AppIcon from "./Pictures/AppIcon";
 import Rhomb from "./Rhomb";
 
 export default function SearchPanel() {
@@ -15,7 +15,7 @@ export default function SearchPanel() {
           inputViewTw={'bg-gray-50 h-12'}
           containerTw={'grow'}
           leftAddornment={
-            <Icon
+            <AppIcon
               name="search"
               ctw="ml-2 h-[25px] w-[25px]"
               iconElementTw="fill-gray-300 stroke-gray-300"
@@ -24,7 +24,7 @@ export default function SearchPanel() {
         />
   
         <Rhomb ctw="h-[50px]">
-          <Icon name="filters" iconElementTw="pointer-events-none fill-white" />
+          <AppIcon name="filters" iconElementTw="pointer-events-none fill-white" />
         </Rhomb>
       </View>
     )

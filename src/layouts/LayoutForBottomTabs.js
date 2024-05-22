@@ -1,4 +1,4 @@
-import Icon from '@components/Pictures/Icon'
+import AppIcon from '@components/Pictures/AppIcon'
 import ViewWithShadow from '@components/ViewWithShadow'
 import AppText from '@components/AppText/AppText'
 import Go from '@libs/Navigation/Go'
@@ -54,7 +54,7 @@ LayoutForBottomTabs.BottomTabs = ({ routes = [LayoutForBottomTabs.BottomTabs.def
               key={key}
             >
               <View>
-                <Icon
+                <AppIcon
                   name={route.iconName}
                   ctw={'h-6 w-10'}
                   iconElementTw={cn(

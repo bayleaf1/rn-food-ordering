@@ -2,7 +2,7 @@ import Button from '@components/Button'
 import Card from '@components/Card'
 import FadingOverlay from '@components/FadingOverlay'
 import Radio from '@components/FormRelated/Radio'
-import Icon from '@components/Pictures/Icon'
+import AppIcon from '@components/Pictures/AppIcon'
 import LocalPicture from '@components/Pictures/LocalPicture'
 import AppText from '@components/AppText/AppText'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
@@ -17,7 +17,7 @@ export default function SelectCard({}) {
       <Button.Outlined
         renderLabel={({ labelTw }) => (
           <View ctw={'flex flex-row items-center bg-gray-600'} style={{ flexDirection: 'row' }}>
-            <Icon name="plus" ctw={'mr-2 mt-[3px] h-4 w-4 '} iconElementTw={labelTw} />
+            <AppIcon name="plus" ctw={'mr-2 mt-[3px] h-4 w-4 '} iconElementTw={labelTw} />
             <AppText size="sm"ctw={cn('relative self-start', labelTw)}>
               Add New Card
             </AppText>
