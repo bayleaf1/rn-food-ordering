@@ -5,7 +5,7 @@ import Go from '@libs/Navigation/Go'
 import AppConfig from '@constants/AppConfig'
 import { fetchBackend } from '@libs/Api'
 import endpoints from '@constants/endpoints'
-import { UserManager } from '@libs/UserManager'
+import { NullUser, User, UserManager } from '@libs/UserManager'
 
 const AuthContext = React.createContext({
   jwt: '',
@@ -16,7 +16,7 @@ const AuthContext = React.createContext({
   isSignedIn: false,
   isSignedOut: true,
   isLoading: false,
-  user: UserManager.nullUser()
+  // user: new NullUser()
 })
 
 // This hook can be used to access the user info.
@@ -30,7 +30,7 @@ function SessionProvider(props) {
   const isSignedOut = useMemo(() => !isSignedIn, [isSignedIn])
   let { setProviderAsLoaded } = useAppLoadingProvider()
 
-  const [user, setUser] = useState(UserManager.nullUser())
+  const [user, setUser] = useState(new NullUser())
 
   const signOut = () => {
     // console.log("53-36", 'SIGN OUT')
@@ -38,21 +38,21 @@ function SessionProvider(props) {
     setJwtToken(null)
     // Go.toScreen('login')
   }
-  useEffect(() => {
-    if (jwtToken) {
-      fetchBackend({
-        endpoint: endpoints.userProfile,
-        jwt: jwtToken,
-        onSuccess: ({ data }) => {
-          setUser(data)
-        },
-        onError: ({ status, error, message }) => {
-          if (status === 401) signOut()
+  // useEffect(() => {
+  //   if (jwtToken) {
+  //     fetchBackend({
+  //       endpoint: endpoints.userProfile,
+  //       jwt: jwtToken,
+  //       onSuccess: ({ data }) => {
+  //         setUser( new User( data))
+  //       },
+  //       onError: ({ status, error, message }) => {
+  //         if (status === 401) signOut()
 
-        },
-      })
-    }
-  }, [jwtToken])
+  //       },
+  //     })
+  //   }
+  // }, [jwtToken])
 
   // removeValue()
   useEffect(() => {
@@ -72,7 +72,7 @@ function SessionProvider(props) {
         },
         isSignedIn,
         isSignedOut,
-        user,
+        // user,
         // session,
       }}
     >

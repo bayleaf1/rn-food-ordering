@@ -11,6 +11,7 @@ import { UserManager } from '@libs/UserManager'
 import { useScreenOrientationProvider } from '@providers/ScreenOrientationProvider'
 import { useSessionProvider } from '@providers/SessionProvider'
 import { useTranslationProvider } from '@providers/TranslationProvider'
+import { useUserProvider } from '@providers/UserProvider'
 import { Pressable, ScrollView, View } from 'react-native'
 
 export default function Page() {
@@ -20,37 +21,38 @@ export default function Page() {
 
   // let { data, statusCode } = useApi('/todos/1', { defaultData: {} })
 
-  const { user } = useSessionProvider()
+  const { user, updateUserFromBackEndResponse } = useUserProvider()
   const { getPropsForField, validateFormAndFetch } = useAuthForm({
     fields: {
-      email: { value: UserManager.get(user, 'email') },
-      address: { value: UserManager.get(user, 'address')},
-      zipCode: { value: UserManager.get(user, 'zipCode')},
-      unit: { value: UserManager.get(user, 'unit')},
-      phone: { value: UserManager.get(user, 'phone')},
+      email: { value: user.email() },
+      address: { value: user.address()},
+      zipCode: { value: user.zipCode()},
+      unit: { value: user.unit()},
+      phone: { value: user.phone()},
 
       // password: { value: '' },
       // timezone: {value: Clock.timezone()}
     },
     fetch: {
-      endpoint: endpoints.loginWithEmail,
+      endpoint: endpoints.updateUserProfile,
       onSuccess: ({ data }) => {
-        signIn(data.auth.accessToken)
+        updateUserFromBackEndResponse(data)
       },
       onError: ({ error }) => {
         console.log(`errorx:`, error)
       },
+      method: 'post'
     },
   })
 
   return (
     <SafeFullScreenLayout>
       <AppText ctw={cn('')} testID="user_screen">User</AppText>
-      {UserManager.isNotCompleted(user) && <AppText ctw={cn("")}> Profile is not completed </AppText>}
+      {user.isNotCompleted() && <AppText ctw={cn("")}> Profile is not completed </AppText>}
       <View tw={cn('')}>
         <AppTextInput {...getPropsForField('email')}/>
         <FormFieldsSpacer/>
-        <AppTextInput {...getPropsForField('phone')}/>
+        <AppTextInput.Phone {...getPropsForField('phone')}/>
         <FormFieldsSpacer/>
 
         <AppTextInput {...getPropsForField('address')}/>

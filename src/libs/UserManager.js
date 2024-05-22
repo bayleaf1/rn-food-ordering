@@ -14,7 +14,6 @@ export const UserManager = {
           id: 0,
           name: 'Lite plan',
         },
-        
       },
       profileMeta: {
         hasPlan: false,
@@ -29,14 +28,16 @@ export const UserManager = {
         canCancelSubscription: false,
         hasFishboxCellNumber: false,
       },
-      isNullUser: true
+      isNullUser: true,
     }
   },
-  isNullUser(u){return u.isNullUser},
-  isCompleted(u){
+  isNullUser(u) {
+    return u.isNullUser
+  },
+  isCompleted(u) {
     return u.profileMeta.isCompleted
   },
-  isNotCompleted(u){
+  isNotCompleted(u) {
     return !u.profileMeta.isCompleted
   },
 
@@ -79,4 +80,65 @@ export const UserManager = {
     // If found value is undefined return default value; otherwise return the value
     return result === undefined ? defValue : result
   },
+}
+
+
+export class User {
+  constructor(data = UserManager.nullUser()) {
+    this.profile =  data.profile
+    this.profileMeta = data.profileMeta
+  }
+
+  isNull() {
+    return false
+  }
+  fName() {
+    return this.profile.firstName
+  }
+  lName() {
+    return this.profile.lastName
+  }
+  zipCode() {
+    return this.profile.zipCode
+  }
+  address() {
+    return this.profile.address
+  }
+  unit() {
+    return this.profile.unit
+  }
+  email() {
+    return this.profile.email
+  }
+  phone(){
+     return this.profile.phone
+  }
+  isCompleted() {
+    return this.profileMeta.isCompleted
+  }
+  isNotCompleted() {
+    return !this.isCompleted()
+  }
+  usernameForTest() {
+    return this.fName() + '_' + this.lName()
+  }
+  shortedUsername(){
+    return trim(this.fName(), 12) + ' ' + trim(this.lName(), 1)
+  }
+}
+function trim(string, maxLength = 14) {
+  if (typeof string !== 'string') return 'not a string'
+
+  if (string.length <= maxLength) return string
+
+  return string.slice(0, maxLength) + '.'
+}
+
+export class NullUser extends User {
+  constructor(){
+    super(UserManager.nullUser())
+  }
+  isNull() {
+    return true
+  }
 }

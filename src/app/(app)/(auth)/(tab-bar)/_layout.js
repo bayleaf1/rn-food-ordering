@@ -7,6 +7,7 @@ import Screens from '@libs/Navigation/ScreenList'
 import { BottomTabsStack } from '@libs/Navigation/TabsStacks'
 import { UserManager } from '@libs/UserManager'
 import { useSessionProvider } from '@providers/SessionProvider'
+import UserProvider, { useUserProvider } from '@providers/UserProvider'
 import { Redirect, Stack, Tabs } from 'expo-router'
 import { Pressable } from 'react-native'
 import { Button } from 'react-native-paper'
@@ -56,45 +57,41 @@ function screenOptions({ iconName = 'home', testIDprefix, username, resolveEnabl
   }
 }
 export default function AuthorizedLayout() {
-  const { isSignedOut } = useSessionProvider()
-  const { user } = useSessionProvider()
+  // const { isSignedOut } = useSessionProvider()
+  const { user } = useUserProvider()
   // console.log(`user:`, user);
 
-  if (isSignedOut) return <Redirect href={Screens.singIn} />
+  // if (isSignedOut) return <Redirect href={Screens.singIn} />
 
   return (
-    <Tabs>
-      <Tabs.Screen
-        name="user"
-        options={{
-          tabBarLabel: UserManager.fullFirstNameAndFirstLetterFromLastName(user),
-          ...screenOptions({
-            iconName: 'burger',
-            testIDprefix: 'user',
-            username: UserManager.get(user, 'firstName') + '_' + UserManager.get(user, 'lastName'),
-          }),
-        }}
-      />
-      <Tabs.Screen
-        name="plans"
-        options={{
-          ...screenOptions({ iconName: 'burger', 
-          resolveEnabled: () => UserManager.isCompleted(user),
-
-
-           }),
-        }}
-      />
-      <Tabs.Screen
-        name="home"
-        options={{
-          ...screenOptions({
-            iconName: 'burger',
-            resolveEnabled: () => UserManager.isCompleted(user),
-          }),
-        }}
-      />
-    </Tabs>
+      <Tabs>
+        <Tabs.Screen
+          name="user"
+          options={{
+            tabBarLabel: user.shortedUsername(),
+            ...screenOptions({
+              iconName: 'burger',
+              testIDprefix: 'user',
+              username: user.usernameForTest(),
+            }),
+          }}
+        />
+        <Tabs.Screen
+          name="plans"
+          options={{
+            ...screenOptions({ iconName: 'burger', resolveEnabled: () => user.isCompleted() }),
+          }}
+        />
+        <Tabs.Screen
+          name="home"
+          options={{
+            ...screenOptions({
+              iconName: 'burger',
+              resolveEnabled: () => UserManager.isCompleted(user),
+            }),
+          }}
+        />
+      </Tabs>
   )
   // return <Stack />
 

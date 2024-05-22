@@ -10,7 +10,11 @@ const TestUtils = {
       .withTimeout(timeout),
   fillFields: async (fieldsRegister) => {
     let fields = Object.entries(fieldsRegister)
-    for (const x of fields) await element(by.id(x[0])).typeText(x[1])
+    for (const x of fields) {
+      const elem = by.id(x[0])
+       await element(elem).clearText()
+       await element(elem).typeText(x[1])
+      }
   },
 }
 

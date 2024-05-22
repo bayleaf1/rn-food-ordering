@@ -70,9 +70,10 @@ AppTextInput.CardExpiration = (props = codeHitingProps) => (
 AppTextInput.CardCVV = (props = codeHitingProps) => (
   <AppTextInput {...props} mask={[/\d/, /\d/, /\d/]} />
 )
+AppTextInput.Phone = (props = codeHitingProps) => <AppTextInput {...props} mask={Masks.USA_PHONE} />
 
 const ComponentParts = {
-  normalizedInputFontSize: normalizeFontSize(DeviceMeta.iosOrOther(16, 12)),
+  normalizedInputFontSize: normalizeFontSize(DeviceMeta.iosOrOther(14, 12)),
   InnerBorder: ({ focus }) => (
     <View
       pointerEvents="none"

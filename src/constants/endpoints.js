@@ -17,8 +17,7 @@ function tableEndpoint(segment) {
 const endpoints = {
   userProfile: '/api/users/profile',
 //   userProfileOverview: (id) => `/api/users/profile/` + id,
-//   updateUserProfileAsAdmin: (id) => `/api/users/profile/` + id,
-//   updateUserProfile: `/api/users/profile/update`,
+  updateUserProfile: `/api/users/profile/update`,
 //   usersTable: tableEndpoint('users'),
 //   //
 //   // systemUsersTable: `/api/users/table`,
