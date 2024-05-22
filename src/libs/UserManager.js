@@ -33,6 +33,9 @@ export const UserManager = {
     }
   },
   isNullUser(u){return u.isNullUser},
+  isCompleted(u){
+    return u.profileMeta.isCompleted
+  },
   isNotCompleted(u){
     return !u.profileMeta.isCompleted
   },

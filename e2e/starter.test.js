@@ -32,14 +32,13 @@ describe('Example', () => {
     await SignUpScreen.waitToBeVisible()
 
     await SignUpScreen.signUp(fields)
-    await HomeScreen.waitToBeVisible()
+    await UserScreen.waitToBeVisible()
     await TestTabs.userButtonContainsUserName(fields.firstName, fields.lastName)
 
-    await TestTabs.navigateToUserScreen()
-    await UserScreen.waitToBeVisible()
+    // await TestTabs.navigateToUserScreen()
+    // await UserScreen.waitToBeVisible()
 
     await UserScreen.updateUser(updatedFields)
-    await TestTabs.userButtonContainsUserName(updatedFields.firstName, updatedFields.lastName)
   })
 
   //TODO test for outdated jwt

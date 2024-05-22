@@ -15,12 +15,10 @@ const TestUserUtils = {
   getUpdatedFields(overrides={}) {
     return {
         email: this.generateEmail(),
-        firstName: casual.first_name.slice(0, 3),
-        lastName: casual.last_name.slice(0, 3),
-        address: casual.address,
-        zipCode: casual.zip(4),
-        phoneNumber: '1234567890',
-        unit: '1234',
+        address: casual.address.slice(0,4),
+        zipCode: casual.zip(3).slice(0,3),
+        phone: '1234567890',
+        unit: casual.zip(3).slice(0,3),
         ...overrides,
 
     }

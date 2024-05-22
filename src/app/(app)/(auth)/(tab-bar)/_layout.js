@@ -8,6 +8,7 @@ import { BottomTabsStack } from '@libs/Navigation/TabsStacks'
 import { UserManager } from '@libs/UserManager'
 import { useSessionProvider } from '@providers/SessionProvider'
 import { Redirect, Stack, Tabs } from 'expo-router'
+import { Pressable } from 'react-native'
 import { Button } from 'react-native-paper'
 // import { Image } from 'react-native'
 //TODO RESTORE
@@ -19,9 +20,8 @@ let tabBarNavigationItems = {
   cart: { label: 'Cart', iconName: 'cart', screenName: 'cart' },
 }
 
-function screenOptions({ iconName = 'home', testIDprefix, username, label }) {
+function screenOptions({ iconName = 'home', testIDprefix, username, resolveEnabled = () => true }) {
   return {
-    ...(label ? {tabBarLabel:label} : {}),
     tabBarIcon: (props) => (
       <View testID={username + '_username'}>
         <View
@@ -38,44 +38,64 @@ function screenOptions({ iconName = 'home', testIDprefix, username, label }) {
         </View>
       </View>
     ),
+    tabBarButton: (p) => {
+      let enabled = resolveEnabled()
+      let opts = enabled
+        ? { onLongPress: p.onLongPress, onPress: p.onPress, opacity: 1 }
+        : { onLongPress: () => '', onPress: () => '', opacity: 0.5 }
+
+      return (
+        <Pressable
+          {...p}
+          onLongPress={opts.onLongPress}
+          onPress={opts.onPress}
+          style={[p.style, { opacity: opts.opacity }]}
+        />
+      )
+    },
   }
 }
 export default function AuthorizedLayout() {
   const { isSignedOut } = useSessionProvider()
   const { user } = useSessionProvider()
+  // console.log(`user:`, user);
 
   if (isSignedOut) return <Redirect href={Screens.singIn} />
 
-  // return (
-  //   <Tabs>
-  //     {/* <Tabs.Screen name="homex" options={{ labe tabBarButton:( p  ) => {
-  //            console.log("04-06", p) 
-  //             return ( <View testID="user_tab_button" tw={cn("w-5 h-5 bg-gray-100")}></View> )
-  //           } }} /> */}
-  //     <Tabs.Screen
-  //       name="home"
-  //       options={screenOptions({ iconName: 'home', testIDprefix: 'home' })}
-  //     />
-  //     <Tabs.Screen name="plans" options={{
-  //       href:null,
-  //       // tabBarStyle:{display: 'none'},
-  //       // lazy: true,
-        
-  //       ...screenOptions({ iconName: 'burger' }), 
-          
-    
-  //   }} />
-  //     <Tabs.Screen
-  //       name="user"
-  //       options={screenOptions({
-  //         iconName: 'burger',
-  //         testIDprefix: 'user',
-  //         username: UserManager.get(user, 'firstName') + '_' + UserManager.get(user, 'lastName'),
-  //         label: UserManager.fullFirstNameAndFirstLetterFromLastName(user)
-  //       })}
-  //     />
-  //   </Tabs>
-  // )
+  return (
+    <Tabs>
+      <Tabs.Screen
+        name="user"
+        options={{
+          tabBarLabel: UserManager.fullFirstNameAndFirstLetterFromLastName(user),
+          ...screenOptions({
+            iconName: 'burger',
+            testIDprefix: 'user',
+            username: UserManager.get(user, 'firstName') + '_' + UserManager.get(user, 'lastName'),
+          }),
+        }}
+      />
+      <Tabs.Screen
+        name="plans"
+        options={{
+          ...screenOptions({ iconName: 'burger', 
+          resolveEnabled: () => UserManager.isCompleted(user),
+
+
+           }),
+        }}
+      />
+      <Tabs.Screen
+        name="home"
+        options={{
+          ...screenOptions({
+            iconName: 'burger',
+            resolveEnabled: () => UserManager.isCompleted(user),
+          }),
+        }}
+      />
+    </Tabs>
+  )
   // return <Stack />
 
   return (
@@ -104,7 +124,7 @@ export default function AuthorizedLayout() {
           ),
         }}
       /> */}
-     {/* <BottomTabsStack.Screen
+      {/* <BottomTabsStack.Screen
         name="favourites"
         options={{
           headerShown: true,

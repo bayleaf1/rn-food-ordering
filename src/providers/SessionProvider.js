@@ -45,10 +45,10 @@ function SessionProvider(props) {
         jwt: jwtToken,
         onSuccess: ({ data }) => {
           setUser(data)
-          // console.log(`data:`, data)
         },
         onError: ({ status, error, message }) => {
           if (status === 401) signOut()
+
         },
       })
     }
