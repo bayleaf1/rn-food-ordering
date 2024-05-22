@@ -6,6 +6,7 @@ const AppConfig = Object.freeze({
   SCREEN_NAME_TO_REDIRECT_IF_AUTHORIZED: 'home',
   TEST: process.env.EXPO_PUBLIC_TEST,
   AUTH_TOKEN_NAME: 'jwt_token',
+  SHOW_SPLASH_SCREEN: process.env.EXPO_PUBLIC_SHOW_SPLASH_SCREEN  === '1',
   isDevEnv() {
     return this.ENV === 'development'
   },

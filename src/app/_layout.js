@@ -14,6 +14,7 @@ import TranslationProvider from '@providers/TranslationProvider'
 import { NativeWindStyleSheet } from 'nativewind'
 import { LogBox } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import AppConfig from '@constants/AppConfig'
 
 LogBox.ignoreLogs(['NativeEvent'])
 //TODO add Localizations or Cronos objectx
@@ -24,40 +25,36 @@ LogBox.ignoreLogs(['NativeEvent'])
 //TODO add useAync storage provider
 NativeWindStyleSheet.setOutput({ default: 'native' })
 
-
 export default function AppLayout() {
-  // const response = Linking.useURL()
-  // const { queryParams } = response ? Linking.parse(response) : { queryParams: {} }
-  // // console.log(`res:`, res);
-  // console.log(`response:`, queryParams)
-  // if (queryParams.authToken === 'clear') removeStorageItemAsync(AppConfig.AUTH_TOKEN_NAME)
+  const Splash = AppConfig.SHOW_SPLASH_SCREEN
+    ? require('@screens/splash/SplashView').default
+    : (p) => p.children
+
   return (
     <DeepLinksProvider>
-
-    <AppLoadingProvider>
-      <AppThemeProvider>
-        <ToastsProvider>
-          <SafeAreaProvider>
-            <TranslationProvider>
-              <FontsProvider>
-                <ScreenOrientationProvider>
-                  <SessionProvider>
-                    {/* <SplashView showInDev={false}> */}
-                    <StopRenderIfAppNotLoaded>
-                        {/* Might change name */}
-                        <NativeStackResponsableForScreenOrientation />
-                    </StopRenderIfAppNotLoaded>
-                    {/* </SplashView> */}
-                  </SessionProvider>
-                </ScreenOrientationProvider>
-              </FontsProvider>
-            </TranslationProvider>
-          </SafeAreaProvider>
-        </ToastsProvider>
-      </AppThemeProvider>
-    </AppLoadingProvider>
+      <AppLoadingProvider>
+        <AppThemeProvider>
+          <ToastsProvider>
+            <SafeAreaProvider>
+              <TranslationProvider>
+                <FontsProvider>
+                  <ScreenOrientationProvider>
+                    <SessionProvider>
+                      <Splash>
+                        <StopRenderIfAppNotLoaded>
+                          {/* Might change name */}
+                          <NativeStackResponsableForScreenOrientation />
+                        </StopRenderIfAppNotLoaded>
+                      </Splash>
+                    </SessionProvider>
+                  </ScreenOrientationProvider>
+                </FontsProvider>
+              </TranslationProvider>
+            </SafeAreaProvider>
+          </ToastsProvider>
+        </AppThemeProvider>
+      </AppLoadingProvider>
     </DeepLinksProvider>
-
   )
 }
 

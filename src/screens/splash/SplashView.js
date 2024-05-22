@@ -1,14 +1,15 @@
+import LocalPicture from '@components/Pictures/LocalPicture'
 import AppConfig from '@constants/AppConfig'
 import { useOnMount } from '@libs/LifecycleHooks'
 import { useAppLoadingProvider } from '@providers/AppLoadingProvider'
 import Constants from 'expo-constants'
 import { SplashScreen } from 'expo-router'
 import { useEffect, useMemo, useState } from 'react'
-import { Animated, StyleSheet, View } from 'react-native'
+import { Animated, Image, StyleSheet, View } from 'react-native'
 export { ErrorBoundary } from 'expo-router'
 
-const loadedSplashImage = require('@assets/images/logo.png')
-// const loadedSplashImage = require('@assets/splash.jpg')
+// const loadedSplashImage = require('@assets/images/logo.png')
+const loadedSplashImage = require('@assets/splash.jpg')
 const IS_DEV_ENV = AppConfig.isDevEnv()
 
 try {
@@ -28,20 +29,20 @@ function hideSystemSplash() {
 function runAnimationWhileAppIsLoading(animation, cb) {
   Animated.timing(animation, {
     toValue: 1.15,
-    duration: 2000,
+    duration: 5000,
     useNativeDriver: true,
   }).start(cb)
 }
 
 function runExitAnimationWhenAppHasLoadedAndTreeIsRendered(animation, cb) {
   Animated.timing(animation, {
-    toValue: 0.2,
-    duration: 700,
+    toValue: 0,
+    duration: 1500,
     useNativeDriver: true,
   }).start(cb)
 }
 
-function SplashView({ children, showInDev }) {
+function SplashView({ children }) {
   const animationWhileAppIsLoading = useMemo(() => new Animated.Value(1), [])
   const exitAnimation = useMemo(() => new Animated.Value(1), [])
 
@@ -62,70 +63,59 @@ function SplashView({ children, showInDev }) {
     [isAppLoaded, isCustomSplashImageLoaded, isLoadingAnimationComplete]
   )
 
-  // console.log('34-26', [isAppLoaded, isCustomSplashImageLoaded, isLoadingAnimationComplete])
-
-  useEffect(() => {
+  useEffect(function checkIfShouldStartHiddingSplash() {
     if (appAndSplashImageHasLoaded) {
       hideSystemSplash()
-      runExitAnimationWhenAppHasLoadedAndTreeIsRendered(exitAnimation, () =>
+      runExitAnimationWhenAppHasLoadedAndTreeIsRendered(exitAnimation, () => {
         setExitAnimationComplete(true)
-      )
+      })
     }
   }, [appAndSplashImageHasLoaded])
 
-  let showCustomSplashElement = useMemo(() => {
-    // if (IS_DEV_ENV) return !!showInDev && !isExitAnimationComplete
-    return !isExitAnimationComplete
-  }, [isExitAnimationComplete, showInDev, IS_DEV_ENV])
+  let showCustomSplashElement = useMemo(() => !isExitAnimationComplete, [isExitAnimationComplete])
 
   useEffect(() => {
-    if (!showCustomSplashElement && IS_DEV_ENV) hideSystemSplash()
+    if (!showCustomSplashElement) hideSystemSplash()
   }, [showCustomSplashElement])
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, position: 'relative' }}>
       {(isLoadingAnimationComplete || !showCustomSplashElement) && children}
 
-      {showCustomSplashElement && (
-        <Animated.View
-          pointerEvents="none"
-          style={[
-            StyleSheet.absoluteFill,
-            {
-              backgroundColor: Constants.expoConfig.splash.backgroundColor,
-              opacity: exitAnimation,
-            },
-          ]}
-        >
-          <Animated.Image
-            style={{
-              width: '100%',
-              maxHeight: 600,
-              height: '200px',
-              resizeMode: Constants.expoConfig.splash.resizeMode || 'contain',
-              transform: [
-                {
-                  scale: animationWhileAppIsLoading,
-                  // scale: 2,
-                },
-              ],
-            }}
-            source={loadedSplashImage}
-            onLoadEnd={() => (setCustomSplashImageLoaded(true), console.log('33-36', 'Loaded'))}
-            fadeDuration={0}
-          />
-        </Animated.View>
-      )}
+
+      {showCustomSplashElement &&
+        (
+          <Animated.View
+            pointerEvents="none"
+            tw={cn("w-full h-full absolute")}
+            style={[
+              {
+                backgroundColor: Constants.expoConfig.splash.backgroundColor,
+                opacity: exitAnimation,
+              },
+            ]}
+          >
+            <Animated.Image
+            tw={cn("w-full h-full")}
+              style={{
+                resizeMode: Constants.expoConfig.splash.resizeMode || 'contain',
+                transform: [
+                  {
+                    scale: animationWhileAppIsLoading,
+                  },
+                ],
+              }}
+              source={loadedSplashImage}
+              onLoadEnd={() => (setCustomSplashImageLoaded(true))}
+              fadeDuration={0}
+            />
+          </Animated.View>
+        )}
     </View>
   )
 }
 
 export default SplashView
-
-
-
-
-
 
 // import AppConfig from '@constants/AppConfig'
 // import { useOnMount } from '@libs/LifecycleHooks'
@@ -208,7 +198,6 @@ export default SplashView
 //     if (!showCustomSplashElement && IS_DEV_ENV) hideSystemSplash()
 //   }, [showCustomSplashElement])
 
-
 //   return (
 //     <View style={{ flex: 1 }}>
 
@@ -245,4 +234,3 @@ export default SplashView
 //     </View>
 //   )
 // }
-
