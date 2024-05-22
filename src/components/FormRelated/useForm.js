@@ -1,6 +1,7 @@
 import AppText from '@components/AppText/AppText'
 import SpacerView from '@components/SpacerView'
 import { fetchBackend } from '@libs/Api'
+import { useSessionProvider } from '@providers/SessionProvider'
 import * as changeCase from 'change-case'
 import { useCallback, useState } from 'react'
 // import { BaseForm } from '../components/Form'
@@ -25,7 +26,10 @@ const defFetchProps = {
 
 //   return useForm({ fields, fetch, method, accessToken })
 // }
-
+export function useAuthForm({ fields = {}, fetch = defFetchProps }){
+  const { jwt } = useSessionProvider()
+  return useForm({ fields, fetch, accessToken:jwt })
+}
 export default function useForm({ fields = {}, fetch = defFetchProps, accessToken }) {
   fetch = { ...defFetchProps, ...fetch }
   const { getValueForField, setFieldValue, validateFields, getFieldsRegister } = useFields(fields)

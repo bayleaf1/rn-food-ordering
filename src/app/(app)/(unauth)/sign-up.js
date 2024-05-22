@@ -9,8 +9,8 @@ import Button from '@components/Button'
 import Go from '@libs/Navigation/Go'
 import endpoints from '@constants/endpoints'
 import Clock from '@libs/Clock'
+import FormFieldsSpacer from '@components/FormRelated/FormFieldsSpacer'
 
-let Spacer = SpacerView.createWithStyles(wp(4))
 
 export default function Page() {
   const { signIn } = useSessionProvider()
@@ -40,13 +40,16 @@ export default function Page() {
     <SafeFullScreenLayout>
       <View tw={cn('')} testID="sign_up_screen">
         <AppTextInput {...getPropsForField('email')} />
-        <Spacer />
+        <FormFieldsSpacer/>
         <AppTextInput {...getPropsForField('firstName')} />
-        <Spacer />
+        <FormFieldsSpacer/>
+
         <AppTextInput {...getPropsForField('lastName')} />
-        <Spacer />
+        <FormFieldsSpacer/>
+
         <AppTextInput.Password {...getPropsForField('password')} />
-        <Spacer />
+        <FormFieldsSpacer/>
+
         <Button
           label={'Sign up'}
           labelTw={'text-white'}

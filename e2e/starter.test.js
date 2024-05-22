@@ -4,11 +4,14 @@ const { default: TestUtils } = require('./utils/TestUtils')
 const { default: TestDevice } = require('./utils/TestDevice')
 const { default: HomeScreen } = require('./utils/screens/HomeScreen')
 const { default: SignUpScreen } = require('./utils/screens/SignUpScreen')
+const { default: UserScreen } = require('./utils/screens/UserScreen')
 const { default: BackEnd } = require('./utils/BackEnd')
 const { default: TestUserUtils } = require('./utils/TestUserUtils')
+const { default: TestTabs } = require('./utils/TestTabs')
 
 describe('Example', () => {
   const fields = TestUserUtils.getRegistrationFields()
+  const updatedFields = TestUserUtils.getUpdatedFields()
 
   beforeAll(async () => {
     await TestDevice.launchAppAsUnauthorized()
@@ -20,31 +23,44 @@ describe('Example', () => {
 
   afterAll(async () => {
     await BackEnd.eraseUserWithRelatedByEmail(fields.email)
-  });
-//TODO test for outdated jwt
-  it('registers and login', async () => {
-    
+    await BackEnd.eraseUserWithRelatedByEmail(updatedFields.email)
+  })
+
+  it('registers and updates profile', async () => {
     await SignInScreen.waitToBeVisible()
     await SignInScreen.navigateToSignUpScreen()
     await SignUpScreen.waitToBeVisible()
 
     await SignUpScreen.signUp(fields)
     await HomeScreen.waitToBeVisible()
+    await TestTabs.userButtonContainsUserName(fields.firstName, fields.lastName)
 
-    await HomeScreen.signOut()
-    await SignInScreen.waitToBeVisible()
+    await TestTabs.navigateToUserScreen()
+    await UserScreen.waitToBeVisible()
 
-    await SignInScreen.signIn(fields.email, fields.password)
-    await HomeScreen.waitToBeVisible()
-
-
-
-
-
-
-    // await SignInScreen.waitToBeVisible()
-    // await TestDevice.screenshot()
+    await UserScreen.updateUser(updatedFields)
+    await TestTabs.userButtonContainsUserName(updatedFields.firstName, updatedFields.lastName)
   })
+
+  //TODO test for outdated jwt
+  // it('registers and login', async () => {
+
+  //   await SignInScreen.waitToBeVisible()
+  //   await SignInScreen.navigateToSignUpScreen()
+  //   await SignUpScreen.waitToBeVisible()
+
+  //   await SignUpScreen.signUp(fields)
+  //   await HomeScreen.waitToBeVisible()
+
+  //   await HomeScreen.signOut()
+  //   await SignInScreen.waitToBeVisible()
+
+  //   await SignInScreen.signIn(fields.email, fields.password)
+  //   await HomeScreen.waitToBeVisible()
+
+  //   // await SignInScreen.waitToBeVisible()
+  //   // await TestDevice.screenshot()
+  // })
 
   // it('should have welcome screen', async () => {
   //   // await expect(element(by.text('Register'))).toBeVisible();

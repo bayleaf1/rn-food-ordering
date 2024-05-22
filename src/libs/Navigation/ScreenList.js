@@ -6,6 +6,7 @@ const Screens = {
   privacyPolicy: '/privacy-policy',
   //
   home: '/home',
+  user: '/user',
   'food-review': '/food-review',
   search: '/search',
   favourites: '/favourites',

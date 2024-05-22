@@ -5,8 +5,10 @@ import Go from '@libs/Navigation/Go'
 import AppConfig from '@constants/AppConfig'
 import { fetchBackend } from '@libs/Api'
 import endpoints from '@constants/endpoints'
+import { UserManager } from '@libs/UserManager'
 
 const AuthContext = React.createContext({
+  jwt: '',
   signIn: () => null,
   signOut: () => null,
   // signInAndRedirectToHomeScreen: () => null,
@@ -14,6 +16,7 @@ const AuthContext = React.createContext({
   isSignedIn: false,
   isSignedOut: true,
   isLoading: false,
+  user: UserManager.nullUser()
 })
 
 // This hook can be used to access the user info.
@@ -27,7 +30,7 @@ function SessionProvider(props) {
   const isSignedOut = useMemo(() => !isSignedIn, [isSignedIn])
   let { setProviderAsLoaded } = useAppLoadingProvider()
 
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(UserManager.nullUser())
 
   const signOut = () => {
     // console.log("53-36", 'SIGN OUT')
@@ -41,6 +44,7 @@ function SessionProvider(props) {
         endpoint: endpoints.userProfile,
         jwt: jwtToken,
         onSuccess: ({ data }) => {
+          setUser(data)
           // console.log(`data:`, data)
         },
         onError: ({ status, error, message }) => {
@@ -52,7 +56,7 @@ function SessionProvider(props) {
 
   // removeValue()
   useEffect(() => {
-    if (!isLoading) setProviderAsLoaded('session')
+    if (!isLoading ) setProviderAsLoaded('session')
   }, [isLoading])
 
   const signIn = (token = '') => setJwtToken(token)
@@ -60,6 +64,7 @@ function SessionProvider(props) {
   return (
     <AuthContext.Provider
       value={{
+        jwt:jwtToken,
         signIn,
         signOut: () => {
           signOut()
@@ -67,6 +72,7 @@ function SessionProvider(props) {
         },
         isSignedIn,
         isSignedOut,
+        user,
         // session,
       }}
     >
