@@ -1,6 +1,7 @@
 import AppConfig from '@constants/AppConfig'
 import axios from 'axios'
 import useSWR from 'swr'
+import { pushErrorToast } from './Toaster'
 
 //Endpoints for when back-end no involved
 // export const Endpoints = {
@@ -16,7 +17,6 @@ import useSWR from 'swr'
 
 //   return Promise.resolve(endpointObject.response())
 // }
-
 
 const instance = axios.create({ baseURL: AppConfig.API_BASE_URL })
 
@@ -48,7 +48,19 @@ const backendDefProps = {
 }
 
 export function fetchBackend(opts = backendDefProps) {
-  return appFetch({ ...opts, baseURL: AppConfig.API_BASE_URL })
+  let merged = {
+    ...backendDefProps,
+    ...opts,
+  }
+  return appFetch({
+    ...merged,
+    baseURL: AppConfig.API_BASE_URL,
+    onError: (p) => {
+      if (p.status === 401) pushErrorToast('Session expired or jwt is malformated')
+      else if (p.status !== 422) pushErrorToast(p.message)
+      merged.onError(p)
+    },
+  })
 }
 const appFetchDefProps = {
   ...backendDefProps,
@@ -57,9 +69,12 @@ const appFetchDefProps = {
 
 function appFetch(opts = appFetchDefProps) {
   opts = { ...appFetchDefProps, ...opts }
-  
-  let optionalBody  = ['get', 'head'].findIndex(v=>opts.method.toLowerCase() === v ) > -1 ? {} : {body:JSON.stringify(opts.body)} 
-  
+
+  let optionalBody =
+    ['get', 'head'].findIndex((v) => opts.method.toLowerCase() === v) > -1
+      ? {}
+      : { body: JSON.stringify(opts.body) }
+
   fetch(opts.baseURL + opts.endpoint, {
     method: opts.method,
     ...optionalBody,

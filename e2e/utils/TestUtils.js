@@ -12,8 +12,9 @@ const TestUtils = {
     let fields = Object.entries(fieldsRegister)
     for (const x of fields) {
       const elem = by.id(x[0])
-       await element(elem).clearText()
-       await element(elem).typeText(x[1])
+      //  await element(elem).clearText()
+       await element(elem).replaceText(x[1])
+      //  await element(elem).typeText(x[1])
       }
   },
 }

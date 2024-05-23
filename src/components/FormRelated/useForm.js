@@ -1,31 +1,19 @@
 import AppText from '@components/AppText/AppText'
-import SpacerView from '@components/SpacerView'
 import { fetchBackend } from '@libs/Api'
+import { pushSuccessToast } from '@libs/Toaster'
 import { useSessionProvider } from '@providers/SessionProvider'
 import * as changeCase from 'change-case'
 import { useCallback, useState } from 'react'
-// import { BaseForm } from '../components/Form'
-// import { pushErrorToast } from '../providers/ToastProvider'
 
 const defFetchProps = {
   endpoint: '',
+  onSuccessToastMsg: '',
   onSuccess: () => '',
   onError: () => '',
   formatFieldsForFetching: (fields = {}) => fields,
   method: 'post',
 }
 
-// export function useUserDashboardApiForm({ fields = {}, fetch = defFetchProps, method = 'post' }) {
-//   const { accessToken } = useUserDashboardSessionProvider()
-
-//   return useForm({ fields, fetch, method, accessToken })
-// }
-
-// export function useAdminDashboardApiForm({ fields = {}, fetch = defFetchProps, method = 'post' }) {
-//   const { accessToken } = useAdminDashboardSessionProvider()
-
-//   return useForm({ fields, fetch, method, accessToken })
-// }
 export function useAuthForm({ fields = {}, fetch = defFetchProps }){
   const { jwt } = useSessionProvider()
   return useForm({ fields, fetch, accessToken:jwt })
@@ -88,7 +76,7 @@ export default function useForm({ fields = {}, fetch = defFetchProps, accessToke
 
   const validateFormAndFetch = useCallback(
     (props = {}) => {
-      let { endpoint, onSuccess, onError, formatFieldsForFetching, token, method } = {
+      let { endpoint, onSuccess, onError, formatFieldsForFetching, token, method, onSuccessToastMsg } = {
         ...fetch,
         ...props,
       }
@@ -103,18 +91,14 @@ export default function useForm({ fields = {}, fetch = defFetchProps, accessToke
             jwt: token || accessToken,
             onSuccess: ({ data }) => {
               resetErrorsRegister()
+              if(onSuccessToastMsg) pushSuccessToast(onSuccessToastMsg)
               onSuccess({ fields: body, data })
             },
 
             onError: ({ status, message, error }) => {
-              // console.log(`status, data, message, error:`, status, data, message, error);
               if (status === 422) {
-                // const errors = BaseForm.parseValidationErrors({
-                //   error: data.error,
-                //   goToSingInForm: () => AuhtorizationModal.show(), //
-                // })
                 const errors = parseValidationErrors({error})
-                console.log(`validation errors:`, errors);
+                // console.log(`validation errors:`, errors);
 
                 setErrorsRegister(errors)
               } else {

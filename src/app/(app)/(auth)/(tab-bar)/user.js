@@ -29,17 +29,12 @@ export default function Page() {
       zipCode: { value: user.zipCode()},
       unit: { value: user.unit()},
       phone: { value: user.phone()},
-
-      // password: { value: '' },
-      // timezone: {value: Clock.timezone()}
     },
     fetch: {
       endpoint: endpoints.updateUserProfile,
+      onSuccessToastMsg: 'Saved!',
       onSuccess: ({ data }) => {
         updateUserFromBackEndResponse(data)
-      },
-      onError: ({ error }) => {
-        console.log(`errorx:`, error)
       },
       method: 'post'
     },
