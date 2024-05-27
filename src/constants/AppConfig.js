@@ -3,7 +3,7 @@ import _ from 'lodash'
 const AppConfig = Object.freeze({
   ENV: process.env.EXPO_PUBLIC_ENV || reportMissing('ENV'),
   API_BASE_URL: process.env.EXPO_PUBLIC_API_BASE_URL || reportMissing('API_BASE_URL'),
-  SCREEN_NAME_TO_REDIRECT_IF_AUTHORIZED: process.env.EXPO_PUBLIC_SCREEN_NAME_TO_REDIRECT_IF_AUTHORIZED || 'payment-info',
+  SCREEN_NAME_TO_REDIRECT_IF_AUTHORIZED: process.env.EXPO_PUBLIC_SCREEN_NAME_TO_REDIRECT_IF_AUTHORIZED || 'plans',
   TEST: process.env.EXPO_PUBLIC_TEST,
   AUTH_TOKEN_NAME: 'jwt_token',
   SHOW_SPLASH_SCREEN: process.env.EXPO_PUBLIC_SHOW_SPLASH_SCREEN  === '1',

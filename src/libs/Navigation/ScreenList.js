@@ -8,6 +8,8 @@ const Screens = {
   home: '/home',
   user: '/user',
   'payment-info': '/payment-info',
+  plans: '/plans',
+
   'food-review': '/food-review',
   search: '/search',
   favourites: '/favourites',
