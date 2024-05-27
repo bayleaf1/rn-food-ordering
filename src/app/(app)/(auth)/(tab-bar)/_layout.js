@@ -1,5 +1,4 @@
 import AppIcon from '@components/Pictures/AppIcon'
-import { UserManager } from '@libs/UserManager'
 import { useUserProvider } from '@providers/UserProvider'
 import { Tabs } from 'expo-router'
 import { Pressable } from 'react-native'
@@ -78,7 +77,7 @@ export default function TabsLayout() {
         options={{
           ...screenOptions({
             iconName: 'burger',
-            resolveEnabled: () => UserManager.isCompleted(user),
+            resolveEnabled: () => user.isCompleted(),
           }),
         }}
       />

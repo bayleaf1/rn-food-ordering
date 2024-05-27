@@ -22,7 +22,6 @@ const AppConfig = Object.freeze({
      return this.isTestEnv() ? whenIsTest : otherwise
   }
 })
-console.log("56-54", AppConfig.CONSOLER_LEVEL)
 
 export default AppConfig;
 

@@ -28,7 +28,7 @@ function SessionProvider(props) {
     if (!isLoading ) setProviderAsLoaded('session')
   }, [isLoading])
 
-  const signIn = (token = '') => setJwtToken(token)
+  const signIn = (auth) => setJwtToken(auth.jwt())
   
   return (
     <AuthContext.Provider

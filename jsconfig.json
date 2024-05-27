@@ -13,6 +13,7 @@
       "@images/*": ["./assets/images/*"],
       "@utils/*": ["./src/utils/*"],
       "@screens/*": ["./src/screens/*"],
+      "@dto/*": ["./src/dto/*"],
     },
   },
 

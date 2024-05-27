@@ -10,6 +10,7 @@ import Go from '@libs/Navigation/Go'
 import endpoints from '@constants/endpoints'
 import Clock from '@libs/Clock'
 import FormFieldsSpacer from '@components/FormRelated/FormFieldsSpacer'
+import Authentification from '@dto/Authentification'
 
 
 export default function Page() {
@@ -27,7 +28,7 @@ export default function Page() {
     fetch: {
       endpoint: endpoints.registerWithEmailAndLogin,
       onSuccess: ({ data }) => {
-        signIn(data.auth.accessToken)
+        signIn(new Authentification(data))
       },
       onError: ({error, message, status}) => {
         console.log("04-18", error, message, status)

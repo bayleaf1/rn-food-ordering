@@ -24,6 +24,7 @@ module.exports = function (api) {
         '@images': './assets/images',
         '@utils': './src/utils',
         '@screens': './src/screens',
+        '@dto': './src/dto',
       },
     },
   ]
