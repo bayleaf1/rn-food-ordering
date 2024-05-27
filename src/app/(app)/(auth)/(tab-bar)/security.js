@@ -5,47 +5,35 @@ import FormFieldsSpacer from '@components/FormRelated/FormFieldsSpacer'
 import useForm from '@components/FormRelated/useForm'
 import endpoints from '@constants/endpoints'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
-import { useUserProvider } from '@providers/UserProvider'
+import { pushSuccessToast } from '@libs/Toaster'
 import { View } from 'react-native'
 
 export default function Page() {
 
-  const { user, updateUserFromBackEndResponse } = useUserProvider()
   const { getPropsForField, validateFormAndFetch, loading } = useForm({
     fields: {
-      email: { value: user.email() },
-      address: { value: user.address()},
-      zipCode: { value: user.zipCode()},
-      unit: { value: user.unit()},
-      phone: { value: user.phone()},
+      currentPassword: { value: '' },
+      newPassword: { value: '' },
+      repeatedNewPassword: { value: '' },
     },
     fetch: {
-      endpoint: endpoints.updateUserProfile,
-      onSuccessToastMsg: 'Saved!',
-      onSuccess: ({ data }) => {
-        updateUserFromBackEndResponse(data)
+      endpoint: endpoints.updatePassword,
+      onSuccess: () => {
+        pushSuccessToast('Your password was successfully reset!')
+        // onSuccess()
       },
     },
   })
 
   return (
     <SafeFullScreenLayout>
-      <AppText ctw={cn('')} testID="user_screen">User</AppText>
-      {user.isNotCompleted() && <AppText ctw={cn("")}> Profile is not completed </AppText>}
+      <AppText ctw={cn('')} testID="security_screen">User</AppText>
       <View tw={cn('')}>
-        <AppTextInput {...getPropsForField('email')}/>
+        <AppTextInput.Password {...getPropsForField('currentPassword')}  label={'Old password'}/>
         <FormFieldsSpacer/>
-        <AppTextInput.Phone {...getPropsForField('phone')}/>
+        <AppTextInput.Password {...getPropsForField('newPassword')}/>
         <FormFieldsSpacer/>
-
-        <AppTextInput {...getPropsForField('address')}/>
-        <FormFieldsSpacer/>
-
-        <AppTextInput {...getPropsForField('unit')}/>
-        <FormFieldsSpacer/>
-
-        <AppTextInput {...getPropsForField('zipCode')}/>
-
+        <AppTextInput.Password {...getPropsForField('repeatedNewPassword')} label={'Repeat new password'}/>
         <FormFieldsSpacer/>
         <Button
           label={'Update'}

@@ -14,10 +14,10 @@ const defFetchProps = {
   method: 'post',
 }
 
-export function useAuthForm({ fields = {}, fetch = defFetchProps }){
-  const { jwt } = useSessionProvider()
-  return useForm({ fields, fetch, accessToken:jwt })
-}
+// export function useAuthForm({ fields = {}, fetch = defFetchProps }){
+//   const { jwt } = useSessionProvider()
+//   return useForm({ fields, fetch, accessToken:jwt })
+// }
 export default function useForm({ fields = {}, fetch = defFetchProps, accessToken }) {
   fetch = { ...defFetchProps, ...fetch }
   const { getValueForField, setFieldValue, validateFields, getFieldsRegister } = useFields(fields)

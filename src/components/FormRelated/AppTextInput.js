@@ -54,6 +54,7 @@ AppTextInput.Password = (props = codeHitingProps) => {
             <AppText ctw={cn('mr-2')}> {secure ? 'S' : 'H'} </AppText>
           </Pressable>
         ),
+        placeholder: ''
       }}
     />
   )

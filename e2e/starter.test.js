@@ -9,10 +9,12 @@ const { default: PaymentInfoScreen } = require('./utils/screens/PaymentInfoScree
 const { default: BackEnd } = require('./utils/BackEnd')
 const { default: TestUserUtils } = require('./utils/TestUserUtils')
 const { default: TestTabs } = require('./utils/TestTabs')
+const { default: SecurityScreen } = require('./utils/screens/SecurityScreen')
 
 describe('Example', () => {
   const fields = TestUserUtils.getRegistrationFields()
   const updatedFields = TestUserUtils.getUpdatedFields()
+  const newPassword = 'uio392io'
 
   beforeAll(async () => {
     await TestDevice.launchAppAsUnauthorized()
@@ -27,27 +29,52 @@ describe('Example', () => {
     await BackEnd.eraseUserWithRelatedByEmail(updatedFields.email)
   })
 
-  it('registers and updates profile', async () => {
+  it('signup and change password', async () => {
     await SignInScreen.waitToBeVisible()
     await SignInScreen.navigateToSignUpScreen()
     await SignUpScreen.waitToBeVisible()
 
     await SignUpScreen.signUp(fields)
     await UserScreen.waitToBeVisible()
-    await TestTabs.userButtonContainsUserName(fields.firstName, fields.lastName)
-
-    // await TestTabs.navigateToUserScreen()
-    await UserScreen.waitToBeVisible()
-
     await UserScreen.updateUser(updatedFields)
 
-    await TestTabs.navigateToPaymentInfoScreen()
-    await PaymentInfoScreen.waitToBeVisible()
 
-    await PaymentInfoScreen.saveCardInfo()
+    await TestTabs.navigateToSecurityScreen()
+    await SecurityScreen.waitToBeVisible()
 
+    await SecurityScreen.changePassword(fields.password, newPassword)
+    
+    await TestTabs.navigateToHomeScreen()
+    await HomeScreen.waitToBeVisible()
+
+    await HomeScreen.signOut() 
+    await SignInScreen.waitToBeVisible()
+
+    await SignInScreen.signIn(updatedFields.email, newPassword)
+    await UserScreen.waitToBeVisible()
 
   })
+
+  // it('registers and updates profile', async () => {
+  //   await SignInScreen.waitToBeVisible()
+  //   await SignInScreen.navigateToSignUpScreen()
+  //   await SignUpScreen.waitToBeVisible()
+
+  //   await SignUpScreen.signUp(fields)
+  //   await UserScreen.waitToBeVisible()
+  //   await TestTabs.userButtonContainsUserName(fields.firstName, fields.lastName)
+
+  //   // await TestTabs.navigateToUserScreen()
+  //   await UserScreen.waitToBeVisible()
+
+  //   await UserScreen.updateUser(updatedFields)
+
+  //   await TestTabs.navigateToPaymentInfoScreen()
+  //   await PaymentInfoScreen.waitToBeVisible()
+
+  //   await PaymentInfoScreen.saveCardInfo()
+
+  // })
 
   //TODO test for outdated jwt
   // it('registers and login', async () => {

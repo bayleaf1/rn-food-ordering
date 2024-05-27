@@ -24,7 +24,7 @@ const endpoints = {
 //   //
 //   adminProfile: `/api/system-users/profile`,
 //   //
-//   updatePassword: `/api/users/update-password`,
+  updatePassword: `/api/users/update-password`,
 //   changePlan: `/api/users/change-subscription`,
 //   //
 //   contactUs: `/api/emails/contact-us`,

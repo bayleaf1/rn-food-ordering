@@ -3,13 +3,12 @@ import Button from '@components/Button'
 import AppTextInput from '@components/FormRelated/AppTextInput'
 import FormFieldsSpacer from '@components/FormRelated/FormFieldsSpacer'
 import useForm from '@components/FormRelated/useForm'
-import SpacerView from '@components/SpacerView'
 import AppConfig from '@constants/AppConfig'
 import endpoints from '@constants/endpoints'
+import Authentification from '@dto/Authentification'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import Clock from '@libs/Clock'
 import Go from '@libs/Navigation/Go'
-import { wp } from '@libs/Styling'
 import { useSessionProvider } from '@providers/SessionProvider'
 
 
@@ -24,7 +23,7 @@ export default function LoginPage() {
     fetch: {
       endpoint: endpoints.loginWithEmail,
       onSuccess: ({ data }) => {
-        signIn(data.auth.accessToken)
+        signIn(new Authentification(data))
       },
       onError: ({ error }) => {
         console.log(`errorx:`, error)

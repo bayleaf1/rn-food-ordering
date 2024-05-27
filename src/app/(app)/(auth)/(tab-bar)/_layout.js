@@ -72,11 +72,20 @@ export default function TabsLayout() {
           }),
         }}
       />
+       <Tabs.Screen
+        name="security"
+        options={{
+          ...screenOptions({ iconName: 'burger', 
+          testIDprefix: 'security',
+          resolveEnabled: () => user.isCompleted() }),
+        }}
+      />
       <Tabs.Screen
         name="home"
         options={{
           ...screenOptions({
             iconName: 'burger',
+            testIDprefix: 'home',
             resolveEnabled: () => user.isCompleted(),
           }),
         }}
