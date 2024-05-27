@@ -21,7 +21,7 @@ describe('Example', () => {
   })
 
   beforeEach(async () => {
-    await device.reloadReactNative()
+    await TestDevice.reloadReactNativeToResetState()
   })
 
   afterAll(async () => {
@@ -30,47 +30,47 @@ describe('Example', () => {
   })
 
   it('signup and change password', async () => {
-    await SignInScreen.waitToBeVisible()
+    await SignInScreen.toBeVisible()
     await SignInScreen.navigateToSignUpScreen()
-    await SignUpScreen.waitToBeVisible()
+    await SignUpScreen.toBeVisible()
 
     await SignUpScreen.signUp(fields)
-    await UserScreen.waitToBeVisible()
+    await UserScreen.toBeVisible()
     await UserScreen.updateUser(updatedFields)
 
 
     await TestTabs.navigateToSecurityScreen()
-    await SecurityScreen.waitToBeVisible()
+    await SecurityScreen.toBeVisible()
 
     await SecurityScreen.changePassword(fields.password, newPassword)
     
     await TestTabs.navigateToHomeScreen()
-    await HomeScreen.waitToBeVisible()
+    await HomeScreen.toBeVisible()
 
     await HomeScreen.signOut() 
-    await SignInScreen.waitToBeVisible()
+    await SignInScreen.toBeVisible()
 
     await SignInScreen.signIn(updatedFields.email, newPassword)
-    await UserScreen.waitToBeVisible()
+    await UserScreen.toBeVisible()
 
   })
 
   // it('registers and updates profile', async () => {
-  //   await SignInScreen.waitToBeVisible()
+  //   await SignInScreen.toBeVisible()
   //   await SignInScreen.navigateToSignUpScreen()
-  //   await SignUpScreen.waitToBeVisible()
+  //   await SignUpScreen.toBeVisible()
 
   //   await SignUpScreen.signUp(fields)
-  //   await UserScreen.waitToBeVisible()
+  //   await UserScreen.toBeVisible()
   //   await TestTabs.userButtonContainsUserName(fields.firstName, fields.lastName)
 
   //   // await TestTabs.navigateToUserScreen()
-  //   await UserScreen.waitToBeVisible()
+  //   await UserScreen.toBeVisible()
 
   //   await UserScreen.updateUser(updatedFields)
 
   //   await TestTabs.navigateToPaymentInfoScreen()
-  //   await PaymentInfoScreen.waitToBeVisible()
+  //   await PaymentInfoScreen.toBeVisible()
 
   //   await PaymentInfoScreen.saveCardInfo()
 
@@ -79,39 +79,39 @@ describe('Example', () => {
   //TODO test for outdated jwt
   // it('registers and login', async () => {
 
-  //   await SignInScreen.waitToBeVisible()
+  //   await SignInScreen.toBeVisible()
   //   await SignInScreen.navigateToSignUpScreen()
-  //   await SignUpScreen.waitToBeVisible()
+  //   await SignUpScreen.toBeVisible()
 
   //   await SignUpScreen.signUp(fields)
-  //   await HomeScreen.waitToBeVisible()
+  //   await HomeScreen.toBeVisible()
 
   //   await HomeScreen.signOut()
-  //   await SignInScreen.waitToBeVisible()
+  //   await SignInScreen.toBeVisible()
 
   //   await SignInScreen.signIn(fields.email, fields.password)
-  //   await HomeScreen.waitToBeVisible()
+  //   await HomeScreen.toBeVisible()
 
-  //   // await SignInScreen.waitToBeVisible()
+  //   // await SignInScreen.toBeVisible()
   //   // await TestDevice.screenshot()
   // })
 
   // it('should have welcome screen', async () => {
   //   // await expect(element(by.text('Register'))).toBeVisible();
-  //   await SignInScreen.waitToBeVisible()
+  //   await SignInScreen.toBeVisible()
 
   //   // await TestUtils.fillFields({ email: '123testx', password: '123' })
 
   //   await SignInScreen.tryToLogin()
 
-  //   await HomeScreen.waitToBeVisible()
+  //   await HomeScreen.toBeVisible()
 
   //   await TestDevice.screenshot()
   //   // await element(by.id('emailInput')).typeText('test@mail')
   //   // await device.takeScreenshot('opened general section2')
   //   return
   //   await SignInScreen.navigateToForgotPasswordScreen()
-  //   await ForgotPasswordScreen.waitToBeVisible()
+  //   await ForgotPasswordScreen.toBeVisible()
 
   //   return
   //   await waitFor(element(by.id('welcome')))
