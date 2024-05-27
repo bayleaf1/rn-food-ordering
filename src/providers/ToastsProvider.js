@@ -2,7 +2,7 @@ import Button from '@components/Button'
 import { createContext, useContext } from 'react'
 import { View } from 'react-native'
 import Toast from 'react-native-toast-message'
-import { pushErrorToast, pushSuccessToast } from "@libs/Toaster";
+import { ToastProviderConfig, pushErrorToast, pushSuccessToast } from "@libs/Toaster";
 
 const Context = createContext({
   pushSuccessToast: (msg = '', opts = {}) => '',
@@ -23,7 +23,7 @@ function ToastsProvider({ children }) {
       <Button label={'s'} onPress={()=>pushSuccessToast('succ')} />
       <Button label={'e'} onPress={()=>pushErrorToast('error')} /> */}
       {children}
-      <Toast />
+      <Toast config={ToastProviderConfig} />
     </Context.Provider>
   )
 }

@@ -1,6 +1,6 @@
 import AppText from '@components/AppText/AppText'
-import { fetchBackend } from '@libs/Api'
 import { pushSuccessToast } from '@libs/Toaster'
+import { useApiProvider } from '@providers/ApiProvider'
 import { useSessionProvider } from '@providers/SessionProvider'
 import * as changeCase from 'change-case'
 import { useCallback, useState } from 'react'
@@ -29,6 +29,7 @@ export default function useForm({ fields = {}, fetch = defFetchProps, accessToke
     createErrorsRegisterFromFieldsValidationResult,
     registerContainsErrors,
   } = useErrors()
+  const [loading, setLoading] = useState(false)
 
   const getPropsForField = useCallback(
     (fieldName) => {
@@ -73,7 +74,7 @@ export default function useForm({ fields = {}, fetch = defFetchProps, accessToke
     },
     [validateFields]
   )
-
+  const { post } = useApiProvider()
   const validateFormAndFetch = useCallback(
     (props = {}) => {
       let { endpoint, onSuccess, onError, formatFieldsForFetching, token, method, onSuccessToastMsg } = {
@@ -83,12 +84,10 @@ export default function useForm({ fields = {}, fetch = defFetchProps, accessToke
       validateForm({
         onOk: () => {
           let body = getFieldsRegister()
-
-          fetchBackend({
+          post({
+            setLoading,
             endpoint: endpoint,
-            method,
             body: formatFieldsForFetching(body),
-            jwt: token || accessToken,
             onSuccess: ({ data }) => {
               resetErrorsRegister()
               if(onSuccessToastMsg) pushSuccessToast(onSuccessToastMsg)
@@ -123,7 +122,7 @@ export default function useForm({ fields = {}, fetch = defFetchProps, accessToke
     return createErrorsRegisterFromFieldsValidationResult(result)
   }
 
-  return { getPropsForField, formIsValid, validateForm, validateFormAndFetch }
+  return { loading, getPropsForField, formIsValid, validateForm, validateFormAndFetch }
 }
 
 

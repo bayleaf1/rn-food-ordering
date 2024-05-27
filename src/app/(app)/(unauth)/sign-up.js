@@ -16,7 +16,7 @@ import Authentification from '@dto/Authentification'
 export default function Page() {
   const { signIn } = useSessionProvider()
 
-  const { getPropsForField, validateFormAndFetch } = useForm({
+  const { getPropsForField, validateFormAndFetch, loading } = useForm({
     fields: {
       email: { value: '' },
       firstName: { value: '' },
@@ -57,6 +57,7 @@ export default function Page() {
           fullWidth
           onPress={() => validateFormAndFetch()}
           testID={'sign_up'}
+          loading={loading}
         />
       </View>
     </SafeFullScreenLayout>

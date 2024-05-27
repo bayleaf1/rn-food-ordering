@@ -11,7 +11,7 @@ import { View } from 'react-native'
 export default function Page() {
 
   const { user, updateUserFromBackEndResponse } = useUserProvider()
-  const { getPropsForField, validateFormAndFetch } = useAuthForm({
+  const { getPropsForField, validateFormAndFetch, loading } = useAuthForm({
     fields: {
       email: { value: user.email() },
       address: { value: user.address()},
@@ -52,6 +52,7 @@ export default function Page() {
           labelTw={'text-white'}
           fullWidth
           onPress={() => validateFormAndFetch()}
+          loading={loading}
           // onPress={() => Go.toScreen('home')}
           testID="update"
         />

@@ -36,12 +36,15 @@ describe('Example', () => {
     await UserScreen.waitToBeVisible()
     await TestTabs.userButtonContainsUserName(fields.firstName, fields.lastName)
 
-    await TestTabs.navigateToUserScreen()
+    // await TestTabs.navigateToUserScreen()
     await UserScreen.waitToBeVisible()
 
     await UserScreen.updateUser(updatedFields)
+
     await TestTabs.navigateToPaymentInfoScreen()
     await PaymentInfoScreen.waitToBeVisible()
+
+    await PaymentInfoScreen.saveCardInfo()
 
 
   })

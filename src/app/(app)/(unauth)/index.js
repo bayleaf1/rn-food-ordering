@@ -15,7 +15,7 @@ import { useSessionProvider } from '@providers/SessionProvider'
 
 export default function LoginPage() {
   const { signIn } = useSessionProvider()
-  const { getPropsForField, validateFormAndFetch } = useForm({
+  const { getPropsForField, validateFormAndFetch, loading } = useForm({
     fields: {
       email: { value: '' },
       password: { value: '' },
@@ -48,6 +48,7 @@ export default function LoginPage() {
           labelTw={'text-white'}
           fullWidth
           onPress={() => validateFormAndFetch()}
+          loading={loading}
           // onPress={() => Go.toScreen('home')}
           testID="login"
         />

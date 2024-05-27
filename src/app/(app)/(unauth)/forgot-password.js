@@ -9,7 +9,7 @@ import { wp } from '@libs/Styling'
 let Spacer = SpacerView.createWithStyles(wp(4))
 
 export default function Page() {
-  const { getPropsForField, validateFormAndFetch } = useForm({
+  const { getPropsForField, validateFormAndFetch, loading } = useForm({
     fields: {
       email: { value: '' },
     },
@@ -32,6 +32,7 @@ export default function Page() {
           labelTw={'text-white'}
           fullWidth
           onPress={() => validateFormAndFetch()}
+          loading={loading}
         />
       </View>
     </SafeFullScreenLayout>

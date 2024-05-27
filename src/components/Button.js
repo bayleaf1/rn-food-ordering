@@ -1,7 +1,7 @@
+import AppText from '@components/AppText/AppText'
 import Go from '@libs/Navigation/Go'
 import AnimationList from './AnimationList/AnimationList'
-import AppText from '@components/AppText/AppText'
-
+import Loader from './Loader'
 //TODO copy to main repo
 
 let variants = {
@@ -14,6 +14,7 @@ let variants = {
     labelTw: `text-primary stroke-primary fill-primary`,
   },
 }
+
 export default function Button({
   label,
   renderLabel,
@@ -23,14 +24,14 @@ export default function Button({
   labelTw,
   fullWidth,
   onPress = () => '',
-  disabled,
-  testID
+  enabled = true,
+  loading = false,
+  testID,
 }) {
   let style = variants[variant]
 
-  let Wrapper = disabled
-    ? ({ children }) => children
-    : ({ children }) => (
+  let Wrapper = enabled
+    ? ({ children }) => (
         <AnimationList.ZoomOutOnPress
           goToScreen={() => screenNameToGoOnPress && Go.toScreen(screenNameToGoOnPress)}
           targetSize={0.99}
@@ -39,17 +40,18 @@ export default function Button({
           {children}
         </AnimationList.ZoomOutOnPress>
       )
+    : ({ children }) => children
 
   return (
     <Wrapper>
       <View
-        pointerEvents={disabled}
+        pointerEvents={enabled}
         tw={cn(
           { 'w-full': fullWidth },
-          'self-start rounded-lg p-3 px-6',
+          'flex flex-row justify-center self-start rounded-lg p-3 px-6',
           style.viewTw,
           ctw,
-          disabled && 'pointer-events-none bg-gray-100'
+          !enabled && 'pointer-events-none bg-gray-100'
         )}
         testID={testID ? testID + '_button' : ''}
       >
@@ -57,6 +59,11 @@ export default function Button({
           renderLabel({ labelTw: style.labelTw })
         ) : (
           <AppText ctw={cn('text-center', style.labelTw, labelTw)}>{label}</AppText>
+        )}
+        {loading && (
+          <View tw={cn('ml-1 flex justify-center')}>
+            <Loader size={15} color="blue"></Loader>
+          </View>
         )}
       </View>
     </Wrapper>

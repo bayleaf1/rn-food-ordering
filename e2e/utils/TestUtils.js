@@ -8,6 +8,10 @@ const TestUtils = {
     waitFor(element(by.id(id)))
       .toBeVisible()
       .withTimeout(timeout),
+    waitToBeVisibleByText: async (text, timeout = 3000) =>
+        waitFor(element(by.text(text)))
+          .toBeVisible()
+          .withTimeout(timeout),
   fillFields: async (fieldsRegister) => {
     let fields = Object.entries(fieldsRegister)
     for (const x of fields) {
