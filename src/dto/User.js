@@ -52,6 +52,14 @@ export class NullUser {
   phone(){
      return this.profile.phone
   }
+  planId(){
+     return 0
+    return this.profile.plan.id
+  }
+  hasPlan(){
+     return true
+    return this.profileMeta.hasPlan
+  }
   isCompleted() {
     return this.profileMeta.isCompleted
   }

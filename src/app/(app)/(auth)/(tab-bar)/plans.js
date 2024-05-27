@@ -1,60 +1,88 @@
-import FadingOverlay from '@components/FadingOverlay'
-import Food from '@components/Food/Food'
-import LayoutForBottomTabs from '@layouts/LayoutForBottomTabs'
-import { Algebra } from '@libs/Algebra'
-import { FlatList } from 'react-native'
+import AppText from '@components/AppText/AppText'
+import Button from '@components/Button'
+import ViewWithShadow from '@components/ViewWithShadow'
+import { NullUser } from '@dto/User'
+import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import { useUserProvider } from '@providers/UserProvider'
 
-export default function Page() {
-  let items = Food.Showcase.propsModels(10)
-  return (
-    <LayoutForBottomTabs contentTw="flex-1" verticalPartBottomSpace={0}>
-      <FoodList items={items} itemsCount={items.length} />
-    </LayoutForBottomTabs>
-  )
+class BasePlan {
+  constructor(user = new NullUser()) {
+    this.user = user
+    this.id = -1
+    this.buttonActionLabel = ''
+    this._title = 'Plan'
+    this.postConstructor()
+  }
+
+  buttonLabel() {
+    if (!this.user.hasPlan()) return 'Select this plan'
+    return this.user.planId() === this.id ? 'Current plan' : this.buttonActionLabel
+  }
+  title() {
+    return this._title
+  }
 }
 
-function FoodList({ items = [], itemsCount = 0 }) {
-  const renderItem = useCallback(
-    ({ item, index }) => {
-      let isLast = index === items.length - 1
+class LitePlan extends BasePlan {
+  postConstructor() {
+    this.id = 0
+    this.buttonActionLabel = 'Downgrade plan'
+    this._title = 'Lite Plan'
+  }
+}
+class EasePlan extends BasePlan {
+  postConstructor() {
+    this.id = 1
+    this.buttonActionLabel = 'Upgrade plan'
+    this._title = 'Ease Plan'
+  }
+}
 
-      let spaceVertical = 'pb-6'
+export default function Page() {
+  const { user } = useUserProvider()
+  const lite = new LitePlan(user)
+  const ease = new EasePlan(user)
 
-      function Placeholder() {
-        return (
-          <View
-            style={{
-              height: Algebra.percentageOf(LayoutForBottomTabs.defaultVerticalPartBottomSpace, 40),
-            }}
-          />
-        )
-      }
-
-      return (
-        <View tw={cn('w-full px-1', spaceVertical)}>
-          <Food.CompactShowcase {...item} containerTw="p-1" />
-          {isLast && <Placeholder />}
-        </View>
-      )
-    },
-    [itemsCount, items]
-  )
   return (
-    <View tw={cn('relative mt-2')}>
-      <FadingOverlay />
-      <FlatList
-        style={{
-          paddingTop: 30,
-        }}
-        data={items}
-        windowSize={10}
-        bouncesZoom={false}
-        alwaysBounceVertical={false}
-        overScrollMode="never"
-        keyExtractor={(_, index) => index}
-        renderItem={renderItem}
-        showsVerticalScrollIndicator={false}
-      />
-    </View>
+    <SafeFullScreenLayout>
+      <AppText ctw={cn('')} testID="plans_screen">
+        Plans
+      </AppText>
+
+      <ViewWithShadow>
+        <AppText ctw={cn('')}> {lite.title()} </AppText>
+        <Button label={lite.buttonLabel()} />
+      </ViewWithShadow>
+      <View tw={cn('mt-8')}></View>
+      <ViewWithShadow>
+        <AppText ctw={cn('')}> {ease.title()} </AppText>
+        <Button label={ease.buttonLabel()} />
+      </ViewWithShadow>
+      {/* <View tw={cn('')}>
+        <AppTextInput {...getPropsForField('email')}/>
+        <FormFieldsSpacer/>
+        <AppTextInput.Phone {...getPropsForField('phone')}/>
+        <FormFieldsSpacer/>
+
+        <AppTextInput {...getPropsForField('address')}/>
+        <FormFieldsSpacer/>
+
+        <AppTextInput {...getPropsForField('unit')}/>
+        <FormFieldsSpacer/>
+
+        <AppTextInput {...getPropsForField('zipCode')}/>
+
+        <FormFieldsSpacer/>
+        <Button
+          label={'Update'}
+          labelTw={'text-white'}
+          fullWidth
+          onPress={() => validateFormAndFetch()}
+          loading={loading}
+          // onPress={() => Go.toScreen('home')}
+          testID="update"
+        />
+      </View> */}
+    </SafeFullScreenLayout>
   )
 }
