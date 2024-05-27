@@ -1,12 +1,11 @@
 import endpoints from '@constants/endpoints'
-import { fetchBackend } from '@libs/Api'
 import { NullUser, User } from '@libs/UserManager'
 import React, { useEffect, useState } from 'react'
-import { useSessionProvider } from './SessionProvider'
+import { useApiProvider } from './ApiProvider'
 
 const Context = React.createContext({
-  updateUserFromBackEndResponse: ()=>'',
-  user: new NullUser()
+  updateUserFromBackEndResponse: () => '',
+  user: new NullUser(),
 })
 
 export const useUserProvider = () => React.useContext(Context)
@@ -14,26 +13,22 @@ export const useUserProvider = () => React.useContext(Context)
 function UserProvider(props) {
   const [user, setUser] = useState(new NullUser())
 
-  const { jwt, signOut } = useSessionProvider()
+  const { get } = useApiProvider()
 
   useEffect(() => {
-      fetchBackend({
-        endpoint: endpoints.userProfile,
-        jwt,
-        onSuccess: ({ data }) => {
-          setUser( new User( data))
-        },
-        onError: ({ status}) => {
-          if (status === 401) signOut()
-        },
-      })
-  }, [jwt])
+    get({
+      endpoint: endpoints.userProfile,
+      onSuccess: ({ data }) => {
+        setUser(new User(data))
+      },
+    })
+  }, [])
 
   return (
     <Context.Provider
       value={{
         user,
-        updateUserFromBackEndResponse: (d)=>setUser(new User(d))
+        updateUserFromBackEndResponse: (d) => setUser(new User(d)),
       }}
     >
       {!user.isNull() && props.children}

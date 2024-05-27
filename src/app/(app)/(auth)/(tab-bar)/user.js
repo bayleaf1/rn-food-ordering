@@ -2,24 +2,13 @@ import AppText from '@components/AppText/AppText'
 import Button from '@components/Button'
 import AppTextInput from '@components/FormRelated/AppTextInput'
 import FormFieldsSpacer from '@components/FormRelated/FormFieldsSpacer'
-import useForm, { useAuthForm } from '@components/FormRelated/useForm'
+import { useAuthForm } from '@components/FormRelated/useForm'
 import endpoints from '@constants/endpoints'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
-import useApi from '@libs/Api'
-import { wp } from '@libs/Styling'
-import { UserManager } from '@libs/UserManager'
-import { useScreenOrientationProvider } from '@providers/ScreenOrientationProvider'
-import { useSessionProvider } from '@providers/SessionProvider'
-import { useTranslationProvider } from '@providers/TranslationProvider'
 import { useUserProvider } from '@providers/UserProvider'
-import { Pressable, ScrollView, View } from 'react-native'
+import { View } from 'react-native'
 
 export default function Page() {
-  // let { signOut } = useSessionProvider()
-  // let { setLanguageAndSaveToStorage, AvailableLanguages } = useTranslationProvider()
-  // let { portraitOrLandscape } = useScreenOrientationProvider()
-
-  // let { data, statusCode } = useApi('/todos/1', { defaultData: {} })
 
   const { user, updateUserFromBackEndResponse } = useUserProvider()
   const { getPropsForField, validateFormAndFetch } = useAuthForm({
@@ -36,7 +25,6 @@ export default function Page() {
       onSuccess: ({ data }) => {
         updateUserFromBackEndResponse(data)
       },
-      method: 'post'
     },
   })
 

@@ -44,33 +44,44 @@ export default function TabsLayout() {
   const { user } = useUserProvider()
 
   return (
-      <Tabs>
-        <Tabs.Screen
-          name="user"
-          options={{
-            tabBarLabel: user.shortedUsername(),
-            ...screenOptions({
-              iconName: 'burger',
-              testIDprefix: 'user',
-              username: user.usernameForTest(),
-            }),
-          }}
-        />
-        <Tabs.Screen
-          name="plans"
-          options={{
-            ...screenOptions({ iconName: 'burger', resolveEnabled: () => user.isCompleted() }),
-          }}
-        />
-        <Tabs.Screen
-          name="home"
-          options={{
-            ...screenOptions({
-              iconName: 'burger',
-              resolveEnabled: () => UserManager.isCompleted(user),
-            }),
-          }}
-        />
-      </Tabs>
+    <Tabs>
+      <Tabs.Screen
+        name="user"
+        options={{
+          tabBarLabel: user.shortedUsername(),
+          ...screenOptions({
+            iconName: 'burger',
+            testIDprefix: 'user',
+            username: user.usernameForTest(),
+          }),
+        }}
+      />
+      <Tabs.Screen
+        name="plans"
+        options={{
+          ...screenOptions({ iconName: 'burger', resolveEnabled: () => user.isCompleted() }),
+        }}
+      />
+      <Tabs.Screen
+        name="payment-info"
+        options={{
+          tabBarLabel: 'P info',
+          ...screenOptions({
+            iconName: 'burger',
+            testIDprefix: 'payment_info',
+            resolveEnabled: () => user.isCompleted(),
+          }),
+        }}
+      />
+      <Tabs.Screen
+        name="home"
+        options={{
+          ...screenOptions({
+            iconName: 'burger',
+            resolveEnabled: () => UserManager.isCompleted(user),
+          }),
+        }}
+      />
+    </Tabs>
   )
 }

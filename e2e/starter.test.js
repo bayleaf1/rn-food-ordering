@@ -5,6 +5,7 @@ const { default: TestDevice } = require('./utils/TestDevice')
 const { default: HomeScreen } = require('./utils/screens/HomeScreen')
 const { default: SignUpScreen } = require('./utils/screens/SignUpScreen')
 const { default: UserScreen } = require('./utils/screens/UserScreen')
+const { default: PaymentInfoScreen } = require('./utils/screens/PaymentInfoScreen')
 const { default: BackEnd } = require('./utils/BackEnd')
 const { default: TestUserUtils } = require('./utils/TestUserUtils')
 const { default: TestTabs } = require('./utils/TestTabs')
@@ -35,10 +36,15 @@ describe('Example', () => {
     await UserScreen.waitToBeVisible()
     await TestTabs.userButtonContainsUserName(fields.firstName, fields.lastName)
 
-    // await TestTabs.navigateToUserScreen()
-    // await UserScreen.waitToBeVisible()
+    await TestTabs.navigateToUserScreen()
+    await UserScreen.waitToBeVisible()
 
     await UserScreen.updateUser(updatedFields)
+    await TestTabs.navigateToPaymentInfoScreen()
+    await PaymentInfoScreen.waitToBeVisible()
+    await PaymentInfoScreen.fillCardDetails()
+
+
   })
 
   //TODO test for outdated jwt

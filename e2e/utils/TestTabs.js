@@ -4,6 +4,9 @@ const TestTabs = {
   async navigateToUserScreen() {
     await TestUtils.pressByIdAtIndex('user_tab_button')
   },
+  async navigateToPaymentInfoScreen() {
+    await TestUtils.pressByIdAtIndex('payment_info_tab_button')
+  },
   async userButtonContainsUserName(fName, lName) {
     await TestUtils.expectVisibleByIdAtIndex(fName + '_' + lName + '_username')
   },

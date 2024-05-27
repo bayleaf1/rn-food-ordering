@@ -1,3 +1,4 @@
+process.env.EXPO_ROUTER_APP_ROOT = __dirname + "/src/app";
 export default ({ config }) => {
   return {
     ...config,

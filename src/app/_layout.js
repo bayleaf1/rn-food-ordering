@@ -15,8 +15,10 @@ import { NativeWindStyleSheet } from 'nativewind'
 import { LogBox } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import AppConfig from '@constants/AppConfig'
+import ApiProvider from '@providers/ApiProvider'
+import AppStripeProvider from '@providers/AppStripeProvider'
 
-LogBox.ignoreLogs(['NativeEvent'])
+LogBox.ignoreLogs(['NativeEvent', 'onAnimatedValueUpdate'])
 //TODO add Localizations or Cronos objectx
 //TODO add buttons
 //TODO change splash view visibility prop name in dev mode hideInDev=true
@@ -40,12 +42,16 @@ export default function AppLayout() {
                 <FontsProvider>
                   <ScreenOrientationProvider>
                     <SessionProvider>
-                      <Splash>
-                        <StopRenderIfAppNotLoaded>
-                          {/* Might change name */}
-                          <NativeStackResponsableForScreenOrientation />
-                        </StopRenderIfAppNotLoaded>
-                      </Splash>
+                      <ApiProvider>
+                        <AppStripeProvider>
+                          <Splash>
+                            <StopRenderIfAppNotLoaded>
+                              {/* Might change name */}
+                              <NativeStackResponsableForScreenOrientation />
+                            </StopRenderIfAppNotLoaded>
+                          </Splash>
+                        </AppStripeProvider>
+                      </ApiProvider>
                     </SessionProvider>
                   </ScreenOrientationProvider>
                 </FontsProvider>

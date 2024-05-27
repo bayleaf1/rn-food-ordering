@@ -38,7 +38,9 @@ const endpoints = {
 //   validatePromocode: `/api/payments/stripe/promocodes/validate`,
 //   subscriptions: `/api/payments/stripe/subscriptions`,
 //   saveCard: `/api/payments/stripe/save-card`,
-//   saveCardIntent: `/api/payments/stripe/save-card-intent`,
+  // saveCardIntent: `/api/payments/stripe/save-card-intent`,
+  saveCardAndCreateFBID: `/api/payments/stripe/save-card-and-create-fbid`,
+
   //
 //   checkAuthForUserDashboard: `/api/sessions/check-auth/user-dashboard`,
   registerWithEmail: `/api/sessions/register/user/email`,

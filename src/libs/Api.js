@@ -2,6 +2,7 @@ import AppConfig from '@constants/AppConfig'
 import axios from 'axios'
 import useSWR from 'swr'
 import { pushErrorToast } from './Toaster'
+import Consoler from './Consoler'
 
 //Endpoints for when back-end no involved
 // export const Endpoints = {
@@ -62,22 +63,24 @@ export function fetchBackend(opts = backendDefProps) {
     },
   })
 }
-const appFetchDefProps = {
-  ...backendDefProps,
+export const appFetchDefOpts = {
+  endpoint: '',
+  method: 'get',
+  body: {},
+  headers: {},
+  jwt: '',
+  onSuccess: () => '',
+  onError: () => '',
   baseURL: '',
 }
 
-function appFetch(opts = appFetchDefProps) {
-  opts = { ...appFetchDefProps, ...opts }
-
-  let optionalBody =
-    ['get', 'head'].findIndex((v) => opts.method.toLowerCase() === v) > -1
-      ? {}
-      : { body: JSON.stringify(opts.body) }
-
-  fetch(opts.baseURL + opts.endpoint, {
+export function appFetch(opts = appFetchDefOpts) {
+  opts = { ...appFetchDefOpts, ...opts }
+  const defMsg = 'Default error from front-end';
+  let endpoint = opts.baseURL + opts.endpoint
+  fetch(endpoint, {
     method: opts.method,
-    ...optionalBody,
+    ...getBodyByMethod(),
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${opts.jwt || ''}`,
@@ -86,17 +89,18 @@ function appFetch(opts = appFetchDefProps) {
   })
     .then(async (r) => ({ status: r.status, response: await r.json() }))
     .then((result) => {
+      let message = result.response?.message || ''
+      const status  = result.status;
+      Consoler.logHttpReq({ method: opts.method, endpoint, status, message })
+
       if (result.status > 299) {
         let res = result.response
-        let defMsg = 'Default message from front-end'
         opts.onError({
-          error: { ...(res?.error || {}), message: res?.message || defMsg },
-          message: res?.message || defMsg,
-          status: result.status,
+          error: { ...(res?.error || {}), message: message || defMsg },
+          message: message || defMsg,
+          status,
         })
       } else opts.onSuccess({ data: result.response })
-
-      // console.log('44-58 success', res)
     })
     .catch((res) => {
       opts.onError({
@@ -104,6 +108,11 @@ function appFetch(opts = appFetchDefProps) {
         message: res?.message || '',
         status: res?.error?.status || 500,
       })
-      // console.log('44-58 error', e)
     })
+
+  function getBodyByMethod() {
+    return ['get', 'head'].findIndex((v) => opts.method.toLowerCase() === v) > -1
+      ? {}
+      : { body: JSON.stringify(opts.body) }
+  }
 }

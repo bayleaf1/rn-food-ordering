@@ -3,4 +3,5 @@
     "editor.quickSuggestions": {
         "strings": true
     },
+    "editor.formatOnSave": false,
 }
