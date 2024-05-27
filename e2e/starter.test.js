@@ -42,7 +42,6 @@ describe('Example', () => {
     await UserScreen.updateUser(updatedFields)
     await TestTabs.navigateToPaymentInfoScreen()
     await PaymentInfoScreen.waitToBeVisible()
-    await PaymentInfoScreen.fillCardDetails()
 
 
   })
