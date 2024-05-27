@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
-    "start": "expo start",
+    "dev": "expo start",
     "start:test": "NODE_ENV=test expo start",
     "android": "expo run:android",
     "format": "npx prettier . --write",
