@@ -19,7 +19,6 @@ export default function Button({
   label,
   renderLabel,
   ctw,
-  screenNameToGoOnPress,
   variant = 'contained',
   labelTw,
   fullWidth,
@@ -33,7 +32,6 @@ export default function Button({
   let Wrapper = enabled
     ? ({ children }) => (
         <AnimationList.ZoomOutOnPress
-          goToScreen={() => screenNameToGoOnPress && Go.toScreen(screenNameToGoOnPress)}
           targetSize={0.99}
           onPress={onPress}
         >

@@ -1,6 +1,6 @@
 import LottieAnimation from '@components/LottieAnimation'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
-import Screens from '@libs/Navigation/ScreenList'
+import { Screens } from '@libs/Navigation/ScreenList'
 import LandingAnimatedText from '@screens/landing/LandingAnimatedText'
 import useLandingRedirectWithDelay from '@screens/landing/useLandingRedirectWithDelay'
 

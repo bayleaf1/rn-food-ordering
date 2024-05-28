@@ -1,7 +1,7 @@
 import Button from '@components/Button'
 import LottieAnimation from '@components/LottieAnimation'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
-import Screens from '@libs/Navigation/ScreenList'
+import { Screens } from '@libs/Navigation/ScreenList'
 import LandingAnimatedText from '@screens/landing/LandingAnimatedText'
 import { useRouter } from 'expo-router'
 import Animated, { Easing, FadeIn } from 'react-native-reanimated'

@@ -8,9 +8,8 @@ import endpoints from '@constants/endpoints'
 import Authentification from '@dto/Authentification'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import Clock from '@libs/Clock'
-import Go from '@libs/Navigation/Go'
+import AppLink from '@libs/Navigation/AppLink'
 import { useSessionProvider } from '@providers/SessionProvider'
-
 
 export default function LoginPage() {
   const { signIn } = useSessionProvider()
@@ -18,7 +17,7 @@ export default function LoginPage() {
     fields: {
       email: { value: '' },
       password: { value: '' },
-      timezone: {value: Clock.timezone()}
+      timezone: { value: Clock.timezone() },
     },
     fetch: {
       endpoint: endpoints.loginWithEmail,
@@ -38,28 +37,33 @@ export default function LoginPage() {
       </AppText>
 
       <View tw={cn('')}>
-        <AppTextInput {...getPropsForField('email')}/>
-        <FormFieldsSpacer/>
+        <AppTextInput {...getPropsForField('email')} />
+        <FormFieldsSpacer />
         <AppTextInput.Password {...getPropsForField('password')} />
-        <FormFieldsSpacer/>
+        <FormFieldsSpacer />
         <Button
           label={'Login'}
           labelTw={'text-white'}
           fullWidth
           onPress={() => validateFormAndFetch()}
           loading={loading}
-          // onPress={() => Go.toScreen('home')}
           testID="login"
         />
       </View>
-      <View testID="login_screen" ><AppText>Lalalal</AppText></View>
+      <View testID="login_screen">
+        <AppText>Lalalal</AppText>
+      </View>
 
-      <Go toScreen="forgot-password">
-        <AppText ctw={cn('')} testID='forgot_password_button'> Forgot password? </AppText>
-      </Go>
-      <Go toScreen="sign-up">
-        <AppText ctw={cn('')} testID='sign_up_button'> Register </AppText>
-      </Go>
+      <AppLink screenName="forgot-password">
+        <AppText ctw={cn('')} testID="forgot_password_button">
+          Forgot password?
+        </AppText>
+      </AppLink>
+      <AppLink screenName="sign-up">
+        <AppText ctw={cn('')} testID="sign_up_button">
+          Register
+        </AppText>
+      </AppLink>
     </SafeFullScreenLayout>
   )
 }

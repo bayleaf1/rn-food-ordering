@@ -7,7 +7,6 @@ export default function AnimationList({ children }) {
 
 AnimationList.ZoomOutOnPress = ({
   containerTw = 'flex-start',
-  goToScreen,
   onPress = () => '',
   children,
   targetSize = 0.98,
@@ -27,7 +26,6 @@ AnimationList.ZoomOutOnPress = ({
         setTargetSize(targetSize)
         setTimeout(() => {
           onPress()
-          if (goToScreen) goToScreen()
         }, 0)
       }}
       onPressOut={() => {

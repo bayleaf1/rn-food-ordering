@@ -11,6 +11,7 @@ import endpoints from '@constants/endpoints'
 import Clock from '@libs/Clock'
 import FormFieldsSpacer from '@components/FormRelated/FormFieldsSpacer'
 import Authentification from '@dto/Authentification'
+import AppLink from '@libs/Navigation/AppLink'
 
 
 export default function Page() {
@@ -56,6 +57,7 @@ export default function Page() {
           labelTw={'text-white'}
           fullWidth
           onPress={() => validateFormAndFetch()}
+          // onPress={() => AppLink.navigateToHref('/home')}
           testID={'sign_up'}
           loading={loading}
         />

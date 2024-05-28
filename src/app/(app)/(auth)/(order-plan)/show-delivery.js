@@ -2,7 +2,7 @@ import Button from '@components/Button'
 import LottieAnimation from '@components/LottieAnimation'
 import AppText from '@components/AppText/AppText'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
-import Screens from '@libs/Navigation/ScreenList'
+import { Screens } from '@libs/Navigation/ScreenList'
 import { useRouter } from 'expo-router'
 import { useEffect } from 'react'
 

@@ -8,12 +8,17 @@ import AppText from '@components/AppText/AppText'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import React from 'react'
 import { ScrollView, View } from 'react-native'
+import { useLocalSearchParams } from 'expo-router'
 
-export default function SelectCard({}) {
-  const [checked, setChecked] = React.useState('first')
+export default function Payment({}) {
+  const local = useLocalSearchParams();
+  console.log(`local:`, local);
 
+  // const [checked, setChecked] = React.useState('first')
+ return <AppText ctw={cn("")}> {JSON.stringify(local, null, 2)} </AppText>
   return (
     <SafeFullScreenLayout contentTw="flex-1" headerIsShown>
+      <AppText ctw={cn("")} testID='payment_screen'> PAyment </AppText>
       <Button.Outlined
         renderLabel={({ labelTw }) => (
           <View ctw={'flex flex-row items-center bg-gray-600'} style={{ flexDirection: 'row' }}>

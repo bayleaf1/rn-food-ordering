@@ -2,6 +2,7 @@ import { View } from 'react-native'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
 import Go from '@libs/Navigation/Go'
 import AppText from '@components/AppText/AppText'
+import AppLink from '@libs/Navigation/AppLink'
 
 //! For some reason tailwind is not working on this file
 export default function CustomUnmatched() {
@@ -12,11 +13,11 @@ export default function CustomUnmatched() {
           Screen not found
         </AppText>
         {/* ! Go componenet not working */}
-        <Go toScreen="home">
+        <AppLink screenName="home">
           <AppText h2 style={{ marginTop: 20, textAlign: 'center' }}>
             Return to home
           </AppText>
-        </Go>
+        </AppLink>
       </View>
     </SafeFullScreenLayout>
   )

@@ -1,6 +1,6 @@
 import { Link, router } from 'expo-router'
 import React, { useMemo } from 'react'
-import Screens from './ScreenList'
+import {Screens} from './ScreenList'
 import { Pressable } from 'react-native'
 
 const defaultScreen = Screens.home
@@ -41,6 +41,7 @@ function getRoute(toScreen) {
 }
 
 Go.toScreen = (name) => router.push(getRoute(name))
+Go.toScreenByPath = (path) => router.push(path)
 Go.getGoToScreen = (name) => () => Go.toScreen(name)
 
 export default Go
