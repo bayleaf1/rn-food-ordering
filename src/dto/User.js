@@ -53,11 +53,11 @@ export class NullUser {
      return this.profile.phone
   }
   planId(){
-     return 0
+    //  return 0
     return this.profile.plan.id
   }
   hasPlan(){
-     return true
+    //  return true
     return this.profileMeta.hasPlan
   }
   isCompleted() {

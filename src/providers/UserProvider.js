@@ -16,11 +16,14 @@ function UserProvider(props) {
 
   const { get } = useApiProvider()
 
-  const fetchUser = useCallback(()=>{
+  const fetchUser = useCallback((props={setLoading:()=>'', extraOnSuccess: ()=>''})=>{
     get({
+      setLoading: props.setLoading || function(){},
       endpoint: endpoints.userProfile,
       onSuccess: ({ data }) => {
+        // console.log(`data:`, data);
         setUser(new User(data))
+        props.extraOnSuccess && props.extraOnSuccess()
       },
     })
   }, [get])

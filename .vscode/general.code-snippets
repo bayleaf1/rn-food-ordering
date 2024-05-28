@@ -1,0 +1,10 @@
+{
+    "setLoading state": {
+        "prefix": "ul",
+        "body": [
+            "const [loading, setLoading] = useState(false)",
+            "$2"
+        ],
+        "description": "create loading state"
+    }
+}

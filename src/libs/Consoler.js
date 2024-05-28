@@ -2,11 +2,15 @@ import AppConfig from '@constants/AppConfig'
 
 class NullConsoler {
   logHttpReq({ method, endpoint, status, message }) {}
+  error({ message }) {}
 }
 
 class ConsolerImpl extends NullConsoler {
   logHttpReq({ method, endpoint, status, message }) {
     console.log(method, endpoint, status, message)
+  }
+  error({ message }) {
+    console.log('Error: ', message)
   }
 }
 

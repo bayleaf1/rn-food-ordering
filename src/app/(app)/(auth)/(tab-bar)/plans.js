@@ -1,20 +1,21 @@
 import AppText from '@components/AppText/AppText'
-// import Button from '@components/Button'
+import Button from '@components/Button'
+import Loader from '@components/Loader'
 import ViewWithShadow from '@components/ViewWithShadow'
 import { NullUser } from '@dto/User'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
-// import Go from '@libs/Navigation/Go'
-import {Screens} from '@libs/Navigation/ScreenList'
+import AppLink from '@libs/Navigation/AppLink'
+import { Screens } from '@libs/Navigation/ScreenList'
 import { useUserProvider } from '@providers/UserProvider'
-import { BaseButton } from 'react-native-gesture-handler'
-import { ToggleButton } from 'react-native-paper'
-import { Button } from 'react-native-paper'
+import { useFocusEffect, useLocalSearchParams } from 'expo-router'
+import { useEffect, useMemo } from 'react'
 class BasePlan {
   constructor(user = new NullUser()) {
-    this.user = new NullUser()
-    this.id = -1
+    this.user = user //new NullUser()
+    this._id = -1
     this.buttonActionLabel = ''
     this._title = 'Plan'
+    this._testID = 'plan'
     this.postConstructor()
   }
 
@@ -22,32 +23,48 @@ class BasePlan {
     if (!this.user.hasPlan()) return 'Select this plan'
     return this.isActiveForUser() ? 'Current plan' : this.buttonActionLabel
   }
+  id() {
+    return this._id
+  }
   title() {
     return this._title
   }
 
+  testID(){
+    return this._testID
+  }
+
   isActiveForUser() {
-    return this.user.planId() === this.id
+    return this.user.planId() === this._id
+  }
+  missForUser() {
+    return !this.isActiveForUser()
   }
 }
 
 class LitePlan extends BasePlan {
   postConstructor() {
-    this.id = 0
+    this._id = 0
     this.buttonActionLabel = 'Downgrade plan'
     this._title = 'Lite Plan'
+    this._testID = 'lite_plan'
+
   }
 }
 class EasePlan extends BasePlan {
   postConstructor() {
-    this.id = 1
+    this._id = 1
     this.buttonActionLabel = 'Upgrade plan'
     this._title = 'Ease Plan'
+    this._testID = 'ease_plan'
+
   }
 }
 
 export default function Page() {
   const { user } = useUserProvider()
+  console.log("07-03", JSON.stringify(user, null, 2))
+
   const lite = new LitePlan(user)
   const ease = new EasePlan(user)
 
@@ -58,39 +75,31 @@ export default function Page() {
       </AppText>
 
       <ViewWithShadow key={Date.now()}>
-        <AppText ctw={cn('')}> {lite.title()} </AppText>
+        <AppText ctw={cn('')} testID={lite.isActiveForUser() ? 'subscription_with_lite_plan' : ''}>
+          {lite.title()}
+        </AppText>
         <Button
           label={lite.buttonLabel()}
-          // screenNameToGoOnPress={!lite.isActiveForUser() && 'payment'}
+          testID={lite.testID()}
+          onPress={() => {
+            if (lite.missForUser()) AppLink.navigateToHref(Screens.order(lite.id()))
+          }}
         />
       </ViewWithShadow>
       <View tw={cn('mt-8')}></View>
       <ViewWithShadow>
-        <AppText ctw={cn('')}> {ease.title()} </AppText>
+        <AppText ctw={cn('')} testID={ease.isActiveForUser() ? 'subscription_with_ease_plan' : ''}>
+          {ease.title()}
+        </AppText>
         <Button
           label={ease.buttonLabel()}
-          // screenNameToGoOnPress={!ease.isActiveForUser() && 'payment'}
-        />
-        <Button
-          mode="contained"
-          loading={false}
+          testID={ease.testID()}
           onPress={() => {
-            console.log('Pressed')
-            // console.log("59-29", Screens)
-            // const path = Screens.payment(0)
-            // console.log(`path:`, path);
-            // Go.toScreenByPath(path)
+            if (ease.missForUser()) AppLink.navigateToHref(Screens.order(ease.id()))
           }}
-        >
-          <View tw={cn('h-4 bg-gray-300')}>
-            <AppText ctw={cn('')}>Press mex</AppText>
-          </View>
-        </Button>
-
-        {/* <BaseButton>
-          <AppText ctw={cn('')}> Text </AppText>
-        </BaseButton> */}
+        />
       </ViewWithShadow>
+
       {/* <View tw={cn('')}>
         <AppTextInput {...getPropsForField('email')}/>
         <FormFieldsSpacer/>

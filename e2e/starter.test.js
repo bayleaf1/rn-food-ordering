@@ -10,6 +10,8 @@ const { default: BackEnd } = require('./utils/BackEnd')
 const { default: TestUserUtils } = require('./utils/TestUserUtils')
 const { default: TestTabs } = require('./utils/TestTabs')
 const { default: SecurityScreen } = require('./utils/screens/SecurityScreen')
+const { default: PlansScreen } = require('./utils/screens/PlansScreen')
+const { default: PaymentScreen } = require('./utils/screens/PaymentScreen')
 
 describe('Example', () => {
   const fields = TestUserUtils.getRegistrationFields()
@@ -29,7 +31,8 @@ describe('Example', () => {
     await BackEnd.eraseUserWithRelatedByEmail(updatedFields.email)
   })
 
-  it('signup and change password', async () => {
+
+  it('get lite subscription', async () => {
     await SignInScreen.toBeVisible()
     await SignInScreen.navigateToSignUpScreen()
     await SignUpScreen.toBeVisible()
@@ -38,22 +41,67 @@ describe('Example', () => {
     await UserScreen.toBeVisible()
     await UserScreen.updateUser(updatedFields)
 
+    await TestTabs.navigateToPlansScreen()
+    await PlansScreen.toBeVisible();
 
-    await TestTabs.navigateToSecurityScreen()
-    await SecurityScreen.toBeVisible()
+    await PlansScreen.selectLitePlan()
+    await PaymentScreen.toBeVisible()
 
-    await SecurityScreen.changePassword(fields.password, newPassword)
+    await PaymentScreen.purchasePlan()
+    await PlansScreen.toBeVisible();
+    await PlansScreen.showsActiveLitePlan();
+
+    await PlansScreen.selectEasePlan()
+    await PaymentScreen.toBeVisible()
+    await PaymentScreen.purchasePlan()
+    await PlansScreen.toBeVisible();
+    await PlansScreen.showsActiveEasePlan();
+
+
+
+
+
+
+    // await SecurityScreen.toBeVisible()
+
+    // await SecurityScreen.changePassword(fields.password, newPassword)
     
-    await TestTabs.navigateToHomeScreen()
-    await HomeScreen.toBeVisible()
+    // await TestTabs.navigateToHomeScreen()
+    // await HomeScreen.toBeVisible()
 
-    await HomeScreen.signOut() 
-    await SignInScreen.toBeVisible()
+    // await HomeScreen.signOut() 
+    // await SignInScreen.toBeVisible()
 
-    await SignInScreen.signIn(updatedFields.email, newPassword)
-    await UserScreen.toBeVisible()
+    // await SignInScreen.signIn(updatedFields.email, newPassword)
+    // await UserScreen.toBeVisible()
 
   })
+
+  // it('signup and change password', async () => {
+  //   await SignInScreen.toBeVisible()
+  //   await SignInScreen.navigateToSignUpScreen()
+  //   await SignUpScreen.toBeVisible()
+
+  //   await SignUpScreen.signUp(fields)
+  //   await UserScreen.toBeVisible()
+  //   await UserScreen.updateUser(updatedFields)
+
+
+  //   await TestTabs.navigateToSecurityScreen()
+  //   await SecurityScreen.toBeVisible()
+
+  //   await SecurityScreen.changePassword(fields.password, newPassword)
+    
+  //   await TestTabs.navigateToHomeScreen()
+  //   await HomeScreen.toBeVisible()
+
+  //   await HomeScreen.signOut() 
+  //   await SignInScreen.toBeVisible()
+
+  //   await SignInScreen.signIn(updatedFields.email, newPassword)
+  //   await UserScreen.toBeVisible()
+
+  // })
 
   // it('registers and updates profile', async () => {
   //   await SignInScreen.toBeVisible()

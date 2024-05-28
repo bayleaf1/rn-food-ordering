@@ -13,6 +13,9 @@ const TestTabs = {
   async navigateToHomeScreen() {
     await TestUtils.pressByIdAtIndex('home_tab_button')
   },
+  async navigateToPlansScreen() {
+    await TestUtils.pressByIdAtIndex('plans_tab_button')
+  },
   
   async userButtonContainsUserName(fName, lName) {
     await TestUtils.expectVisibleByIdAtIndex(fName + '_' + lName + '_username')

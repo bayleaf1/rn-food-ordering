@@ -58,7 +58,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="plans"
         options={{
-          ...screenOptions({ iconName: 'burger', resolveEnabled: () => user.isCompleted() }),
+          ...screenOptions({ iconName: 'burger', testIDprefix: 'plans', resolveEnabled: () => user.isCompleted() }),
         }}
       />
       <Tabs.Screen

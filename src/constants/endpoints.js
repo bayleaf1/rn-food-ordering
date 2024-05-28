@@ -36,11 +36,11 @@ const endpoints = {
 //   cancelCurrentPlanSubscriptionAsUser: `/api/payments/cancel-current-plan-subscription/as-user`,
 //   cancelCurrentPlanSubscriptionAsAdmin: `/api/payments/cancel-current-plan-subscription/as-system-user`,
 //   validatePromocode: `/api/payments/stripe/promocodes/validate`,
-//   subscriptions: `/api/payments/stripe/subscriptions`,
+  subscriptions: `/api/payments/stripe/subscriptions`,
 //   saveCard: `/api/payments/stripe/save-card`,
   // saveCardIntent: `/api/payments/stripe/save-card-intent`,
   saveCardAndCreateFBID: `/api/payments/stripe/save-card-and-create-fbid`,
-
+  confirmPaymentWithMethod: '/api/payments/stripe/confirm-payment-with-method',
   //
 //   checkAuthForUserDashboard: `/api/sessions/check-auth/user-dashboard`,
   registerWithEmail: `/api/sessions/register/user/email`,

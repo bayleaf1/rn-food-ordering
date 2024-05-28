@@ -9,6 +9,14 @@ export const Screens = {
   home: () => '/home',
   user: () => '/user',
   'payment-info': () => '/payment-info',
-  plans: () => '/plans',
-  payment: (planId) => '/payment/' + planId,
+  plans: (command = '') => {
+    return '/plans'+ createQuery()
+
+    function createQuery() {
+      let query = ''
+      if (command === 'after-payment') query = 'source=after-payment'
+      return query ? '?' + query : ''
+    }
+  },
+  order: (planId) => `/order/${planId}/payment`,
 }
