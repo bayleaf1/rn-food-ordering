@@ -19,7 +19,6 @@ describe('Example', () => {
   const fields = TestUserUtils.getRegistrationFields()
   const updatedFields = TestUserUtils.getUpdatedFields()
   const newPassword = 'uio392io'
-  const updatedFieldsBeforePayment = { promocode: freePromocode }
 
   beforeAll(async () => {
     await TestDevice.launchAppAsUnauthorized()
@@ -58,8 +57,8 @@ describe('Example', () => {
     await PlansScreen.toBeVisible()
     await PlansScreen.showsActiveEasePlan()
 
-    // await PlansScreen.cancelSubscription()
-    // await PlansScreen.showsNoOneActivePlan()
+    await PlansScreen.cancelSubscription()
+    await PlansScreen.showsNoOneActivePlan()
   })
 
   // it('signup and change password', async () => {

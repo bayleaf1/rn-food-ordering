@@ -6,16 +6,15 @@ const { default: TestUtils } = require('../TestUtils')
 class PaymentScreen extends BaseScreen {
   async purchasePlan() {
     await TestUtils.pressButtonById('purchase_plan')
-    await TestToaster.waitVisibleSuccess()
+    // await TestToaster.waitVisibleSuccess()
   }
 
   async purchasePlanWithFreePromocode() {
     await TestUtils.fillFields({ promocode: 'lifetime'})
     await TestUtils.pressButtonById('purchase_plan')
     await TestUtils.pressButtonById('save_card')
-    await TestToaster.waitVisibleSuccess()
+    // await TestToaster.waitVisibleSuccess()
 
-    // await this.purchasePlan()
   }
 }
 

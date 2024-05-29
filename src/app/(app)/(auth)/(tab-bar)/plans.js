@@ -1,3 +1,4 @@
+import AppDialog from '@components/AppDialog'
 import AppText from '@components/AppText/AppText'
 import Button from '@components/Button'
 import Loader from '@components/Loader'
@@ -11,8 +12,7 @@ import { Screens } from '@libs/Navigation/ScreenList'
 import { pushSuccessToast } from '@libs/Toaster'
 import { useApiProvider } from '@providers/ApiProvider'
 import { useUserProvider } from '@providers/UserProvider'
-import { useFocusEffect, useLocalSearchParams } from 'expo-router'
-import { useEffect, useMemo } from 'react'
+//TODO refactor
 class BasePlan {
   constructor(user = new NullUser()) {
     this.user = user //new NullUser()
@@ -64,7 +64,7 @@ class EasePlan extends BasePlan {
 }
 
 export default function Page() {
-  const { user, refetchUser } = useUserProvider()
+  const { user, refetchUser, loading } = useUserProvider()
   const { patch } = useApiProvider()
 
   const lite = new LitePlan(user)
@@ -76,88 +76,79 @@ export default function Page() {
         Plans
       </AppText>
 
-      <ViewWithShadow key={Date.now()}>
-        <AppText ctw={cn('')} testID={`${lite.isActiveForUser() ? 'with' : 'without'}_subscription_for_${lite.testID()}`}>
-          {lite.title()}
-        </AppText>
-        <Button
-          label={lite.buttonLabel()}
-          testID={lite.testID()}
-          onPress={() => {
-            if (lite.missForUser()) AppLink.navigateToHref(Screens.order(lite.id()))
-          }}
-        />
-      </ViewWithShadow>
-      <View tw={cn('mt-8')}></View>
-      <ViewWithShadow>
-        <AppText ctw={cn('')} testID={`${ease.isActiveForUser() ? 'with' : 'without'}_subscription_for_${ease.testID()}`}>
-          {ease.title()}
-        </AppText>
-        <Button
-          label={ease.buttonLabel()}
-          testID={ease.testID()}
-          onPress={() => {
-            if (ease.missForUser()) AppLink.navigateToHref(Screens.order(ease.id()))
-          }}
-        />
-      </ViewWithShadow>
-
-      {user.hasPlan() && (
-        <View tw={cn('mt-3')}>
-          <AppText ctw={cn('')}>
-            {' '}
-            Your next payment date: {Clock.formatNextPayment(
-              user.nextDateForSubscriptionCharge()
-            )}{' '}
-          </AppText>
-
-          {user.canCancelSubscription() && (
+      {loading ? (
+        <Loader size={40} />
+      ) : (
+        <>
+          <ViewWithShadow key={Date.now()}>
+            <AppText
+              ctw={cn('')}
+              testID={`${lite.isActiveForUser() ? 'with' : 'without'}_subscription_for_${lite.testID()}`}
+            >
+              {lite.title()}
+            </AppText>
             <Button
-              label={'Cancel Subscription'}
-              ctw={'mt-2'}
-              testID={'cancel_subscription'}
+              label={lite.buttonLabel()}
+              testID={lite.testID()}
               onPress={() => {
-                patch({
-                  endpoint: endpoints.cancelCurrentPlanSubscriptionAsUser,
-                  onSuccess: () => {
-                    refetchUser({
-                      extraOnSuccess: () => {
-                        pushSuccessToast('Subscription was canceled')
-                      },
-                    })
-                  },
-                })
+                if (lite.missForUser()) AppLink.navigateToHref(Screens.order(lite.id()))
               }}
             />
+          </ViewWithShadow>
+          <View tw={cn('mt-8')}></View>
+          <ViewWithShadow>
+            <AppText
+              ctw={cn('')}
+              testID={`${ease.isActiveForUser() ? 'with' : 'without'}_subscription_for_${ease.testID()}`}
+            >
+              {ease.title()}
+            </AppText>
+            <Button
+              label={ease.buttonLabel()}
+              testID={ease.testID()}
+              onPress={() => {
+                if (ease.missForUser()) AppLink.navigateToHref(Screens.order(ease.id()))
+              }}
+            />
+          </ViewWithShadow>
+          {user.hasPlan() && (
+            <View tw={cn('mt-3')}>
+              <AppText ctw={cn('')}>
+                {' '}
+                Your next payment date:{' '}
+                {Clock.formatNextPayment(user.nextDateForSubscriptionCharge())}{' '}
+              </AppText>
+
+              {user.canCancelSubscription() && (
+                <AppDialog
+                  title="Do you want to cancel current plan subscription?"
+                  onConfirm={() => {
+                    patch({
+                      endpoint: endpoints.cancelCurrentPlanSubscriptionAsUser,
+                      onSuccess: () => {
+                        refetchUser({
+                          extraOnSuccess: () => {
+                            pushSuccessToast('Subscription was canceled')
+                          },
+                        })
+                      },
+                    })
+                  }}
+                >
+                  {({ open }) => (
+                    <Button
+                      label={'Cancel Subscription'}
+                      ctw={'mt-2'}
+                      testID={'cancel_subscription'}
+                      onPress={open}
+                    />
+                  )}
+                </AppDialog>
+              )}
+            </View>
           )}
-        </View>
+        </>
       )}
-
-      {/* <View tw={cn('')}>
-        <AppTextInput {...getPropsForField('email')}/>
-        <FormFieldsSpacer/>
-        <AppTextInput.Phone {...getPropsForField('phone')}/>
-        <FormFieldsSpacer/>
-
-        <AppTextInput {...getPropsForField('address')}/>
-        <FormFieldsSpacer/>
-
-        <AppTextInput {...getPropsForField('unit')}/>
-        <FormFieldsSpacer/>
-
-        <AppTextInput {...getPropsForField('zipCode')}/>
-
-        <FormFieldsSpacer/>
-        <Button
-          label={'Update'}
-          labelTw={'text-white'}
-          fullWidth
-          onPress={() => validateFormAndFetch()}
-          loading={loading}
-          // onPress={() => Go.toScreen('home')}
-          testID="update"
-        />
-      </View> */}
     </SafeFullScreenLayout>
   )
 }

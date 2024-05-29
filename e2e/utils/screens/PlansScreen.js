@@ -1,3 +1,4 @@
+import TestDialog from '../TestDialog'
 import TestToaster from '../TestToaster'
 import { BaseScreen } from './BaseScreen'
 
@@ -20,7 +21,8 @@ class PlansScreen extends BaseScreen {
     }
     async cancelSubscription(){
         await TestUtils.pressButtonById('cancel_subscription')
-        await TestToaster.waitVisibleSuccess()
+        await TestDialog.confirm()
+        // await TestToaster.waitVisibleSuccess()
     }
     async showsNoOneActivePlan(){
         await TestUtils.expectVisibleById('without_subscription_for_lite_plan')

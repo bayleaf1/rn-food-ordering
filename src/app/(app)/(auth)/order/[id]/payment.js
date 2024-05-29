@@ -37,7 +37,7 @@ export default function Payment({}) {
 
   function onSuccessPay() {
     const time = 1000 * AppConfig.testEnvOrOther(3.8, 2.8)
-    const push = time - 800
+    const push = AppConfig.testEnvOrOther(100, time - 800)
     setTimeout(() => {
       pushSuccessToast('Your order is confirmed!')
     }, push)
