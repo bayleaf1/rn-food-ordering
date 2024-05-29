@@ -36,9 +36,9 @@ const Clock = {
   //   yearsFrom(year) {
   //     return dayjs().year() - year
   //   },
-  //   formatNextPayment(date) {
-  //     return dayjs(date).format('MMMM D, YYYY')
-  //   },
+    formatNextPayment(date) {
+      return dayjs(date).format('MMMM D, YYYY')
+    },
 
   //   tableCreatedAt(date) {
   //     return dayjs(date).format('MMMM D, YYYY hh:mma')

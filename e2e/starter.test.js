@@ -14,9 +14,12 @@ const { default: PlansScreen } = require('./utils/screens/PlansScreen')
 const { default: PaymentScreen } = require('./utils/screens/PaymentScreen')
 
 describe('Example', () => {
+  const fiftyPromocode = 'XGGBPL34'
+  const freePromocode = 'lifetime'
   const fields = TestUserUtils.getRegistrationFields()
   const updatedFields = TestUserUtils.getUpdatedFields()
   const newPassword = 'uio392io'
+  const updatedFieldsBeforePayment = { promocode: freePromocode }
 
   beforeAll(async () => {
     await TestDevice.launchAppAsUnauthorized()
@@ -31,7 +34,6 @@ describe('Example', () => {
     await BackEnd.eraseUserWithRelatedByEmail(updatedFields.email)
   })
 
-
   it('get lite subscription', async () => {
     await SignInScreen.toBeVisible()
     await SignInScreen.navigateToSignUpScreen()
@@ -42,39 +44,22 @@ describe('Example', () => {
     await UserScreen.updateUser(updatedFields)
 
     await TestTabs.navigateToPlansScreen()
-    await PlansScreen.toBeVisible();
+    await PlansScreen.toBeVisible()
 
     await PlansScreen.selectLitePlan()
     await PaymentScreen.toBeVisible()
-
     await PaymentScreen.purchasePlan()
-    await PlansScreen.toBeVisible();
-    await PlansScreen.showsActiveLitePlan();
+    await PlansScreen.toBeVisible()
+    await PlansScreen.showsActiveLitePlan()
 
     await PlansScreen.selectEasePlan()
     await PaymentScreen.toBeVisible()
-    await PaymentScreen.purchasePlan()
-    await PlansScreen.toBeVisible();
-    await PlansScreen.showsActiveEasePlan();
+    await PaymentScreen.purchasePlanWithFreePromocode()
+    await PlansScreen.toBeVisible()
+    await PlansScreen.showsActiveEasePlan()
 
-
-
-
-
-
-    // await SecurityScreen.toBeVisible()
-
-    // await SecurityScreen.changePassword(fields.password, newPassword)
-    
-    // await TestTabs.navigateToHomeScreen()
-    // await HomeScreen.toBeVisible()
-
-    // await HomeScreen.signOut() 
-    // await SignInScreen.toBeVisible()
-
-    // await SignInScreen.signIn(updatedFields.email, newPassword)
-    // await UserScreen.toBeVisible()
-
+    // await PlansScreen.cancelSubscription()
+    // await PlansScreen.showsNoOneActivePlan()
   })
 
   // it('signup and change password', async () => {
@@ -86,16 +71,15 @@ describe('Example', () => {
   //   await UserScreen.toBeVisible()
   //   await UserScreen.updateUser(updatedFields)
 
-
   //   await TestTabs.navigateToSecurityScreen()
   //   await SecurityScreen.toBeVisible()
 
   //   await SecurityScreen.changePassword(fields.password, newPassword)
-    
+
   //   await TestTabs.navigateToHomeScreen()
   //   await HomeScreen.toBeVisible()
 
-  //   await HomeScreen.signOut() 
+  //   await HomeScreen.signOut()
   //   await SignInScreen.toBeVisible()
 
   //   await SignInScreen.signIn(updatedFields.email, newPassword)

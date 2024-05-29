@@ -1,6 +1,6 @@
 export class NullUser {
-  constructor(){
-    this.profile= {
+  constructor() {
+    ;(this.profile = {
       firstName: '',
       lastName: '',
       address: '',
@@ -13,20 +13,20 @@ export class NullUser {
         id: 0,
         name: 'Lite plan',
       },
-    },
-    this.profileMeta= {
-      hasPlan: false,
-      hasCustomPlan: false,
-      isCompleted: false,
-      doNotAllowToChangeEmail: false,
-      doNotAllowToChangePassword: false,
-      termsAgreed: false,
-      enabled: true,
-      dateForNextChargeOfPlanSubscription: '1970-01-01',
-      canChangeSubscription: false,
-      canCancelSubscription: false,
-      hasFishboxCellNumber: false,
-    }
+    }),
+      (this.profileMeta = {
+        hasPlan: false,
+        hasCustomPlan: false,
+        isCompleted: false,
+        doNotAllowToChangeEmail: false,
+        doNotAllowToChangePassword: false,
+        termsAgreed: false,
+        enabled: true,
+        dateForNextChargeOfPlanSubscription: '1970-01-01',
+        canChangeSubscription: false,
+        canCancelSubscription: false,
+        hasFishboxCellNumber: false,
+      })
   }
   isValidToRenderApp() {
     return false
@@ -49,16 +49,22 @@ export class NullUser {
   email() {
     return this.profile.email
   }
-  phone(){
-     return this.profile.phone
+  phone() {
+    return this.profile.phone
   }
-  planId(){
+  nextDateForSubscriptionCharge() {
+    return this.profileMeta.dateForNextChargeOfPlanSubscription
+  }
+  planId() {
     //  return 0
     return this.profile.plan.id
   }
-  hasPlan(){
+  hasPlan() {
     //  return true
     return this.profileMeta.hasPlan
+  }
+  canCancelSubscription() {
+    return this.profileMeta.canCancelSubscription
   }
   isCompleted() {
     return this.profileMeta.isCompleted
@@ -69,15 +75,15 @@ export class NullUser {
   usernameForTest() {
     return this.fName() + '_' + this.lName()
   }
-  shortedUsername(){
+  shortedUsername() {
     return trim(this.fName(), 12) + ' ' + trim(this.lName(), 1)
   }
 }
 
-export class User extends NullUser{
+export class User extends NullUser {
   constructor(data = new NullUser()) {
     super()
-    this.profile =  data.profile
+    this.profile = data.profile
     this.profileMeta = data.profileMeta
   }
 
@@ -85,9 +91,6 @@ export class User extends NullUser{
     return true
   }
 }
-
-
-
 
 function trim(string, maxLength = 14) {
   if (typeof string !== 'string') return 'not a string'

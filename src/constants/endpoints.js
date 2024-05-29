@@ -33,8 +33,7 @@ const endpoints = {
 //   paymentsTable: tableEndpoint('payments'),
 //   getCheckoutPlanPage: (planId, returnUrl) =>
 //     `/api/payments/stripe/checkout/subscription?planId=` + planId + '&returnUrl=' + returnUrl,
-//   cancelCurrentPlanSubscriptionAsUser: `/api/payments/cancel-current-plan-subscription/as-user`,
-//   cancelCurrentPlanSubscriptionAsAdmin: `/api/payments/cancel-current-plan-subscription/as-system-user`,
+  cancelCurrentPlanSubscriptionAsUser: `/api/payments/cancel-current-plan-subscription/as-user`,
 //   validatePromocode: `/api/payments/stripe/promocodes/validate`,
   subscriptions: `/api/payments/stripe/subscriptions`,
 //   saveCard: `/api/payments/stripe/save-card`,

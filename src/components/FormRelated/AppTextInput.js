@@ -21,6 +21,7 @@ const codeHitingProps = {
   errorMessage: '',
   style: {},
   testID: '',
+  autoCapitalize: ''
 }
 
 function AppTextInput(props = codeHitingProps) {
@@ -130,6 +131,7 @@ function BaseInput(props = codeHitingProps) {
             style: { fontSize: AppTextInput.normalizedInputFontSize, fontFamily: 'Primary' },
             ref: ref,
             secureTextEntry: props.secureTextEntry,
+            autoCapitalize: props.autoCapitalize
           },
           getTw: () => cn('flex-1 px-2 py-2', props.inputTw),
         })}

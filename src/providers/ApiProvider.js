@@ -12,6 +12,7 @@ const fetchDefOpts = copy;
 const Context = React.createContext({
   get: (opts = fetchDefOpts) => '',
   post: (opts = fetchDefOpts) => '',
+  patch: (opts = fetchDefOpts) => '',
 })
 
 export const useApiProvider = () => React.useContext(Context)
@@ -39,7 +40,7 @@ function ApiProvider(props) {
         })
       }
 
-    return { post: fet('post'), get: fet('get') }
+    return { post: fet('post'), get: fet('get'), patch: fet('patch') }
   }, [jwt])
 
   return <Context.Provider value={{ ...fetchers }}>{props.children}</Context.Provider>

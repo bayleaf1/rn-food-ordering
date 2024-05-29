@@ -122,7 +122,7 @@ export default function useForm({ fields = {}, fetch = defFetchProps, accessToke
     return createErrorsRegisterFromFieldsValidationResult(result)
   }
 
-  return { loading, getPropsForField, formIsValid, validateForm, validateFormAndFetch }
+  return { loading, getValueForField, getPropsForField, formIsValid, validateForm, validateFormAndFetch }
 }
 
 

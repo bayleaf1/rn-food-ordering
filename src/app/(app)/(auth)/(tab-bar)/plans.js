@@ -2,10 +2,14 @@ import AppText from '@components/AppText/AppText'
 import Button from '@components/Button'
 import Loader from '@components/Loader'
 import ViewWithShadow from '@components/ViewWithShadow'
+import endpoints from '@constants/endpoints'
 import { NullUser } from '@dto/User'
 import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import Clock from '@libs/Clock'
 import AppLink from '@libs/Navigation/AppLink'
 import { Screens } from '@libs/Navigation/ScreenList'
+import { pushSuccessToast } from '@libs/Toaster'
+import { useApiProvider } from '@providers/ApiProvider'
 import { useUserProvider } from '@providers/UserProvider'
 import { useFocusEffect, useLocalSearchParams } from 'expo-router'
 import { useEffect, useMemo } from 'react'
@@ -30,7 +34,7 @@ class BasePlan {
     return this._title
   }
 
-  testID(){
+  testID() {
     return this._testID
   }
 
@@ -48,7 +52,6 @@ class LitePlan extends BasePlan {
     this.buttonActionLabel = 'Downgrade plan'
     this._title = 'Lite Plan'
     this._testID = 'lite_plan'
-
   }
 }
 class EasePlan extends BasePlan {
@@ -57,13 +60,12 @@ class EasePlan extends BasePlan {
     this.buttonActionLabel = 'Upgrade plan'
     this._title = 'Ease Plan'
     this._testID = 'ease_plan'
-
   }
 }
 
 export default function Page() {
-  const { user } = useUserProvider()
-  console.log("07-03", JSON.stringify(user, null, 2))
+  const { user, refetchUser } = useUserProvider()
+  const { patch } = useApiProvider()
 
   const lite = new LitePlan(user)
   const ease = new EasePlan(user)
@@ -75,7 +77,7 @@ export default function Page() {
       </AppText>
 
       <ViewWithShadow key={Date.now()}>
-        <AppText ctw={cn('')} testID={lite.isActiveForUser() ? 'subscription_with_lite_plan' : ''}>
+        <AppText ctw={cn('')} testID={`${lite.isActiveForUser() ? 'with' : 'without'}_subscription_for_${lite.testID()}`}>
           {lite.title()}
         </AppText>
         <Button
@@ -88,7 +90,7 @@ export default function Page() {
       </ViewWithShadow>
       <View tw={cn('mt-8')}></View>
       <ViewWithShadow>
-        <AppText ctw={cn('')} testID={ease.isActiveForUser() ? 'subscription_with_ease_plan' : ''}>
+        <AppText ctw={cn('')} testID={`${ease.isActiveForUser() ? 'with' : 'without'}_subscription_for_${ease.testID()}`}>
           {ease.title()}
         </AppText>
         <Button
@@ -99,6 +101,37 @@ export default function Page() {
           }}
         />
       </ViewWithShadow>
+
+      {user.hasPlan() && (
+        <View tw={cn('mt-3')}>
+          <AppText ctw={cn('')}>
+            {' '}
+            Your next payment date: {Clock.formatNextPayment(
+              user.nextDateForSubscriptionCharge()
+            )}{' '}
+          </AppText>
+
+          {user.canCancelSubscription() && (
+            <Button
+              label={'Cancel Subscription'}
+              ctw={'mt-2'}
+              testID={'cancel_subscription'}
+              onPress={() => {
+                patch({
+                  endpoint: endpoints.cancelCurrentPlanSubscriptionAsUser,
+                  onSuccess: () => {
+                    refetchUser({
+                      extraOnSuccess: () => {
+                        pushSuccessToast('Subscription was canceled')
+                      },
+                    })
+                  },
+                })
+              }}
+            />
+          )}
+        </View>
+      )}
 
       {/* <View tw={cn('')}>
         <AppTextInput {...getPropsForField('email')}/>

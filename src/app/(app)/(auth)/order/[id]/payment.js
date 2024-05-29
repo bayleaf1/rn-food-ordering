@@ -1,37 +1,39 @@
-import Button from '@components/Button'
-import Card from '@components/Card'
-import FadingOverlay from '@components/FadingOverlay'
-import Radio from '@components/FormRelated/Radio'
-import AppIcon from '@components/Pictures/AppIcon'
-import LocalPicture from '@components/Pictures/LocalPicture'
 import AppText from '@components/AppText/AppText'
-import { SafeFullScreenLayout } from '@layouts/BaseLayout'
-import React from 'react'
-import { ScrollView, View } from 'react-native'
-import { useLocalSearchParams } from 'expo-router'
-import {
-  initPaymentSheet,
-  presentPaymentSheet,
-  confirmPaymentSheetPayment,
-} from '@stripe/stripe-react-native'
-import { useApiProvider } from '@providers/ApiProvider'
+import Button from '@components/Button'
+import AppTextInput from '@components/FormRelated/AppTextInput'
+import useForm from '@components/FormRelated/useForm'
+import Loader from '@components/Loader'
+import StripeCardField from '@components/Stripe/StripeCardField'
+import AppConfig from '@constants/AppConfig'
 import endpoints from '@constants/endpoints'
-import { pushErrorToast, pushSuccessToast } from '@libs/Toaster'
+import { SafeFullScreenLayout } from '@layouts/BaseLayout'
+import Consoler from '@libs/Consoler'
 import AppLink from '@libs/Navigation/AppLink'
 import { Screens } from '@libs/Navigation/ScreenList'
-import Loader from '@components/Loader'
+import { pushErrorToast, pushSuccessToast } from '@libs/Toaster'
+import { useApiProvider } from '@providers/ApiProvider'
 import { useUserProvider } from '@providers/UserProvider'
-import Consoler from '@libs/Consoler'
-import AppConfig from '@constants/AppConfig'
+import { initPaymentSheet, presentPaymentSheet } from '@stripe/stripe-react-native'
+import { useLocalSearchParams } from 'expo-router'
+import { View } from 'react-native'
 
 export default function Payment({}) {
   const local = useLocalSearchParams()
-  const [showPaymentModal, setShowPaymentModal] = useState(false)
-  const [loadingStripeUi, setLoadingStripeUi] = useState(false)
-  const [postPaymentLoading, setPostPaymentLoading] = useState(false)
-  const { refetchUser } = useUserProvider()
-
   const planId = Number(local.id)
+  const [formButtonLoading, setFormButtonLoading] = useState(false)
+  const [paymentData, setPaymentData] = useState()
+  const { refetchUser } = useUserProvider()
+  const { validateFormAndFetch, getPropsForField, getValueForField } = useForm({
+    fields: {
+      promocode: { value: '' },
+    },
+  })
+  const [elements, setElements] = useState('0100')
+  const needShowing = (idx) => !!Number(elements.slice(idx, idx + 1))
+  const showPageLoader = needShowing(0)
+  const showForm = needShowing(1)
+  const showStripeModal = needShowing(2) && paymentData
+  const showStripeCardField = needShowing(3)
 
   function onSuccessPay() {
     const time = 1000 * AppConfig.testEnvOrOther(3.8, 2.8)
@@ -39,122 +41,161 @@ export default function Payment({}) {
     setTimeout(() => {
       pushSuccessToast('Your order is confirmed!')
     }, push)
-    setPostPaymentLoading(true)
+    setElements('1000')
     setTimeout(() => {
       refetchUser({
         extraOnSuccess: () => {
-          setPostPaymentLoading(false)
           AppLink.navigateToHref(Screens.plans())
         },
       })
     }, time)
   }
 
-  const Modal = AppConfig.testEnvOrOther(StripePaymentApiModal, StripePaymentUiModal)
   return (
     <SafeFullScreenLayout contentTw="flex-1" headerIsShown>
       <AppText ctw={cn('')} testID="payment_screen">
         Payment
       </AppText>
       <AppText ctw={cn('')}>xx {JSON.stringify(local, null, 2)} </AppText>
-      <Button
-        label={'Update'}
-        loading={loadingStripeUi}
-        testID={'purchase_plan'}
-        onPress={() => setShowPaymentModal(true)}
-      />
-      {showPaymentModal && (
-        <Modal
-          setLoadingStripeUi={setLoadingStripeUi}
-          planId={planId}
-          promocode={''}
-          onSuccessPay={onSuccessPay}
-          hidePaymentModal={() => setShowPaymentModal(false)}
+
+      {showPageLoader && <Loader size={40} />}
+
+      {showForm && (
+        <Form
+          {...{
+            getPropsForField,
+            formButtonLoading,
+            setFormButtonLoading,
+            getValueForField,
+            setPaymentData,
+            planId,
+            setElements,
+            validateFormAndFetch,
+          }}
         />
       )}
-      {postPaymentLoading && <Loader size={40} />}
-      
+
+      {showStripeModal && (
+        <StripePaymentUiModal
+          {...{
+            setFormButtonLoading,
+            onSuccessPay,
+            hidePaymentModal: () => setElements('0100'),
+            paymentData,
+          }}
+        />
+      )}
+
+      {showStripeCardField && (
+        <StripeCardField
+          extraOnSuccess={() => {
+            refetchUser({
+              extraOnSuccess: () => {
+                setTimeout(() => {
+                  AppLink.navigateToHref(Screens.plans())
+                }, 1000 * 1)
+              },
+            })
+          }}
+        />
+      )}
     </SafeFullScreenLayout>
   )
 }
 
-function StripePaymentUiModal({
+function Form({
+  getPropsForField,
+  formButtonLoading,
+  getValueForField,
+  setPaymentData,
   planId,
-  promocode,
-  setLoadingStripeUi,
+  setElements,
+  validateFormAndFetch,
+  setFormButtonLoading,
+}) {
+  return (
+    <View>
+      <AppTextInput {...getPropsForField('promocode')} autoCapitalize="none" />
+      <Button
+        label={'Update'}
+        loading={formButtonLoading}
+        testID={'purchase_plan'}
+        onPress={() => {
+          setFormButtonLoading(true)
+          validateFormAndFetch({
+            endpoint: endpoints.subscriptions,
+            formatFieldsForFetching: () => ({
+              planId,
+              promocode: getValueForField('promocode'),
+            }),
+            onSuccess: ({ data }) => {
+              setPaymentData(data)
+              if (data.canPay) setElements('0110')
+              else setElements('0001')
+            },
+          })
+        }}
+      />
+    </View>
+  )
+}
+function StripePaymentUiModal({
+  setFormButtonLoading,
   onSuccessPay,
   hidePaymentModal,
+  paymentData,
 }) {
   const { post } = useApiProvider()
 
-  useEffect(() => {
-    setLoadingStripeUi(true)
+  const showStripeModal = async ({ clientSecret }) => {
+    await loadPaymentModal()
+    await openPaymentModal()
+
+    async function loadPaymentModal() {
+      const { error } = await initPaymentSheet({
+        paymentIntentClientSecret: clientSecret,
+        merchantDisplayName: 'Required for android',
+      })
+      if (error) {
+        pushErrorToast('Stripe: ' + error.message)
+        hidePaymentModal()
+      }
+      setFormButtonLoading(false)
+    }
+    async function openPaymentModal() {
+      const { error } = await presentPaymentSheet()
+      if (error) {
+        if (error.code.toLowerCase() !== 'canceled') pushErrorToast('Stripe: ' + error.message)
+        Consoler.error({ message: `stripe: code ${error.code} message: ${error.message}` })
+        hidePaymentModal()
+      } else {
+        onSuccessPay()
+      }
+    }
+  }
+
+  const useApiInsteadOfModal = async ({ paymentIntentId }) => {
     post({
-      endpoint: endpoints.subscriptions,
-      body: { planId, promocode },
-      onSuccess: ({ data }) => {
-        const clientSecret = data.clientSecret
-
-        load().then(async () => {
-          const openPaymentSheet = async () => {
-            const { error } = await presentPaymentSheet()
-            if (error) {
-              if (error.code.toLowerCase() !== 'canceled')
-                pushErrorToast('Stripe: ' + error.message)
-              Consoler.error({ message: `stripe: code ${error.code} message: ${error.message}` })
-              hidePaymentModal()
-            } else {
-              onSuccessPay()
-            }
-          }
-          await openPaymentSheet()
-        })
-
-        async function load() {
-          const { error } = await initPaymentSheet({
-            paymentIntentClientSecret: clientSecret,
-            merchantDisplayName: 'Required for android',
-          })
-          if (error) {
-            pushErrorToast('Stripe: ' + error.message)
-            hidePaymentModal()
-          }
-          setLoadingStripeUi(false)
-        }
+      endpoint: endpoints.confirmPaymentWithMethod,
+      body: {
+        paymentIntentId: paymentIntentId,
+        method: 'pm_card_visa',
       },
-    })
-  }, [])
-  return <AppText ctw={cn('')}> Stripe ui modal </AppText>
-}
-
-function StripePaymentApiModal({ planId, promocode, onSuccessPay, setLoadingStripeUi }) {
-  const { post } = useApiProvider()
-
-  useEffect(() => {
-    setLoadingStripeUi(true)
-    post({
-      endpoint: endpoints.subscriptions,
-      body: { planId, promocode },
-      onSuccess: ({ data }) => {
-        post({
-          endpoint: endpoints.confirmPaymentWithMethod,
-          body: {
-            paymentIntentId: data.paymentIntentId,
-            method: 'pm_card_visa',
-          },
-          onSuccess: () => {
-            setLoadingStripeUi(false)
-            onSuccessPay()
-          },
-          onError: () => {
-            hidePaymentModal()
-          },
-        })
+      onSuccess: () => {
+        setFormButtonLoading(false)
+        onSuccessPay()
       },
       onError: () => {
         hidePaymentModal()
+        setFormButtonLoading(false)
       },
     })
+  }
+
+  useEffect(() => {
+    const modal = AppConfig.testEnvOrOther(useApiInsteadOfModal, showStripeModal)
+    modal({ clientSecret: paymentData.clientSecret, paymentIntentId: paymentData.paymentIntentId })
   }, [])
-  return <AppText ctw={cn('')}> Stripe api modal </AppText>
+
+  return null
 }
