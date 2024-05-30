@@ -1,8 +1,9 @@
 const casual = require('casual')
 
+const AUTOMATED_TEST_DOMAIN = '@xtest.com'
 const TestUserUtils = {
   generateEmail() {
-    return casual.uuid.slice(0, 5) + '@m.com'
+    return casual.uuid.slice(0, 5) + AUTOMATED_TEST_DOMAIN
   },
   getRegistrationFields() {
     return {
